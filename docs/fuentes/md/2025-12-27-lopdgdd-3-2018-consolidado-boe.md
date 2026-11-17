@@ -1,7 +1,7 @@
 # Ley Orgánica 3/2018 (LOPDGDD), texto consolidado
 
-> **Conversión a Markdown no oficial** (17-11-2026) desde la API de legislación consolidada del BOE (versión más reciente de cada bloque; última modificación incluida: BOE-A-2025-26698, publicada el 27-12-2025 y vigente desde el 28-12-2025).
-> Fuente oficial: https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673 · API: https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2018-16673/texto
+> **Conversión a Markdown no oficial** (17-11-2026) desde la API de legislación consolidada del BOE (versión más reciente de cada bloque).
+> Fuente oficial: https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673
 > Solo hace fe el texto publicado en el BOE.
 
 FELIPE VI

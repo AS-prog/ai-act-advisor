@@ -1,8 +1,8 @@
 # Reglamento (UE) 2016/679 (RGPD), texto consolidado a 04-05-2016
 
-> **Conversión a Markdown no oficial** (17-11-2026) de `rgpd-2016-679-consolidado-2016-05-04-es.xhtml`.
+> **Conversión a Markdown no oficial** (17-11-2026) de `2016-05-04-rgpd-2016-679-consolidado-es.xhtml`.
 > Fuente oficial: EUR-Lex, CELEX 02016R0679-20160504, https://eur-lex.europa.eu/eli/reg/2016/679/oj/spa
-> Solo hacen fe los textos publicados en el Diario Oficial. Los marcadores ▼B, ▼M1, ►C1 indican el acto de origen de cada fragmento (B = texto base, M1 = Reglamento 2026/1744, C = rectificaciones).
+> Solo hacen fe los textos publicados en el Diario Oficial. Los marcadores ▼B, ▼M1, ►C1 indican el acto de origen de cada fragmento.
 
 02016R0679 — ES — 04.05.2016 — 000.003
 

@@ -467,33 +467,35 @@ Documentos oficiales con los que se contrastó la base normativa del plugin `ai-
 
 ## Derivadas
 
+Se regeneran desde la raíz del repo con `bash docs/fuentes/conversion/convertir.sh docs/fuentes docs/fuentes/md`. Necesita pandoc 3 o superior, python3 con beautifulsoup4 y lxml, y curl (descarga la LOPDGDD de la API del BOE). El script falla si pandoc deja alguna tabla sin convertir. Ficheros: `convertir.sh` (orquesta), `flatten.py` (aplana las tablas de EUR-Lex), `clean.py` (limpia y pone los artículos como encabezados) y `boe.py` (XML del BOE a Markdown).
+
 Copias de trabajo generadas a partir de los originales de arriba, para buscar y leer con comodidad. **No son texto oficial**: una cita se comprueba siempre contra el original del que salen.
 
 ### `md/2026-07-27-ai-act-2024-1689-consolidado-es.md`
 
 - **Derivada de**: `2026-07-27-ai-act-2024-1689-consolidado-es.xhtml`.
-- **Cómo se generó**: Conversión del XHTML consolidado de EUR-Lex a Markdown, hecha el 17-11-2026 en otro hilo del proyecto con pandoc, tras aplanar las tablas del original. Los artículos son encabezados `####` y lo que añade el Reglamento 2026/1744 va marcado con `▼M1`; cada fichero lleva una cabecera con su fuente oficial.
+- **Cómo se generó**: Conversión del XHTML consolidado de EUR-Lex a Markdown, hecha el 17-11-2026 con `conversion/convertir.sh` (pandoc), tras aplanar las tablas del original. Los artículos son encabezados `####` y lo que añade el Reglamento 2026/1744 va marcado con `▼M1`; cada fichero lleva una cabecera con su fuente oficial.
 - **No es texto oficial.**
-- **Tamaño**: 458259 bytes.
-- **sha256**: `eb77390052bc39ee569b2a3dab248f7063cca7a6e5f833e87cb712855e17cff1`
+- **Tamaño**: 458118 bytes.
+- **sha256**: `1bcbaba5b2a1f8b633eebb0978596d755591dcdac91bf14077165ae6446616d1`
 - **Copia del proyecto**: `fuentes-primarias/md/ai-act-2024-1689-consolidado-2026-07-27-es.md`
 
 ### `md/2026-07-24-omnibus-2026-1744-es.md`
 
 - **Derivada de**: `2026-07-24-omnibus-2026-1744-es.xhtml`.
-- **Cómo se generó**: Conversión del XHTML del Diario Oficial a Markdown, hecha el 17-11-2026 en otro hilo del proyecto con pandoc, tras aplanar las tablas del original. Los artículos son encabezados `####` y lo que añade el Reglamento 2026/1744 va marcado con `▼M1`; cada fichero lleva una cabecera con su fuente oficial.
+- **Cómo se generó**: Conversión del XHTML del Diario Oficial a Markdown, hecha el 17-11-2026 con `conversion/convertir.sh` (pandoc), tras aplanar las tablas del original. Los artículos son encabezados `####` y lo que añade el Reglamento 2026/1744 va marcado con `▼M1`; cada fichero lleva una cabecera con su fuente oficial.
 - **No es texto oficial.**
-- **Tamaño**: 177929 bytes.
-- **sha256**: `25fc5ceae8be94b625defba261ce33f8805af6013e2d165cedbe41cef8af5c81`
+- **Tamaño**: 177868 bytes.
+- **sha256**: `312fdac559d8ebb5a60adaeeee153683cb32bb6eee862f16713f419f6ed036fd`
 - **Copia del proyecto**: `fuentes-primarias/md/omnibus-2026-1744-es.md`
 
 ### `md/2016-05-04-rgpd-2016-679-consolidado-es.md`
 
 - **Derivada de**: `2016-05-04-rgpd-2016-679-consolidado-es.xhtml`.
-- **Cómo se generó**: Conversión del XHTML consolidado de EUR-Lex a Markdown, hecha el 17-11-2026 en otro hilo del proyecto con pandoc, tras aplanar las tablas del original. Los artículos son encabezados `####`; cada fichero lleva una cabecera con su fuente oficial.
+- **Cómo se generó**: Conversión del XHTML consolidado de EUR-Lex a Markdown, hecha el 17-11-2026 con `conversion/convertir.sh` (pandoc), tras aplanar las tablas del original. Los artículos son encabezados `####`; cada fichero lleva una cabecera con su fuente oficial.
 - **No es texto oficial.**
-- **Tamaño**: 218586 bytes.
-- **sha256**: `0472ad0a87095d0ad56d1c4bee43eceeb95b5742d7e26a3363a79aeb3f32f339`
+- **Tamaño**: 218521 bytes.
+- **sha256**: `edc52f0bbaeed78733b644f952d98934e38b9ac6bb30ce620750236d7911918e`
 - **Copia del proyecto**: `fuentes-primarias/md/rgpd-2016-679-consolidado-2016-05-04-es.md`
 
 ### `2025-12-27-lopdgdd-3-2018-consolidado-boe-api.xml`
@@ -508,9 +510,9 @@ Copias de trabajo generadas a partir de los originales de arriba, para buscar y 
 ### `md/2025-12-27-lopdgdd-3-2018-consolidado-boe.md`
 
 - **Derivada de**: `2025-12-27-lopdgdd-3-2018-consolidado-boe-api.xml`.
-- **Cómo se generó**: Conversión a Markdown del XML de la API del BOE (versión más reciente de cada bloque), hecha el 17-11-2026 en otro hilo del proyecto con pandoc. Incluye la última modificación (BOE-A-2025-26698, publicada el 27-12-2025 y vigente desde el 28-12-2025). Los artículos son encabezados `####`; el fichero lleva una cabecera con su fuente oficial.
+- **Cómo se generó**: Conversión a Markdown del XML de la API del BOE (versión más reciente de cada bloque), hecha el 17-11-2026 con `conversion/convertir.sh` (pandoc). Incluye la última modificación (BOE-A-2025-26698, publicada el 27-12-2025 y vigente desde el 28-12-2025). Los artículos son encabezados `####`; el fichero lleva una cabecera con su fuente oficial.
 - **No es texto oficial.**
-- **Tamaño**: 244967 bytes.
-- **sha256**: `95a78828ec10ab2a3b3819e70159332e38d8451b4cf8d271de7ab6d1dc2b94e9`
+- **Tamaño**: 244767 bytes.
+- **sha256**: `a20760ccf092e4622197893668ee52bfe04791a5caea90eaba070d939c660a87`
 - **Copia del proyecto**: `fuentes-primarias/md/lopdgdd-3-2018-consolidado-boe.md`
 
