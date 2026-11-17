@@ -30,7 +30,7 @@ El marco es el AI Act tras el Omnibus 2026/1744, bajando al RGPD y la LOPDGDD, c
 | `plugins/ai-act-advisor/apm.yml` | Manifiesto para instalar el plugin con APM en otros agentes |
 | `plugins/ai-act-advisor/hooks/hooks.json` | `SessionStart` y `PostToolUse`: solo añaden contexto |
 | `plugins/ai-act-advisor/agents/` | `regulatory-watcher`, que vigila las fuentes oficiales |
-| `plugins/ai-act-advisor/knowledge/` | Fechas, señales, sectores, técnicas y fuentes, con la fecha de la base normativa |
+| `plugins/ai-act-advisor/knowledge/` | Fechas, señales, sectores, técnicas y fuentes, con la fecha de la base normativa; en `notas/`, las fuentes legales troceadas que cita la skill `cite-regulation` |
 | `plugins/ai-act-advisor/adapters/` | Señales y mitigaciones por stack |
 | `plugins/ai-act-advisor/scripts/` | `audit.py` (auditoría de solo lectura) y `hook.py` (hooks), en Python sin dependencias |
 | `examples/medallion-demo/` | Proyecto ficticio para probar la auditoría y los hooks |

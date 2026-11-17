@@ -2,7 +2,7 @@
 """Notas con front matter para lo que no es norma ni PDF: la sentencia TJUE C-184/20
 (XHTML) y los checklists y ejemplos de AESIA (zip de Excel).
 
-Requiere pandoc, beautifulsoup4 (flatten.py) y openpyxl. Escribe en fuentes/notas/.
+Requiere pandoc, beautifulsoup4 (flatten.py) y openpyxl. Escribe en plugins/ai-act-advisor/knowledge/notas/.
 Uso: python3 -I trocear_otros.py
 """
 import re
@@ -17,7 +17,8 @@ import openpyxl
 
 AQUI = Path(__file__).resolve().parent
 FUENTES = AQUI.parent.parent
-SALIDA = FUENTES / "notas"
+# Las notas viajan con el plugin (D21): plugins/ai-act-advisor/knowledge/notas/.
+SALIDA = FUENTES.parents[2] / "plugins" / "ai-act-advisor" / "knowledge" / "notas"
 SENTENCIA = FUENTES / "2022-08-01-tjue-c-184-20-sentencia-es.xhtml"
 ZIP = FUENTES / "2026-07-30-aesia-checklists-y-ejemplos.zip"
 CABECERAS = ["Marco jurídico", "Litigio principal y cuestiones prejudiciales",

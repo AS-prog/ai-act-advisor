@@ -232,9 +232,13 @@ dejen de salir.
 
 ## Pendiente
 
+**Decidido (2026-11-17, Andrés):** las notas viajan enteras con el
+plugin, en `plugins/ai-act-advisor/knowledge/notas/` (7,5 MB).
+`trocear*.py` escriben ahí. Con APM llegan también, porque copia
+`knowledge/` entero; comprobado instalando la rama con
+`apm install … --target copilot`.
+
 > [!PENDING] D21 · decisiones para Andrés (issue #15)
-> 1. Si las notas viajan con el plugin enteras (7,5 MB) o solo las normas
->    (2 MB) y las guías se consultan desde el repo.
 > 2. Si el formato de cita de arriba vale, en particular las líneas.
 > 3. Si se empieza por el mapa curado y el buscador stdlib y el MCP con
 >    embeddings queda para cuando el conjunto de consultas lo pida.

@@ -31,7 +31,7 @@ claude plugin eval . --allow-tools Bash --judge-model sonnet
 
 - `--allow-tools Bash` es necesario: la skill llama a `scripts/buscar.py`. En Linux, Claude Code solo concede Bash dentro de una evaluación si están instalados `bubblewrap` y `socat`.
 - La ablación `with-without` va por defecto: cada caso corre con el plugin y sin él, y el informe da la diferencia (Δ).
-- **Notas**: aún no viajan con el plugin (decisión pendiente de D21). `buscar.py` las encuentra en `docs/documentos/fuentes/notas/` subiendo desde su propia carpeta, así que la evaluación funciona con el plugin cargado desde el clon. Con el plugin instalado desde el marketplace no hay notas y los casos fallan.
+- **Notas**: viajan con el plugin en `knowledge/notas/` (D21), así que la evaluación funciona igual con el plugin cargado desde el clon que instalado. `AIACT_NOTAS` o `--notas` apuntan a otra carpeta si hace falta.
 - Los resultados quedan en `evals/results/`, fuera de git.
 
 ## Con varios modelos: `run.py`

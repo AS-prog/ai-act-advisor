@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(ROOT, "plugins", "ai-act-advisor", "scripts"))
 
 from aiact import notas  # noqa: E402
 
-NOTAS = os.path.join(ROOT, "docs", "documentos", "fuentes", "notas")
+NOTAS = os.path.join(ROOT, "plugins", "ai-act-advisor", "knowledge", "notas")
 CONSULTAS = os.path.join(ROOT, "tests", "consultas-citas.json")
 INDICE = None
 

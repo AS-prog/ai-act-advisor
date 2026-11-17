@@ -18,11 +18,7 @@ from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PLUGIN = os.path.dirname(os.path.dirname(HERE))
-REPO = os.path.dirname(os.path.dirname(PLUGIN))
-CANDIDATAS = [
-    os.path.join(PLUGIN, "knowledge", "notas"),
-    os.path.join(REPO, "docs", "documentos", "fuentes", "notas"),
-]
+CANDIDATAS = [os.path.join(PLUGIN, "knowledge", "notas")]
 
 # Documentos en inglés con versión española en las notas: se omiten.
 DUPLICADOS = {"directrices-art50-transparencia-c2026-5054": "directrices-art50-transparencia-c2026-7702"}
