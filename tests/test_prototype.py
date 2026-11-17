@@ -186,9 +186,16 @@ class HooksTest(RepoCopy):
     def test_new_llm_dependency_suggests_reaudit(self):
         core.write_outputs(self.root, core.audit(self.root))
         with open(os.path.join(self.root, "pyproject.toml"), "a", encoding="utf-8") as fh:
-            fh.write('# nueva dependencia\n[tool.extra]\nx = "openai pyspark"\n')
+            fh.write('\n[project.optional-dependencies]\nllm = ["openai>=1.40", "scikit-learn"]\n')
         ctx = self.edit("pyproject.toml")
         self.assertIn("relanzar /project-init", ctx)
+        self.assertIn("SDK de LLM", ctx)
+        self.assertIn("Librerías de ML", ctx)
+
+    def test_dependency_names_need_whole_words(self):
+        signals, _ = core.load_knowledge()
+        envs = core.detect_environments([("requirements.txt", "openaire-client==1\nmy-torchlight\n")], signals)
+        self.assertEqual(envs, [])
 
     def test_hook_never_blocks(self):
         core.write_outputs(self.root, core.audit(self.root))

@@ -72,6 +72,17 @@ def import_regex(modules):
     )
 
 
+DEPENDENCY_FILES = {"pyproject.toml", "requirements.txt", "requirements-dev.txt", "environment.yml",
+                    "package.json", "Pipfile", "setup.cfg"}
+
+
+def package_regex(names):
+    """Nombre de paquete completo en un fichero de dependencias: «openai» casa con
+    «openai>=1.40» o «"openai"», pero no con «openaire-client»."""
+    alt = "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True))
+    return re.compile(r"(?<![\w.@/-])(" + alt + r")(?![\w-])", re.IGNORECASE)
+
+
 def finding_id(rule, *parts):
     h = hashlib.sha1("|".join((rule,) + parts).encode("utf-8")).hexdigest()[:10]
     return f"{rule}:{h}"
@@ -168,6 +179,8 @@ def detect_environments(files, signals):
 
     llm = import_regex(signals.get("llm_imports", []))
     ml = import_regex(signals.get("ml_imports", []))
+    llm_pkg = package_regex(signals.get("llm_packages", []) or ["openai"])
+    ml_pkg = package_regex(signals.get("ml_packages", []) or ["scikit-learn"])
     for rel, text in files:
         base = rel.rsplit("/", 1)[-1]
         ext = os.path.splitext(base)[1]
@@ -187,9 +200,10 @@ def detect_environments(files, signals):
             elif rx and text and re.search(rx, text, re.IGNORECASE):
                 add(name, rel, how)
         if text and how == "código":
-            if llm.search(text):
+            deps = base in DEPENDENCY_FILES or base.startswith("requirements")
+            if llm.search(text) or (deps and llm_pkg.search(text)):
                 add("SDK de LLM", rel, "código")
-            if ml.search(text):
+            if ml.search(text) or (deps and ml_pkg.search(text)):
                 add("Librerías de ML", rel, "código")
     order = {n: i for i, (n, _, _) in enumerate(ENVIRONMENTS)}
     return sorted(found.values(), key=lambda e: order.get(e["name"], 99))

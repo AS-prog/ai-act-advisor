@@ -133,6 +133,35 @@ ml_imports:
   - statsmodels
   - mlflow
 
+# Nombres de paquete en ficheros de dependencias (pyproject, requirements,
+# environment.yml, package.json). No siempre coinciden con el import.
+llm_packages:
+  - openai
+  - anthropic
+  - "@anthropic-ai/sdk"
+  - langchain
+  - langchain-openai
+  - langchain-anthropic
+  - llama-index
+  - google-generativeai
+  - google-genai
+  - google-cloud-aiplatform
+  - mistralai
+  - cohere
+  - semantic-kernel
+  - azure-ai-openai
+
+ml_packages:
+  - scikit-learn
+  - xgboost
+  - lightgbm
+  - catboost
+  - torch
+  - tensorflow
+  - keras
+  - statsmodels
+  - mlflow
+
 export_imports:
   - google.cloud.storage
   - gcsfs
