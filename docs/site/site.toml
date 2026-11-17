@@ -14,6 +14,14 @@ path = "docs/diseno/propuesta-prototipo.html"
 type = "diseño"
 
 [[section]]
+title = "Técnica"
+
+[[section.page]]
+title = "Cómo funciona el prototipo en uso"
+path = "docs/tecnica/uso-del-prototipo.html"
+type = "técnica"
+
+[[section]]
 title = "Investigación"
 
 [[section.page]]
