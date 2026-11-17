@@ -334,8 +334,33 @@ investigación, filtrada a los cuatro riesgos del prototipo.
   el SOW y dejar el resumen de riesgos, y el catálogo del data warehouse
   para leer esquemas y etiquetas de columnas.
 - **LSP**: no aporta nada a este plugin.
-- **Distribución**: repo propio en GitHub con
-  `.claude-plugin/marketplace.json`, todo en español.
+- **Distribución**: por ahora en el repo personal
+  `AS-prog/ai-act-advisor`, todo en español. Si va a un marketplace
+  propio se decide después del prototipo.
+
+### Versión madura: MCP de documentación normativa
+
+Cuando el prototipo funcione, un servidor MCP con toda la documentación
+normativa indexada con embeddings, para contrastar cada aviso con el texto
+original en lugar de fiarse solo de los resúmenes de `knowledge/`.
+
+- **Qué indexa**: el AI Act consolidado y los reglamentos que lo
+  modifican, las directrices y códigos de la Comisión, las guías y
+  checklists de AESIA y las guías de AEPD y CEPD. Cada fragmento con su
+  fuente, artículo o apartado y fecha.
+- **Para qué**: que las skills citen el pasaje exacto en cada aviso, que
+  el PM pueda preguntar en lenguaje natural («¿un modelo de propensión
+  para una aseguradora es anexo III?») y que el vigilante normativo
+  compare versiones de un mismo texto.
+- **Herramientas previstas**: buscar pasajes por pregunta, traer un
+  artículo por su número y contrastar una afirmación con los pasajes que
+  la apoyan o la contradicen.
+- **Actualización**: el índice se regenera con el mismo ciclo semanal y
+  por el mismo PR que `knowledge/`.
+
+> [!PENDING] versión madura
+> Dónde corre el MCP (local o servicio), qué modelo de embeddings usa y
+> cómo se reparte el índice con el plugin.
 
 ## Alternativas
 
@@ -352,39 +377,35 @@ investigación, filtrada a los cuatro riesgos del prototipo.
 
 ## Decisiones
 
-| Pregunta | Decisión                                                               |
-|----------|------------------------------------------------------------------------|
-| Q1       | Para consultoras como Merkle, no solo Merkle                           |
-| Q2       | AI Act como marco, bajando al RGPD                                     |
-| Q3       | Hooks para detectar, skills para explicar                              |
-| Q4       | Varios stacks, elegidos al iniciar el proyecto                         |
-| Q6       | El PM hace el triaje y ve el resumen de riesgos                        |
-| Q7       | Un perfil por proyecto, versionado en el repo                          |
-| Q8       | Sin IA, siguen los avisos del RGPD                                     |
-| Q9       | Núcleo genérico más adaptadores por stack                              |
-| Q10      | Los avisos de riesgo alto dicen a quién escalar                        |
-| Q11      | Base normativa con fecha y búsqueda proactiva de cambios               |
-| Q12      | Marketplace propio, todo en español                                    |
-| Q13      | Tarea semanal que abre un PR y alerta a 90 días                        |
-| Q14      | EUR-Lex, Oficina de IA, AESIA, AEPD y CEPD                             |
-| Q15      | Prototipo con PII, categorías especiales, scoring por sector y art. 50 |
+| Pregunta | Decisión |
+|---|---|
+| Q1 | Para consultoras como Merkle, no solo Merkle |
+| Q2 | AI Act como marco, bajando al RGPD |
+| Q3 | Hooks para detectar, skills para explicar |
+| Q4 | Varios stacks, elegidos al iniciar el proyecto |
+| Q6 | El PM hace el triaje y ve el resumen de riesgos |
+| Q7 | Un perfil por proyecto, versionado en el repo |
+| Q8 | Sin IA, siguen los avisos del RGPD |
+| Q9 | Núcleo genérico más adaptadores por stack |
+| Q10 | Los avisos de riesgo alto dicen a quién escalar |
+| Q11 | Base normativa con fecha y búsqueda proactiva de cambios |
+| Q12 | Todo en español |
+| Q13 | Tarea semanal que abre un PR y alerta a 90 días |
+| Q14 | EUR-Lex, Oficina de IA, AESIA, AEPD y CEPD |
+| Q15 | Prototipo con PII, categorías especiales, scoring por sector y art. 50 |
+| Q16 | Sin stack fijo: `project-init` audita el repo, detecta los entornos y el PM confirma |
+| Q17 | Nombre `ai-act-advisor` |
+| Q18 | Repo personal hasta después del prototipo |
+| Q20 | Hooks y auditoría en Python sin dependencias |
+| Q22 | Licencia MIT |
+| — | Versión madura con un MCP de documentación normativa y embeddings |
 
 ## Pendiente
 
-Pendiente · Q5
+> [!PENDING] Q5
+> Cuánto ruido es aceptable y si las decisiones del ingeniero quedan en un
+> registro del repo. Se decide al probar el prototipo.
 
-Cuánto ruido es aceptable y si las decisiones del ingeniero quedan en un
-registro del repo. Se decide al probar el prototipo.
-
-Pendiente · Q16
-
-Stack del primer adaptador.
-
-Pendiente · Q17
-
-Nombre definitivo del plugin.
-
-Pendiente · Q18
-
-Si el plugin va en un marketplace nuevo o en `asprog`, el de tu sistema
-de diseño.
+> [!PENDING] Q19
+> Primer corte del prototipo. La auditoría de un repo real apunta a la PII
+> en la ingesta.

@@ -15,5 +15,6 @@
     "compliance",
     "data-engineering",
     "analytics"
-  ]
+  ],
+  "license": "MIT"
 }
