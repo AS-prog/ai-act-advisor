@@ -7,6 +7,7 @@
                   -q "informar de que están interactuando con un sistema de IA" \\
                   --en "inform users they are interacting with an AI system"
 
+La salida de texto empieza por la carpeta de las notas, para abrir el pasaje.
 «citas» devuelve dos listas: normas que pueden ser la cita y guías que la
 apoyan. Cada -q busca en las notas en español y cada --en en las notas en
 inglés (directrices del art. 6 en borrador y del CEPD). Quien llama (Claude)
@@ -38,7 +39,11 @@ def main(argv=None):
     c.add_argument("-k", type=int, default=3)
     args = ap.parse_args(argv)
 
-    indice = notas.Indice(args.notas)
+    try:
+        indice = notas.Indice(args.notas)
+    except FileNotFoundError as e:
+        print(e)
+        return 1
     if args.cmd == "articulo":
         r = indice.articulo(args.norma, args.ref)
         if args.json:
@@ -47,6 +52,7 @@ def main(argv=None):
             print("Sin nota para %s %s" % (args.norma, args.ref))
             return 1
         else:
+            print("Notas en %s" % indice.dir)
             print("%s · %s — %s · %s:L%s" % (args.norma, r["unidad"], r["titulo"], r["ruta"], r["linea"]))
         return 0
 
@@ -57,6 +63,7 @@ def main(argv=None):
     if args.json:
         print(json.dumps(res, ensure_ascii=False, indent=2))
         return 0
+    print("Notas en %s" % indice.dir)
     for titulo, clave in (("Normas (cita)", "normas"), ("Guías (apoyo)", "guias")):
         print(titulo)
         for r in res[clave]:

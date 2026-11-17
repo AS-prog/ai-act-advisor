@@ -2,3 +2,4 @@
 node_modules/
 __pycache__/
 .scratch/
+plugins/ai-act-advisor/evals/results/

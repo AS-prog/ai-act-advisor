@@ -1,0 +1,39 @@
+# Generado por evals/generate.py: no editar a mano.
+schema_version: "1.0"
+name: 13-anonimizacion
+description: "Consulta «anonimizacion»: riesgo de reidentificación al anonimizar datos"
+tags: [cita, solo-ingles]
+execution:
+  prompt: "Si anonimizamos el dataset antes de compartirlo, ¿cómo se valora el riesgo de reidentificación? ¿Hay criterios publicados?"
+  max_turns: 20
+  timeout_seconds: 300
+  allowed_tools: [Skill, Read, Glob, Grep, Bash]
+runs: 3
+graders:
+  - type: regex
+    name: nota-recuperada
+    target: "trace"
+    pattern: "(?:cepd-directrices-02-2026-anonimizacion-v1-03-2-legal-analysis|cepd-directrices-02-2026-anonimizacion-v1-04-3-the-technical-analysis-of-anonymisatio|cepd-directrices-02-2026-anonimizacion-v1-05-3-the-technical-analysis-of-anonymisatio)(?![a-z0-9])"
+    arm: "with-only"
+  - type: regex
+    name: nota-citada
+    pattern: "(?:cepd-directrices-02-2026-anonimizacion-v1-03-2-legal-analysis|cepd-directrices-02-2026-anonimizacion-v1-04-3-the-technical-analysis-of-anonymisatio|cepd-directrices-02-2026-anonimizacion-v1-05-3-the-technical-analysis-of-anonymisatio)(?![a-z0-9])"
+  - type: regex
+    name: articulo-citado
+    pattern: "CEPD|EDPB|Comit[eé] Europeo de Protecci[oó]n de Datos|European Data Protection Board"
+    flags: "i"
+  - type: regex
+    name: formato-cita
+    pattern: "·\\s*nota\\s+`?[a-z0-9-]+`?\\s*\\(L\\d+(?:\\s*[-–]\\s*L?\\d+)?\\)\\s*·"
+    weight: 0.5
+  - type: llm
+    name: guia-como-apoyo
+    criteria: "Aprueba si se cumplen las dos condiciones:\n1. Cada vez que la respuesta menciona una guía, unas directrices o un documento de una autoridad (AESIA, AEPD, CEPD/EDPB, Comisión Europea), lo presenta como orientación, criterio o apoyo, y no como la norma que obliga.\n2. Cada cosa que la respuesta presenta como obligatoria o prohibida va unida a un artículo o anexo de una norma (reglamento, ley o real decreto), o la respuesta dice de forma expresa que no tiene norma que la respalde.\nSi la respuesta no menciona ninguna guía, basta con la condición 2.\nSuspende si alguna obligación se apoya solo en una guía o en directrices, o si la respuesta está vacía o no contesta a la pregunta."
+  - type: tool_used
+    name: usa-skill
+    tool: "Skill"
+  - type: tool_used
+    name: usa-buscador
+    tool: "Bash"
+    input_match: "buscar\\.py"
+    arm: "with-only"
