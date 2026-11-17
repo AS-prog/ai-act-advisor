@@ -4,6 +4,20 @@ Plugin de Claude Code que avisa a project managers (PM), data engineers (DE) y a
 
 > Estado: primer prototipo. La auditoría y los hooks cubren la PII en la ingesta; las siete skills y el agente están escritos. El diseño está en [`docs/documentos/diseno/propuesta-prototipo.md`](docs/documentos/diseno/propuesta-prototipo.md); el sitio HTML empieza en `docs/site/index.html` y la guía de uso está en `docs/site/guia/como-se-usa.html`.
 
+## De qué trata
+
+En un proyecto de datos los riesgos legales aparecen en el código antes que en ningún documento: una columna de email que entra en Bronze sin proteger, una exportación a un tercero, un modelo que puntúa a personas, un chatbot que no dice que es una IA. Quien escribe ese código rara vez tiene a mano el artículo que aplica ni la fecha desde la que obliga.
+
+`ai-act-advisor` lleva ese conocimiento a la sesión de Claude Code de cada rol:
+
+- **PM**: al arrancar, `/project-init` hace el perfil del proyecto (cliente, sector, finalidad, rol, datos personales, stack) y, si ya hay código, una auditoría de solo lectura de entornos y riesgos. Después, `risk-summary` resume los riesgos y las decisiones para el cliente o el DPO.
+- **DE y AE**: mientras trabajan, los hooks detectan señales (PII sin clave declarada, escritura en Bronze con cambio de esquema, exportaciones, SDK de LLM) y avisan una sola vez por sesión. Las skills explican el riesgo, la norma y el artículo, y proponen opciones adaptadas al stack: enmascarar, seudonimizar, generalizar, clasificar el sistema o añadir el aviso de IA.
+- **Mantenimiento**: el agente `regulatory-watcher` revisa las fuentes oficiales (EUR-Lex, Comisión, AESIA, AEPD, CEPD) y propone actualizar la base normativa.
+
+El plugin no bloquea nada: informa, propone y deja la decisión a quien trabaja. Cada decisión queda en `.ai-act/baseline.json` (abierto, mitigado o aceptado con justificación), y los avisos solo vuelven si aparece algo nuevo.
+
+El marco es el AI Act tras el Omnibus 2026/1744, bajando al RGPD y la LOPDGDD, con la normativa española (AESIA, AEPD). Hoy el foco está en el RGPD y la PII en la ingesta, que es lo que más aparece en proyectos reales.
+
 ## Qué hay
 
 | Ruta | Qué es |
