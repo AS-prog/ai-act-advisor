@@ -411,7 +411,7 @@ python3 -m unittest discover -s tests
 > Cuánto ruido es aceptable. El límite actual es cuatro hallazgos por aviso, una vez por sesión y nada de lo que está en la línea base. Se ajusta con el uso.
 
 - Solo entiende configuración en YAML, código Python y SQL. Los notebooks `.ipynb` se leen por celdas. Scala y R solo entran en la auditoría, con la búsqueda de términos; los hooks no los vigilan.
-- Categorías especiales, scoring y transparencia (art. 50) se detectan, pero sus skills siguen como esqueleto.
+- Categorías especiales, scoring y transparencia (art. 50) tienen skill propia, pero el hook del día a día no emite `scoring-model` (solo la auditoría) y los proxies de categorías especiales no tienen señal en `signals.yaml`.
 - El informe HTML con el sistema de diseño solo se ofrece si el repo tiene `docs/site/site.toml`.
 
 ## Dónde está en el código {#donde-esta}
@@ -432,4 +432,5 @@ python3 -m unittest discover -s tests
 
 | Fecha | Cambio | Qué cambió |
 |---|---|---|
+| 2026-11-17 | Skills y agente | `risk-summary`, `special-categories`, `ai-act-classify`, `ai-transparency`, `regulatory-update` y el agente `regulatory-watcher` con contenido real, más tres referencias en `knowledge/` |
 | 2026-11-17 | PR #2 | Primer prototipo: auditoría, hooks con línea base, skills `project-init` y `pii-masking`, ejemplo medallion. Detección de SDK de LLM y librerías de ML también en los ficheros de dependencias |

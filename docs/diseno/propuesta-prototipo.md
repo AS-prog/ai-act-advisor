@@ -272,6 +272,9 @@ investigación, filtrada a los cuatro riesgos del prototipo.
 | `knowledge/signals.yaml`          | Núcleo genérico: patrón → riesgo → norma → artículo → severidad → skill |
 | `knowledge/sectors.yaml`          | Sector del cliente → puntos del anexo III que pueden aplicar            |
 | `knowledge/masking-techniques.md` | Técnicas de enmascaramiento, ventajas, límites y cuándo usar cada una   |
+| `knowledge/ai-act-classification.md` | Árbol de clasificación AI Act: art. 5, anexo III, art. 6.3 y roles |
+| `knowledge/transparency-art50.md` | Obligaciones del art. 50 por apartado, avisos válidos y marcado |
+| `knowledge/special-categories.md` | Art. 9 RGPD, proxies de categorías especiales y condiciones de uso |
 | `knowledge/sources.yaml`          | Las cinco fuentes con su URL y la fecha de la última comprobación       |
 | `adapters/<stack>/`               | Señales y ejemplos de mitigación propios de cada stack                  |
 
