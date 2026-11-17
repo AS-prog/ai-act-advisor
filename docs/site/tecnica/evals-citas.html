@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="es" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cómo funciona el eval de las citas</title>
+    <meta name="description" content="Qué mide la suite de claude plugin eval de las citas normativas, cómo corre cada caso con y sin plugin, qué comprueba cada grader y qué salió en la primera ejecución." />
+    <meta name="theme-color" content="#F0EBDE" />
+    <link rel="stylesheet" href="../design-system/v0.13/tokens.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/base.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/document.css" />
+    <!-- site:css --><link rel="stylesheet" href="../design-system/v0.13/css/library.css" /><!-- /site:css -->
+    <script>
+      // Antes de pintar, para que no haya destello: el tema guardado manda sobre «auto».
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="lib">
+    <!-- site:nav -->
+    <nav class="lib-nav" aria-label="Sitio">
+    <details open>
+    <summary><a class="lib-home" href="../index.html">ai-act-advisor</a><span class="lib-menu">Índice</span></summary>
+    <h2>Guía</h2>
+    <ul>
+    <li><a href="../guia/como-se-usa.html">Cómo se usa</a></li>
+    <li><a href="../guia/demo.html">Demo de punta a punta</a></li>
+    </ul>
+    <h2>Diseño</h2>
+    <ul>
+    <li><a href="../diseno/propuesta-prototipo.html">Propuesta del prototipo</a></li>
+    <li><a href="../diseno/citar-notas.html">Cómo recuperar y citar las notas normativas</a></li>
+    </ul>
+    <h2>Técnica</h2>
+    <ul>
+    <li><a href="uso-del-prototipo.html">Cómo funciona el prototipo en uso</a></li>
+    <li><a href="evals-citas.html" aria-current="page">Cómo funciona el eval de las citas</a></li>
+    </ul>
+    <h2>Seguimiento</h2>
+    <ul>
+    <li><a href="../pendientes.html">Pendientes y dudas</a></li>
+    </ul>
+    <h2>Investigación</h2>
+    <ul>
+    <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
+    </ul>
+    </details>
+    </nav>
+    <script>(function () { var m = matchMedia('(max-width: 56rem)'), d = document.querySelector('.lib-nav details'); d.open = !m.matches; m.addEventListener('change', function () { d.open = !m.matches; }); })();</script>
+    <script src="../design-system/v0.13/js/library-fold.js"></script>
+    <!-- /site:nav -->
+    <div class="doc">
+      <header class="doc-bar">
+        <span class="doc-brand">ai-act-advisor / técnica</span>
+        <button class="doc-theme" type="button" aria-label="Cambiar tema">Tema</button>
+      </header>
+
+      <header class="doc-header">
+        <h1>Cómo funciona el eval de las citas</h1>
+        <p class="lede">Qué mide la suite de <code>claude plugin eval</code> de las citas
+normativas, cómo corre cada caso con y sin plugin, qué comprueba cada
+grader y qué salió en la primera ejecución.</p>
+        <dl class="doc-meta">
+          <div><dt>Vigente a</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
+          <div><dt>Código</dt><dd><code>ai-act-advisor@ee40d83</code></dd></div>
+          <div><dt>Diseño</dt><dd><a href="../diseno/citar-notas.html">Cómo recuperar y citar las notas normativas</a></dd></div>
+          <div><dt>Suite</dt><dd><code>plugins/ai-act-advisor/evals/</code></dd></div>
+        </dl>
+      </header>
+
+      <nav class="doc-toc" aria-label="Índice">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#en-una-frase">En una frase</a></li>
+          <li><a href="#por-que-hace-falta">Por qué hace falta</a></li>
+          <li><a href="#como-corre-un-caso">Cómo corre un caso</a></li>
+          <li><a href="#los-casos">Los casos</a></li>
+          <li><a href="#que-comprueba-cada-grader">Qué comprueba cada grader</a></li>
+          <li><a href="#primera-ejecucion">Primera ejecución</a></li>
+          <li><a href="#con-varios-modelos">Con varios modelos</a></li>
+          <li><a href="#como-se-ejecuta">Cómo se ejecuta</a></li>
+          <li><a href="#siguientes-pasos">Siguientes pasos</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc-prose">
+<h2 id="en-una-frase">En una frase</h2>
+<p>Cada caso hace a Claude una pregunta normativa en español, como la
+haría un PM, un DE o un AE, dos veces: con el plugin, donde la skill
+<code>cite-regulation</code> busca en las notas y cita con formato fijo,
+y sin él, donde Claude responde de memoria. Unos graders puntúan las dos
+respuestas y el informe da la diferencia.</p>
+<h2 id="por-que-hace-falta">Por qué hace falta</h2>
+<p><code>tests/test_buscar.py</code> ya mide el buscador: 19 de 20
+preguntas encuentran la nota esperada. Pero las tres consultas que
+recibe el buscador (la pregunta, la misma con el vocabulario de la norma
+y su traducción al inglés) las escribí a mano imitando a Claude. El eval
+quita esa suposición: las consultas las escribe Claude desde la skill, y
+además mide si la skill se activa, si lee el pasaje y si cita bien.</p>
+<h2 id="como-corre-un-caso">Cómo corre un caso</h2>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 352" role="img" aria-labelledby="eval-title eval-desc">
+    <title id="eval-title">Un caso del eval, con y sin plugin</title>
+    <desc id="eval-desc">La misma pregunta va a dos brazos. Con plugin, Claude carga la skill cite-regulation, escribe tres consultas, llama a buscar.py, lee la nota en la línea indicada y responde con la cita. Sin plugin, Claude responde de memoria. Los graders puntúan las dos respuestas; algunos miran también la traza del brazo con plugin. El informe da la puntuación de cada brazo y la diferencia.</desc>
+    <defs>
+      <marker id="eval-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
+    </defs>
+    <rect class="d-box" x="16" y="136" width="136" height="72"/>
+    <text class="d-t" x="28" y="162">Pregunta</text>
+    <text class="d-sm" x="28" y="182">en español, de</text>
+    <text class="d-sm" x="28" y="198">PM, DE o AE</text>
+    <line class="d-line" x1="152" y1="160" x2="184" y2="72" marker-end="url(#eval-arrow)"/>
+    <line class="d-line" x1="152" y1="184" x2="184" y2="284" marker-end="url(#eval-arrow)"/>
+    <text class="d-tm" x="184" y="22">CON PLUGIN</text>
+    <rect class="d-fill" x="184" y="32" width="336" height="168"/>
+    <text class="d-t" x="200" y="58">1 · skill cite-regulation</text>
+    <text class="d-sm" x="200" y="80">tres consultas: pregunta, norma, inglés</text>
+    <text class="d-t" x="200" y="110">2 · buscar.py citas</text>
+    <text class="d-sm" x="200" y="132">normas y guías, con nota y línea</text>
+    <text class="d-t" x="200" y="162">3 · lee el pasaje y cita</text>
+    <text class="d-sm" x="200" y="184">RGPD art. 5.1.c · nota … (L23) · DOUE</text>
+    <text class="d-tm" x="184" y="250">SIN PLUGIN</text>
+    <rect class="d-box" x="184" y="260" width="336" height="56"/>
+    <text class="d-t" x="200" y="284">Claude responde de memoria</text>
+    <text class="d-sm" x="200" y="304">sin notas ni formato de cita</text>
+    <line class="d-line" x1="520" y1="116" x2="560" y2="160" marker-end="url(#eval-arrow)"/>
+    <line class="d-line" x1="520" y1="288" x2="560" y2="208" marker-end="url(#eval-arrow)"/>
+    <rect class="d-box" x="560" y="136" width="144" height="96"/>
+    <text class="d-t" x="572" y="160">Graders</text>
+    <text class="d-sm" x="572" y="182">regex · traza</text>
+    <text class="d-sm" x="572" y="200">herramienta · juez</text>
+    <text class="d-sm" x="572" y="222">puntos y Δ</text>
+  </svg>
+  <figcaption>La misma pregunta corre en dos brazos. La diferencia entre ellos (<strong>Δ</strong>) es lo que aporta el plugin.</figcaption>
+</figure>
+
+<ol type="1">
+<li><strong>Pregunta.</strong> Cada caso es un <code>case.yaml</code>
+con una pregunta en lenguaje natural («En la ingesta a Bronze traemos
+todas las columnas del CRM aunque solo usamos cuatro. ¿Hay algún
+artículo que obligue a traer solo lo necesario?»).</li>
+<li><strong>Dos brazos.</strong> <code>claude plugin eval</code> lanza
+un Claude con el plugin cargado y otro sin él (ablación
+<code>with-without</code>). Los dos pueden usar <code>Bash</code>,
+<code>Read</code>, <code>Glob</code> y <code>Grep</code>.</li>
+<li><strong>Con plugin.</strong> Si la skill
+<code>cite-regulation</code> se activa, Claude escribe las tres
+consultas, llama a <code>scripts/buscar.py citas</code>, abre la nota en
+la línea que le da y responde con una línea de cita por afirmación:
+norma y artículo, nota y línea, y fuente oficial.</li>
+<li><strong>Graders.</strong> Puntúan la respuesta final de cada brazo;
+los marcados «solo con plugin» miran también la traza (qué herramientas
+usó y qué salió en la sesión) y no cuentan para la nota.</li>
+<li><strong>Informe.</strong> Puntuación por caso y brazo, tasa de
+aprobados y Δ.</li>
+</ol>
+<h2 id="los-casos">Los casos</h2>
+<p>22 casos en <code>plugins/ai-act-advisor/evals/</code>, generados por
+<code>evals/generate.py</code> desde
+<code>tests/consultas-citas.json</code>, para que el eval y el test
+offline usen las mismas preguntas y las mismas notas esperadas.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Casos</th>
+<th>Etiqueta</th>
+<th>Qué prueban</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01 a 20</td>
+<td><code>cita</code></td>
+<td>Las 20 preguntas del test offline: RGPD, LOPDGDD, AI Act, guías</td>
+</tr>
+<tr class="even">
+<td>13, 14 y 21</td>
+<td><code>solo-ingles</code></td>
+<td>La respuesta solo está en directrices del CEPD en inglés; deben
+salir como orientación, no como obligación</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td><code>negativo</code></td>
+<td>Pregunta por el Reglamento de Servicios Digitales, que no está en
+las notas; se espera «sin nota que lo respalde»</td>
+</tr>
+<tr class="even">
+<td>02, 21 y 22</td>
+<td><code>humo</code></td>
+<td>Tres casos para comprobar que todo corre</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="que-comprueba-cada-grader">Qué comprueba cada grader</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Grader</th>
+<th>Tipo</th>
+<th>Qué comprueba</th>
+<th>Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>nota-citada</code></td>
+<td>regex</td>
+<td>La respuesta nombra el id de una nota esperada</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><code>articulo-citado</code></td>
+<td>regex</td>
+<td>Nombra la norma y el artículo o anexo esperados</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><code>fuente-oficial</code></td>
+<td>regex</td>
+<td>Remite al DOUE, al BOE o a un CELEX</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><code>formato-cita</code></td>
+<td>regex</td>
+<td>Hay una línea con la forma <code>· nota id (Lnn) ·</code></td>
+<td>0,5</td>
+</tr>
+<tr class="odd">
+<td><code>guia-como-apoyo</code></td>
+<td>juez LLM</td>
+<td>Las guías salen como orientación y cada obligación va unida a un
+artículo</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><code>dice-sin-nota</code></td>
+<td>regex</td>
+<td>Caso 22: aparece «sin nota que lo respalde»</td>
+<td>0,5</td>
+</tr>
+<tr class="odd">
+<td><code>no-inventa-cita</code></td>
+<td>juez LLM</td>
+<td>Caso 22: no presenta el DSA como fuente comprobada</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><code>nota-recuperada</code></td>
+<td>regex sobre la traza</td>
+<td>El buscador encontró una nota esperada con las consultas de
+Claude</td>
+<td>solo con plugin</td>
+</tr>
+<tr class="odd">
+<td><code>usa-buscador</code></td>
+<td>herramienta</td>
+<td>Se llamó a <code>buscar.py</code></td>
+<td>solo con plugin</td>
+</tr>
+<tr class="even">
+<td><code>usa-skill</code></td>
+<td>herramienta</td>
+<td>Se cargó una skill</td>
+<td>solo con plugin</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cómo leerlos:</p>
+<ul>
+<li><strong><code>nota-recuperada</code></strong> es la cifra comparable
+con los 19 de 20 del test offline. Si falla, las consultas de Claude no
+encontraron la nota; si pasa y falla <code>nota-citada</code>, la
+encontró y no la citó.</li>
+<li><strong>Δ está inflada por construcción.</strong> Claude sin plugin
+no conoce los ids de las notas, así que <code>nota-citada</code> y
+<code>formato-cita</code> siempre suman a favor del plugin. La
+comparación limpia está en <code>articulo-citado</code>,
+<code>fuente-oficial</code> y los dos jueces.</li>
+<li><strong>El juez</strong> es otro modelo
+(<code>--judge-model sonnet</code>), para que no se califique a sí
+mismo.</li>
+</ul>
+<h2 id="primera-ejecucion">Primera ejecución</h2>
+<p>2026-11-17, casos <code>humo</code>, una pasada por brazo, juez
+<code>sonnet</code>: 35 segundos y 0,46 USD.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Caso</th>
+<th>Con plugin</th>
+<th>Sin plugin</th>
+<th>Qué pasó</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>02 · minimización</td>
+<td><strong>1,00</strong></td>
+<td>0,44</td>
+<td>La skill se activa, llama a <code>buscar.py</code> en 6 turnos y
+cita
+<code>RGPD art. 5.1.c · nota rgpd-art-5 (L23) · DOUE, CELEX 02016R0679-20160504</code>
+y el art. 25.2</td>
+</tr>
+<tr class="even">
+<td>21 · singularización</td>
+<td>0,00</td>
+<td>0,29</td>
+<td>La skill <strong>no se activa</strong>: Claude responde de memoria
+con el Dictamen 05/2014 y el considerando 26, sin la guía del CEPD</td>
+</tr>
+<tr class="odd">
+<td>22 · DSA, sin nota</td>
+<td>0,67</td>
+<td>0,00</td>
+<td>La skill <strong>no se activa</strong>: cita de memoria el art. 27
+del DSA; el juez lo aprueba en <code>no-inventa-cita</code>, pero no
+dice «sin nota que lo respalde»</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lo que enseña:</p>
+<ul>
+<li><strong>Cuando la skill entra, funciona.</strong> Encuentra la nota,
+lee el apartado y cita con el formato completo. El brazo sin plugin
+acierta el artículo, pero sin nota ni fuente oficial.</li>
+<li><strong>La skill no se activa sola en dos tipos de
+pregunta.</strong> Las conceptuales («¿qué es…?») y las de normas que no
+están en las notas. Es un problema de su <code>description</code>, no
+del buscador.</li>
+<li><strong>El juez de <code>no-inventa-cita</code> es blando.</strong>
+Aprobó una cita del DSA de memoria sin la advertencia que pide su
+criterio. Hay que revisarlo con más pasadas.</li>
+</ul>
+<h2 id="con-varios-modelos">Con varios modelos</h2>
+<p><code>evals/run.py</code> lanza el eval una vez por modelo y lleva el
+historial. El juez queda fijo (por defecto <code>sonnet</code>), porque
+si cambia entre ejecuciones las notas dejan de ser comparables.</p>
+<pre class="sh"><code>cd plugins/ai-act-advisor/evals
+python3 run.py ejecutar --modelos claude-haiku-5-5 claude-sonnet-5-5 claude-opus-5-5 \
+  --tag humo --runs 1 --max-cost 3
+python3 run.py historial               # una fila por ejecución y modelo
+python3 run.py historial --por-caso    # detalle por caso
+python3 run.py ejecutar --modelos claude-opus-5-5 --dry-run   # el comando, sin gastar</code></pre>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 200" role="img" aria-labelledby="hist-title hist-desc">
+    <title id="hist-title">De la ejecución al historial</title>
+    <desc id="hist-desc">run.py llama a claude plugin eval una vez por modelo. El JSON completo de cada ejecución queda en results, fuera de git. Un resumen se añade a dos CSV versionados en historial: ejecuciones.csv, una fila por ejecución y modelo, y casos.csv, una fila por caso. run.py historial los lee para comparar.</desc>
+    <defs>
+      <marker id="hist-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
+    </defs>
+    <rect class="d-box" x="16" y="64" width="152" height="72"/>
+    <text class="d-t" x="28" y="90">run.py ejecutar</text>
+    <text class="d-sm" x="28" y="110">--modelos a b c</text>
+    <text class="d-sm" x="28" y="126">juez fijo</text>
+    <line class="d-line" x1="168" y1="100" x2="208" y2="100" marker-end="url(#hist-arrow)"/>
+    <rect class="d-box" x="208" y="64" width="168" height="72"/>
+    <text class="d-t" x="220" y="90">claude plugin eval</text>
+    <text class="d-sm" x="220" y="110">una vez por modelo</text>
+    <text class="d-sm" x="220" y="126">con y sin plugin</text>
+    <line class="d-line" x1="376" y1="84" x2="416" y2="48" marker-end="url(#hist-arrow)"/>
+    <line class="d-line" x1="376" y1="116" x2="416" y2="152" marker-end="url(#hist-arrow)"/>
+    <rect class="d-box" x="416" y="16" width="160" height="56"/>
+    <text class="d-t" x="428" y="40">results/*.json</text>
+    <text class="d-sm" x="428" y="60">detalle, fuera de git</text>
+    <rect class="d-fill" x="416" y="128" width="160" height="56"/>
+    <text class="d-t" x="428" y="152">historial/*.csv</text>
+    <text class="d-sm" x="428" y="172">resumen, versionado</text>
+    <line class="d-line" x1="576" y1="156" x2="608" y2="156" marker-end="url(#hist-arrow)"/>
+    <rect class="d-box" x="608" y="128" width="96" height="56"/>
+    <text class="d-t" x="618" y="152">historial</text>
+    <text class="d-sm" x="618" y="172">compara</text>
+  </svg>
+  <figcaption>El detalle de cada ejecución se queda en local; el <strong>resumen</strong> va al repo para comparar modelos y versiones de la skill.</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Fichero</th>
+<th>Una fila por</th>
+<th>Columnas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>historial/ejecuciones.csv</code></td>
+<td>ejecución y modelo</td>
+<td>puntos con y sin plugin, Δ, aprobados, <code>skill_activa</code>,
+<code>nota_recuperada</code>, coste, duración, si fue parcial,
+<code>commit</code>, <code>skill_sha</code></td>
+</tr>
+<tr class="even">
+<td><code>historial/casos.csv</code></td>
+<td>caso</td>
+<td>puntos con y sin plugin, Δ, <code>skill_activa</code>,
+<code>nota_recuperada</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>skill_sha</code> es la huella de
+<code>cite-regulation/SKILL.md</code>: dos filas con la misma huella
+prueban la misma skill, y un cambio de huella marca una versión nueva.
+<code>commit</code> lleva «+cambios» si había cambios sin guardar en
+skills, scripts o knowledge.</p>
+<h3 id="primera-comparativa">Primera comparativa</h3>
+<p>2026-11-17, casos <code>humo</code>, una pasada por brazo, juez
+<code>sonnet</code>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Con plugin</th>
+<th>Sin plugin</th>
+<th>Δ</th>
+<th>Skill activa</th>
+<th>Nota recuperada</th>
+<th>Coste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Haiku 5.5</td>
+<td>0,47</td>
+<td>0,24</td>
+<td>0,22</td>
+<td>0 de 3</td>
+<td>0 de 2</td>
+<td>0,09 USD</td>
+</tr>
+<tr class="even">
+<td>Sonnet 5.5</td>
+<td>0,65</td>
+<td>0,34</td>
+<td>0,31</td>
+<td>1 de 3</td>
+<td>1 de 2</td>
+<td>0,50 USD</td>
+</tr>
+</tbody>
+</table></div>
+<p>Los dos modelos confirman lo de la primera ejecución: el plugin
+mejora la respuesta cuando la skill entra, y lo que más resta es que no
+entra. Con Haiku no se activa ninguna vez. Con una pasada por caso la
+varianza es alta; las cifras sirven para comparar tendencias, no para
+decidir.</p>
+<h2 id="como-se-ejecuta">Cómo se ejecuta</h2>
+<p>Desde <code>plugins/ai-act-advisor/</code>, en un clon del
+repositorio:</p>
+<pre class="sh"><code># prueba de humo: 3 casos, una pasada
+claude plugin eval . --tag humo --runs 1 --max-cost-usd 3 \
+  --allow-tools Bash --judge-model sonnet --no-publish
+
+# suite completa: 22 casos, 2 brazos, 3 pasadas
+claude plugin eval . --allow-tools Bash --judge-model sonnet</code></pre>
+<ul>
+<li><strong>Bash</strong> hace falta porque la skill llama a
+<code>buscar.py</code>. En Linux, Claude Code solo lo concede dentro de
+un eval si están instalados <code>bubblewrap</code> y
+<code>socat</code>.</li>
+<li><strong>Notas.</strong> Viajan con el plugin en
+<code>knowledge/notas/</code> (decisión 1 de D21, 2026-11-17), así que
+el eval funciona igual con el plugin cargado desde el clon, instalado
+desde el marketplace o con APM.</li>
+<li><strong>Resultados</strong> en <code>evals/results/</code>, fuera de
+git, con un informe HTML.</li>
+<li>Para cambiar una pregunta, edita <code>generate.py</code> y
+regenera; <code>tests/test_evals.py</code> falla si los casos no están
+al día.</li>
+</ul>
+<h2 id="siguientes-pasos">Siguientes pasos</h2>
+<ol type="1">
+<li>Ajustar la <code>description</code> de <code>cite-regulation</code>
+para que se active con preguntas conceptuales y con normas que no están
+en las notas, y repetir los casos <code>humo</code> con
+<code>run.py</code> para ver el cambio de <code>skill_sha</code> y de
+<code>skill_activa</code> en el historial.</li>
+<li>Endurecer el criterio del juez <code>no-inventa-cita</code>.</li>
+<li>Lanzar la suite completa (22 casos, 2 brazos, 3 pasadas; unos 10
+USD) y comparar <code>nota-recuperada</code> con los 19 de 20 del test
+offline.</li>
+</ol>
+
+      </article>
+
+      <footer class="doc-footer">
+        <span>Fuente: docs/documentos/tecnica/evals-citas.md</span>
+        <span>asprog-design-system</span>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelector('.doc-theme').addEventListener('click', function () {
+        var r = document.documentElement, t = r.getAttribute('data-theme');
+        var isDark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var next = isDark ? 'light' : 'dark';
+        r.setAttribute('data-theme', next);
+        try { localStorage.setItem('tema', next); } catch (e) {}
+      });
+    </script>
+  </body>
+</html>

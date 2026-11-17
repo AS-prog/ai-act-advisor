@@ -519,4 +519,4 @@ Copias de trabajo generadas a partir de los originales de arriba, para buscar y 
 
 ## Notas por artículo
 
-Las conversiones de `md/` están troceadas por artículo en `notas/` (con front matter para buscarlas). Ver `notas/README.md`.
+Las conversiones de `md/` y los PDF están troceados en notas con front matter en `plugins/ai-act-advisor/knowledge/notas/`, para que viajen con el plugin (D21). Ver su `README.md`.

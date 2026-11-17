@@ -3,7 +3,7 @@
 
 Cada nota lleva front matter (name, description, tags...) en formato skill para
 poder buscarlas con grep, un índice o una herramienta de búsqueda.
-Uso: python3 trocear.py   (desde cualquier carpeta; reescribe fuentes/notas/)
+Uso: python3 trocear.py   (desde cualquier carpeta; reescribe plugins/ai-act-advisor/knowledge/notas/)
 Solo stdlib. Las notas son derivadas: se editan las conversiones y se regenera.
 """
 import re
@@ -13,7 +13,8 @@ from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 MD = AQUI.parent
-SALIDA = MD.parent / "notas"
+# Las notas viajan con el plugin (D21): plugins/ai-act-advisor/knowledge/notas/.
+SALIDA = MD.parents[3] / "plugins" / "ai-act-advisor" / "knowledge" / "notas"
 
 NORMAS = [
     dict(slug="ai-act", fichero="2026-07-27-ai-act-2024-1689-consolidado-es.md",

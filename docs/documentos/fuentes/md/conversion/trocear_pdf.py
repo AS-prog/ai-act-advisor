@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Convierte los PDF de fuentes/ en notas Markdown con front matter, troceadas por sección.
 
-Requiere `pdftotext` (poppler) y `pypdf`. Escribe en fuentes/notas/<documento>/.
+Requiere `pdftotext` (poppler) y `pypdf`. Escribe en plugins/ai-act-advisor/knowledge/notas/<documento>/.
 Troceado, por orden: marcadores del PDF (nivel 1); índice «Contenido general» de las
 guías AESIA; bloques de páginas si el documento es largo; una sola nota si es corto.
 Los PDF que ya tienen conversión fina en fuentes/md/ (AI Act, RGPD, LOPDGDD) se omiten.
@@ -18,7 +18,8 @@ import pypdf
 
 AQUI = Path(__file__).resolve().parent
 FUENTES = AQUI.parent.parent
-SALIDA = FUENTES / "notas"
+# Las notas viajan con el plugin (D21): plugins/ai-act-advisor/knowledge/notas/.
+SALIDA = FUENTES.parents[2] / "plugins" / "ai-act-advisor" / "knowledge" / "notas"
 
 OMITIR = ("2016-05-04-rgpd-2016-679-doue", "2024-07-12-ai-act-2024-1689-original",
           "2025-12-27-lopdgdd-3-2018-consolidado-boe.pdf")

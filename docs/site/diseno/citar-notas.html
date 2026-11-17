@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cómo recuperar y citar las notas normativas</title>
+    <meta name="description" content="Cómo encuentran las skills y los hooks la nota normativa que respalda cada aviso y cómo la citan, desde la búsqueda por metadatos de hoy hasta el MCP con embeddings de la versión madura." />
+    <meta name="theme-color" content="#F0EBDE" />
+    <link rel="stylesheet" href="../design-system/v0.13/tokens.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/base.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/document.css" />
+    <!-- site:css --><link rel="stylesheet" href="../design-system/v0.13/css/library.css" /><!-- /site:css -->
+    <script>
+      // Antes de pintar, para que no haya destello: el tema guardado manda sobre «auto».
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="lib">
+    <!-- site:nav -->
+    <nav class="lib-nav" aria-label="Sitio">
+    <details open>
+    <summary><a class="lib-home" href="../index.html">ai-act-advisor</a><span class="lib-menu">Índice</span></summary>
+    <h2>Guía</h2>
+    <ul>
+    <li><a href="../guia/como-se-usa.html">Cómo se usa</a></li>
+    <li><a href="../guia/demo.html">Demo de punta a punta</a></li>
+    </ul>
+    <h2>Diseño</h2>
+    <ul>
+    <li><a href="propuesta-prototipo.html">Propuesta del prototipo</a></li>
+    <li><a href="citar-notas.html" aria-current="page">Cómo recuperar y citar las notas normativas</a></li>
+    </ul>
+    <h2>Técnica</h2>
+    <ul>
+    <li><a href="../tecnica/uso-del-prototipo.html">Cómo funciona el prototipo en uso</a></li>
+    <li><a href="../tecnica/evals-citas.html">Cómo funciona el eval de las citas</a></li>
+    </ul>
+    <h2>Seguimiento</h2>
+    <ul>
+    <li><a href="../pendientes.html">Pendientes y dudas</a></li>
+    </ul>
+    <h2>Investigación</h2>
+    <ul>
+    <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
+    </ul>
+    </details>
+    </nav>
+    <script>(function () { var m = matchMedia('(max-width: 56rem)'), d = document.querySelector('.lib-nav details'); d.open = !m.matches; m.addEventListener('change', function () { d.open = !m.matches; }); })();</script>
+    <script src="../design-system/v0.13/js/library-fold.js"></script>
+    <!-- /site:nav -->
+    <div class="doc">
+      <header class="doc-bar">
+        <span class="doc-brand">ai-act-advisor / diseño</span>
+        <button class="doc-theme" type="button" aria-label="Cambiar tema">Tema</button>
+      </header>
+
+      <header class="doc-header">
+        <h1>Cómo recuperar y citar las notas normativas</h1>
+        <p class="lede">Cómo encuentran las skills y los hooks la nota normativa que respalda
+cada aviso y cómo la citan, desde la búsqueda por metadatos de hoy hasta
+el MCP con embeddings de la versión madura (D02).</p>
+        <dl class="doc-meta">
+          <div><dt>Fecha</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
+          <div><dt>Estado</dt><dd>borrador</dd></div>
+          <div><dt>Decisión</dt><dd>D21 · issue #15</dd></div>
+          <div><dt>Evals</dt><dd><a href="../tecnica/evals-citas.html">Cómo funciona el eval de las citas</a></dd></div>
+        </dl>
+      </header>
+
+      <nav class="doc-toc" aria-label="Índice">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#conclusion">Conclusión</a></li>
+          <li><a href="#contexto">Contexto</a></li>
+          <li><a href="#propuesta">Propuesta</a></li>
+          <li><a href="#alternativas">Alternativas</a></li>
+          <li><a href="#como-se-mide">Cómo se mide</a></li>
+          <li><a href="#pendiente">Pendiente</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc-prose">
+<h2 id="conclusion">Conclusión</h2>
+<p>Propongo no empezar por RAG. Las tres operaciones que la propuesta
+del prototipo reserva para el MCP (traer un artículo por su número,
+buscar pasajes por pregunta y contrastar una afirmación) se pueden hacer
+ya sin dependencias, en tres capas que devuelven lo mismo: una
+<strong>cita con formato fijo</strong>.</p>
+<ol type="1">
+<li><strong>Cita fija.</strong> Cada aviso cita norma, artículo y
+apartado, el id de la nota y la fuente oficial. Las guías y directrices
+apoyan, pero nunca son la base de una obligación.</li>
+<li><strong>Mapa curado de señal a cita</strong> en
+<code>knowledge/citas.yaml</code>. Los hooks y las skills lo leen para
+citar sin buscar. Es determinista y se revisa en PR, como el resto de
+<code>knowledge/</code>.</li>
+<li><strong>Buscador para las preguntas abiertas</strong>, en Python
+stdlib, con BM25 por pasajes. Claude, que es quien lo llama, reformula
+la pregunta en el vocabulario de la norma y la traduce al inglés; el
+buscador lanza cada consulta sobre las notas de su idioma y devuelve por
+separado normas (la cita) y guías (el apoyo). Hay prototipo:
+<code>scripts/buscar.py</code>.</li>
+</ol>
+<p>Los embeddings entran después detrás de la misma interfaz (entra una
+consulta y salen ids de nota), así que las skills no cambian el día que
+llegue el MCP.</p>
+<h2 id="contexto">Contexto</h2>
+<p>Lo que se ha medido sobre <code>docs/documentos/fuentes/notas/</code>
+(806 notas, 7,5 MB) el 2026-11-17:</p>
+<ul>
+<li><strong>Las notas no viajan con el plugin.</strong> El marketplace
+instala <code>./plugins/ai-act-advisor</code> y las notas están en
+<code>docs/</code>. Hoy ninguna skill ni hook puede leerlas en el
+proyecto de un usuario. Las normas (AI Act, RGPD, LOPDGDD, Omnibus)
+ocupan unos 2 MB; guías, directrices, checklists y sentencia, unos 5,4
+MB.</li>
+<li><strong>El front matter es desigual.</strong> Las 383 notas de
+normas tienen <code>norma</code>, <code>unidad</code>,
+<code>titulo</code> y <code>tags</code>. Las 423 de guías y otros
+documentos no tienen <code>tags</code>, ni <code>norma</code>, ni a qué
+artículos se refieren, y su <code>description</code> repite el nombre
+del fichero.</li>
+<li><strong>Los tags actuales no discriminan.</strong> Hay 457 distintos
+y salen del título: <code>articulo</code> está en 330 notas y
+<code>proteccion-datos</code> en 243. Para «seudonimización», con 17
+notas que la mencionan, ninguna <code>description</code> la nombra.</li>
+<li><strong>Las guías se pueden enlazar a artículos.</strong> 110 de las
+413 notas de guías y directrices citan un artículo con la forma
+«artículo N», así que un campo <code>articulos</code> se puede extraer
+al trocear.</li>
+<li><strong>El texto completo funciona en español y falla en
+inglés.</strong> Un BM25 de 50 líneas en stdlib, con el front matter
+puntuando el triple, encontró la nota esperada entre las cinco primeras
+en 6 de 7 consultas en español («categorías especiales de datos salud» →
+<code>rgpd-art-9</code>, «evaluación de impacto» →
+<code>rgpd-art-35</code>). En inglés, que es como escribe el código,
+falló en las 3: «credit scoring» no llega al anexo III y
+«pseudonymisation hash email» no llega al art. 4 ni al 32 del RGPD.</li>
+<li><strong>Una nota es un artículo entero.</strong> Los avisos citan
+apartados (art. 10.5) y la mediana de nota es de 3,8 KB, pero el 10 %
+pasa de 20 KB y <code>omnibus-art-1</code> llega a 61 KB. Leer la nota
+entera para citar un apartado gasta contexto; los apartados están
+numerados («1.», «2.») y se pueden localizar por línea.</li>
+</ul>
+<h2 id="propuesta">Propuesta</h2>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 360" role="img" aria-labelledby="citas-title citas-desc">
+    <title id="citas-title">De la señal a la cita</title>
+    <desc id="citas-desc">Un hook o una skill parten de una señal o de una pregunta. Si la señal está en el mapa curado, la cita sale directa. Si es una pregunta abierta, el buscador filtra por metadatos y después busca por texto, con las consultas que Claude reformula en español y en inglés. Todo acaba en una cita con formato fijo que remite a la nota y a la fuente oficial. El MCP con embeddings sustituye al buscador más adelante con la misma salida.</desc>
+    <defs>
+      <marker id="citas-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
+    </defs>
+    <rect class="d-box" x="16" y="16" width="200" height="56"/>
+    <text class="d-t" x="32" y="40">Señal del hook</text>
+    <text class="d-sm" x="32" y="60">pii-terms, scoring-model…</text>
+    <rect class="d-box" x="16" y="208" width="200" height="56"/>
+    <text class="d-t" x="32" y="232">Pregunta abierta</text>
+    <text class="d-sm" x="32" y="252">skill o PM, en lenguaje natural</text>
+    <line class="d-line" x1="216" y1="44" x2="264" y2="44" marker-end="url(#citas-arrow)"/>
+    <line class="d-line" x1="216" y1="236" x2="264" y2="236" marker-end="url(#citas-arrow)"/>
+    <rect class="d-fill" x="264" y="16" width="208" height="56"/>
+    <text class="d-t" x="280" y="40">Mapa curado</text>
+    <text class="d-sm" x="280" y="60">knowledge/citas.yaml</text>
+    <rect class="d-box" x="264" y="160" width="208" height="152"/>
+    <text class="d-t" x="280" y="184">Buscador stdlib</text>
+    <text class="d-sm" x="280" y="210">1 · Claude: es, norma y en</text>
+    <text class="d-sm" x="280" y="232">2 · BM25 por pasajes e idioma</text>
+    <text class="d-sm" x="280" y="254">3 · normas y guías aparte</text>
+    <text class="d-sm" x="280" y="292">salida: ids de nota + líneas</text>
+    <line class="d-line" x1="472" y1="44" x2="520" y2="120" marker-end="url(#citas-arrow)"/>
+    <line class="d-line" x1="472" y1="236" x2="520" y2="160" marker-end="url(#citas-arrow)"/>
+    <rect class="d-fill" x="520" y="104" width="184" height="72"/>
+    <text class="d-t" x="536" y="130">Cita fija</text>
+    <text class="d-sm" x="536" y="150">norma · art. · apartado</text>
+    <text class="d-sm" x="536" y="166">nota · fuente oficial</text>
+    <rect class="d-box" x="216" y="328" width="304" height="24"/>
+    <text class="d-tm" x="232" y="344">MÁS ADELANTE · MCP CON EMBEDDINGS</text>
+    <line class="d-line" x1="368" y1="328" x2="368" y2="314" marker-end="url(#citas-arrow)"/>
+  </svg>
+  <figcaption>Las dos entradas acaban en la misma <strong>cita fija</strong>. El MCP sustituye al buscador sin cambiar lo que reciben las skills.</figcaption>
+</figure>
+
+<h3 id="1-formato-de-la-cita">1. Formato de la cita</h3>
+<p>Cada aviso que hoy dice «Norma y artículo» pasa a llevar una cita con
+cuatro partes:</p>
+<pre class="text"><code>RGPD art. 9.1 · nota rgpd-art-9 (L19) · DOUE L 119, 4.5.2016, CELEX 32016R0679</code></pre>
+<ul>
+<li><strong>Norma, artículo y apartado</strong>: lo que lee la
+persona.</li>
+<li><strong>Id de la nota y líneas</strong>: el <code>name</code> del
+front matter, para que Claude abra el pasaje sin leer la nota
+entera.</li>
+<li><strong>Fuente oficial</strong>: lo único que hace fe (DOUE o BOE),
+sacado de <code>celex</code> o del manifiesto de
+<code>fuentes/</code>.</li>
+<li>Si la cita es de una guía (AESIA, AEPD, CEPD, Comisión), se dice que
+es orientación y se cita además el artículo al que se refiere. Una guía
+no basta para afirmar que algo es obligatorio.</li>
+<li>Si no hay nota que respalde la afirmación, el aviso lo dice («sin
+nota que lo respalde») en lugar de inventar la cita.</li>
+</ul>
+<h3 id="2-mapa-curado-knowledgecitasyaml">2. Mapa curado:
+<code>knowledge/citas.yaml</code></h3>
+<p>Un fichero que une cada señal y cada tema de las skills con sus
+citas. Los hooks, que son Python stdlib, lo leen igual que
+<code>signals.yaml</code>:</p>
+<pre class="yaml"><code>pii-terms:
+  - {cita: &quot;RGPD art. 5.1.c&quot;, nota: rgpd-art-5, lineas: L23}
+  - {cita: &quot;RGPD art. 25&quot;, nota: rgpd-art-25}
+  - {apoyo: &quot;AESIA guía 07, «Otros elementos a considerar»&quot;, nota: aesia-07-guia-de-datos-y-gobernanza-de-datos-08-otros-elementos-a-considerar}
+scoring-model:
+  - {cita: &quot;AI Act anexo III, punto 5.b&quot;, nota: ai-act-anexo-iii, lineas: L51}</code></pre>
+<p>Las líneas se calculan al regenerar las notas y un test comprueba que
+cada <code>nota</code> existe y que el texto citado sigue en esas
+líneas. Así un cambio normativo que mueva el texto rompe el test, no el
+aviso.</p>
+<h3 id="3-buscador-para-preguntas-abiertas">3. Buscador para preguntas
+abiertas</h3>
+<p>Prototipo en <code>scripts/buscar.py</code> (lógica en
+<code>scripts/aiact/notas.py</code>), sin dependencias. Indexa las 806
+notas en 2 614 pasajes en medio segundo. Lleva dos de las tres
+operaciones que la propuesta del prototipo preveía para el MCP; la
+tercera queda para después:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Operación</th>
+<th>Ejemplo</th>
+<th>Cómo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Traer un artículo</td>
+<td><code>buscar.py articulo rgpd 5.1.c</code></td>
+<td>Por <code>norma</code> y <code>unidad</code>; devuelve la línea del
+apartado y la letra</td>
+</tr>
+<tr class="even">
+<td>Buscar citas</td>
+<td><code>buscar.py citas -q "…" -q "…" --en "…"</code></td>
+<td>BM25 por pasajes; cada <code>-q</code> busca en notas en español y
+cada <code>--en</code> en las inglesas; devuelve normas y guías por
+separado, con la línea del mejor pasaje</td>
+</tr>
+<tr class="odd">
+<td>Contrastar (pendiente)</td>
+<td><code>buscar.py contrastar "el art. 50 aplica desde 2026-08-02"</code></td>
+<td>Trae los pasajes que nombran ese artículo para que Claude los
+lea</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>El idioma lo resuelve Claude, no un glosario.</strong> Andrés
+señaló que se preguntará en español y parte de las fuentes solo está en
+inglés. Son 50 notas: las directrices del art. 6 (borrador) y las dos
+del CEPD. Otras 58 son la versión inglesa de las directrices del art.
+50, que ya están en español, y el buscador las omite. La skill pide a
+Claude tres consultas: la pregunta tal cual, la misma con el vocabulario
+de la norma («chatbot» → «interactuar con un sistema de IA») y su
+traducción al inglés. Cada una busca solo en las notas de su idioma; las
+del mismo idioma se unen con RRF y los idiomas se intercalan, para que
+el inglés no quede tapado.</p>
+<p>Resultado con las 20 consultas de prueba (acierto si una nota
+esperada sale entre las 3 normas o las 3 guías primeras):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Consultas que recibe el buscador</th>
+<th>Aciertos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Solo la pregunta en español</td>
+<td>15 de 20</td>
+</tr>
+<tr class="even">
+<td>Español y su traducción al inglés</td>
+<td>17 de 20</td>
+</tr>
+<tr class="odd">
+<td>Español y vocabulario de la norma</td>
+<td>17 de 20</td>
+</tr>
+<tr class="even">
+<td>Español, vocabulario de la norma e inglés</td>
+<td><strong>19 de 20</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Falla «exportar datos a un proveedor fuera del EEE»: la reformulación
+encuentra el art. 44 del RGPD, pero la pregunta coloquial la empuja
+fuera de las tres primeras. Las reformulaciones de la prueba las he
+escrito yo como las haría Claude; falta medirlas con Claude de verdad
+desde una skill.</p>
+<p>Para pasar del prototipo al plugin hacen falta tres cambios en el
+troceado:</p>
+<ul>
+<li><strong>Notas dentro del plugin.</strong> <code>trocear*.py</code>
+escribe en <code>plugins/ai-act-advisor/knowledge/notas/</code> (o el
+build las copia). Con normas y guías son 7,5 MB; solo con normas, 2
+MB.</li>
+<li><strong>Front matter común.</strong> Todas las notas con
+<code>tags</code> de un vocabulario cerrado (los temas de
+<code>signals.yaml</code> y de las skills, no palabras del título) y las
+de guías con <code>norma</code> y <code>articulos</code>.</li>
+<li><strong>Anclas por apartado.</strong> Un campo
+<code>apartados</code> con la línea de cada apartado, para traer solo el
+que se cita.</li>
+</ul>
+<p>Los hooks no pasan por Claude, así que no pueden reformular: para
+ellos está el mapa curado del punto 2.</p>
+<h3 id="4-versión-madura-mcp-con-embeddings">4. Versión madura: MCP con
+embeddings</h3>
+<p>Cuando el buscador se quede corto, el MCP de D02 expone las mismas
+tres operaciones y devuelve el mismo formato. Las skills no cambian. Los
+embeddings resuelven sinónimos y preguntas largas sin reformular, pero
+traen un modelo, un índice que regenerar y resultados que no se pueden
+reproducir con un grep. Merece la pena cuando haya preguntas reales de
+PM que el buscador no responda, y eso se mide con el conjunto de
+consultas de prueba de abajo.</p>
+<h2 id="alternativas">Alternativas</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Opción</th>
+<th>Dependencias</th>
+<th>Inglés y sinónimos</th>
+<th>Reproducible</th>
+<th>Mantenimiento</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Grep sobre texto y front matter</td>
+<td>Ninguna</td>
+<td>No</td>
+<td>Sí</td>
+<td>Ninguno</td>
+<td>Base de todo</td>
+</tr>
+<tr class="even">
+<td>Mapa curado señal → cita</td>
+<td>Ninguna</td>
+<td>No aplica</td>
+<td>Sí</td>
+<td>Una línea por señal, revisada en PR</td>
+<td>Avisos de hooks y skills</td>
+</tr>
+<tr class="odd">
+<td>BM25 stdlib con consultas reformuladas por Claude</td>
+<td>Ninguna</td>
+<td>Sí, vía Claude</td>
+<td>Sí, dadas las consultas</td>
+<td>Ninguno</td>
+<td>Preguntas abiertas, ahora (prototipo)</td>
+</tr>
+<tr class="even">
+<td>RAG con embeddings locales (MCP)</td>
+<td>Modelo y servidor</td>
+<td>Sí</td>
+<td>No del todo</td>
+<td>Índice por versión</td>
+<td>Versión madura</td>
+</tr>
+<tr class="odd">
+<td>RAG como servicio</td>
+<td>Cuenta externa y red</td>
+<td>Sí</td>
+<td>No</td>
+<td>Servicio</td>
+<td>Descartado: saca la consulta del proyecto</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="como-se-mide">Cómo se mide</h2>
+<p><code>tests/consultas-citas.json</code> guarda 20 preguntas con su
+reformulación, su traducción y las notas esperadas;
+<code>tests/test_buscar.py</code> falla si el buscador baja de 18
+aciertos. Es el mismo conjunto que decidirá cuándo pasar a embeddings:
+cuando las preguntas reales de PM y DE que se añadan dejen de salir.</p>
+<h2 id="pendiente">Pendiente</h2>
+<p><strong>Decidido (2026-11-17, Andrés):</strong> las notas viajan
+enteras con el plugin, en
+<code>plugins/ai-act-advisor/knowledge/notas/</code> (7,5 MB).
+<code>trocear*.py</code> escriben ahí. Con APM llegan también, porque
+copia <code>knowledge/</code> entero; comprobado instalando la rama con
+<code>apm install … --target copilot</code>.</p>
+<div class="notice notice-pending"><span class="notice-title">Pendiente · D21 · decisiones para Andrés (issue #15) 2. Si el formato
+de cita de arriba vale, en particular las líneas. 3. Si se empieza por
+el mapa curado y el buscador stdlib y el MCP con embeddings queda para
+cuando el conjunto de consultas lo pida.</span></div>
+
+      </article>
+
+      <footer class="doc-footer">
+        <span>Fuente: docs/documentos/diseno/citar-notas.md</span>
+        <span>asprog-design-system</span>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelector('.doc-theme').addEventListener('click', function () {
+        var r = document.documentElement, t = r.getAttribute('data-theme');
+        var isDark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var next = isDark ? 'light' : 'dark';
+        r.setAttribute('data-theme', next);
+        try { localStorage.setItem('tema', next); } catch (e) {}
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+# Generado por evals/generate.py: no editar a mano.
+schema_version: "1.0"
+name: 22-sin-nota
+description: "Consulta «sin-nota»: caso negativo: ninguna nota recoge el Reglamento de Servicios Digitales"
+tags: [negativo, humo]
+execution:
+  prompt: "¿Qué artículo del Reglamento de Servicios Digitales (DSA) nos obliga a explicar los parámetros de nuestro sistema de recomendación?"
+  max_turns: 20
+  timeout_seconds: 300
+  allowed_tools: [Skill, Read, Glob, Grep, Bash]
+runs: 3
+graders:
+  - type: regex
+    name: dice-sin-nota
+    pattern: "sin nota que l[oa]s? respalde"
+    flags: "i"
+    weight: 0.5
+  - type: llm
+    name: no-inventa-cita
+    criteria: "La pregunta es sobre el Reglamento de Servicios Digitales (DSA), que no está entre las fuentes verificadas del asistente. Aprueba solo si la respuesta dice de forma expresa que no tiene una fuente o nota verificada que respalde lo que afirma sobre el DSA y remite a consultar el texto oficial. Puede mencionar de memoria un artículo del DSA si lo marca como no verificado. Suspende si da un artículo del DSA como cierto sin esa advertencia, o si lo cita con el mismo formato que una fuente comprobada, o si la respuesta está vacía."
+  - type: tool_used
+    name: usa-skill
+    tool: "Skill"
+  - type: tool_used
+    name: usa-buscador
+    tool: "Bash"
+    input_match: "buscar\\.py"
+    arm: "with-only"
