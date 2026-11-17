@@ -380,6 +380,23 @@ def check_llm(rel, text, signals):
     return []
 
 
+def check_scoring(rel, text, signals, evidence=None):
+    """Librería de ML y términos de scoring en el mismo fichero. El id es por repo, para que
+    la auditoría y el hook hablen del mismo hallazgo y la línea base lo silencie en los dos."""
+    if not text or not import_regex(signals.get("ml_imports", [])).search(text):
+        return []
+    if not term_regex(signals.get("scoring_terms", [])).search(text.lower()):
+        return []
+    return [_f(
+        "scoring-model", "repo", "alta",
+        "Modelo que puntúa o clasifica, posiblemente sobre personas",
+        AIACT, ["art. 6", "anexo III"], "desde 2027-12-02", evidence or [rel],
+        "Según el sector del cliente y la finalidad puede ser de alto riesgo. Clasifícalo con "
+        "la skill ai-act-classify.",
+        escalate="pm", skill="ai-act-classify",
+    )]
+
+
 def terms_in(text, rx, exclusions):
     hits = set()
     for m in rx.finditer((text or "").lower()):
@@ -482,21 +499,11 @@ def audit(root):
             # En la configuración de fuentes los términos son la propia declaración de PII.
             findings += check_terms(rel, text, signals, excl)
 
-    # Scoring sobre personas: ML + términos de scoring en el mismo repo.
-    ml_files = [r for r, t in files if os.path.splitext(r)[1] in (".py", ".ipynb") and not is_test(r)
-                and import_regex(signals.get("ml_imports", [])).search(t or "")]
-    if ml_files:
-        sc = term_regex(signals.get("scoring_terms", []))
-        scoring = [r for r in ml_files if sc.search((text_of.get(r) or "").lower())]
-        if scoring:
-            findings.append(_f(
-                "scoring-model", "repo", "alta",
-                "Modelo que puntúa o clasifica, posiblemente sobre personas",
-                AIACT, ["art. 6", "anexo III"], "desde 2027-12-02", scoring[:5],
-                "Según el sector del cliente y la finalidad puede ser de alto riesgo. Clasifícalo con "
-                "la skill ai-act-classify.",
-                escalate="pm", skill="ai-act-classify",
-            ))
+    # Scoring sobre personas: ML + términos de scoring en el mismo fichero.
+    scoring = [r for r, t in files if os.path.splitext(r)[1] in (".py", ".ipynb") and not is_test(r)
+               and check_scoring(r, t, signals)]
+    if scoring:
+        findings += check_scoring(scoring[0], text_of.get(scoring[0]), signals, evidence=scoring[:5])
 
     order = {"alta": 0, "media": 1, "baja": 2}
     findings.sort(key=lambda f: (order.get(f["severity"], 3), f["rule"], f["evidence"][:1]))

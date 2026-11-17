@@ -26,6 +26,7 @@
     <h2>Guía</h2>
     <ul>
     <li><a href="guia/como-se-usa.html">Cómo se usa</a></li>
+    <li><a href="guia/demo.html">Demo de punta a punta</a></li>
     </ul>
     <h2>Diseño</h2>
     <ul>
@@ -146,8 +147,8 @@
 </ul>
 <h3 id="d08-scoring-model-en-el-hook">D08 · <code>scoring-model</code> en el hook</h3>
 <ul>
-<li><strong>Estado</strong>: el hallazgo solo lo emite la auditoría completa (<code>core.audit</code>); el hook <code>PostToolUse</code> no lo comprueba, así que un modelo nuevo no avisa hasta relanzar <code>/project-init</code>.</li>
-<li><strong>Qué decidir</strong>: si el hook debe comprobar ML más términos de scoring en el fichero editado.</li>
+<li><strong>Estado</strong>: propuesta hecha con la demo (2026-11-17). El hook <code>PostToolUse</code> ya comprueba ML más términos de scoring en el fichero leído o editado (<code>core.check_scoring</code>), con el mismo id por repo que la auditoría, para que la línea base lo silencie en los dos sitios.</li>
+<li><strong>Qué decidir</strong>: si se queda así o si el aviso debe ser por fichero (hoy, un segundo modelo en otro fichero no vuelve a avisar si el primero ya está en la línea base).</li>
 </ul>
 <h3 id="d09-tarea-semanal-sin-programar">D09 · Tarea semanal sin programar</h3>
 <ul>
@@ -204,6 +205,11 @@
 <ul>
 <li><strong>Estado</strong>: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. <code>skills/regulatory-update/SKILL.md</code> no dice nada de ella.</li>
 <li><strong>Qué decidir</strong>: si cada <code>/regulatory-update</code> añade a <code>docs/documentos/fuentes/</code> los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.</li>
+</ul>
+<h3 id="d20-relanzar-la-auditoria-silencia-lo-que-nadie-ha-visto">D20 · Relanzar la auditoría silencia lo que nadie ha visto</h3>
+<ul>
+<li><strong>Estado</strong>: visto al diseñar la demo (2026-11-17). <code>audit.py write</code> mete en la línea base, como <code>abierto</code>, todo lo que encuentra, y los hooks callan lo que está en la línea base. Si el PM relanza <code>/project-init</code> (o <code>ai-act-classify</code> escribe la línea base) antes de que DE y AE abran los ficheros nuevos, esos avisos ya no salen en su sesión. La demo lo evita con el orden de los pasos.</li>
+<li><strong>Qué decidir</strong>: si los hooks deben seguir avisando de los <code>abierto</code> que nadie ha revisado (por ejemplo, con un campo <code>reviewed</code> o una fecha de decisión, que enlaza con D10), o si basta con que <code>/project-init</code> y <code>/risk-summary</code> los enseñen.</li>
 </ul>
 <h2 id="verificado">Verificado</h2>
 <p>Todo comprobado el 2026-11-17 en el documento oficial que se indica. Los ficheros están en <code>docs/documentos/fuentes/</code>; la columna de fuente da el identificador y, la primera vez que aparece, el nombre del fichero. Abreviaturas:</p>

@@ -1,0 +1,15 @@
+# Fuente CRM en PostgreSQL (ficticia).
+source: crm
+type: postgres
+objects:
+  - name: customers
+    schema: crm
+    pii_columns: [email, phone, birth_date]
+    active: true
+  - name: subscriptions
+    schema: crm
+    active: true
+  # Fase 2: solicitudes de pago a plazos, para entrenar el modelo de impago.
+  - name: instalment_applications
+    schema: finance
+    active: true

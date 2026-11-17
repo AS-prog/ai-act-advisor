@@ -12,6 +12,7 @@ Cada página HTML tiene su Markdown en la misma subcarpeta de `documentos/`. Por
 ## Qué leer
 
 - **Guía** (`guia/como-se-usa`): cómo se instala y se usa el plugin, aviso a aviso. Empieza aquí si vas a usarlo.
+- **Demo** (`guia/demo`): guion de una hora para probar el plugin entero con un proyecto ficticio, paso a paso por rol.
 - **Técnica** (`tecnica/uso-del-prototipo`): qué hay por dentro, con las salidas reales sobre el proyecto de ejemplo.
 - **Diseño** (`diseno/propuesta-prototipo`): la propuesta y las decisiones tomadas.
 - **Pendientes** (`pendientes`): dudas normativas (P), decisiones abiertas (D) y lo ya verificado con fuente (V).

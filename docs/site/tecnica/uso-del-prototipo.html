@@ -26,6 +26,7 @@
     <h2>Guía</h2>
     <ul>
     <li><a href="../guia/como-se-usa.html">Cómo se usa</a></li>
+    <li><a href="../guia/demo.html">Demo de punta a punta</a></li>
     </ul>
     <h2>Diseño</h2>
     <ul>
@@ -616,7 +617,7 @@ python3 -m unittest discover -s tests
 
 <ul>
 <li>Solo entiende configuración en YAML, código Python y SQL. Los notebooks <code>.ipynb</code> se leen por celdas. Scala y R solo entran en la auditoría, con la búsqueda de términos; los hooks no los vigilan.</li>
-<li>Categorías especiales, scoring y transparencia (art. 50) tienen skill propia, pero el hook del día a día no emite <code>scoring-model</code> (solo la auditoría) y los proxies de categorías especiales no tienen señal en <code>signals.yaml</code>.</li>
+<li>Categorías especiales, scoring y transparencia (art. 50) tienen skill propia, y el hook del día a día ya emite <code>scoring-model</code> (ML y términos de scoring en el mismo fichero, D08), pero los proxies de categorías especiales no tienen señal en <code>signals.yaml</code>.</li>
 <li>El informe HTML con el sistema de diseño solo se ofrece si el repo tiene <code>docs/site/site.toml</code>.</li>
 </ul>
 <h2 id="donde-esta">Dónde está en el código</h2>

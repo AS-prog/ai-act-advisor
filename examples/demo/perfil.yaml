@@ -1,0 +1,22 @@
+# Perfil de la demo: lo que el PM contesta a /project-init. Empresa y contactos inventados.
+client:
+  name: Electrodomésticos Ejemplo, S.L.
+  sector: retail-marketing
+project:
+  purpose: Medallion de clientes y ventas; entrega de audiencias a un socio de medios
+  deliverable_infers: false
+  ai_type: []
+  role: deployer          # provider | deployer | both (rol de la consultora)
+  eu_affected: true
+personal_data: [contact, purchase_history]
+stack: [postgres, sharepoint, delta, duckdb, gcs]
+escalation:
+  dpo: dpo@cliente.example
+  legal: legal@consultora.example
+  pm: pm@consultora.example
+classification:
+  ai_act_level: out-of-scope   # prohibited | high-risk-candidate | transparency | minimal | out-of-scope
+  reviewed: 2026-11-17
+consolidado_ai_act: 2026-07-27
+reglamentos: [2024/1689, 2026/1744]
+ultima_revision: 2026-11-17

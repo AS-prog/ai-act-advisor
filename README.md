@@ -34,6 +34,7 @@ El marco es el AI Act tras el Omnibus 2026/1744, bajando al RGPD y la LOPDGDD, c
 | `plugins/ai-act-advisor/adapters/` | Señales y mitigaciones por stack |
 | `plugins/ai-act-advisor/scripts/` | `audit.py` (auditoría de solo lectura) y `hook.py` (hooks), en Python sin dependencias |
 | `examples/medallion-demo/` | Proyecto ficticio para probar la auditoría y los hooks |
+| `examples/demo/` | La demo guiada: fase 2 del proyecto ficticio, perfil, `preparar.py` y `ensayo.py` |
 | `tests/` | `python3 -m unittest discover -s tests` |
 | `docs/site/` | El sitio HTML con [asprog-design-system](https://github.com/AS-prog/asprog-design-system): portada (`index.html`), páginas, copia del sistema de diseño y `site.toml` |
 | `docs/documentos/` | Los documentos fuente: Markdown de cada página, investigación, pendientes y, en `fuentes/`, los textos oficiales (PDF, XHTML) con su manifiesto |
@@ -72,6 +73,14 @@ Los hooks se lanzan con `sh` y Python 3. En Windows, Claude Code usa Git Bash; l
 ```
 python3 plugins/ai-act-advisor/scripts/audit.py report --root examples/medallion-demo
 python3 -m unittest discover -s tests
+```
+
+Para probarlo entero con Claude Code hay una demo guiada de una hora, con un proyecto ficticio en dos fases y catorce pasos por rol (PM, DE y AE) que ejercitan las siete skills, el agente y los dos hooks. El guion está en `docs/site/guia/demo.html` y los ficheros en `examples/demo/`:
+
+```
+python3 examples/demo/ensayo.py                       # ensayo sin Claude: comprueba cada aviso del guion
+python3 examples/demo/preparar.py --dest ~/ai-act-demo  # prepara la carpeta de trabajo
+cd ~/ai-act-demo && claude --plugin-dir <clon>/plugins/ai-act-advisor
 ```
 
 En un repo con el plugin instalado, `/project-init` audita, deja `.ai-act/rules.json`, `.ai-act/baseline.json` y `.ai-act/audits/AAAA-MM-DD.md`, y a partir de ahí los hooks solo avisan de riesgos nuevos.
