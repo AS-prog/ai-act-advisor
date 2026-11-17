@@ -1,0 +1,10 @@
+# Núcleo genérico de señales: patrón → riesgo → norma → artículo → severidad → skill.
+# Por hacer: poblar desde docs/investigacion/ai-act-investigacion.md (sección 18.2),
+# filtrado a los cuatro riesgos del prototipo. Ejemplo de forma:
+- id: pii-columns
+  patrones: [email, dni, nif, nie, telefono, phone, iban, fecha_nacimiento, birth_date, direccion, address, ip_address]
+  riesgo: Datos personales sin enmascarar
+  norma: RGPD
+  articulos: [art. 5.1.c, art. 25]
+  severidad: media
+  skill: pii-masking

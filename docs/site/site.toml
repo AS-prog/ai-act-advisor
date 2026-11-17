@@ -1,0 +1,21 @@
+[project]
+name = "ai-act-advisor"
+brand = "ai-act-advisor"
+system = "docs/design-system"
+home = "docs/site/home.md"
+index = "docs/index.html"
+
+[[section]]
+title = "Diseño"
+
+[[section.page]]
+title = "Propuesta del prototipo"
+path = "docs/diseno/propuesta-prototipo.html"
+type = "diseño"
+
+[[section]]
+title = "Investigación"
+
+[[section.page]]
+title = "El AI Act tras el Omnibus 2026/1744"
+type = "historia"

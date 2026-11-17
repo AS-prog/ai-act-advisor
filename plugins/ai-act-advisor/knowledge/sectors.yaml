@@ -1,0 +1,8 @@
+# Sector del cliente → puntos del anexo III que pueden aplicar.
+# Por hacer: completar. Ejemplo de forma:
+- sector: insurance-life-health
+  anexo_iii: [5.c]
+  nota: Fijación de precios y evaluación de riesgos de personas en seguros de vida y salud
+- sector: banking-credit
+  anexo_iii: [5.b]
+  nota: Evaluación de solvencia de personas físicas. La detección de fraude está excluida

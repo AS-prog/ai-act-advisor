@@ -1,0 +1,19 @@
+# Ejemplo de .ai-act/profile.yaml (lo escribe /project-init en el repo del proyecto).
+client:
+  name: Aseguradora Ejemplo
+  sector: insurance-life-health
+project:
+  purpose: Modelo de propensión a la baja para campañas de retención
+  deliverable_infers: true
+  ai_type: [ml]
+  role: provider          # provider | deployer | both (rol de la consultora)
+  eu_affected: true
+personal_data: [contact, financial, health]
+stack: [dbt, bigquery]
+escalation:
+  dpo: dpo@cliente.example
+  legal: legal@consultora.example
+  pm: pm@consultora.example
+classification:
+  ai_act_level: high-risk-candidate   # prohibited | high-risk-candidate | transparency | minimal | out-of-scope
+  reviewed: 2026-11-17

@@ -1,0 +1,19 @@
+{
+  "name": "ai-act-advisor",
+  "displayName": "Asesor AI Act",
+  "version": "0.1.0",
+  "description": "Avisos preventivos del AI Act y del RGPD para PM, DE y AE en proyectos de datos: detecta señales de riesgo, explica la norma y la fecha, sugiere mitigaciones y deja la decisión a quien trabaja.",
+  "author": {
+    "name": "Andrés R. Sotelo",
+    "url": "https://github.com/AS-prog"
+  },
+  "repository": "https://github.com/AS-prog/ai-act-advisor",
+  "keywords": [
+    "ai-act",
+    "rgpd",
+    "gdpr",
+    "compliance",
+    "data-engineering",
+    "analytics"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "ai-act-advisor",
+  "owner": {
+    "name": "Andrés R. Sotelo",
+    "url": "https://github.com/AS-prog"
+  },
+  "metadata": {
+    "description": "Avisos preventivos del AI Act y del RGPD para proyectos de ingeniería y analítica de datos."
+  },
+  "plugins": [
+    {
+      "name": "ai-act-advisor",
+      "description": "Avisa a PM, DE y AE de los riesgos del AI Act y del RGPD mientras trabajan y sugiere cómo mitigarlos, sin bloquear nada.",
+      "source": "./plugins/ai-act-advisor"
+    }
+  ]
+}
