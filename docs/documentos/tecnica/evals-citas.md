@@ -2,7 +2,7 @@
 title: Cómo funciona el eval de las citas
 description: Qué mide la suite de claude plugin eval de las citas normativas, cómo corre cada caso con y sin plugin, qué comprueba cada grader y qué salió en la primera ejecución.
 date: 2026-11-17
-code: ai-act-advisor@2648639
+code: ai-act-advisor@ee40d83
 ---
 
 # Cómo funciona el eval de las citas
@@ -145,6 +145,77 @@ Lo que enseña:
   memoria sin la advertencia que pide su criterio. Hay que revisarlo con
   más pasadas.
 
+## Con varios modelos
+
+`evals/run.py` lanza el eval una vez por modelo y lleva el historial. El
+juez queda fijo (por defecto `sonnet`), porque si cambia entre
+ejecuciones las notas dejan de ser comparables.
+
+```sh
+cd plugins/ai-act-advisor/evals
+python3 run.py ejecutar --modelos claude-haiku-5-5 claude-sonnet-5-5 claude-opus-5-5 \
+  --tag humo --runs 1 --max-cost 3
+python3 run.py historial               # una fila por ejecución y modelo
+python3 run.py historial --por-caso    # detalle por caso
+python3 run.py ejecutar --modelos claude-opus-5-5 --dry-run   # el comando, sin gastar
+```
+
+<figure class="figwrap">
+  <svg viewBox="0 0 720 200" role="img" aria-labelledby="hist-title hist-desc">
+    <title id="hist-title">De la ejecución al historial</title>
+    <desc id="hist-desc">run.py llama a claude plugin eval una vez por modelo. El JSON completo de cada ejecución queda en results, fuera de git. Un resumen se añade a dos CSV versionados en historial: ejecuciones.csv, una fila por ejecución y modelo, y casos.csv, una fila por caso. run.py historial los lee para comparar.</desc>
+    <defs>
+      <marker id="hist-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
+    </defs>
+    <rect class="d-box" x="16" y="64" width="152" height="72"/>
+    <text class="d-t" x="28" y="90">run.py ejecutar</text>
+    <text class="d-sm" x="28" y="110">--modelos a b c</text>
+    <text class="d-sm" x="28" y="126">juez fijo</text>
+    <line class="d-line" x1="168" y1="100" x2="208" y2="100" marker-end="url(#hist-arrow)"/>
+    <rect class="d-box" x="208" y="64" width="168" height="72"/>
+    <text class="d-t" x="220" y="90">claude plugin eval</text>
+    <text class="d-sm" x="220" y="110">una vez por modelo</text>
+    <text class="d-sm" x="220" y="126">con y sin plugin</text>
+    <line class="d-line" x1="376" y1="84" x2="416" y2="48" marker-end="url(#hist-arrow)"/>
+    <line class="d-line" x1="376" y1="116" x2="416" y2="152" marker-end="url(#hist-arrow)"/>
+    <rect class="d-box" x="416" y="16" width="160" height="56"/>
+    <text class="d-t" x="428" y="40">results/*.json</text>
+    <text class="d-sm" x="428" y="60">detalle, fuera de git</text>
+    <rect class="d-fill" x="416" y="128" width="160" height="56"/>
+    <text class="d-t" x="428" y="152">historial/*.csv</text>
+    <text class="d-sm" x="428" y="172">resumen, versionado</text>
+    <line class="d-line" x1="576" y1="156" x2="608" y2="156" marker-end="url(#hist-arrow)"/>
+    <rect class="d-box" x="608" y="128" width="96" height="56"/>
+    <text class="d-t" x="618" y="152">historial</text>
+    <text class="d-sm" x="618" y="172">compara</text>
+  </svg>
+  <figcaption>El detalle de cada ejecución se queda en local; el <strong>resumen</strong> va al repo para comparar modelos y versiones de la skill.</figcaption>
+</figure>
+
+| Fichero | Una fila por | Columnas |
+| --- | --- | --- |
+| `historial/ejecuciones.csv` | ejecución y modelo | puntos con y sin plugin, Δ, aprobados, `skill_activa`, `nota_recuperada`, coste, duración, si fue parcial, `commit`, `skill_sha` |
+| `historial/casos.csv` | caso | puntos con y sin plugin, Δ, `skill_activa`, `nota_recuperada` |
+
+`skill_sha` es la huella de `cite-regulation/SKILL.md`: dos filas con la
+misma huella prueban la misma skill, y un cambio de huella marca una
+versión nueva. `commit` lleva «+cambios» si había cambios sin guardar en
+skills, scripts o knowledge.
+
+### Primera comparativa
+
+2026-11-17, casos `humo`, una pasada por brazo, juez `sonnet`:
+
+| Modelo | Con plugin | Sin plugin | Δ | Skill activa | Nota recuperada | Coste |
+| --- | --- | --- | --- | --- | --- | --- |
+| Haiku 5.5 | 0,47 | 0,24 | 0,22 | 0 de 3 | 0 de 2 | 0,09 USD |
+| Sonnet 5.5 | 0,65 | 0,34 | 0,31 | 1 de 3 | 1 de 2 | 0,50 USD |
+
+Los dos modelos confirman lo de la primera ejecución: el plugin mejora
+la respuesta cuando la skill entra, y lo que más resta es que no entra.
+Con Haiku no se activa ninguna vez. Con una pasada por caso la varianza
+es alta; las cifras sirven para comparar tendencias, no para decidir.
+
 ## Cómo se ejecuta
 
 Desde `plugins/ai-act-advisor/`, en un clon del repositorio:
@@ -173,7 +244,8 @@ claude plugin eval . --allow-tools Bash --judge-model sonnet
 
 1. Ajustar la `description` de `cite-regulation` para que se active con
    preguntas conceptuales y con normas que no están en las notas, y
-   repetir los casos `humo`.
+   repetir los casos `humo` con `run.py` para ver el cambio de
+   `skill_sha` y de `skill_activa` en el historial.
 2. Endurecer el criterio del juez `no-inventa-cita`.
 3. Lanzar la suite completa (22 casos, 2 brazos, 3 pasadas; unos 10 USD)
    y comparar `nota-recuperada` con los 19 de 20 del test offline.

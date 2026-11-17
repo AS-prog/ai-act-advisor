@@ -26,6 +26,11 @@ title = "Propuesta del prototipo"
 path = "docs/site/diseno/propuesta-prototipo.html"
 type = "diseño"
 
+[[section.page]]
+title = "Cómo recuperar y citar las notas normativas"
+path = "docs/site/diseno/citar-notas.html"
+type = "diseño"
+
 [[section]]
 title = "Técnica"
 
