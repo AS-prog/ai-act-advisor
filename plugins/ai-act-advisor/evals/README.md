@@ -34,6 +34,23 @@ claude plugin eval . --allow-tools Bash --judge-model sonnet
 - **Notas**: aún no viajan con el plugin (decisión pendiente de D21). `buscar.py` las encuentra en `docs/documentos/fuentes/notas/` subiendo desde su propia carpeta, así que la evaluación funciona con el plugin cargado desde el clon. Con el plugin instalado desde el marketplace no hay notas y los casos fallan.
 - Los resultados quedan en `evals/results/`, fuera de git.
 
+## Con varios modelos: `run.py`
+
+`run.py` lanza el eval una vez por modelo, con el juez fijo para que las notas se puedan comparar, y lleva el historial:
+
+```sh
+# desde plugins/ai-act-advisor/evals/
+python3 run.py ejecutar --modelos claude-haiku-5-5 claude-sonnet-5-5 claude-opus-5-5 --tag humo --runs 1 --max-cost 3
+python3 run.py ejecutar --modelos claude-opus-5-5 --dry-run        # enseña el comando sin gastar
+python3 run.py historial                                           # una fila por ejecución y modelo
+python3 run.py historial --por-caso --modelo 'claude-haiku*'       # detalle por caso
+python3 run.py registrar results/x.json --modelo claude-opus-5-5   # añade una ejecución hecha a mano
+```
+
+- El JSON completo de cada ejecución va a `results/` (fuera de git). El resumen se añade a `historial/ejecuciones.csv` y `historial/casos.csv`, que sí se versionan.
+- Columnas de `ejecuciones.csv`: puntos con y sin plugin, Δ, tasa de aprobados, `skill_activa` (parte de las pasadas en que se cargó la skill), `nota_recuperada`, coste, duración, si fue parcial por el tope de coste, `commit` del repo y `skill_sha` (huella de `cite-regulation/SKILL.md`). Con las dos últimas se compara una versión de la skill con la anterior.
+- `--juez` (por defecto `sonnet`), `--runs`, `--tag`, `--caso`, `--max-cost` (por modelo) y `-j` pasan tal cual a `claude plugin eval`.
+
 ## Qué comprueba cada grader
 
 | Grader | Tipo | Qué comprueba | Puntúa |
