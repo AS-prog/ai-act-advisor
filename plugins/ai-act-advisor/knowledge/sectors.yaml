@@ -1,7 +1,7 @@
 # Sector del cliente → puntos del anexo III que pueden aplicar según la finalidad.
 # Es una pista para preguntar, no una clasificación: decide la finalidad prevista
 # (art. 3.12), no el sector. El detalle de cada punto, con sus exclusiones, está en
-# ai-act-classification.md. Fuente: docs/investigacion/ai-act-investigacion.md (7.2).
+# ai-act-classification.md. Fuente: docs/documentos/investigacion/ai-act-investigacion.md (7.2).
 - sector: insurance-life-health
   anexo_iii: [5.c]
   nota: Evaluación de riesgos y fijación de precios de personas en seguros de vida y salud

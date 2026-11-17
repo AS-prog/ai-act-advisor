@@ -59,7 +59,7 @@ Cubre medir y corregir el sesgo; usar la categoría como variable del modelo en 
 
 ## Estado de la verificación
 
-Contrastado el 2026-11-17 con los textos oficiales en español, que están en `docs/fuentes/`:
+Contrastado el 2026-11-17 con los textos oficiales en español, que están en `docs/documentos/fuentes/`:
 
 - RGPD arts. 9, 10, 22.4 y 35.3.b y considerando 51: consolidado CELEX 02016R0679-20160504.
 - LOPDGDD arts. 9 y 10: texto consolidado del BOE, BOE-A-2018-16673, última modificación publicada el 27-12-2025.

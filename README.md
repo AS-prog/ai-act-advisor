@@ -2,7 +2,7 @@
 
 Plugin de Claude Code que avisa a project managers (PM), data engineers (DE) y analytics engineers (AE) de los riesgos del AI Act y del RGPD en proyectos de ingeniería y analítica de datos, y sugiere cómo mitigarlos. Nunca bloquea: informa y deja la decisión a quien trabaja.
 
-> Estado: primer prototipo. La auditoría y los hooks cubren la PII en la ingesta; las siete skills y el agente están escritos. El diseño está en [`docs/diseno/propuesta-prototipo.md`](docs/diseno/propuesta-prototipo.md); la página HTML, en `docs/index.html`.
+> Estado: primer prototipo. La auditoría y los hooks cubren la PII en la ingesta; las siete skills y el agente están escritos. El diseño está en [`docs/documentos/diseno/propuesta-prototipo.md`](docs/documentos/diseno/propuesta-prototipo.md); el sitio HTML empieza en `docs/site/index.html` y la guía de uso está en `docs/site/guia/como-se-usa.html`.
 
 ## Qué hay
 
@@ -18,7 +18,8 @@ Plugin de Claude Code que avisa a project managers (PM), data engineers (DE) y a
 | `plugins/ai-act-advisor/scripts/` | `audit.py` (auditoría de solo lectura) y `hook.py` (hooks), en Python sin dependencias |
 | `examples/medallion-demo/` | Proyecto ficticio para probar la auditoría y los hooks |
 | `tests/` | `python3 -m unittest discover -s tests` |
-| `docs/` | Documentación con [asprog-design-system](https://github.com/AS-prog/asprog-design-system): propuesta, investigación y sitio |
+| `docs/site/` | El sitio HTML con [asprog-design-system](https://github.com/AS-prog/asprog-design-system): portada (`index.html`), páginas, copia del sistema de diseño y `site.toml` |
+| `docs/documentos/` | Los documentos fuente: Markdown de cada página, investigación, pendientes y, en `fuentes/`, los textos oficiales (PDF, XHTML) con su manifiesto |
 
 ## Instalar
 

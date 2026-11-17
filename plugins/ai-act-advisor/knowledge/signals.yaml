@@ -1,7 +1,7 @@
 # Señales que usan la auditoría y los hooks. Las palabras se buscan como
 # identificador completo, con «_» como separador: «nif» no casa con
 # «planificadas», pero sí con «cliente_nif». Origen:
-# docs/investigacion/ai-act-investigacion.md (18.2) y las dos auditorías de
+# docs/documentos/investigacion/ai-act-investigacion.md (18.2) y las dos auditorías de
 # prueba de 2026-11-17.
 
 pii_terms:
