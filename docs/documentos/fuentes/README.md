@@ -2,7 +2,7 @@
 
 Documentos oficiales con los que se contrastó la base normativa del plugin `ai-act-advisor` el 2026-11-17, y su manifiesto: título oficial, identificador, versión, idioma, origen, fecha de descarga y huella sha256.
 
-- Los ficheros están en esta carpeta, `docs/fuentes/`, con el nombre `aaaa-mm-dd-documento`. La fecha del nombre es la de la versión del documento (consolidación, publicación o adopción), no la de descarga.
+- Los ficheros están en esta carpeta, `docs/documentos/fuentes/`, con el nombre `aaaa-mm-dd-documento`. La fecha del nombre es la de la versión del documento (consolidación, publicación o adopción), no la de descarga.
 - Fecha de descarga de todos: 2026-11-17.
 - Hay una segunda copia en la carpeta `fuentes-primarias/` de los ficheros del proyecto, con el nombre que figura en cada entrada como «copia del proyecto».
 - Los textos de EUR-Lex se bajaron por la API Cellar de la Oficina de Publicaciones: `https://publications.europa.eu/resource/celex/<CELEX>` con las cabeceras `Accept-Language: spa` y `Accept: application/xhtml+xml` o `application/pdf`.
@@ -467,7 +467,7 @@ Documentos oficiales con los que se contrastó la base normativa del plugin `ai-
 
 ## Derivadas
 
-Se regeneran desde la raíz del repo con `bash docs/fuentes/conversion/convertir.sh docs/fuentes docs/fuentes/md`. Necesita pandoc 3 o superior, python3 con beautifulsoup4 y lxml, y curl (descarga la LOPDGDD de la API del BOE). El script falla si pandoc deja alguna tabla sin convertir. Ficheros: `convertir.sh` (orquesta), `flatten.py` (aplana las tablas de EUR-Lex), `clean.py` (limpia y pone los artículos como encabezados) y `boe.py` (XML del BOE a Markdown).
+Se regeneran desde la raíz del repo con `bash docs/documentos/fuentes/conversion/convertir.sh docs/documentos/fuentes docs/documentos/fuentes/md`. Necesita pandoc 3 o superior, python3 con beautifulsoup4 y lxml, y curl (descarga la LOPDGDD de la API del BOE). El script falla si pandoc deja alguna tabla sin convertir. Ficheros: `convertir.sh` (orquesta), `flatten.py` (aplana las tablas de EUR-Lex), `clean.py` (limpia y pone los artículos como encabezados) y `boe.py` (XML del BOE a Markdown).
 
 Copias de trabajo generadas a partir de los originales de arriba, para buscar y leer con comodidad. **No son texto oficial**: una cita se comprueba siempre contra el original del que salen.
 

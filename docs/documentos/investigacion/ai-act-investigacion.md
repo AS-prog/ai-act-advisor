@@ -878,7 +878,7 @@ Todas se consultaron el **17-11-2026**.
 
 ## 20. Pendiente / no verificado
 
-> **Revisión del 17-11-2026 con los textos oficiales en español** (copias en `docs/fuentes/`, manifiesto en `docs/fuentes/README.md`). La lista de abajo se conserva como quedó al cerrar la investigación; esto es lo que ha cambiado:
+> **Revisión del 17-11-2026 con los textos oficiales en español** (copias en `docs/documentos/fuentes/`, manifiesto en `docs/documentos/fuentes/README.md`). La lista de abajo se conserva como quedó al cerrar la investigación; esto es lo que ha cambiado:
 >
 > - **Puntos 2 y 3, resueltos.** Se leyó el consolidado en español (CELEX 02024R1689-20260727) y el texto original de 2024 (DO L de 12-07-2024). La terminología de este documento sigue ya la oficial; el art. 3.60 dice «ultrafalsificación».
 > - **Punto 1, resuelto en lo que usa el plugin.** Los arts. 99, 111 y 113 y el anexo I se comprobaron en el consolidado, y el art. 4 del Reglamento 2026/1744 (entrada en vigor a los tres días de su publicación: 27-07-2026), en el Diario Oficial. El art. 3 del Reglamento 2026/1744 modifica los arts. 8, 20 y 47 del Reglamento 2023/1230; no se ha analizado más allá.
@@ -888,7 +888,7 @@ Todas se consultaron el **17-11-2026**.
 > - **Punto 13, resuelto en parte.** Las guías 01-15 de AESIA (versión 2.0, de 17-07-2026, ya adaptadas al Reglamento 2026/1744), la guía 16 y el ZIP de checklists están descargados; no se han leído una a una.
 > - **Punto 14.** El art. 43.2 del consolidado confirma el control interno del anexo VI.
 >
-> El estado al día de cada duda está en `docs/pendientes.md`.
+> El estado al día de cada duda está en `docs/documentos/pendientes.md`.
 
 1. **Texto íntegro del Reglamento 2026/1744 a partir del art. 1 punto 32 (art. 75 bis)**: arts. 77, 96, 99, 111 y 113, anexos VIII y XIV, y los **arts. 2 y 3 (modificaciones de los Reglamentos 2018/1139 y 2023/1230)**. Los cambios de los arts. 77-113 y de los anexos se verificaron **solo** con las marcas del Service Desk, y no se conoce el número de punto exacto. No se leyó el contenido de las modificaciones del Reglamento de máquinas, que es relevante para el traslado de las máquinas a la sección B del anexo I.
 2. **Texto original de 2024 de los arts. 4 y 113**, para la columna "antes" del calendario. Se infiere de la FAQ del Service Desk y del considerando 8 del Omnibus. EUR-Lex y BOE se truncaron antes de llegar a los artículos.

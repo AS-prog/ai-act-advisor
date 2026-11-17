@@ -1,6 +1,6 @@
 # Fuentes que vigila regulatory-watcher. last_checked: null = aún sin revisar entera desde el plugin.
 # Si EUR-Lex no responde a una petición automática, el mismo texto está en publications.europa.eu/resource/celex/<CELEX>.
-# Copia de los documentos leídos en cada revisión: docs/fuentes/ (manifiesto en docs/fuentes/README.md).
+# Copia de los documentos leídos en cada revisión: docs/documentos/fuentes/ (manifiesto en docs/documentos/fuentes/README.md).
 - id: eur-lex
   nombre: EUR-Lex (AI Act y reglamentos que lo modifican)
   urls:

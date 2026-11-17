@@ -2,8 +2,8 @@
 # Convierte los textos oficiales (XHTML de EUR-Lex y XML de la API de legislación
 # consolidada del BOE) a Markdown no oficial, con artículos como encabezados.
 # Requisitos: pandoc >= 3, python3 con beautifulsoup4 y lxml, curl.
-# Uso desde la raíz del repo: bash docs/fuentes/conversion/convertir.sh docs/fuentes docs/fuentes/md
-#   <dir_fuentes> debe contener los .xhtml descargados de EUR-Lex con los nombres de docs/fuentes.
+# Uso desde la raíz del repo: bash docs/documentos/fuentes/conversion/convertir.sh docs/documentos/fuentes docs/documentos/fuentes/md
+#   <dir_fuentes> debe contener los .xhtml descargados de EUR-Lex con los nombres de docs/documentos/fuentes.
 set -euo pipefail
 SRC=${1:?dir de fuentes}; OUT=${2:?dir de salida}
 HERE=$(cd "$(dirname "$0")" && pwd); TMP=$(mktemp -d); mkdir -p "$OUT"

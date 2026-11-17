@@ -3,7 +3,7 @@ title: Cómo funciona el prototipo en uso
 description: Recorrido paso a paso de una sesión con el prototipo sobre el proyecto de ejemplo, con las salidas reales, y por qué el plugin avisa o calla en cada momento.
 date: 2026-11-17
 code: ai-act-advisor@2d551c3
-design: docs/diseno/propuesta-prototipo.md
+design: docs/documentos/diseno/propuesta-prototipo.md
 decisions: Q5, Q16, Q19, Q20, Q21, Q23
 ---
 

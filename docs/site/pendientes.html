@@ -58,7 +58,7 @@
         <h1>Pendientes y dudas</h1>
         <p class="lede">Lista de trabajo del plugin <code>ai-act-advisor</code>. Tres partes: dudas normativas que siguen abiertas (P), decisiones de diseño abiertas (D) y lo ya verificado (V), con su fuente, para no repetirlo. Las rutas son relativas a la raíz del repo; <code>knowledge/</code> es <code>plugins/ai-act-advisor/knowledge/</code> y <code>skills/</code> es <code>plugins/ai-act-advisor/skills/</code>.</p>
         <dl class="doc-meta">
-          <div><dt>Fuente</dt><dd><a href="pendientes.md">docs/pendientes.md</a></dd></div>
+          <div><dt>Fuente</dt><dd><a href="../documentos/pendientes.md">docs/documentos/pendientes.md</a></dd></div>
           <div><dt>Fecha</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
           <div><dt>Estado</dt><dd>vivo</dd></div>
         </dl>
@@ -80,7 +80,7 @@
 <p>Hubo dos pasadas el 2026-11-17.</p>
 <ul>
 <li><strong>Primera</strong>: con el consolidado en inglés del AI Act Service Desk y, para el RGPD, una copia no oficial. Dejó doce dudas, P01 a P12.</li>
-<li><strong>Segunda</strong>: con los textos oficiales, en español cuando existe. Los documentos están en <code>docs/fuentes/</code> y su manifiesto (título oficial, identificador, versión, URL de origen y sha256) en <code>docs/fuentes/README.md</code>. Cada dato de la tabla de verificado se buscó en el original; las conversiones a Markdown de <code>docs/fuentes/md/</code> solo sirvieron para localizar el pasaje.</li>
+<li><strong>Segunda</strong>: con los textos oficiales, en español cuando existe. Los documentos están en <code>docs/documentos/fuentes/</code> y su manifiesto (título oficial, identificador, versión, URL de origen y sha256) en <code>docs/documentos/fuentes/README.md</code>. Cada dato de la tabla de verificado se buscó en el original; las conversiones a Markdown de <code>docs/documentos/fuentes/md/</code> solo sirvieron para localizar el pasaje.</li>
 </ul>
 <p>Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están cerradas y pasan a la tabla de verificado; P09 era una decisión de diseño y ahora es D17. Siguen abiertas P04, P10 y P11, que dependen de documentos que aún no existen en versión final o de una lectura que no se ha hecho. Los identificadores no se renumeran.</p>
 <h2 id="dudas-normativas-que-siguen-abiertas">Dudas normativas que siguen abiertas</h2>
@@ -88,7 +88,7 @@
 <ul>
 <li><strong>Qué se afirma</strong>: que son un borrador sin adoptar.</li>
 <li><strong>Dónde</strong>: <code>knowledge/ai-act-classification.md</code> (final de «Excepción del art. 6.3») y <code>skills/ai-act-classify/SKILL.md</code> (límites).</li>
-<li><strong>Estado a 2026-11-17</strong>: comprobado. Solo existe el borrador publicado el 19-05-2026 para consulta hasta el 23-07-2026, en tres PDF en inglés sin número de documento («<a href="2026">…</a> XXX draft»), guardados como <code>docs/fuentes/2026-05-19-directrices-art6-alto-riesgo-borrador-parte{1,2,3}-en.pdf</code>. Ni el Service Desk ni la biblioteca de la Comisión listan una versión final.</li>
+<li><strong>Estado a 2026-11-17</strong>: comprobado. Solo existe el borrador publicado el 19-05-2026 para consulta hasta el 23-07-2026, en tres PDF en inglés sin número de documento («C(2026) XXX draft»), guardados como <code>docs/documentos/fuentes/2026-05-19-directrices-art6-alto-riesgo-borrador-parte{1,2,3}-en.pdf</code>. Ni el Service Desk ni la biblioteca de la Comisión listan una versión final.</li>
 <li><strong>Por qué sigue abierta</strong>: el plazo legal venció el 2-02-2026 y la consulta se cerró en julio; la adopción puede llegar en cualquier momento. El borrador (167 páginas) no se ha comparado con la tabla del anexo III de <code>knowledge/</code>, porque un borrador no debe fijar criterio.</li>
 <li><strong>Qué hacer</strong>: vigilar la adopción en cada <code>/regulatory-update</code>. Cuando se adopten, revisar con ellas la tabla del anexo III y la excepción del art. 6.3.</li>
 </ul>
@@ -116,8 +116,8 @@
 </ul>
 <h3 id="d02-mcp-de-documentacion-normativa-version-madura">D02 · MCP de documentación normativa (versión madura)</h3>
 <ul>
-<li><strong>Qué decidir</strong>: dónde corre (local o servicio), qué modelo de embeddings usa y cómo se reparte el índice con el plugin. Está como pendiente en <code>docs/diseno/propuesta-prototipo.md</code>.</li>
-<li><strong>Dato nuevo</strong>: EUR-Lex no responde a peticiones automáticas y las herramientas de lectura cortan los textos largos. Los originales íntegros y sus conversiones a Markdown están ya en <code>docs/fuentes/</code> y <code>docs/fuentes/md/</code>, y pueden ser la materia prima del índice.</li>
+<li><strong>Qué decidir</strong>: dónde corre (local o servicio), qué modelo de embeddings usa y cómo se reparte el índice con el plugin. Está como pendiente en <code>docs/documentos/diseno/propuesta-prototipo.md</code>.</li>
+<li><strong>Dato nuevo</strong>: EUR-Lex no responde a peticiones automáticas y las herramientas de lectura cortan los textos largos. Los originales íntegros y sus conversiones a Markdown están ya en <code>docs/documentos/fuentes/</code> y <code>docs/documentos/fuentes/md/</code>, y pueden ser la materia prima del índice.</li>
 </ul>
 <h3 id="d03-ruta-del-resumen-de-riesgos">D03 · Ruta del resumen de riesgos</h3>
 <ul>
@@ -200,13 +200,13 @@
 <li><strong>Estado</strong>: <code>knowledge/ai-act-classification.md</code> menciona el Real Decreto 723/2026 (información a la persona trabajadora sobre sistemas algorítmicos) como nota del área de empleo. Ninguna señal ni hallazgo lo usa, y <code>knowledge/sources.yaml</code> no vigila normas laborales.</li>
 <li><strong>Qué decidir</strong>: si el plugin cubre normas nacionales sectoriales (laboral, consumo, seguros) o se queda en el AI Act, el RGPD y la LOPDGDD, con notas sueltas como esta.</li>
 </ul>
-<h3 id="d19-mantenimiento-de-docs-fuentes">D19 · Mantenimiento de <code>docs/fuentes/</code></h3>
+<h3 id="d19-mantenimiento-de-docs-fuentes">D19 · Mantenimiento de <code>docs/documentos/fuentes/</code></h3>
 <ul>
 <li><strong>Estado</strong>: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. <code>skills/regulatory-update/SKILL.md</code> no dice nada de ella.</li>
-<li><strong>Qué decidir</strong>: si cada <code>/regulatory-update</code> añade a <code>docs/fuentes/</code> los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.</li>
+<li><strong>Qué decidir</strong>: si cada <code>/regulatory-update</code> añade a <code>docs/documentos/fuentes/</code> los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.</li>
 </ul>
 <h2 id="verificado">Verificado</h2>
-<p>Todo comprobado el 2026-11-17 en el documento oficial que se indica. Los ficheros están en <code>docs/fuentes/</code>; la columna de fuente da el identificador y, la primera vez que aparece, el nombre del fichero. Abreviaturas:</p>
+<p>Todo comprobado el 2026-11-17 en el documento oficial que se indica. Los ficheros están en <code>docs/documentos/fuentes/</code>; la columna de fuente da el identificador y, la primera vez que aparece, el nombre del fichero. Abreviaturas:</p>
 <ul>
 <li><strong>AIA</strong>: AI Act consolidado en español, CELEX 02024R1689-20260727, <code>2026-07-27-ai-act-2024-1689-consolidado-es.xhtml</code>.</li>
 <li><strong>OMN</strong>: Reglamento (UE) 2026/1744, CELEX 32026R1744, <code>2026-07-24-omnibus-2026-1744-es.xhtml</code>.</li>
@@ -381,13 +381,13 @@
 <td>V26</td>
 <td>Código de buenas prácticas sobre transparencia del contenido generado por IA: versión final de 10-06-2026, declarado herramienta voluntaria adecuada</td>
 <td><code>knowledge/transparency-art50.md</code></td>
-<td>Página de la Comisión sobre el código (primera pasada; no hay copia en <code>docs/fuentes/</code>)</td>
+<td>Página de la Comisión sobre el código (primera pasada; no hay copia en <code>docs/documentos/fuentes/</code>)</td>
 </tr>
 <tr>
 <td>V27</td>
 <td>El contenido generado antes del 2026-08-02 no necesita etiquetado retroactivo</td>
 <td><code>knowledge/transparency-art50.md</code></td>
-<td>FAQ de la Comisión sobre el art. 50 (primera pasada; no hay copia en <code>docs/fuentes/</code>)</td>
+<td>FAQ de la Comisión sobre el art. 50 (primera pasada; no hay copia en <code>docs/documentos/fuentes/</code>)</td>
 </tr>
 <tr>
 <td>V28</td>
@@ -446,7 +446,7 @@
 <tr>
 <td>V37</td>
 <td>El Reglamento 2026/1744 entró en vigor a los tres días de su publicación en el DO (24-07-2026): el 27-07-2026. Cierra P05</td>
-<td><code>knowledge/VERSION</code>, <code>docs/investigacion/ai-act-investigacion.md</code></td>
+<td><code>knowledge/VERSION</code>, <code>docs/documentos/investigacion/ai-act-investigacion.md</code></td>
 <td>OMN art. 4 y considerando 46</td>
 </tr>
 <tr>
@@ -470,7 +470,7 @@
 <tr>
 <td>V41</td>
 <td>Fechas de las directrices de 2025: las de prácticas prohibidas se publicaron el 4-02-2025 y las de definición el 6-02-2025; las dos se adoptaron el 29-07-2025. Cierra P12</td>
-<td><code>docs/investigacion/ai-act-investigacion.md</code> (secciones 4.3, 6 y 16), <code>knowledge/ai-act-classification.md</code></td>
+<td><code>docs/documentos/investigacion/ai-act-investigacion.md</code> (secciones 4.3, 6 y 16), <code>knowledge/ai-act-classification.md</code></td>
 <td>DPP; DDEF</td>
 </tr>
 <tr>
@@ -684,7 +684,7 @@
       </article>
 
       <footer class="doc-footer">
-        <span>Fuente: docs/pendientes.md</span>
+        <span>Fuente: docs/documentos/pendientes.md</span>
         <span>asprog-design-system</span>
       </footer>
     </div>
