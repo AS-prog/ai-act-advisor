@@ -1,0 +1,8 @@
+# Libros de SharePoint (ficticios). El registro no admite pii_columns aquí.
+source: sharepoint
+type: sharepoint
+objects:
+  - name: campaign_contacts
+    library: Marketing
+    sheet: contactos_planificadas
+    active: true

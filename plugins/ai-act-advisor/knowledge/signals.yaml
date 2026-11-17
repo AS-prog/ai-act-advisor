@@ -1,10 +1,161 @@
-# Núcleo genérico de señales: patrón → riesgo → norma → artículo → severidad → skill.
-# Por hacer: poblar desde docs/investigacion/ai-act-investigacion.md (sección 18.2),
-# filtrado a los cuatro riesgos del prototipo. Ejemplo de forma:
-- id: pii-columns
-  patrones: [email, dni, nif, nie, telefono, phone, iban, fecha_nacimiento, birth_date, direccion, address, ip_address]
-  riesgo: Datos personales sin enmascarar
-  norma: RGPD
-  articulos: [art. 5.1.c, art. 25]
-  severidad: media
-  skill: pii-masking
+# Señales que usan la auditoría y los hooks. Las palabras se buscan como
+# identificador completo, con «_» como separador: «nif» no casa con
+# «planificadas», pero sí con «cliente_nif». Origen:
+# docs/investigacion/ai-act-investigacion.md (18.2) y las dos auditorías de
+# prueba de 2026-11-17.
+
+pii_terms:
+  - email
+  - e_mail
+  - correo
+  - correo_electronico
+  - dni
+  - nif
+  - nie
+  - pasaporte
+  - passport
+  - telefono
+  - phone
+  - phone_number
+  - mobile
+  - iban
+  - cuenta_bancaria
+  - bank_account
+  - card_number
+  - fecha_nacimiento
+  - birth_date
+  - birthdate
+  - date_of_birth
+  - dob
+  - direccion
+  - address
+  - codigo_postal
+  - postal_code
+  - zip_code
+  - ip_address
+  - nombre_completo
+  - full_name
+  - first_name
+  - last_name
+  - apellido
+  - apellidos
+  - ssn
+  - cups
+  - geolocalizacion
+  - latitude
+  - longitude
+
+special_category_terms:
+  - salud
+  - health
+  - diagnostico
+  - diagnosis
+  - enfermedad
+  - discapacidad
+  - disability
+  - embarazo
+  - pregnancy
+  - religion
+  - etnia
+  - ethnicity
+  - origen_racial
+  - racial_origin
+  - orientacion_sexual
+  - sexual_orientation
+  - sindicato
+  - afiliacion_sindical
+  - trade_union
+  - biometrico
+  - biometric
+  - huella_dactilar
+  - antecedentes_penales
+  - criminal_record
+
+scoring_terms:
+  - propensity
+  - propension
+  - churn
+  - credit_score
+  - scoring
+  - risk_score
+  - lead_score
+  - morosidad
+  - impago
+  - default_probability
+  - next_best_action
+
+masking_terms:
+  - sha2
+  - sha256
+  - hashlib
+  - pseudonymize
+  - pseudonymise
+  - seudonimizar
+  - mask
+  - masking
+  - redact
+  - tokenize
+  - anonymize
+  - anonimizar
+  - encrypt
+
+erasure_terms:
+  - erasure
+  - supresion
+  - derecho_al_olvido
+  - right_to_be_forgotten
+  - gdpr_delete
+  - retention
+  - retencion
+  - vacuum
+  - purge
+
+llm_imports:
+  - openai
+  - anthropic
+  - langchain
+  - langchain_openai
+  - llama_index
+  - google.generativeai
+  - vertexai
+  - mistralai
+  - cohere
+  - semantic_kernel
+
+ml_imports:
+  - sklearn
+  - xgboost
+  - lightgbm
+  - catboost
+  - torch
+  - tensorflow
+  - keras
+  - statsmodels
+  - mlflow
+
+export_imports:
+  - google.cloud.storage
+  - gcsfs
+  - boto3
+  - s3fs
+  - paramiko
+  - pysftp
+  - ftplib
+  - smtplib
+
+# Palabras que un buscador ingenuo marcaría por error en proyectos de datos.
+# Cada repo puede añadir las suyas en .ai-act/rules.json («exclusions»).
+exclusions:
+  - predicate
+  - predicado
+  - model
+  - modelo
+  - row_hash
+  - schema_hash
+  - quick_xor
+  - cliente_id
+  - client_id
+  - client_filter
+  - usuario
+  - politica
+  - movil
