@@ -56,7 +56,7 @@ Escribe `.ai-act/profile.yaml` con la forma de `profile.example.yaml`, en la car
    ```
 
    Deja `.ai-act/rules.json` (reglas que usan los hooks), `.ai-act/baseline.json` (hallazgos con estado) y `.ai-act/audits/AAAA-MM-DD.md` (informe fechado).
-4. Estados de la línea base: `abierto`, `mitigado`, `aceptado` (con `justification`) y `no detectado` (lo pone la auditoría cuando un hallazgo abierto desaparece). Si el PM acepta un riesgo, edita su estado y la justificación en `baseline.json`; al relanzar la auditoría se conservan. Los hooks solo avisan de lo que no está en la línea base.
+4. Estados de la línea base: `abierto`, `mitigado`, `aceptado` (con `justification`) y `no detectado` (lo pone la auditoría cuando un hallazgo abierto desaparece; si vuelve a aparecer, pasa a `abierto`). Cuando alguien decide, se rellenan además `decided_by` (quién decide) y `decided_on` (AAAA-MM-DD); un `abierto` revisado que espera respuesta de legal o del DPO también los lleva. Al relanzar la auditoría se conservan los cuatro campos. Los hooks callan lo decidido y siguen avisando, a quien abra el fichero, de lo que la auditoría dejó `abierto` sin `decided_on`: relanzar `/project-init` no silencia avisos que nadie ha visto.
 5. Si el repo tiene `docs/site/site.toml`, ofrece además una versión HTML del informe con la skill de documentación del sistema de diseño del repo.
 
 ## Forma de cada aviso

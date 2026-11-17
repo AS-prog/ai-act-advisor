@@ -14,7 +14,7 @@ En un proyecto de datos los riesgos legales aparecen en el código antes que en 
 - **DE y AE**: mientras trabajan, los hooks detectan señales (PII sin clave declarada, escritura en Bronze con cambio de esquema, exportaciones, SDK de LLM) y avisan una sola vez por sesión. Las skills explican el riesgo, la norma y el artículo, y proponen opciones adaptadas al stack: enmascarar, seudonimizar, generalizar, clasificar el sistema o añadir el aviso de IA.
 - **Mantenimiento**: el agente `regulatory-watcher` revisa las fuentes oficiales (EUR-Lex, Comisión, AESIA, AEPD, CEPD) y propone actualizar la base normativa.
 
-El plugin no bloquea nada: informa, propone y deja la decisión a quien trabaja. Cada decisión queda en `.ai-act/baseline.json` (abierto, mitigado o aceptado con justificación), y los avisos solo vuelven si aparece algo nuevo.
+El plugin no bloquea nada: informa, propone y deja la decisión a quien trabaja. Cada decisión queda en `.ai-act/baseline.json` (abierto, mitigado o aceptado con justificación, con quién decide y cuándo), y los avisos solo vuelven si aparece algo nuevo o queda algo abierto que nadie ha revisado.
 
 Además de como plugin de Claude Code, se puede instalar con [APM](https://github.com/microsoft/apm) en otros agentes (Copilot, Cursor, Codex, Gemini…). Es experimental: las skills llegan a todos, pero algunos avisos automáticos se pierden según el agente (ver [Con APM](#con-apm-otros-agentes-experimental)).
 
@@ -83,7 +83,7 @@ python3 examples/demo/preparar.py --dest ~/ai-act-demo  # prepara la carpeta de 
 cd ~/ai-act-demo && claude --plugin-dir <clon>/plugins/ai-act-advisor
 ```
 
-En un repo con el plugin instalado, `/project-init` audita, deja `.ai-act/rules.json`, `.ai-act/baseline.json` y `.ai-act/audits/AAAA-MM-DD.md`, y a partir de ahí los hooks solo avisan de riesgos nuevos.
+En un repo con el plugin instalado, `/project-init` audita, deja `.ai-act/rules.json`, `.ai-act/baseline.json` y `.ai-act/audits/AAAA-MM-DD.md`, y a partir de ahí los hooks avisan de los riesgos nuevos y de los abiertos que nadie ha revisado.
 
 ## Aviso
 

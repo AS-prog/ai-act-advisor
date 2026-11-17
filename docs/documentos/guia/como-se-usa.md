@@ -14,7 +14,7 @@ Guía de uso del plugin para PM, data engineers (DE) y analytics engineers (AE):
 1. El PM lanza `/project-init` al empezar el proyecto, o cuando ya está en marcha, y deja configurado el repo en `.ai-act/`.
 2. DE y AE trabajan como siempre. Cuando Claude lee o edita algo con riesgo nuevo de RGPD o del AI Act, recibe un aviso y te lo cuenta en pocas líneas.
 3. Si quieres detalle, pides la skill que indica el aviso. Te explica el riesgo, te propone opciones y la decisión es tuya.
-4. La decisión se apunta en la línea base (`.ai-act/baseline.json`), y ese aviso no vuelve a salir.
+4. La decisión se apunta en la línea base (`.ai-act/baseline.json`), con quién decide y cuándo, y ese aviso no vuelve a salir.
 5. El PM lanza `/risk-summary` cuando quiere ver el estado y qué escalar.
 6. Quien mantiene el plugin lanza `/regulatory-update` para revisar las fuentes oficiales y proponer los cambios en una PR.
 
@@ -127,7 +127,7 @@ Vuelve a lanzarlo cuando cambie el alcance o el stack, o cuando un aviso diga qu
 
 ## 2. Trabajar: qué hacer con un aviso
 
-DE y AE no lanzan nada. Al abrir una sesión, el plugin le da a Claude un resumen del perfil. Cuando Claude lee o edita un fichero con un riesgo que no está en la línea base, recibe un aviso con esta forma:
+DE y AE no lanzan nada. Al abrir una sesión, el plugin le da a Claude un resumen del perfil. Cuando Claude lee o edita un fichero con un riesgo sobre el que nadie ha decidido todavía, recibe un aviso con esta forma. Cada hallazgo dice si es `nuevo` o si ya estaba en la línea base como `abierto sin revisar`; lo nuevo va primero:
 
 ```text
 [media] Objeto «complaints» sin «pii_columns» declarado · RGPD art. 5.1.c, art. 25, art. 30
@@ -156,19 +156,21 @@ La decisión es de quien trabaja (o del PM, el DPO o legal cuando el aviso dice 
 
 | Estado | Cuándo | Qué hay que escribir |
 |---|---|---|
-| `abierto` | Lo pone la auditoría al encontrarlo | Nada |
+| `abierto` | Lo pone la auditoría al encontrarlo; los hooks siguen avisando mientras nadie lo revise | Nada. Si ya lo has revisado y esperas respuesta (de legal o del DPO), `decided_by` y `decided_on` para que deje de avisar |
 | `mitigado` | Ya se ha resuelto | `justification`: qué se hizo y dónde |
-| `aceptado` | Se asume el riesgo | `justification`: por qué, y quién lo decidió |
-| `no detectado` | Lo pone la auditoría cuando el hallazgo desaparece del código | Nada |
+| `aceptado` | Se asume el riesgo | `justification`: por qué |
+| `no detectado` | Lo pone la auditoría cuando el hallazgo desaparece del código; si vuelve, pasa a `abierto` | Nada |
 
 ```json
 "external-export:98e308bed7": {
   "status": "aceptado",
-  "justification": "Contrato de encargado firmado; bucket en UE"
+  "justification": "Contrato de encargado firmado; bucket en UE",
+  "decided_by": "Ana (PM)",
+  "decided_on": "2026-11-17"
 }
 ```
 
-Puedes pedírselo a Claude: «marca la exportación como aceptada, hay contrato de encargado». Relanzar la auditoría conserva el estado y la justificación, y los hooks no vuelven a avisar de ningún id que esté en la línea base. Si una palabra salta y no es dato personal en tu repo, añádela a `exclusions` en `.ai-act/rules.json`.
+Puedes pedírselo a Claude: «marca la exportación como aceptada, hay contrato de encargado». En `mitigado` y `aceptado` se añaden siempre `decided_by` (quién decide) y `decided_on` (la fecha). Relanzar la auditoría conserva los cuatro campos, y los hooks no vuelven a avisar de lo decidido. Lo que la auditoría acaba de meter como `abierto` sigue avisando a quien abra el fichero, así que relanzar `/project-init` no esconde avisos que nadie ha visto. Si una palabra salta y no es dato personal en tu repo, añádela a `exclusions` en `.ai-act/rules.json`.
 
 ## 4. Ver el estado: /risk-summary
 
@@ -220,7 +222,7 @@ Conviene versionar `.ai-act/` con el repo: así las decisiones quedan en el hist
 : No. Todo se ejecuta en local con Python, solo lee código y configuración del repo, y no abre datos ni secretos.
 
 Me avisa demasiado.
-: Registra en la línea base lo que ya has decidido y añade a `exclusions` los términos que no son datos personales en tu repo. Cada aviso sale una vez por sesión y como mucho con cuatro hallazgos.
+: Registra en la línea base lo que ya has decidido y añade a `exclusions` los términos que no son datos personales en tu repo. Cada aviso sale una vez por sesión y como mucho con cuatro hallazgos. Con `.ai-act/rules.json`, las columnas con aspecto de dato personal solo avisan al escribir un fichero, no al leerlo; las categorías especiales avisan en los dos casos.
 
 ¿Y si el proyecto no usa IA?
 : Los avisos del RGPD siguen siendo útiles. La clasificación AI Act queda como «fuera de alcance».

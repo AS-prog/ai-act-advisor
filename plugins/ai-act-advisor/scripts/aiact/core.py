@@ -380,17 +380,17 @@ def check_llm(rel, text, signals):
     return []
 
 
-def check_scoring(rel, text, signals, evidence=None):
-    """Librería de ML y términos de scoring en el mismo fichero. El id es por repo, para que
-    la auditoría y el hook hablen del mismo hallazgo y la línea base lo silencie en los dos."""
+def check_scoring(rel, text, signals):
+    """Librería de ML y términos de scoring en el mismo fichero. El id es por fichero (D08):
+    cada modelo tiene su finalidad y su clasificación, y la auditoría y el hook usan el mismo."""
     if not text or not import_regex(signals.get("ml_imports", [])).search(text):
         return []
     if not term_regex(signals.get("scoring_terms", [])).search(text.lower()):
         return []
     return [_f(
-        "scoring-model", "repo", "alta",
+        "scoring-model", rel, "alta",
         "Modelo que puntúa o clasifica, posiblemente sobre personas",
-        AIACT, ["art. 6", "anexo III"], "desde 2027-12-02", evidence or [rel],
+        AIACT, ["art. 6", "anexo III"], "desde 2027-12-02", [rel],
         "Según el sector del cliente y la finalidad puede ser de alto riesgo. Clasifícalo con "
         "la skill ai-act-classify.",
         escalate="pm", skill="ai-act-classify",
@@ -495,15 +495,11 @@ def audit(root):
             continue
         if ext in (".py", ".ipynb"):
             findings += check_llm(rel, text, signals)
+            # Scoring sobre personas: ML + términos de scoring en el mismo fichero, uno por fichero.
+            findings += check_scoring(rel, text, signals)
         if rel not in rules["source_configs"]:
             # En la configuración de fuentes los términos son la propia declaración de PII.
             findings += check_terms(rel, text, signals, excl)
-
-    # Scoring sobre personas: ML + términos de scoring en el mismo fichero.
-    scoring = [r for r, t in files if os.path.splitext(r)[1] in (".py", ".ipynb") and not is_test(r)
-               and check_scoring(r, t, signals)]
-    if scoring:
-        findings += check_scoring(scoring[0], text_of.get(scoring[0]), signals, evidence=scoring[:5])
 
     order = {"alta": 0, "media": 1, "baja": 2}
     findings.sort(key=lambda f: (order.get(f["severity"], 3), f["rule"], f["evidence"][:1]))
@@ -528,25 +524,63 @@ def load_json(path, default):
         return default
 
 
+DECISION_FIELDS = ("status", "justification", "decided_by", "decided_on")
+LEGACY_SCORING_ID = finding_id("scoring-model", "repo")
+
+
+def is_decided(entry):
+    """Una persona ha decidido sobre el hallazgo (D10, D20): estado aceptado o mitigado, o
+    `decided_on` rellenado (por ejemplo, un abierto revisado a la espera de legal). Lo que la
+    auditoría mete como abierto sin decidir no cuenta: los hooks siguen avisando de ello."""
+    if not entry:
+        return False
+    return entry.get("status") in ("aceptado", "mitigado") or bool(entry.get("decided_on"))
+
+
+def _legacy_scoring(old_f, f):
+    """Decisión sobre el id por repo de `scoring-model` (antes de D08) que vale para este fichero."""
+    legacy = old_f.get(LEGACY_SCORING_ID)
+    if f["rule"] != "scoring-model" or not is_decided(legacy):
+        return None
+    return legacy if f["evidence"][:1] and f["evidence"][0] in (legacy.get("evidence") or []) else None
+
+
 def merge_baseline(old, findings):
-    """Conserva el estado y la justificación de lo que ya estaba (Q23b)."""
+    """Conserva el estado, la justificación y quién decidió y cuándo (Q23b, D10)."""
     old_f = (old or {}).get("findings", {})
     out = {}
     seen = set()
+    migrated = False
     for f in findings:
-        prev = old_f.get(f["id"], {})
+        prev = old_f.get(f["id"])
+        extra = {}
+        if prev is None:
+            legacy = _legacy_scoring(old_f, f)
+            if legacy:
+                prev = {k: legacy[k] for k in DECISION_FIELDS if k in legacy}
+                extra["migrated_from"] = LEGACY_SCORING_ID
+                migrated = True
+        prev = dict(prev or {})
+        if prev.get("status") == "no detectado":
+            prev["status"] = "abierto"  # vuelve a aparecer: hay que mirarlo otra vez
         out[f["id"]] = {
             "status": prev.get("status", "abierto"),
             "justification": prev.get("justification", ""),
+            "decided_by": prev.get("decided_by", ""),
+            "decided_on": prev.get("decided_on", ""),
             "first_seen": prev.get("first_seen", today()),
             "last_seen": today(),
             "rule": f["rule"],
             "severity": f["severity"],
             "title": f["title"],
             "evidence": f["evidence"],
+            **extra,
+            **({"migrated_from": prev["migrated_from"]} if prev.get("migrated_from") else {}),
         }
         seen.add(f["id"])
     for fid, prev in old_f.items():
+        if fid == LEGACY_SCORING_ID and migrated:
+            continue  # su decisión ya está en los ids por fichero
         if fid not in seen:
             item = dict(prev)
             if item.get("status") == "abierto":
@@ -642,8 +676,9 @@ def render_report(result, baseline=None):
         "## Cómo se usa este informe",
         "",
         "Es la línea base del proyecto: cada hallazgo tiene un estado en `.ai-act/baseline.json` "
-        "(`abierto`, `mitigado`, `aceptado` con justificación). Los avisos del día a día solo hablan de lo "
-        "que no está aquí.",
+        "(`abierto`, `mitigado`, `aceptado` con justificación) y, cuando alguien decide, `decided_by` y "
+        "`decided_on`. Los avisos del día a día callan lo decidido y siguen recordando lo abierto que "
+        "nadie ha revisado.",
         "",
     ]
     return "\n".join(lines)

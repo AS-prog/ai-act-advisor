@@ -16,7 +16,7 @@ Referencia: `${CLAUDE_PLUGIN_ROOT}/knowledge/ai-act-classification.md` (árbol, 
 La clasificación depende de la **finalidad** prevista (art. 3.12), que está en las personas y en los documentos, y solo a medias en el código.
 
 - `.ai-act/profile.yaml`: `client.sector`, `project.purpose`, `deliverable_infers`, `ai_type`, `role`, `eu_affected`, `personal_data` y la `classification` actual. Sin perfil, trabaja con lo que diga la conversación y sugiere `/project-init`.
-- `.ai-act/baseline.json`: hallazgos `scoring-model` y `llm-sdk`, con su evidencia. Abre esos ficheros para ver qué predice el modelo, sobre quién y con qué variables.
+- `.ai-act/baseline.json`: hallazgos `scoring-model` (uno por fichero de modelo) y `llm-sdk`, con su evidencia. Abre esos ficheros para ver qué predice el modelo, sobre quién y con qué variables.
 - Pregunta al PM lo que falte, en una sola tanda: qué decisión se toma con la salida, sobre qué personas, quién la toma y con qué nombre o marca se entrega el sistema.
 
 Hecho cuando puedes escribir en una frase qué infiere el sistema, sobre quién y para qué decisión.
@@ -58,11 +58,11 @@ Enseña el nivel propuesto junto al actual y pregunta al PM si lo confirma.
 
 ## 6. Registra la decisión
 
-En `.ai-act/baseline.json`, sobre el hallazgo `scoring-model` (si falta en la línea base, `audit.py write` lo añade como `abierto`):
+En `.ai-act/baseline.json`, sobre cada id `scoring-model:…` que hayas clasificado (hay uno por fichero de modelo; si falta en la línea base, `audit.py write` lo añade como `abierto`). Dos modelos con finalidades distintas pueden quedar en estados distintos. En los tres casos rellena `decided_by` con quién lo confirmó y `decided_on` con la fecha del día (AAAA-MM-DD):
 
-- `aceptado`, con `justification` que diga el nivel, el punto del anexo III o el motivo de exclusión, y quién lo confirmó.
+- `aceptado`, con `justification` que diga el nivel y el punto del anexo III o el motivo de exclusión.
 - `mitigado`, si se cambió la finalidad o el diseño para salir del punto; la justificación dice qué cambió.
-- `abierto`, mientras la respuesta de legal esté pendiente.
+- `abierto`, mientras la respuesta de legal esté pendiente; la justificación dice qué se preguntó y a quién.
 
 ## Forma del aviso
 

@@ -109,11 +109,11 @@ proyecto y, si ya está encaminado, hace una auditoría de riesgos de solo lectu
 Sin reglas del repo, `PostToolUse` cae a la búsqueda de términos por palabra completa, con `_` como separador. Al leer `transform/silver/build_customers.py`:
 
 ```text
-ai-act-advisor: señales de riesgo en `transform/silver/build_customers.py` (no están en la
-línea base del proyecto). Cuéntaselo al usuario en pocas líneas cuando encaje con lo que está
+ai-act-advisor: señales de riesgo en `transform/silver/build_customers.py` sin decisión
+registrada en la línea base. Cuéntaselo al usuario en pocas líneas cuando encaje con lo que está
 haciendo; no bloquees su trabajo: la decisión es suya. Si quiere detalle, carga la skill indicada.
 - [media] Columnas o campos con aspecto de dato personal (Términos: birth_date, email, phone)
-  · RGPD art. 5.1.c, art. 25, art. 32 · aplica ya · skill pii-masking · id pii-terms:793ba1509f
+  · RGPD art. 5.1.c, art. 25, art. 32 · aplica ya · skill pii-masking · nuevo · id pii-terms:793ba1509f
   Opción sugerida: Comprueba si son datos personales reales y, si lo son, decide dónde se
   enmascaran o seudonimizan (skill pii-masking).
 Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
@@ -185,7 +185,7 @@ que el usuario trabaje en ellos.
 <figure class="figwrap">
   <svg viewBox="0 0 720 244" role="img" aria-labelledby="hook-title hook-desc">
     <title id="hook-title">Qué decide PostToolUse antes de avisar</title>
-    <desc id="hook-desc">Tras cada Read, Edit o Write, el hook comprueba que el fichero es del repo y de un tipo vigilado, aplica las comprobaciones con las reglas del repo, quita lo que está en la línea base y lo ya avisado en la sesión, y solo entonces añade un aviso.</desc>
+    <desc id="hook-desc">Tras cada Read, Edit o Write, el hook comprueba que el fichero es del repo y de un tipo vigilado, aplica las comprobaciones con las reglas del repo, quita lo ya decidido en la línea base y lo ya avisado en la sesión, y solo entonces añade un aviso.</desc>
     <defs>
       <marker id="hook-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
     </defs>
@@ -213,7 +213,7 @@ que el usuario trabaje en ellos.
     <text class="d-sm d-mid" x="600" y="65">con las reglas del repo</text>
     <text class="d-sm" x="264" y="98">no → silencio</text>
     <rect class="d-box" x="24" y="152" width="192" height="56"/>
-    <text class="d-t d-mid" x="120" y="175">¿En la línea base?</text>
+    <text class="d-t d-mid" x="120" y="175">¿Ya decidido?</text>
     <text class="d-tm d-mid" x="120" y="193">baseline.json</text>
     <rect class="d-box" x="264" y="152" width="192" height="56"/>
     <text class="d-t d-mid" x="360" y="175">¿Ya avisado?</text>
@@ -224,26 +224,27 @@ que el usuario trabaje en ellos.
     <text class="d-sm" x="24" y="228">sí → silencio</text>
     <text class="d-sm" x="264" y="228">sí → silencio</text>
   </svg>
-  <figcaption>Tres filtros antes de hablar: tipo de fichero, línea base y memoria de la sesión. El ruido (Q5) se ajusta aquí.</figcaption>
+  <figcaption>Tres filtros antes de hablar: tipo de fichero, decisiones de la línea base y memoria de la sesión. El ruido (Q5, D01) se ajusta aquí.</figcaption>
 </figure>
 
 Con la línea base escrita, estas son las respuestas del hook a cuatro situaciones del ejemplo:
 
 | Qué hace el ingeniero | Qué recibe Claude | Por qué |
 |---|---|---|
-| Edita `transform/gold/exports/partner_upload.py` | Nada | La exportación ya está en la línea base |
-| Añade la tabla `complaints` a `crm_postgres.yaml` sin `pii_columns` | Un aviso, abajo | Es un objeto nuevo: su id no está en la línea base |
+| Edita `transform/gold/exports/partner_upload.py` | Nada, si el PM ya decidió sobre ella; si sigue `abierto` sin `decided_on`, el aviso la marca «abierto sin revisar» | Los hooks callan lo decidido y recuerdan lo que nadie ha revisado (D20) |
+| Añade la tabla `complaints` a `crm_postgres.yaml` sin `pii_columns` | Un aviso, abajo | Es un objeto nuevo: su id no está en la línea base y va el primero del aviso |
 | Vuelve a editar el mismo fichero | Nada | Ese id ya se avisó en esta sesión |
 | Añade `openai>=1.40` a `pyproject.toml` | Sugerencia de relanzar `/project-init` | Aparece un entorno (SDK de LLM) que la auditoría no tenía |
 
 El aviso de la tabla nueva:
 
 ```text
-ai-act-advisor: señales de riesgo en `config/sources/crm_postgres.yaml` (no están en la línea
-base del proyecto). Cuéntaselo al usuario en pocas líneas cuando encaje con lo que está
+ai-act-advisor: señales de riesgo en `config/sources/crm_postgres.yaml` sin decisión
+registrada en la línea base. Cuéntaselo al usuario en pocas líneas cuando encaje con lo que está
 haciendo; no bloquees su trabajo: la decisión es suya. Si quiere detalle, carga la skill indicada.
+Si decide, se registra en .ai-act/baseline.json con status, justification, decided_by y decided_on.
 - [media] Objeto «complaints» sin «pii_columns» declarado · RGPD art. 5.1.c, art. 25, art. 30
-  · aplica ya · skill pii-masking · id source-without-pii:70fdf1a3eb
+  · aplica ya · skill pii-masking · nuevo · id source-without-pii:70fdf1a3eb
   Opción sugerida: Revisa el esquema de origen de «complaints» antes de llevarlo a Bronze y
   declara «pii_columns» (aunque sea una lista vacía) para que conste que se revisó.
 Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
@@ -293,15 +294,17 @@ Si el ingeniero pide detalle, Claude carga `pii-masking`, que explica el riesgo,
     <text class="d-t d-mid" x="608" y="153">no detectado</text>
     <text class="d-sm d-mid" x="608" y="170">lo pone la auditoría</text>
   </svg>
-  <figcaption>Los hooks callan en los cuatro estados: solo avisan de ids que no están en la línea base. Relanzar la auditoría conserva estado y justificación.</figcaption>
+  <figcaption>Los hooks callan lo decidido: <code>mitigado</code>, <code>aceptado</code> o cualquier estado con <code>decided_on</code>. Un <code>abierto</code> sin revisar sigue avisando, y un <code>no detectado</code> que reaparece vuelve a <code>abierto</code>. Relanzar la auditoría conserva estado, justificación, <code>decided_by</code> y <code>decided_on</code>.</figcaption>
 </figure>
 
-Si el PM asume la exportación porque hay contrato de encargado y el bucket está en la UE, cambia su estado en `.ai-act/baseline.json`. Tras relanzar la auditoría queda así:
+Si el PM asume la exportación porque hay contrato de encargado y el bucket está en la UE, cambia su estado en `.ai-act/baseline.json` y deja constancia de quién decide y cuándo. Tras relanzar la auditoría queda así:
 
 ```json
 "external-export:98e308bed7": {
   "status": "aceptado",
   "justification": "Contrato de encargado firmado; bucket en UE",
+  "decided_by": "Ana (PM)",
+  "decided_on": "2026-11-17",
   "first_seen": "2026-11-17",
   "last_seen": "2026-11-17",
   "rule": "external-export",
@@ -394,7 +397,7 @@ python3 -m unittest discover -s tests
 | Síntoma | Qué pasa | Qué hacer |
 |---|---|---|
 | Cada sesión sugiere `/project-init` | No hay `.ai-act/profile.yaml` | Lanzar `/project-init` o ignorarlo si el repo no trata datos personales |
-| Un aviso se repite en sesiones nuevas | El hallazgo no está en la línea base | Relanzar `audit.py write` y marcar su estado |
+| Un aviso se repite en sesiones nuevas | Nadie ha decidido sobre el hallazgo | Registrar su estado con `decided_by` y `decided_on` en `.ai-act/baseline.json` |
 | Avisa de una palabra que no es PII | Falso positivo de la búsqueda de términos | Añadirla a `exclusions` en `.ai-act/rules.json` |
 | No avisa de una fuente nueva | La configuración no está en `source_configs` ni usa la clave de PII | Relanzar `/project-init` para que la auditoría la reconozca |
 | Hay que volver a oír un aviso en la misma sesión | Está en la memoria de la sesión | Borrar `<tmp>/ai-act-advisor/<sesión>.json` |
@@ -407,8 +410,8 @@ python3 -m unittest discover -s tests
 > [!WARNING]
 > «PII declarada que no se aplica» es una heurística: busca código que use la clave más allá de validarla. Si el enmascaramiento ocurre fuera del repo (en el warehouse o en otro repo), saldrá como hallazgo y hay que marcarlo `mitigado` con su justificación.
 
-> [!PENDING] Q5
-> Cuánto ruido es aceptable. El límite actual es cuatro hallazgos por aviso, una vez por sesión y nada de lo que está en la línea base. Se ajusta con el uso.
+> [!IMPORTANT]
+> Cuánto ruido es aceptable (Q5, D01). Cuatro hallazgos por aviso, primero los nuevos, una vez por sesión y nada de lo decidido en la línea base. Con `.ai-act/rules.json`, las columnas con aspecto de dato personal solo avisan al escribir; las categorías especiales y las reglas del repo, también al leer.
 
 - Solo entiende configuración en YAML, código Python y SQL. Los notebooks `.ipynb` se leen por celdas. Scala y R solo entran en la auditoría, con la búsqueda de términos; los hooks no los vigilan.
 - Categorías especiales, scoring y transparencia (art. 50) tienen skill propia, y el hook del día a día ya emite `scoring-model` (ML y términos de scoring en el mismo fichero, D08), pero los proxies de categorías especiales no tienen señal en `signals.yaml`.
