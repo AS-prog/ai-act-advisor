@@ -1,0 +1,27 @@
+---
+name: rgpd-art-21
+description: "RGPD, Artículo 21: Derecho de oposición. Ubicación: CAPÍTULO III — Derechos del interesado · Sección 4 — Derecho de oposición y decisiones individuales automatizadas. Texto consolidado 2016-05-04 (Reglamento (UE) 2016/679)."
+metadata:
+  type: reference
+  norma: rgpd
+  celex: 02016R0679-20160504
+  unidad: Artículo 21
+  titulo: "Derecho de oposición"
+  ubicacion: "CAPÍTULO III — Derechos del interesado · Sección 4 — Derecho de oposición y decisiones individuales automatizadas"
+  tags: [rgpd, reglamento-ue, proteccion-datos, articulo, derecho, oposicion]
+  origen: md/2016-05-04-rgpd-2016-679-consolidado-es.md#L533-L546
+  oficial: false
+---
+# Artículo 21 — Derecho de oposición
+
+1. El interesado tendrá derecho a oponerse en cualquier momento, por motivos relacionados con su situación particular, a que datos personales que le conciernan sean objeto de un tratamiento basado en lo dispuesto en el artículo 6, apartado 1, letras e) o f), incluida la elaboración de perfiles sobre la base de dichas disposiciones. El responsable del tratamiento dejará de tratar los datos personales, salvo que acredite motivos legítimos imperiosos para el tratamiento que prevalezcan sobre los intereses, los derechos y las libertades del interesado, o para la formulación, el ejercicio o la defensa de reclamaciones.
+
+2. Cuando el tratamiento de datos personales tenga por objeto la mercadotecnia directa, el interesado tendrá derecho a oponerse en todo momento al tratamiento de los datos personales que le conciernan, incluida la elaboración de perfiles en la medida en que esté relacionada con la citada mercadotecnia.
+
+3. Cuando el interesado se oponga al tratamiento con fines de mercadotecnia directa, los datos personales dejarán de ser tratados para dichos fines.
+
+4. A más tardar en el momento de la primera comunicación con el interesado, el derecho indicado en los apartados 1 y 2 será mencionado explícitamente al interesado y será presentado claramente y al margen de cualquier otra información.
+
+5. En el contexto de la utilización de servicios de la sociedad de la información, y no obstante lo dispuesto en la Directiva 2002/58/CE, el interesado podrá ejercer su derecho a oponerse por medios automatizados que apliquen especificaciones técnicas.
+
+6. Cuando los datos personales se traten con fines de investigación científica o histórica o fines estadísticos de conformidad con el artículo 89, apartado 1, el interesado tendrá derecho, por motivos relacionados con su situación particular, a oponerse al tratamiento de datos personales que le conciernan, salvo que sea necesario para el cumplimiento de una misión realizada por razones de interés público.

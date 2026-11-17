@@ -1,0 +1,29 @@
+---
+name: directrices-art50-transparencia-c2026-5054-26-the-marking-obligation
+description: "Comisión Europea: directrices art50 transparencia c2026 5054, sección «The marking obligation» (págs. 25-25). Documento de 2026-07-20, idioma en."
+metadata:
+  type: reference
+  documento: directrices-art50-transparencia-c2026-5054
+  emisor: Comisión Europea
+  fecha: 2026-07-20
+  idioma: en
+  seccion: "The marking obligation"
+  paginas: 25-25
+  origen: 2026-07-20-directrices-art50-transparencia-c2026-5054-en.pdf
+  oficial: false
+---
+# The marking obligation
+
+4.2. The marking and detection obligation of Article 50(2) AI Act
+(69) Article 50(2) AI Act sets out a transparency obligation for providers of generative AI systems falling within the scope of that provision comprising two distinct, but inherently interlinked elements. First, providers must ensure that the outputs of the AI system are marked in a machine-readable format. Second, providers must ensure that the outputs are detectable as artificially generated or manipulated content. For every marking solution deployed, providers should ensure that corresponding means for detection are available
+(as outlined below) to enable natural persons exposed to the content and other relevant actors to identify and distinguish the AI system’s artificially generated content from other content. A technical solution is to be understood as a combination of techniques for marking and means for detection that the provider has implemented to fulfil the transparency obligation under Article 50(2) AI Act.
+(70) Each of the two above-mentioned elements must be fulfilled to achieve effectively the objectives of the transparency obligations of Article 50(2) AI Act. Fulfilling only one element (e.g. for machine-readable marking of outputs without the means for their detection being available) will not suffice to comply with that provision (27).
+4.2.1. The marking obligation
+(71) The scope of the marking obligation is limited to implementing marks in a machinereadable format. A machine-readable format means that marks are structured in a way that allows software applications to easily identify, recognise and extract them without human intervention. Perceptible marks and labels are not excluded as a complementary measure, where appropriate, with a view to facilitating the compliance of deployers with their obligation to label deep fakes pursuant to Article 50(4) AI Act.
+(72) To comply with the marking obligation, providers may rely on a single marking technique or a combination of techniques, so long as their overall technical solution is machinereadable and meets the requirements for effectiveness, interoperability, robustness and reliability to the legally required degree, as provided by the second sentence of
+Article 50(2) AI Act (see Section 4.2.3. below).
+(73) Recital 133 AI Act provides examples of such techniques to include watermarks, metadata identifications, cryptographic methods for proving provenance and authenticity of content, logging methods, fingerprints or other techniques, and a combination of such techniques. While methods for proving provenance and authenticity are mentioned in
+Recital 133 AI Act, providers are not required to record or keep a full provenance chain containing information on content origin and modifications or any other relevant assertion concerning the history of the content. However, such provenance methods may also be used for compliance with Article 50(2) AI Act and be conducive in enabling natural persons to distinguish AI-generated or manipulated content from authentic content.
+(74) Providers may implement the marking solution for the outputs at different stages of the value chain (e.g. post hoc after content generation at the level of the AI system, at the
+(27) Recital 133 AI Act clarifies that it is appropriate to require providers of those systems to embed technical solutions that enable marking in a machine-readable format and detection that the output has been generated or manipulated by an AI system and not a human. Recital 135 AI Act refers to the obligation regarding detection.
+24

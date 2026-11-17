@@ -1,0 +1,398 @@
+# Índice de notas normativas
+
+Generado por `md/conversion/trocear.py`. No editar a mano: edita la conversión y regenera.
+
+## AI Act — Reglamento (UE) 2024/1689 (consolidado 2026-07-27)
+
+- [ai-act-art-1](ai-act/ai-act-art-1.md) — Artículo 1: Objeto
+- [ai-act-art-2](ai-act/ai-act-art-2.md) — Artículo 2: Ámbito de aplicación
+- [ai-act-art-3](ai-act/ai-act-art-3.md) — Artículo 3: Definiciones
+- [ai-act-art-4](ai-act/ai-act-art-4.md) — Artículo 4: Alfabetización en materia de IA
+- [ai-act-art-4-bis](ai-act/ai-act-art-4-bis.md) — Artículo 4 bis: Tratamiento de categorías especiales de datos personales para la detección y corrección de sesgos
+- [ai-act-art-5](ai-act/ai-act-art-5.md) — Artículo 5: Prácticas de IA prohibidas
+- [ai-act-art-6](ai-act/ai-act-art-6.md) — Artículo 6: Reglas de clasificación de los sistemas de IA de alto riesgo
+- [ai-act-art-7](ai-act/ai-act-art-7.md) — Artículo 7: Modificaciones del anexo III
+- [ai-act-art-8](ai-act/ai-act-art-8.md) — Artículo 8: Cumplimiento de los requisitos
+- [ai-act-art-9](ai-act/ai-act-art-9.md) — Artículo 9: Sistema de gestión de riesgos
+- [ai-act-art-10](ai-act/ai-act-art-10.md) — Artículo 10: Datos y gobernanza de datos
+- [ai-act-art-11](ai-act/ai-act-art-11.md) — Artículo 11: Documentación técnica
+- [ai-act-art-12](ai-act/ai-act-art-12.md) — Artículo 12: Conservación de registros
+- [ai-act-art-13](ai-act/ai-act-art-13.md) — Artículo 13: Transparencia y comunicación de información a los responsables del despliegue
+- [ai-act-art-14](ai-act/ai-act-art-14.md) — Artículo 14: Supervisión humana
+- [ai-act-art-15](ai-act/ai-act-art-15.md) — Artículo 15: Precisión, solidez y ciberseguridad
+- [ai-act-art-16](ai-act/ai-act-art-16.md) — Artículo 16: Obligaciones de los proveedores de sistemas de IA de alto riesgo
+- [ai-act-art-17](ai-act/ai-act-art-17.md) — Artículo 17: Sistema de gestión de la calidad
+- [ai-act-art-18](ai-act/ai-act-art-18.md) — Artículo 18: Conservación de la documentación
+- [ai-act-art-19](ai-act/ai-act-art-19.md) — Artículo 19: Archivos de registro generados automáticamente
+- [ai-act-art-20](ai-act/ai-act-art-20.md) — Artículo 20: Medidas correctoras y obligación de información
+- [ai-act-art-21](ai-act/ai-act-art-21.md) — Artículo 21: Cooperación con las autoridades competentes
+- [ai-act-art-22](ai-act/ai-act-art-22.md) — Artículo 22: Representantes autorizados de los proveedores de sistemas de IA de alto riesgo
+- [ai-act-art-23](ai-act/ai-act-art-23.md) — Artículo 23: Obligaciones de los importadores
+- [ai-act-art-24](ai-act/ai-act-art-24.md) — Artículo 24: Obligaciones de los distribuidores
+- [ai-act-art-25](ai-act/ai-act-art-25.md) — Artículo 25: Responsabilidades a lo largo de la cadena de valor de la IA
+- [ai-act-art-26](ai-act/ai-act-art-26.md) — Artículo 26: Obligaciones de los responsables del despliegue de sistemas de IA de alto riesgo
+- [ai-act-art-27](ai-act/ai-act-art-27.md) — Artículo 27: Evaluación de impacto relativa a los derechos fundamentales para los sistemas de IA de alto riesgo
+- [ai-act-art-28](ai-act/ai-act-art-28.md) — Artículo 28: Autoridades notificantes
+- [ai-act-art-29](ai-act/ai-act-art-29.md) — Artículo 29: Solicitud de notificación por parte de un organismo de evaluación de la conformidad
+- [ai-act-art-30](ai-act/ai-act-art-30.md) — Artículo 30: Procedimiento de notificación
+- [ai-act-art-31](ai-act/ai-act-art-31.md) — Artículo 31: Requisitos relativos a los organismos notificados
+- [ai-act-art-32](ai-act/ai-act-art-32.md) — Artículo 32: Presunción de conformidad con los requisitos relativos a los organismos notificados
+- [ai-act-art-33](ai-act/ai-act-art-33.md) — Artículo 33: Filiales de organismos notificados y subcontratación
+- [ai-act-art-34](ai-act/ai-act-art-34.md) — Artículo 34: Obligaciones operativas de los organismos notificados
+- [ai-act-art-35](ai-act/ai-act-art-35.md) — Artículo 35: Números de identificación y listas de organismos notificados
+- [ai-act-art-36](ai-act/ai-act-art-36.md) — Artículo 36: Cambios en las notificaciones
+- [ai-act-art-37](ai-act/ai-act-art-37.md) — Artículo 37: Cuestionamiento de la competencia de los organismos notificados
+- [ai-act-art-38](ai-act/ai-act-art-38.md) — Artículo 38: Coordinación de los organismos notificados
+- [ai-act-art-39](ai-act/ai-act-art-39.md) — Artículo 39: Organismos de evaluación de la conformidad de terceros países
+- [ai-act-art-40](ai-act/ai-act-art-40.md) — Artículo 40: Normas armonizadas y documentos de normalización
+- [ai-act-art-41](ai-act/ai-act-art-41.md) — Artículo 41: Especificaciones comunes
+- [ai-act-art-42](ai-act/ai-act-art-42.md) — Artículo 42: Presunción de conformidad con determinados requisitos
+- [ai-act-art-43](ai-act/ai-act-art-43.md) — Artículo 43: Evaluación de la conformidad
+- [ai-act-art-44](ai-act/ai-act-art-44.md) — Artículo 44: Certificados
+- [ai-act-art-45](ai-act/ai-act-art-45.md) — Artículo 45: Obligaciones de información de los organismos notificados
+- [ai-act-art-46](ai-act/ai-act-art-46.md) — Artículo 46: Exención del procedimiento de evaluación de la conformidad
+- [ai-act-art-47](ai-act/ai-act-art-47.md) — Artículo 47: Declaración UE de conformidad
+- [ai-act-art-48](ai-act/ai-act-art-48.md) — Artículo 48: Marcado CE
+- [ai-act-art-49](ai-act/ai-act-art-49.md) — Artículo 49: Registro
+- [ai-act-art-50](ai-act/ai-act-art-50.md) — Artículo 50: Obligaciones de transparencia de los proveedores y responsables del despliegue de determinados sistemas de IA
+- [ai-act-art-51](ai-act/ai-act-art-51.md) — Artículo 51: Reglas de clasificación de los modelos de IA de uso general como modelos de IA de uso general con riesgo sistémico
+- [ai-act-art-52](ai-act/ai-act-art-52.md) — Artículo 52: Procedimiento
+- [ai-act-art-53](ai-act/ai-act-art-53.md) — Artículo 53: Obligaciones de los proveedores de modelos de IA de uso general
+- [ai-act-art-54](ai-act/ai-act-art-54.md) — Artículo 54: Representantes autorizados de los proveedores de modelos de IA de uso general
+- [ai-act-art-55](ai-act/ai-act-art-55.md) — Artículo 55: Obligaciones de los proveedores de modelos de IA de uso general con riesgo sistémico
+- [ai-act-art-56](ai-act/ai-act-art-56.md) — Artículo 56: Códigos de buenas prácticas
+- [ai-act-art-57](ai-act/ai-act-art-57.md) — Artículo 57: Espacios controlados de pruebas para la IA
+- [ai-act-art-58](ai-act/ai-act-art-58.md) — Artículo 58: Disposiciones detalladas relativas a los espacios controlados de pruebas para la IA y al funcionamiento de dichos espacios
+- [ai-act-art-59](ai-act/ai-act-art-59.md) — Artículo 59: Tratamiento ulterior de datos personales para el desarrollo de determinados sistemas de IA en favor del interés público en el espacio controlado de pruebas para la IA
+- [ai-act-art-60](ai-act/ai-act-art-60.md) — Artículo 60: Pruebas de sistemas de IA de alto riesgo en condiciones reales fuera de los espacios controlados de pruebas para la IA
+- [ai-act-art-60-bis](ai-act/ai-act-art-60-bis.md) — Artículo 60 bis: Pruebas de sistemas de IA de alto riesgo regulados por los actos legislativos de armonización de la Unión enumerados en el anexo I, sección B, en condiciones reales fuera de los espacios controlados de pruebas para la IA
+- [ai-act-art-61](ai-act/ai-act-art-61.md) — Artículo 61: Consentimiento informado para participar en pruebas en condiciones reales fuera de los espacios controlados de pruebas para la IA
+- [ai-act-art-62](ai-act/ai-act-art-62.md) — Artículo 62: Medidas dirigidas a proveedores y responsables del despliegue, en particular pymes, incluidas las empresas emergentes
+- [ai-act-art-63](ai-act/ai-act-art-63.md) — Artículo 63: Excepciones para operadores específicos
+- [ai-act-art-64](ai-act/ai-act-art-64.md) — Artículo 64: Oficina de IA
+- [ai-act-art-65](ai-act/ai-act-art-65.md) — Artículo 65: Creación y estructura del Consejo Europeo de Inteligencia Artificial
+- [ai-act-art-66](ai-act/ai-act-art-66.md) — Artículo 66: Funciones del Consejo de IA
+- [ai-act-art-67](ai-act/ai-act-art-67.md) — Artículo 67: Foro consultivo
+- [ai-act-art-68](ai-act/ai-act-art-68.md) — Artículo 68: Grupo de expertos científicos independientes
+- [ai-act-art-69](ai-act/ai-act-art-69.md) — Artículo 69: Acceso a expertos por parte de los Estados miembros
+- [ai-act-art-70](ai-act/ai-act-art-70.md) — Artículo 70: Designación de las autoridades nacionales competentes y de los puntos de contacto único
+- [ai-act-art-71](ai-act/ai-act-art-71.md) — Artículo 71: Base de datos de la UE para los sistemas de IA de alto riesgo enumerados en el ANEXO III
+- [ai-act-art-72](ai-act/ai-act-art-72.md) — Artículo 72: Vigilancia poscomercialización por parte de los proveedores y plan de vigilancia poscomercialización para sistemas de IA de alto riesgo
+- [ai-act-art-73](ai-act/ai-act-art-73.md) — Artículo 73: Notificación de incidentes graves
+- [ai-act-art-74](ai-act/ai-act-art-74.md) — Artículo 74: Vigilancia del mercado y control de los sistemas de IA en el mercado de la Unión
+- [ai-act-art-75](ai-act/ai-act-art-75.md) — Artículo 75: ▼M1
+- [ai-act-art-75-bis](ai-act/ai-act-art-75-bis.md) — Artículo 75 bis: Competencias de supervisión y de garantía del cumplimiento de la Oficina de IA
+- [ai-act-art-75-ter](ai-act/ai-act-art-75-ter.md) — Artículo 75 ter: Compromisos
+- [ai-act-art-75-quater](ai-act/ai-act-art-75-quater.md) — Artículo 75 quater: Incumplimiento, multas sancionadoras y multas coercitivas
+- [ai-act-art-75-quinquies](ai-act/ai-act-art-75-quinquies.md) — Artículo 75 quinquies: Salvaguardias y especificaciones adicionales
+- [ai-act-art-76](ai-act/ai-act-art-76.md) — Artículo 76: Supervisión de las pruebas en condiciones reales por las autoridades de vigilancia del mercado
+- [ai-act-art-77](ai-act/ai-act-art-77.md) — Artículo 77: ▼M1
+- [ai-act-art-78](ai-act/ai-act-art-78.md) — Artículo 78: Confidencialidad
+- [ai-act-art-79](ai-act/ai-act-art-79.md) — Artículo 79: Procedimiento aplicable a escala nacional a los sistemas de IA que presenten un riesgo
+- [ai-act-art-80](ai-act/ai-act-art-80.md) — Artículo 80: Procedimiento aplicable a los sistemas de IA clasificados por el proveedor como no de alto riesgo en aplicación del anexo III
+- [ai-act-art-81](ai-act/ai-act-art-81.md) — Artículo 81: Procedimiento de salvaguardia de la Unión
+- [ai-act-art-82](ai-act/ai-act-art-82.md) — Artículo 82: Sistemas de IA conformes que presenten un riesgo
+- [ai-act-art-83](ai-act/ai-act-art-83.md) — Artículo 83: Incumplimiento formal
+- [ai-act-art-84](ai-act/ai-act-art-84.md) — Artículo 84: Estructuras de apoyo a los ensayos de IA de la Unión
+- [ai-act-art-85](ai-act/ai-act-art-85.md) — Artículo 85: Derecho a presentar una reclamación ante una autoridad de vigilancia del mercado
+- [ai-act-art-86](ai-act/ai-act-art-86.md) — Artículo 86: Derecho a explicación de decisiones tomadas individualmente
+- [ai-act-art-87](ai-act/ai-act-art-87.md) — Artículo 87: Denuncia de infracciones y protección de los denunciantes
+- [ai-act-art-88](ai-act/ai-act-art-88.md) — Artículo 88: Cumplimiento de las obligaciones de los proveedores de modelos de IA de uso general
+- [ai-act-art-89](ai-act/ai-act-art-89.md) — Artículo 89: Medidas de seguimiento
+- [ai-act-art-90](ai-act/ai-act-art-90.md) — Artículo 90: Alertas del grupo de expertos científicos sobre riesgos sistémicos
+- [ai-act-art-91](ai-act/ai-act-art-91.md) — Artículo 91: Poderes para solicitar documentación e información
+- [ai-act-art-92](ai-act/ai-act-art-92.md) — Artículo 92: Poderes para realizar evaluaciones
+- [ai-act-art-93](ai-act/ai-act-art-93.md) — Artículo 93: Poderes para solicitar la adopción de medidas
+- [ai-act-art-94](ai-act/ai-act-art-94.md) — Artículo 94: Garantías procesales de los operadores económicos del modelo de IA de uso general
+- [ai-act-art-95](ai-act/ai-act-art-95.md) — Artículo 95: Códigos de conducta para la aplicación voluntaria de requisitos específicos
+- [ai-act-art-96](ai-act/ai-act-art-96.md) — Artículo 96: Directrices de la Comisión sobre la aplicación del presente Reglamento
+- [ai-act-art-97](ai-act/ai-act-art-97.md) — Artículo 97: Ejercicio de la delegación
+- [ai-act-art-98](ai-act/ai-act-art-98.md) — Artículo 98: Procedimiento de comité
+- [ai-act-art-99](ai-act/ai-act-art-99.md) — Artículo 99: Sanciones
+- [ai-act-art-100](ai-act/ai-act-art-100.md) — Artículo 100: Multas administrativas a instituciones, órganos y organismos de la Unión
+- [ai-act-art-101](ai-act/ai-act-art-101.md) — Artículo 101: Multas a proveedores de modelos de IA de uso general
+- [ai-act-art-102](ai-act/ai-act-art-102.md) — Artículo 102: Modificación del Reglamento (CE) n.o 300/2008
+- [ai-act-art-103](ai-act/ai-act-art-103.md) — Artículo 103: Modificación del Reglamento (UE) n.o 167/2013
+- [ai-act-art-104](ai-act/ai-act-art-104.md) — Artículo 104: Modificación del Reglamento (UE) n.o 168/2013
+- [ai-act-art-105](ai-act/ai-act-art-105.md) — Artículo 105: Modificación de la Directiva 2014/90/UE
+- [ai-act-art-106](ai-act/ai-act-art-106.md) — Artículo 106: Modificación de la Directiva (UE) 2016/797
+- [ai-act-art-107](ai-act/ai-act-art-107.md) — Artículo 107: Modificación del Reglamento (UE) 2018/858
+- [ai-act-art-108](ai-act/ai-act-art-108.md) — Artículo 108: Modificación del Reglamento (UE) 2018/1139
+- [ai-act-art-109](ai-act/ai-act-art-109.md) — Artículo 109: Modificación del Reglamento (UE) 2019/2144
+- [ai-act-art-110](ai-act/ai-act-art-110.md) — Artículo 110: Modificación de la Directiva (UE) 2020/1828
+- [ai-act-art-111](ai-act/ai-act-art-111.md) — Artículo 111: Sistemas de IA ya introducidos en el mercado o puestos en servicio y modelos de IA de uso general ya introducidos en el mercado
+- [ai-act-art-112](ai-act/ai-act-art-112.md) — Artículo 112: Evaluación y revisión
+- [ai-act-art-113](ai-act/ai-act-art-113.md) — Artículo 113: Entrada en vigor y aplicación
+- [ai-act-anexo-i](ai-act/ai-act-anexo-i.md) — ANEXO I: Lista de actos legislativos de armonización de la Unión
+- [ai-act-anexo-ii](ai-act/ai-act-anexo-ii.md) — ANEXO II: Lista de los delitos a que se refiere el artículo 5, apartado 1, párrafo primero, letra h), inciso iii)
+- [ai-act-anexo-iii](ai-act/ai-act-anexo-iii.md) — ANEXO III: Sistemas de IA de alto riesgo a que se refiere el artículo 6, apartado 2
+- [ai-act-anexo-iv](ai-act/ai-act-anexo-iv.md) — ANEXO IV: Documentación técnica a que se refiere el artículo 11, apartado 1
+- [ai-act-anexo-v](ai-act/ai-act-anexo-v.md) — ANEXO V: Declaración UE de conformidad
+- [ai-act-anexo-vi](ai-act/ai-act-anexo-vi.md) — ANEXO VI: Procedimiento de evaluación de la conformidad fundamentado en un control interno
+- [ai-act-anexo-vii](ai-act/ai-act-anexo-vii.md) — ANEXO VII: Conformidad fundamentada en la evaluación del sistema de gestión de la calidad y la evaluación de la documentación técnica
+- [ai-act-anexo-viii](ai-act/ai-act-anexo-viii.md) — ANEXO VIII: Información que debe presentarse para la inscripción en el registro de sistemas de IA de alto riesgo de conformidad con el artículo 49
+- [ai-act-anexo-ix](ai-act/ai-act-anexo-ix.md) — ANEXO IX: Información que debe presentarse para la inscripción en el registro de los sistemas de IA de alto riesgo enumerados en el anexo III en relación con las pruebas en condiciones reales de conformidad con el artículo 60
+- [ai-act-anexo-x](ai-act/ai-act-anexo-x.md) — ANEXO X: Actos legislativos de la Unión relativos a sistemas informáticos de gran magnitud en el espacio de libertad, seguridad y justicia
+- [ai-act-anexo-xi](ai-act/ai-act-anexo-xi.md) — ANEXO XI: Documentación técnica a que se refiere el artículo 53, apartado 1, letra a) — documentación técnica para proveedores de modelos de IA de uso general
+- [ai-act-anexo-xii](ai-act/ai-act-anexo-xii.md) — ANEXO XII: Información sobre transparencia a que se refiere el artículo 53, apartado 1, letra b) — documentación técnica de los proveedores de modelos de IA de uso general para los proveedores posteriores que integren el modelo en su sistema de IA
+- [ai-act-anexo-xiii](ai-act/ai-act-anexo-xiii.md) — ANEXO XIII: Criterios para la clasificación de los modelos de IA de uso general con riesgo sistémico a que se refiere el artículo 51
+- [ai-act-anexo-xiv](ai-act/ai-act-anexo-xiv.md) — ANEXO XIV: Lista de códigos, categorías y tipos correspondientes de sistemas de IA a efectos del procedimiento de notificación previsto en el artículo 30 a fin de especificar el ámbito de aplicación de la designación como organismos notificados
+
+## RGPD — Reglamento (UE) 2016/679 (consolidado 2016-05-04)
+
+- [rgpd-art-1](rgpd/rgpd-art-1.md) — Artículo 1: Objeto
+- [rgpd-art-2](rgpd/rgpd-art-2.md) — Artículo 2: Ámbito de aplicación material
+- [rgpd-art-3](rgpd/rgpd-art-3.md) — Artículo 3: Ámbito territorial
+- [rgpd-art-4](rgpd/rgpd-art-4.md) — Artículo 4: Definiciones
+- [rgpd-art-5](rgpd/rgpd-art-5.md) — Artículo 5: Principios relativos al tratamiento
+- [rgpd-art-6](rgpd/rgpd-art-6.md) — Artículo 6: Licitud del tratamiento
+- [rgpd-art-7](rgpd/rgpd-art-7.md) — Artículo 7: Condiciones para el consentimiento
+- [rgpd-art-8](rgpd/rgpd-art-8.md) — Artículo 8: Condiciones aplicables al consentimiento del niño en relación con los servicios de la sociedad de la información
+- [rgpd-art-9](rgpd/rgpd-art-9.md) — Artículo 9: Tratamiento de categorías especiales de datos personales
+- [rgpd-art-10](rgpd/rgpd-art-10.md) — Artículo 10: Tratamiento de datos personales relativos a condenas e infracciones penales
+- [rgpd-art-11](rgpd/rgpd-art-11.md) — Artículo 11: Tratamiento que no requiere identificación
+- [rgpd-art-12](rgpd/rgpd-art-12.md) — Artículo 12: Transparencia de la información, comunicación y modalidades de ejercicio de los derechos del interesado
+- [rgpd-art-13](rgpd/rgpd-art-13.md) — Artículo 13: Información que deberá facilitarse cuando los datos personales se obtengan del interesado
+- [rgpd-art-14](rgpd/rgpd-art-14.md) — Artículo 14: Información que deberá facilitarse cuando los datos personales no se hayan obtenido del interesado
+- [rgpd-art-15](rgpd/rgpd-art-15.md) — Artículo 15: Derecho de acceso del interesado
+- [rgpd-art-16](rgpd/rgpd-art-16.md) — Artículo 16: Derecho de rectificación
+- [rgpd-art-17](rgpd/rgpd-art-17.md) — Artículo 17: Derecho de supresión («el derecho al olvido»)
+- [rgpd-art-18](rgpd/rgpd-art-18.md) — Artículo 18: Derecho a la limitación del tratamiento
+- [rgpd-art-19](rgpd/rgpd-art-19.md) — Artículo 19: Obligación de notificación relativa a la rectificación o supresión de datos personales o la limitación del tratamiento
+- [rgpd-art-20](rgpd/rgpd-art-20.md) — Artículo 20: Derecho a la portabilidad de los datos
+- [rgpd-art-21](rgpd/rgpd-art-21.md) — Artículo 21: Derecho de oposición
+- [rgpd-art-22](rgpd/rgpd-art-22.md) — Artículo 22: Decisiones individuales automatizadas, incluida la elaboración de perfiles
+- [rgpd-art-23](rgpd/rgpd-art-23.md) — Artículo 23: Limitaciones
+- [rgpd-art-24](rgpd/rgpd-art-24.md) — Artículo 24: Responsabilidad del responsable del tratamiento
+- [rgpd-art-25](rgpd/rgpd-art-25.md) — Artículo 25: Protección de datos desde el diseño y por defecto
+- [rgpd-art-26](rgpd/rgpd-art-26.md) — Artículo 26: Corresponsables del tratamiento
+- [rgpd-art-27](rgpd/rgpd-art-27.md) — Artículo 27: Representantes de responsables o encargados del tratamiento no establecidos en la Unión
+- [rgpd-art-28](rgpd/rgpd-art-28.md) — Artículo 28: Encargado del tratamiento
+- [rgpd-art-29](rgpd/rgpd-art-29.md) — Artículo 29: Tratamiento bajo la autoridad del responsable o del encargado del tratamiento
+- [rgpd-art-30](rgpd/rgpd-art-30.md) — Artículo 30: Registro de las actividades de tratamiento
+- [rgpd-art-31](rgpd/rgpd-art-31.md) — Artículo 31: Cooperación con la autoridad de control
+- [rgpd-art-32](rgpd/rgpd-art-32.md) — Artículo 32: Seguridad del tratamiento
+- [rgpd-art-33](rgpd/rgpd-art-33.md) — Artículo 33: Notificación de una violación de la seguridad de los datos personales a la autoridad de control
+- [rgpd-art-34](rgpd/rgpd-art-34.md) — Artículo 34: Comunicación de una violación de la seguridad de los datos personales al interesado
+- [rgpd-art-35](rgpd/rgpd-art-35.md) — Artículo 35: Evaluación de impacto relativa a la protección de datos
+- [rgpd-art-36](rgpd/rgpd-art-36.md) — Artículo 36: Consulta previa
+- [rgpd-art-37](rgpd/rgpd-art-37.md) — Artículo 37: Designación del delegado de protección de datos
+- [rgpd-art-38](rgpd/rgpd-art-38.md) — Artículo 38: Posición del delegado de protección de datos
+- [rgpd-art-39](rgpd/rgpd-art-39.md) — Artículo 39: Funciones del delegado de protección de datos
+- [rgpd-art-40](rgpd/rgpd-art-40.md) — Artículo 40: Códigos de conducta
+- [rgpd-art-41](rgpd/rgpd-art-41.md) — Artículo 41: Supervisión de códigos de conducta aprobados
+- [rgpd-art-42](rgpd/rgpd-art-42.md) — Artículo 42: Certificación
+- [rgpd-art-43](rgpd/rgpd-art-43.md) — Artículo 43: Organismo de certificación
+- [rgpd-art-44](rgpd/rgpd-art-44.md) — Artículo 44: Principio general de las transferencias
+- [rgpd-art-45](rgpd/rgpd-art-45.md) — Artículo 45: Transferencias basadas en una decisión de adecuación
+- [rgpd-art-46](rgpd/rgpd-art-46.md) — Artículo 46: Transferencias mediante garantías adecuadas
+- [rgpd-art-47](rgpd/rgpd-art-47.md) — Artículo 47: Normas corporativas vinculantes
+- [rgpd-art-48](rgpd/rgpd-art-48.md) — Artículo 48: Transferencias o comunicaciones no autorizadas por el Derecho de la Unión
+- [rgpd-art-49](rgpd/rgpd-art-49.md) — Artículo 49: Excepciones para situaciones específicas
+- [rgpd-art-50](rgpd/rgpd-art-50.md) — Artículo 50: Cooperación internacional en el ámbito de la protección de datos personales
+- [rgpd-art-51](rgpd/rgpd-art-51.md) — Artículo 51: Autoridad de control
+- [rgpd-art-52](rgpd/rgpd-art-52.md) — Artículo 52: Independencia
+- [rgpd-art-53](rgpd/rgpd-art-53.md) — Artículo 53: Condiciones generales aplicables a los miembros de la autoridad de control
+- [rgpd-art-54](rgpd/rgpd-art-54.md) — Artículo 54: Normas relativas al establecimiento de la autoridad de control
+- [rgpd-art-55](rgpd/rgpd-art-55.md) — Artículo 55: Competencia
+- [rgpd-art-56](rgpd/rgpd-art-56.md) — Artículo 56: Competencia de la autoridad de control principal
+- [rgpd-art-57](rgpd/rgpd-art-57.md) — Artículo 57: Funciones
+- [rgpd-art-58](rgpd/rgpd-art-58.md) — Artículo 58: Poderes
+- [rgpd-art-59](rgpd/rgpd-art-59.md) — Artículo 59: Informe de actividad
+- [rgpd-art-60](rgpd/rgpd-art-60.md) — Artículo 60: Cooperación entre la autoridad de control principal y las demás autoridades de control interesadas
+- [rgpd-art-61](rgpd/rgpd-art-61.md) — Artículo 61: Asistencia mutua
+- [rgpd-art-62](rgpd/rgpd-art-62.md) — Artículo 62: Operaciones conjuntas de las autoridades de control
+- [rgpd-art-63](rgpd/rgpd-art-63.md) — Artículo 63: Mecanismo de coherencia
+- [rgpd-art-64](rgpd/rgpd-art-64.md) — Artículo 64: Dictamen del Comité
+- [rgpd-art-65](rgpd/rgpd-art-65.md) — Artículo 65: Resolución de conflictos por el Comité
+- [rgpd-art-66](rgpd/rgpd-art-66.md) — Artículo 66: Procedimiento de urgencia
+- [rgpd-art-67](rgpd/rgpd-art-67.md) — Artículo 67: Intercambio de información
+- [rgpd-art-68](rgpd/rgpd-art-68.md) — Artículo 68: Comité Europeo de Protección de Datos
+- [rgpd-art-69](rgpd/rgpd-art-69.md) — Artículo 69: Independencia
+- [rgpd-art-70](rgpd/rgpd-art-70.md) — Artículo 70: Funciones del Comité
+- [rgpd-art-71](rgpd/rgpd-art-71.md) — Artículo 71: Informes
+- [rgpd-art-72](rgpd/rgpd-art-72.md) — Artículo 72: Procedimiento
+- [rgpd-art-73](rgpd/rgpd-art-73.md) — Artículo 73: Presidencia
+- [rgpd-art-74](rgpd/rgpd-art-74.md) — Artículo 74: Funciones del presidente
+- [rgpd-art-75](rgpd/rgpd-art-75.md) — Artículo 75: Secretaría
+- [rgpd-art-76](rgpd/rgpd-art-76.md) — Artículo 76: Confidencialidad
+- [rgpd-art-77](rgpd/rgpd-art-77.md) — Artículo 77: Derecho a presentar una reclamación ante una autoridad de control
+- [rgpd-art-78](rgpd/rgpd-art-78.md) — Artículo 78: Derecho a la tutela judicial efectiva contra una autoridad de control
+- [rgpd-art-79](rgpd/rgpd-art-79.md) — Artículo 79: Derecho a la tutela judicial efectiva contra un responsable o encargado del tratamiento
+- [rgpd-art-80](rgpd/rgpd-art-80.md) — Artículo 80: Representación de los interesados
+- [rgpd-art-81](rgpd/rgpd-art-81.md) — Artículo 81: Suspensión de los procedimientos
+- [rgpd-art-82](rgpd/rgpd-art-82.md) — Artículo 82: Derecho a indemnización y responsabilidad
+- [rgpd-art-83](rgpd/rgpd-art-83.md) — Artículo 83: Condiciones generales para la imposición de multas administrativas
+- [rgpd-art-84](rgpd/rgpd-art-84.md) — Artículo 84: Sanciones
+- [rgpd-art-85](rgpd/rgpd-art-85.md) — Artículo 85: Tratamiento y libertad de expresión y de información
+- [rgpd-art-86](rgpd/rgpd-art-86.md) — Artículo 86: Tratamiento y acceso del público a documentos oficiales
+- [rgpd-art-87](rgpd/rgpd-art-87.md) — Artículo 87: Tratamiento del número nacional de identificación
+- [rgpd-art-88](rgpd/rgpd-art-88.md) — Artículo 88: Tratamiento en el ámbito laboral
+- [rgpd-art-89](rgpd/rgpd-art-89.md) — Artículo 89: Garantías y excepciones aplicables al tratamiento con fines de archivo en interés público, fines de investigación científica o histórica o fines estadísticos
+- [rgpd-art-90](rgpd/rgpd-art-90.md) — Artículo 90: Obligaciones de secreto
+- [rgpd-art-91](rgpd/rgpd-art-91.md) — Artículo 91: Normas vigentes sobre protección de datos de las iglesias y asociaciones religiosas
+- [rgpd-art-92](rgpd/rgpd-art-92.md) — Artículo 92: Ejercicio de la delegación
+- [rgpd-art-93](rgpd/rgpd-art-93.md) — Artículo 93: Procedimiento de comité
+- [rgpd-art-94](rgpd/rgpd-art-94.md) — Artículo 94: Derogación de la Directiva 95/46/CE
+- [rgpd-art-95](rgpd/rgpd-art-95.md) — Artículo 95: Relación con la Directiva 2002/58/CE
+- [rgpd-art-96](rgpd/rgpd-art-96.md) — Artículo 96: Relación con acuerdos celebrados anteriormente
+- [rgpd-art-97](rgpd/rgpd-art-97.md) — Artículo 97: Informes de la Comisión
+- [rgpd-art-98](rgpd/rgpd-art-98.md) — Artículo 98: Revisión de otros actos jurídicos de la Unión en materia de protección de datos
+- [rgpd-art-99](rgpd/rgpd-art-99.md) — Artículo 99: Entrada en vigor y aplicación
+
+## LOPDGDD — Ley Orgánica 3/2018 (consolidado 2025-12-27)
+
+- [lopdgdd-art-1](lopdgdd/lopdgdd-art-1.md) — Artículo 1: Objeto de la ley
+- [lopdgdd-art-2](lopdgdd/lopdgdd-art-2.md) — Artículo 2: Ámbito de aplicación de los Títulos I a IX y de los artículos 89 a 94
+- [lopdgdd-art-3](lopdgdd/lopdgdd-art-3.md) — Artículo 3: Datos de las personas fallecidas
+- [lopdgdd-art-4](lopdgdd/lopdgdd-art-4.md) — Artículo 4: Exactitud de los datos
+- [lopdgdd-art-5](lopdgdd/lopdgdd-art-5.md) — Artículo 5: Deber de confidencialidad
+- [lopdgdd-art-6](lopdgdd/lopdgdd-art-6.md) — Artículo 6: Tratamiento basado en el consentimiento del afectado
+- [lopdgdd-art-7](lopdgdd/lopdgdd-art-7.md) — Artículo 7: Consentimiento de los menores de edad
+- [lopdgdd-art-8](lopdgdd/lopdgdd-art-8.md) — Artículo 8: Tratamiento de datos por obligación legal, interés público o ejercicio de poderes públicos
+- [lopdgdd-art-9](lopdgdd/lopdgdd-art-9.md) — Artículo 9: Categorías especiales de datos
+- [lopdgdd-art-10](lopdgdd/lopdgdd-art-10.md) — Artículo 10: Tratamiento de datos de naturaleza penal
+- [lopdgdd-art-11](lopdgdd/lopdgdd-art-11.md) — Artículo 11: Transparencia e información al afectado
+- [lopdgdd-art-12](lopdgdd/lopdgdd-art-12.md) — Artículo 12: Disposiciones generales sobre ejercicio de los derechos
+- [lopdgdd-art-13](lopdgdd/lopdgdd-art-13.md) — Artículo 13: Derecho de acceso
+- [lopdgdd-art-14](lopdgdd/lopdgdd-art-14.md) — Artículo 14: Derecho de rectificación
+- [lopdgdd-art-15](lopdgdd/lopdgdd-art-15.md) — Artículo 15: Derecho de supresión
+- [lopdgdd-art-16](lopdgdd/lopdgdd-art-16.md) — Artículo 16: Derecho a la limitación del tratamiento
+- [lopdgdd-art-17](lopdgdd/lopdgdd-art-17.md) — Artículo 17: Derecho a la portabilidad
+- [lopdgdd-art-18](lopdgdd/lopdgdd-art-18.md) — Artículo 18: Derecho de oposición
+- [lopdgdd-art-19](lopdgdd/lopdgdd-art-19.md) — Artículo 19: Tratamiento de datos de contacto, de empresarios individuales y de profesionales liberales
+- [lopdgdd-art-20](lopdgdd/lopdgdd-art-20.md) — Artículo 20: Sistemas de información crediticia
+- [lopdgdd-art-21](lopdgdd/lopdgdd-art-21.md) — Artículo 21: Tratamientos relacionados con la realización de determinadas operaciones mercantiles
+- [lopdgdd-art-22](lopdgdd/lopdgdd-art-22.md) — Artículo 22: Tratamientos con fines de videovigilancia
+- [lopdgdd-art-23](lopdgdd/lopdgdd-art-23.md) — Artículo 23: Sistemas de exclusión publicitaria
+- [lopdgdd-art-24](lopdgdd/lopdgdd-art-24.md) — Artículo 24: Tratamiento de datos para la protección de las personas que informen sobre infracciones normativas
+- [lopdgdd-art-25](lopdgdd/lopdgdd-art-25.md) — Artículo 25: Tratamiento de datos en el ámbito de la función estadística pública
+- [lopdgdd-art-26](lopdgdd/lopdgdd-art-26.md) — Artículo 26: Tratamiento de datos con fines de archivo en interés público por parte de las Administraciones Públicas
+- [lopdgdd-art-27](lopdgdd/lopdgdd-art-27.md) — Artículo 27: Tratamiento de datos relativos a infracciones y sanciones administrativas
+- [lopdgdd-art-28](lopdgdd/lopdgdd-art-28.md) — Artículo 28: Obligaciones generales del responsable y encargado del tratamiento
+- [lopdgdd-art-29](lopdgdd/lopdgdd-art-29.md) — Artículo 29: Supuestos de corresponsabilidad en el tratamiento
+- [lopdgdd-art-30](lopdgdd/lopdgdd-art-30.md) — Artículo 30: Representantes de los responsables o encargados del tratamiento no establecidos en la Unión Europea
+- [lopdgdd-art-31](lopdgdd/lopdgdd-art-31.md) — Artículo 31: Registro de las actividades de tratamiento
+- [lopdgdd-art-32](lopdgdd/lopdgdd-art-32.md) — Artículo 32: Bloqueo de los datos
+- [lopdgdd-art-33](lopdgdd/lopdgdd-art-33.md) — Artículo 33: Encargado del tratamiento
+- [lopdgdd-art-34](lopdgdd/lopdgdd-art-34.md) — Artículo 34: Designación de un delegado de protección de datos
+- [lopdgdd-art-35](lopdgdd/lopdgdd-art-35.md) — Artículo 35: Cualificación del delegado de protección de datos
+- [lopdgdd-art-36](lopdgdd/lopdgdd-art-36.md) — Artículo 36: Posición del delegado de protección de datos
+- [lopdgdd-art-37](lopdgdd/lopdgdd-art-37.md) — Artículo 37: Intervención del delegado de protección de datos en caso de reclamación ante las autoridades de protección de datos
+- [lopdgdd-art-38](lopdgdd/lopdgdd-art-38.md) — Artículo 38: Códigos de conducta
+- [lopdgdd-art-39](lopdgdd/lopdgdd-art-39.md) — Artículo 39: Acreditación de instituciones de certificación
+- [lopdgdd-art-40](lopdgdd/lopdgdd-art-40.md) — Artículo 40: Régimen de las transferencias internacionales de datos
+- [lopdgdd-art-41](lopdgdd/lopdgdd-art-41.md) — Artículo 41: Supuestos de adopción por la Agencia Española de Protección de Datos
+- [lopdgdd-art-42](lopdgdd/lopdgdd-art-42.md) — Artículo 42: Supuestos sometidos a autorización previa de las autoridades de protección de datos
+- [lopdgdd-art-43](lopdgdd/lopdgdd-art-43.md) — Artículo 43: Supuestos sometidos a información previa a la autoridad de protección de datos competente
+- [lopdgdd-art-44](lopdgdd/lopdgdd-art-44.md) — Artículo 44: Disposiciones generales
+- [lopdgdd-art-45](lopdgdd/lopdgdd-art-45.md) — Artículo 45: Régimen jurídico
+- [lopdgdd-art-46](lopdgdd/lopdgdd-art-46.md) — Artículo 46: Régimen económico presupuestario y de personal
+- [lopdgdd-art-47](lopdgdd/lopdgdd-art-47.md) — Artículo 47: Funciones y potestades de la Agencia Española de Protección de Datos
+- [lopdgdd-art-48](lopdgdd/lopdgdd-art-48.md) — Artículo 48: La Presidencia de la Agencia Española de Protección de Datos
+- [lopdgdd-art-49](lopdgdd/lopdgdd-art-49.md) — Artículo 49: Consejo Consultivo de la Agencia Española de Protección de Datos
+- [lopdgdd-art-50](lopdgdd/lopdgdd-art-50.md) — Artículo 50: Publicidad
+- [lopdgdd-art-51](lopdgdd/lopdgdd-art-51.md) — Artículo 51: Ámbito y personal competente
+- [lopdgdd-art-52](lopdgdd/lopdgdd-art-52.md) — Artículo 52: Deber de colaboración
+- [lopdgdd-art-53](lopdgdd/lopdgdd-art-53.md) — Artículo 53: Alcance de la actividad de investigación
+- [lopdgdd-art-53-bis](lopdgdd/lopdgdd-art-53-bis.md) — Artículo 53 bis: Actuaciones de investigación a través de sistemas digitales
+- [lopdgdd-art-54](lopdgdd/lopdgdd-art-54.md) — Artículo 54: Planes de auditoría
+- [lopdgdd-art-55](lopdgdd/lopdgdd-art-55.md) — Artículo 55: Potestades de regulación. Circulares de la Agencia Española de Protección de Datos
+- [lopdgdd-art-56](lopdgdd/lopdgdd-art-56.md) — Artículo 56: Acción exterior
+- [lopdgdd-art-57](lopdgdd/lopdgdd-art-57.md) — Artículo 57: Autoridades autonómicas de protección de datos
+- [lopdgdd-art-58](lopdgdd/lopdgdd-art-58.md) — Artículo 58: Cooperación institucional
+- [lopdgdd-art-59](lopdgdd/lopdgdd-art-59.md) — Artículo 59: Tratamientos contrarios al Reglamento (UE) 2016/679
+- [lopdgdd-art-60](lopdgdd/lopdgdd-art-60.md) — Artículo 60: Coordinación en caso de emisión de dictamen por el Comité Europeo de Protección de Datos
+- [lopdgdd-art-61](lopdgdd/lopdgdd-art-61.md) — Artículo 61: Intervención en caso de tratamientos transfronterizos
+- [lopdgdd-art-62](lopdgdd/lopdgdd-art-62.md) — Artículo 62: Coordinación en caso de resolución de conflictos por el Comité Europeo de Protección de Datos
+- [lopdgdd-art-63](lopdgdd/lopdgdd-art-63.md) — Artículo 63: Régimen jurídico
+- [lopdgdd-art-64](lopdgdd/lopdgdd-art-64.md) — Artículo 64: Forma de iniciación del procedimiento y duración
+- [lopdgdd-art-65](lopdgdd/lopdgdd-art-65.md) — Artículo 65: Admisión a trámite de las reclamaciones
+- [lopdgdd-art-66](lopdgdd/lopdgdd-art-66.md) — Artículo 66: Determinación del alcance territorial
+- [lopdgdd-art-67](lopdgdd/lopdgdd-art-67.md) — Artículo 67: Actuaciones previas de investigación
+- [lopdgdd-art-68](lopdgdd/lopdgdd-art-68.md) — Artículo 68: Acuerdo de inicio del procedimiento para el ejercicio de la potestad sancionadora
+- [lopdgdd-art-69](lopdgdd/lopdgdd-art-69.md) — Artículo 69: Medidas provisionales y de garantía de los derechos
+- [lopdgdd-art-70](lopdgdd/lopdgdd-art-70.md) — Artículo 70: Sujetos responsables
+- [lopdgdd-art-71](lopdgdd/lopdgdd-art-71.md) — Artículo 71: Infracciones
+- [lopdgdd-art-72](lopdgdd/lopdgdd-art-72.md) — Artículo 72: Infracciones consideradas muy graves
+- [lopdgdd-art-73](lopdgdd/lopdgdd-art-73.md) — Artículo 73: Infracciones consideradas graves
+- [lopdgdd-art-74](lopdgdd/lopdgdd-art-74.md) — Artículo 74: Infracciones consideradas leves
+- [lopdgdd-art-75](lopdgdd/lopdgdd-art-75.md) — Artículo 75: Interrupción de la prescripción de la infracción
+- [lopdgdd-art-76](lopdgdd/lopdgdd-art-76.md) — Artículo 76: Sanciones y medidas correctivas
+- [lopdgdd-art-77](lopdgdd/lopdgdd-art-77.md) — Artículo 77: Régimen aplicable a determinadas categorías de responsables o encargados del tratamiento
+- [lopdgdd-art-78](lopdgdd/lopdgdd-art-78.md) — Artículo 78: Prescripción de las sanciones
+- [lopdgdd-art-79](lopdgdd/lopdgdd-art-79.md) — Artículo 79: Los derechos en la Era digital
+- [lopdgdd-art-80](lopdgdd/lopdgdd-art-80.md) — Artículo 80: Derecho a la neutralidad de Internet
+- [lopdgdd-art-81](lopdgdd/lopdgdd-art-81.md) — Artículo 81: Derecho de acceso universal a Internet
+- [lopdgdd-art-82](lopdgdd/lopdgdd-art-82.md) — Artículo 82: Derecho a la seguridad digital
+- [lopdgdd-art-83](lopdgdd/lopdgdd-art-83.md) — Artículo 83: Derecho a la educación digital
+- [lopdgdd-art-84](lopdgdd/lopdgdd-art-84.md) — Artículo 84: Protección de los menores en Internet
+- [lopdgdd-art-85](lopdgdd/lopdgdd-art-85.md) — Artículo 85: Derecho de rectificación en Internet
+- [lopdgdd-art-86](lopdgdd/lopdgdd-art-86.md) — Artículo 86: Derecho a la actualización de informaciones en medios de comunicación digitales
+- [lopdgdd-art-87](lopdgdd/lopdgdd-art-87.md) — Artículo 87: Derecho a la intimidad y uso de dispositivos digitales en el ámbito laboral
+- [lopdgdd-art-88](lopdgdd/lopdgdd-art-88.md) — Artículo 88: Derecho a la desconexión digital en el ámbito laboral
+- [lopdgdd-art-89](lopdgdd/lopdgdd-art-89.md) — Artículo 89: Derecho a la intimidad frente al uso de dispositivos de videovigilancia y de grabación de sonidos en el lugar de trabajo
+- [lopdgdd-art-90](lopdgdd/lopdgdd-art-90.md) — Artículo 90: Derecho a la intimidad ante la utilización de sistemas de geolocalización en el ámbito laboral
+- [lopdgdd-art-91](lopdgdd/lopdgdd-art-91.md) — Artículo 91: Derechos digitales en la negociación colectiva
+- [lopdgdd-art-92](lopdgdd/lopdgdd-art-92.md) — Artículo 92: Protección de datos de los menores en Internet
+- [lopdgdd-art-93](lopdgdd/lopdgdd-art-93.md) — Artículo 93: Derecho al olvido en búsquedas de Internet
+- [lopdgdd-art-94](lopdgdd/lopdgdd-art-94.md) — Artículo 94: Derecho al olvido en servicios de redes sociales y servicios equivalentes
+- [lopdgdd-art-95](lopdgdd/lopdgdd-art-95.md) — Artículo 95: Derecho de portabilidad en servicios de redes sociales y servicios equivalentes
+- [lopdgdd-art-96](lopdgdd/lopdgdd-art-96.md) — Artículo 96: Derecho al testamento digital
+- [lopdgdd-art-97](lopdgdd/lopdgdd-art-97.md) — Artículo 97: Políticas de impulso de los derechos digitales
+- [lopdgdd-disp-adicio-primera](lopdgdd/lopdgdd-disp-adicio-primera.md) — Disposición adicional primera: Medidas de seguridad en el ámbito del sector público
+- [lopdgdd-disp-adicio-segunda](lopdgdd/lopdgdd-disp-adicio-segunda.md) — Disposición adicional segunda: Protección de datos y transparencia y acceso a la información pública
+- [lopdgdd-disp-adicio-tercera](lopdgdd/lopdgdd-disp-adicio-tercera.md) — Disposición adicional tercera: Cómputo de plazos
+- [lopdgdd-disp-adicio-cuarta](lopdgdd/lopdgdd-disp-adicio-cuarta.md) — Disposición adicional cuarta: Procedimiento en relación con las competencias atribuidas a la Agencia Española de Protección de Datos por otras leyes
+- [lopdgdd-disp-adicio-quinta](lopdgdd/lopdgdd-disp-adicio-quinta.md) — Disposición adicional quinta: Autorización judicial en relación con decisiones de la Comisión Europea en materia de transferencia internacional de datos
+- [lopdgdd-disp-adicio-sexta](lopdgdd/lopdgdd-disp-adicio-sexta.md) — Disposición adicional sexta: Incorporación de deudas a sistemas de información crediticia
+- [lopdgdd-disp-adicio-septima](lopdgdd/lopdgdd-disp-adicio-septima.md) — Disposición adicional séptima: Identificación de los interesados en las notificaciones por medio de anuncios y publicaciones de actos administrativos
+- [lopdgdd-disp-adicio-octava](lopdgdd/lopdgdd-disp-adicio-octava.md) — Disposición adicional octava: Potestad de verificación de las Administraciones Públicas
+- [lopdgdd-disp-adicio-novena](lopdgdd/lopdgdd-disp-adicio-novena.md) — Disposición adicional novena: Tratamiento de datos personales en relación con la notificación de incidentes de seguridad
+- [lopdgdd-disp-adicio-decima](lopdgdd/lopdgdd-disp-adicio-decima.md) — Disposición adicional décima: Comunicaciones de datos por los sujetos enumerados en el artículo 77.1
+- [lopdgdd-disp-adicio-undecima](lopdgdd/lopdgdd-disp-adicio-undecima.md) — Disposición adicional undécima: Privacidad en las comunicaciones electrónicas
+- [lopdgdd-disp-adicio-duodecima](lopdgdd/lopdgdd-disp-adicio-duodecima.md) — Disposición adicional duodécima: Disposiciones específicas aplicables a los tratamientos de los registros de personal del sector público
+- [lopdgdd-disp-adicio-decimotercera](lopdgdd/lopdgdd-disp-adicio-decimotercera.md) — Disposición adicional decimotercera: Transferencias internacionales de datos tributarios
+- [lopdgdd-disp-adicio-decimocuarta](lopdgdd/lopdgdd-disp-adicio-decimocuarta.md) — Disposición adicional decimocuarta: Normas dictadas en desarrollo del artículo 13 de la Directiva 95/46/CE
+- [lopdgdd-disp-adicio-decimoquinta](lopdgdd/lopdgdd-disp-adicio-decimoquinta.md) — Disposición adicional decimoquinta: Requerimiento de información por parte de la Comisión Nacional del Mercado de Valores
+- [lopdgdd-disp-adicio-decimosexta](lopdgdd/lopdgdd-disp-adicio-decimosexta.md) — Disposición adicional decimosexta: Prácticas agresivas en materia de protección de datos
+- [lopdgdd-disp-adicio-decimoseptima](lopdgdd/lopdgdd-disp-adicio-decimoseptima.md) — Disposición adicional decimoséptima: Tratamientos de datos de salud
+- [lopdgdd-disp-adicio-decimoctava](lopdgdd/lopdgdd-disp-adicio-decimoctava.md) — Disposición adicional decimoctava: Criterios de seguridad
+- [lopdgdd-disp-adicio-decimonovena](lopdgdd/lopdgdd-disp-adicio-decimonovena.md) — Disposición adicional decimonovena: Derechos de los menores ante Internet
+- [lopdgdd-disp-adicio-vigesima](lopdgdd/lopdgdd-disp-adicio-vigesima.md) — Disposición adicional vigésima: Especialidades del régimen jurídico de la Agencia Española de Protección de Datos
+- [lopdgdd-disp-adicio-vigesima-primera](lopdgdd/lopdgdd-disp-adicio-vigesima-primera.md) — Disposición adicional vigésima primera: Educación digital
+- [lopdgdd-disp-adicio-vigesima-segunda](lopdgdd/lopdgdd-disp-adicio-vigesima-segunda.md) — Disposición adicional vigésima segunda: Acceso a los archivos públicos y eclesiásticos
+- [lopdgdd-disp-adicio-vigesima-tercera](lopdgdd/lopdgdd-disp-adicio-vigesima-tercera.md) — Disposición adicional vigésima tercera: Modelos de presentación de reclamaciones
+- [lopdgdd-disp-transi-primera](lopdgdd/lopdgdd-disp-transi-primera.md) — Disposición transitoria primera: Estatuto de la Agencia Española de Protección de Datos
+- [lopdgdd-disp-transi-segunda](lopdgdd/lopdgdd-disp-transi-segunda.md) — Disposición transitoria segunda: Códigos tipo inscritos en las autoridades de protección de datos conforme a la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal
+- [lopdgdd-disp-transi-tercera](lopdgdd/lopdgdd-disp-transi-tercera.md) — Disposición transitoria tercera: Régimen transitorio de los procedimientos
+- [lopdgdd-disp-transi-cuarta](lopdgdd/lopdgdd-disp-transi-cuarta.md) — Disposición transitoria cuarta: Tratamientos sometidos a la Directiva (UE) 2016/680
+- [lopdgdd-disp-transi-quinta](lopdgdd/lopdgdd-disp-transi-quinta.md) — Disposición transitoria quinta: Contratos de encargado del tratamiento
+- [lopdgdd-disp-transi-sexta](lopdgdd/lopdgdd-disp-transi-sexta.md) — Disposición transitoria sexta: Reutilización con fines de investigación en materia de salud y biomédica de datos personales recogidos con anterioridad a la entrada en vigor de esta ley orgánica
+- [lopdgdd-disp-deroga-unica](lopdgdd/lopdgdd-disp-deroga-unica.md) — Disposición derogatoria única: Derogación normativa
+- [lopdgdd-disp-final-primera](lopdgdd/lopdgdd-disp-final-primera.md) — Disposición final primera: Naturaleza de la presente ley
+- [lopdgdd-disp-final-segunda](lopdgdd/lopdgdd-disp-final-segunda.md) — Disposición final segunda: Título competencial
+- [lopdgdd-disp-final-tercera](lopdgdd/lopdgdd-disp-final-tercera.md) — Disposición final tercera: Modificación de la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General
+- [lopdgdd-disp-final-cuarta](lopdgdd/lopdgdd-disp-final-cuarta.md) — Disposición final cuarta: Modificación de la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial
+- [lopdgdd-disp-final-quinta](lopdgdd/lopdgdd-disp-final-quinta.md) — Disposición final quinta: Modificación de la Ley 14/1986, de 25 de abril, General de Sanidad
+- [lopdgdd-disp-final-sexta](lopdgdd/lopdgdd-disp-final-sexta.md) — Disposición final sexta: Modificación de la Ley 29/1998, de 13 de julio, reguladora de la Jurisdicción Contencioso-administrativa
+- [lopdgdd-disp-final-septima](lopdgdd/lopdgdd-disp-final-septima.md) — Disposición final séptima: Modificación de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil
+- [lopdgdd-disp-final-octava](lopdgdd/lopdgdd-disp-final-octava.md) — Disposición final octava: Modificación de la Ley Orgánica 6/2001, de 21 de diciembre, de Universidades
+- [lopdgdd-disp-final-novena](lopdgdd/lopdgdd-disp-final-novena.md) — Disposición final novena: Modificación de la Ley 41/2002, de 14 de noviembre, básica reguladora de la autonomía del paciente y de derechos y obligaciones en materia de información y documentación clínica
+- [lopdgdd-disp-final-decima](lopdgdd/lopdgdd-disp-final-decima.md) — Disposición final décima: Modificación de la Ley Orgánica 2/2006, de 3 de mayo, de Educación
+- [lopdgdd-disp-final-undecima](lopdgdd/lopdgdd-disp-final-undecima.md) — Disposición final undécima: Modificación de la Ley 19/2013, de 9 de diciembre, de transparencia, acceso a la información pública y buen gobierno
+- [lopdgdd-disp-final-duodecima](lopdgdd/lopdgdd-disp-final-duodecima.md) — Disposición final duodécima: Modificación de la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas
+- [lopdgdd-disp-final-decimotercera](lopdgdd/lopdgdd-disp-final-decimotercera.md) — Disposición final decimotercera: Modificación del texto refundido de la Ley del Estatuto de los Trabajadores
+- [lopdgdd-disp-final-decimocuarta](lopdgdd/lopdgdd-disp-final-decimocuarta.md) — Disposición final decimocuarta: Modificación del texto refundido de la Ley del Estatuto Básico del Empleado Público
+- [lopdgdd-disp-final-decimoquinta](lopdgdd/lopdgdd-disp-final-decimoquinta.md) — Disposición final decimoquinta: Desarrollo normativo
+- [lopdgdd-disp-final-decimosexta](lopdgdd/lopdgdd-disp-final-decimosexta.md) — Disposición final decimosexta: Entrada en vigor
+
+## Omnibus IA — Reglamento (UE) 2026/1744 (DO 2026-07-24)
+
+- [omnibus-art-1](omnibus/omnibus-art-1.md) — Artículo 1: Modificación del Reglamento (UE) 2024/1689
+- [omnibus-art-75-ter](omnibus/omnibus-art-75-ter.md) — Artículo 75 ter: Compromisos
+- [omnibus-art-75-quater](omnibus/omnibus-art-75-quater.md) — Artículo 75 quater: Incumplimiento, multas sancionadoras y multas coercitivas
+- [omnibus-art-75-quinquies](omnibus/omnibus-art-75-quinquies.md) — Artículo 75 quinquies: Salvaguardias y especificaciones adicionales
+- [omnibus-art-2](omnibus/omnibus-art-2.md) — Artículo 2: Modificación del Reglamento (UE) 2018/1139
+- [omnibus-art-3](omnibus/omnibus-art-3.md) — Artículo 3: Modificación del Reglamento (UE) 2023/1230
+- [omnibus-art-4](omnibus/omnibus-art-4.md) — Artículo 4: Entrada en vigor y aplicación

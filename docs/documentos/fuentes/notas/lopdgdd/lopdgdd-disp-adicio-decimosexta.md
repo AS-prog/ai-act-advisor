@@ -1,0 +1,27 @@
+---
+name: lopdgdd-disp-adicio-decimosexta
+description: "LOPDGDD, Disposición adicional decimosexta: Prácticas agresivas en materia de protección de datos. Ubicación: TÍTULO X — Garantía de los derechos digitales. Texto consolidado 2025-12-27 (Ley Orgánica 3/2018)."
+metadata:
+  type: reference
+  norma: lopdgdd
+  celex: BOE-A-2018-16673
+  unidad: Disposición adicional decimosexta
+  titulo: "Prácticas agresivas en materia de protección de datos"
+  ubicacion: "TÍTULO X — Garantía de los derechos digitales"
+  tags: [lopdgdd, espana, proteccion-datos, disposicion, practicas, agresivas, materia, proteccion]
+  origen: md/2025-12-27-lopdgdd-3-2018-consolidado-boe.md#L1561-L1574
+  oficial: false
+---
+# Disposición adicional decimosexta. Prácticas agresivas en materia de protección de datos.
+
+A los efectos previstos en el artículo 8 de la Ley 3/1991, de 10 de enero, de Competencia Desleal, se consideran prácticas agresivas las siguientes:
+
+a) Actuar con intención de suplantar la identidad de la Agencia Española de Protección de Datos o de una autoridad autonómica de protección de datos en la realización de cualquier comunicación a los responsables y encargados de los tratamientos o a los interesados.
+
+b) Generar la apariencia de que se está actuando en nombre, por cuenta o en colaboración con la Agencia Española de Protección de Datos o una autoridad autonómica de protección de datos en la realización de cualquier comunicación a los responsables y encargados de los tratamientos en que la remitente ofrezca sus productos o servicios.
+
+c) Realizar prácticas comerciales en las que se coarte el poder de decisión de los destinatarios mediante la referencia a la posible imposición de sanciones por incumplimiento de la normativa de protección de datos personales.
+
+d) Ofrecer cualquier tipo de documento por el que se pretenda crear una apariencia de cumplimiento de las disposiciones de protección de datos de forma complementaria a la realización de acciones formativas sin haber llevado a cabo las actuaciones necesarias para verificar que dicho cumplimiento se produce efectivamente.
+
+e) Asumir, sin designación expresa del responsable o el encargado del tratamiento, la función de delegado de protección de datos y comunicarse en tal condición con la Agencia Española de Protección de Datos o las autoridades autonómicas de protección de datos.

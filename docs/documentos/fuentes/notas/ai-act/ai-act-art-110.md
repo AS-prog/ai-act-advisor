@@ -1,0 +1,21 @@
+---
+name: ai-act-art-110
+description: "AI Act, Artículo 110: Modificación de la Directiva (UE) 2020/1828. Ubicación: CAPÍTULO XIII — DISPOSICIONES FINALES. Texto consolidado 2026-07-27 (Reglamento (UE) 2024/1689)."
+metadata:
+  type: reference
+  norma: ai-act
+  celex: 02024R1689-20260727
+  unidad: Artículo 110
+  titulo: "Modificación de la Directiva (UE) 2020/1828"
+  ubicacion: "CAPÍTULO XIII — DISPOSICIONES FINALES"
+  tags: [ai-act, reglamento-ue, articulo, modificacion, directiva]
+  origen: md/2026-07-27-ai-act-2024-1689-consolidado-es.md#L2933-L2940
+  oficial: false
+---
+# Artículo 110 — Modificación de la Directiva (UE) 2020/1828
+
+En el anexo I de la Directiva (UE) 2020/1828 del Parlamento Europeo y del Consejo ( [3](#E0011) ) se añade el punto siguiente:
+
+«68)
+
+Reglamento (UE) 2024/1689 del Parlamento Europeo y del Consejo, de 1689, por el que se establecen normas armonizadas en materia de inteligencia artificial y por el que se modifican los Reglamentos (CE) n.o 300/2008, (UE) n.o 167/2013, (UE) n.o 168/2013, (UE) 2018/858, (UE) 2018/1139 y (UE) 2019/2144 y las Directivas 2014/90/UE, (UE) 2016/797 y (UE) 2020/1828 (Reglamento de Inteligencia Artificial) (DO L, 2024/1689, 12.7.2024, ELI: http://data.europa.eu/eli/reg/2024/1689/oj).».

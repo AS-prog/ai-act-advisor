@@ -1,0 +1,23 @@
+---
+name: rgpd-art-66
+description: "RGPD, Artículo 66: Procedimiento de urgencia. Ubicación: CAPÍTULO VII — Cooperación y coherencia · Sección 2 — Coherencia. Texto consolidado 2016-05-04 (Reglamento (UE) 2016/679)."
+metadata:
+  type: reference
+  norma: rgpd
+  celex: 02016R0679-20160504
+  unidad: Artículo 66
+  titulo: "Procedimiento de urgencia"
+  ubicacion: "CAPÍTULO VII — Cooperación y coherencia · Sección 2 — Coherencia"
+  tags: [rgpd, reglamento-ue, proteccion-datos, articulo, procedimiento, urgencia]
+  origen: md/2016-05-04-rgpd-2016-679-consolidado-es.md#L1585-L1594
+  oficial: false
+---
+# Artículo 66 — Procedimiento de urgencia
+
+1. En circunstancias excepcionales, cuando una autoridad de control interesada considere que es urgente intervenir para proteger los derechos y las libertades de interesados, podrá, como excepción al mecanismo de coherencia contemplado en los artículos 63, 64 y 65, o al procedimiento mencionado en el artículo 60, adoptar inmediatamente medidas provisionales destinadas a producir efectos jurídicos en su propio territorio, con un periodo de validez determinado que no podrá ser superior a tres meses. La autoridad de control comunicará sin dilación dichas medidas, junto con los motivos de su adopción, a las demás autoridades de control interesadas, al Comité y a la Comisión.
+
+2. Cuando una autoridad de control haya adoptado una medida de conformidad con el apartado 1, y considere que deben adoptarse urgentemente medidas definitivas, podrá solicitar con carácter urgente un dictamen o una decisión vinculante urgente del Comité, motivando dicha solicitud de dictamen o decisión.
+
+3. Cualquier autoridad de control podrá solicitar, motivando su solicitud, y, en particular, la urgencia de la intervención, un dictamen urgente o una decisión vinculante urgente, según el caso, del Comité, cuando una autoridad de control competente no haya tomado una medida apropiada en una situación en la que sea urgente intervenir a fin de proteger los derechos y las libertades de los interesados.
+
+4. No obstante lo dispuesto en el artículo 64, apartado 3, y en el artículo 65, apartado 2, los dictámenes urgentes o decisiones vinculantes urgentes contemplados en los apartados 2 y 3 del presente artículo se adoptarán en el plazo de dos semanas por mayoría simple de los miembros del Comité.

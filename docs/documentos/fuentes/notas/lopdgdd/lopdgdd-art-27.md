@@ -1,0 +1,25 @@
+---
+name: lopdgdd-art-27
+description: "LOPDGDD, Artículo 27: Tratamiento de datos relativos a infracciones y sanciones administrativas. Ubicación: TÍTULO IV — Disposiciones aplicables a tratamientos concretos. Texto consolidado 2025-12-27 (Ley Orgánica 3/2018)."
+metadata:
+  type: reference
+  norma: lopdgdd
+  celex: BOE-A-2018-16673
+  unidad: Artículo 27
+  titulo: "Tratamiento de datos relativos a infracciones y sanciones administrativas"
+  ubicacion: "TÍTULO IV — Disposiciones aplicables a tratamientos concretos"
+  tags: [lopdgdd, espana, proteccion-datos, articulo, tratamiento, relativos, infracciones, sanciones]
+  origen: md/2025-12-27-lopdgdd-3-2018-consolidado-boe.md#L405-L416
+  oficial: false
+---
+# Artículo 27. Tratamiento de datos relativos a infracciones y sanciones administrativas.
+
+1. A los efectos del artículo 86 del Reglamento (UE) 2016/679, el tratamiento de datos relativos a infracciones y sanciones administrativas, incluido el mantenimiento de registros relacionados con las mismas, exigirá:
+
+a) Que los responsables de dichos tratamientos sean los órganos competentes para la instrucción del procedimiento sancionador, para la declaración de las infracciones o la imposición de las sanciones.
+
+b) Que el tratamiento se limite a los datos estrictamente necesarios para la finalidad perseguida por aquel.
+
+2. Cuando no se cumpla alguna de las condiciones previstas en el apartado anterior, los tratamientos de datos referidos a infracciones y sanciones administrativas habrán de contar con el consentimiento del interesado o estar autorizados por una norma con rango de ley, en la que se regularán, en su caso, garantías adicionales para los derechos y libertades de los afectados.
+
+3. Fuera de los supuestos señalados en los apartados anteriores, los tratamientos de datos referidos a infracciones y sanciones administrativas solo serán posibles cuando sean llevados a cabo por abogados y procuradores y tengan por objeto recoger la información facilitada por sus clientes para el ejercicio de sus funciones.

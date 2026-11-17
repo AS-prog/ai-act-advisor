@@ -1,0 +1,47 @@
+---
+name: aesia-checklist-precision-04-autoeval-mg
+description: "AESIA, checklist «Precision», hoja «Autoeval MG» (29 filas). Hoja del Excel de autoevaluación de las guías de requisitos, 2026-07-30."
+metadata:
+  type: reference
+  documento: "aesia-checklist-precision"
+  emisor: "AESIA"
+  fecha: "2026-07-30"
+  idioma: "es"
+  hoja: "Autoeval MG"
+  filas: "29"
+  origen: "2026-07-30-aesia-checklists-y-ejemplos.zip/Precision_Checklist.xlsx"
+  oficial: false
+---
+# Autoeval MG
+
+| Esta es una pestaña OPERATIVA. Se recomienda prestar especial atención a la hora de cumplimentarla, ya que a partir de ella va a surgir el diseño del Plan de Adaptación. Por tanto, en la medida en la que la información esté alineada con la realidad del sistema, la entidad podrá sacar mayor provecho al sandbox. Esta pestaña aparece pre-informada con una fila por cada una de las relaciones descritas en la pestaña anterior (Relación MG-Apart). Si además la entidad considera que alguna medida puede servir para ser aplicada a algún apartado adicional, podrá indicarlo al final de las filas preinformadas. Para cada relación se han de informar únicamente dos columnas (Nivel de dificultad percibido y Nivel de madurez). |  |  |  |  |  |  |  |  |  |  |
+|---|---|---|---|---|---|---|---|---|---|---|
+| IDArt | Apartado | Breve descripción apartado | Tipo Medida | IDMedida | Descripción medida | Nivel de dificultad percibido | Nivel de madurez | Estado Diagnóstico | Plan de adaptación | Observaciones |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG01 | Selección de las métricas de precisión y sus valores teniendo en cuenta la finalidad prevista del sistema |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG02 | Estalecer unas métricas de precisión que esté motivada por la mitigación de los riesgos identificados en el plan de riesgos y documentar dicha motivación |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG03 | Considerar el impacto del preprocesamiento de los datos, realizando registros de las operaciones de preprocesado y su relación con los resultados de las métricas de precisión |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG04 | Considerar el impacto del sobreaprendizaje en la precisión y tomar registro de las medidas tomadas para evitarlo (en la medida de lo posible) |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG05 | Establecer unos modelos base para comparar de manera sistemática durante el ciclo de vida la precisión del modelo contra ellos |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG06 | Establecer, si procede. una medida del nivel de certeza o confianza de los resultados que acompañe a las salidas del modelo |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG07 | Planear y realizar test unitarios, de estrés y de integración, acumulativos durante el proceso de desarrollo del sistema de IA en relación con la medición de precisión. |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG08 | Actualizadar y centralizar con acceso a todos los actores implicados la información relativa a las métricas de precisión |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG09 | Establecer la función objetivo del sistema acorde a la finalidad prevista y los riesgos encontrados en el análisis de riesgos, dejando evidencia de dicha selección |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG10 | Contar con un mecanismo (interfaz gráfica, alarma, etc.) que permita al usuario realizar un seguimiento del estado de la precisión, para detectar errores potenciales de funcionamiento |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG11 | Contar con un mecanismo que almacene todas las precisiones informadas al usuario en un histórico |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG12 | Realizar tests de significancia estadística que justifiquen las elecciones de la(s) métrica(s) de precisión y función(es) objetivo |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG13 | Establecer comparaciones (benchmarks) considerando la finalidad prevista y en relación con modelo o familia de modelos utilizada |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.1. | Deben tener adecuados niveles de precisión | Medida Guía | MG14 | Incluir todos los niveles de precisión y métricas de precisión pertinentes en las instrucciones del sistema para el usuario |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG01 | Selección de las métricas de precisión y sus valores teniendo en cuenta la finalidad prevista del sistema |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG02 | Estalecer unas métricas de precisión que esté motivada por la mitigación de los riesgos identificados en el plan de riesgos y documentar dicha motivación |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG03 | Considerar el impacto del preprocesamiento de los datos, realizando registros de las operaciones de preprocesado y su relación con los resultados de las métricas de precisión |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG04 | Considerar el impacto del sobreaprendizaje en la precisión y tomar registro de las medidas tomadas para evitarlo (en la medida de lo posible) |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG05 | Establecer unos modelos base para comparar de manera sistemática durante el ciclo de vida la precisión del modelo contra ellos |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG06 | Establecer, si procede. una medida del nivel de certeza o confianza de los resultados que acompañe a las salidas del modelo |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG07 | Planear y realizar test unitarios, de estrés y de integración, acumulativos durante el proceso de desarrollo del sistema de IA en relación con la medición de precisión. |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG08 | Actualizadar y centralizar con acceso a todos los actores implicados la información relativa a las métricas de precisión |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG09 | Establecer la función objetivo del sistema acorde a la finalidad prevista y los riesgos encontrados en el análisis de riesgos, dejando evidencia de dicha selección |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG10 | Contar con un mecanismo (interfaz gráfica, alarma, etc.) que permita al usuario realizar un seguimiento del estado de la precisión, para detectar errores potenciales de funcionamiento |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG11 | Contar con un mecanismo que almacene todas las precisiones informadas al usuario en un histórico |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG12 | Realizar tests de significancia estadística que justifiquen las elecciones de la(s) métrica(s) de precisión y función(es) objetivo |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG13 | Establecer comparaciones (benchmarks) considerando la finalidad prevista y en relación con modelo o familia de modelos utilizada |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
+| AR15P | 15.3. | Nivel de precisión necesario y medidas para medirla | Medida Guía | MG14 | Incluir todos los niveles de precisión y métricas de precisión pertinentes en las instrucciones del sistema para el usuario |  |  | 00. Pdte diagnóstico | 00. Pdte diagnóstico |  |
