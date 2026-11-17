@@ -396,7 +396,10 @@ original en lugar de fiarse solo de los resúmenes de `knowledge/`.
 | Q16 | Sin stack fijo: `project-init` audita el repo, detecta los entornos y el PM confirma |
 | Q17 | Nombre `ai-act-advisor` |
 | Q18 | Repo personal hasta después del prototipo |
+| Q19 | Primer corte: PII en la ingesta (fuentes sin clave de PII, PII declarada sin aplicar, Bronze con cambio de esquema, exportaciones, supresión) |
 | Q20 | Hooks y auditoría en Python sin dependencias |
+| Q21 | Proyecto de ejemplo ficticio `examples/medallion-demo`, sin nada del cliente |
+| Q23 | Informe fechado en `.ai-act/audits/`, línea base con estados (los hooks solo avisan de lo nuevo), perfil multi-repo, auditoría de solo lectura, HTML si hay `docs/site/site.toml` |
 | Q22 | Licencia MIT |
 | — | Versión madura con un MCP de documentación normativa y embeddings |
 
@@ -406,6 +409,3 @@ original en lugar de fiarse solo de los resúmenes de `knowledge/`.
 > Cuánto ruido es aceptable y si las decisiones del ingeniero quedan en un
 > registro del repo. Se decide al probar el prototipo.
 
-> [!PENDING] Q19
-> Primer corte del prototipo. La auditoría de un repo real apunta a la PII
-> en la ingesta.

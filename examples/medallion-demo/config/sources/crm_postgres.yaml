@@ -1,0 +1,11 @@
+# Fuente CRM en PostgreSQL (ficticia).
+source: crm
+type: postgres
+objects:
+  - name: customers
+    schema: crm
+    pii_columns: [email, phone, birth_date]
+    active: true
+  - name: subscriptions
+    schema: crm
+    active: true

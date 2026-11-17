@@ -34,6 +34,10 @@
     <ul>
     <li><a href="propuesta-prototipo.html" aria-current="page">Propuesta del prototipo</a></li>
     </ul>
+    <h2>Técnica</h2>
+    <ul>
+    <li><a href="../tecnica/uso-del-prototipo.html">Cómo funciona el prototipo en uso</a></li>
+    </ul>
     <h2>Investigación</h2>
     <ul>
     <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
@@ -414,7 +418,10 @@ Base normativa 2026-07-27 · No es asesoramiento legal</code></pre>
               <tr><td>Q16</td><td>Sin stack fijo: <code>project-init</code> audita el repo, detecta los entornos y el PM confirma</td></tr>
               <tr><td>Q17</td><td>Nombre <code>ai-act-advisor</code></td></tr>
               <tr><td>Q18</td><td>Repo personal hasta después del prototipo</td></tr>
+              <tr><td>Q19</td><td>Primer corte: PII en la ingesta (fuentes sin clave de PII, PII declarada sin aplicar, Bronze con cambio de esquema, exportaciones, supresión)</td></tr>
               <tr><td>Q20</td><td>Hooks y auditoría en Python sin dependencias</td></tr>
+              <tr><td>Q21</td><td>Proyecto de ejemplo ficticio <code>examples/medallion-demo</code>, sin nada del cliente</td></tr>
+              <tr><td>Q23</td><td>Informe fechado en <code>.ai-act/audits/</code>, línea base con estados (los hooks solo avisan de lo nuevo), perfil multi-repo, auditoría de solo lectura, HTML si hay <code>docs/site/site.toml</code></td></tr>
               <tr><td>Q22</td><td>Licencia MIT</td></tr>
               <tr><td>—</td><td>Versión madura con un MCP de documentación normativa y embeddings</td></tr>
             </tbody>
@@ -423,7 +430,6 @@ Base normativa 2026-07-27 · No es asesoramiento legal</code></pre>
 
         <h2 id="pendiente">Pendiente</h2>
         <div class="notice notice-pending"><span class="notice-title">Pendiente · Q5</span><p>Cuánto ruido es aceptable y si las decisiones del ingeniero quedan en un registro del repo. Se decide al probar el prototipo.</p></div>
-        <div class="notice notice-pending"><span class="notice-title">Pendiente · Q19</span><p>Primer corte del prototipo. La auditoría de un repo real apunta a la PII en la ingesta.</p></div>
         </article>
 
       <footer class="doc-footer">
