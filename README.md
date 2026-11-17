@@ -2,7 +2,7 @@
 
 Plugin de Claude Code que avisa a project managers (PM), data engineers (DE) y analytics engineers (AE) de los riesgos del AI Act y del RGPD en proyectos de ingeniería y analítica de datos, y sugiere cómo mitigarlos. Nunca bloquea: informa y deja la decisión a quien trabaja.
 
-> Estado: primer prototipo (PII en la ingesta). El resto de skills siguen como esqueleto. El diseño está en [`docs/diseno/propuesta-prototipo.md`](docs/diseno/propuesta-prototipo.md); la página HTML, en `docs/index.html`.
+> Estado: primer prototipo. La auditoría y los hooks cubren la PII en la ingesta; las siete skills y el agente están escritos. El diseño está en [`docs/diseno/propuesta-prototipo.md`](docs/diseno/propuesta-prototipo.md); la página HTML, en `docs/index.html`.
 
 ## Qué hay
 
