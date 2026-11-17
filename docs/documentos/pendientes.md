@@ -127,6 +127,11 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 - **Estado**: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. `skills/regulatory-update/SKILL.md` no dice nada de ella.
 - **Qué decidir**: si cada `/regulatory-update` añade a `docs/documentos/fuentes/` los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.
 
+### D21 · Cómo recuperar y citar las notas normativas (issue #15)
+
+- **Estado**: las notas de `docs/documentos/fuentes/notas/` no viajan con el plugin y ninguna skill las cita. Propuesta en `docs/documentos/diseno/citar-notas.md`: cita con formato fijo, mapa curado `knowledge/citas.yaml` y buscador stdlib; el MCP con embeddings (D02) después, con la misma interfaz.
+- **Qué decidir**: si las notas viajan enteras (7,5 MB) o solo las normas (2 MB); si vale el formato de cita con líneas; y si el MCP espera a que el conjunto de consultas de prueba lo pida.
+
 ## Decisiones de diseño cerradas
 
 Decididas por Andrés el 2026-11-17, cada una con su issue.
