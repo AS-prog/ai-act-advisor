@@ -228,6 +228,27 @@ class OtherAgentsTest(RepoCopy):
             "sessionId": self.session, "cwd": self.root, "toolName": "view", "toolArgs": json.dumps({"path": rel})})
         self.assertIn("email", ctx)
 
+    def test_copilot_and_cursor_read_top_level_context(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            hooks.session_start({"cwd": self.root, "source": "new"})
+        out = json.loads(buf.getvalue())
+        self.assertIn("/project-init", out["additionalContext"])
+        self.assertEqual(out["additionalContext"], out["additional_context"])
+
+    def test_claude_output_has_no_extra_keys(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            hooks.session_start({"cwd": self.root, "hook_event_name": "SessionStart"})
+        self.assertEqual(list(json.loads(buf.getvalue())), ["hookSpecificOutput"])
+
+    def test_codex_apply_patch_finds_the_file(self):
+        patch = "*** Begin Patch\n*** Update File: transform/silver/build_customers.py\n@@\n-x\n+y\n*** End Patch"
+        ctx = self.run_hook(hooks.post_tool_use, {
+            "session_id": self.session, "cwd": self.root, "hook_event_name": "PostToolUse",
+            "tool_name": "apply_patch", "tool_input": {"command": patch}})
+        self.assertIn("email", ctx)
+
     def test_gemini_payload_keeps_its_event_name(self):
         buf = io.StringIO()
         with redirect_stdout(buf):

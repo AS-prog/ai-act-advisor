@@ -35,7 +35,19 @@ Plugin de Claude Code que avisa a project managers (PM), data engineers (DE) y a
 apm install AS-prog/ai-act-advisor/plugins/ai-act-advisor --target copilot
 ```
 
-Las skills y el agente llegan a todos los agentes. Los avisos automáticos (hooks) dependen de cada agente: en Claude Code funcionan igual que con el plugin; en el resto, revisa `plugins/ai-act-advisor/apm.yml` para ver qué se pierde.
+Las 7 skills llegan a todos los agentes; el agente `regulatory-watcher`, a todos salvo Gemini y Windsurf. Los avisos automáticos (hooks) dependen del agente:
+
+| Agente | Aviso al abrir sesión | Aviso al leer o editar un fichero |
+|---|---|---|
+| Claude Code | Sí | Sí |
+| Copilot (CLI y VS Code) | Sí | Sí, según la documentación; sin probar en el agente |
+| Cursor | Sí | Sí, según la documentación; sin probar en el agente |
+| Codex | Sí | Solo al editar (no salta al leer) |
+| Gemini CLI | Sí | No: sus herramientas se llaman distinto y el filtro no las reconoce |
+| Windsurf | Sin comprobar | Sin comprobar |
+| OpenCode | No (no tiene hooks) | No |
+
+Los hooks se lanzan con `sh` y Python 3. En Windows, Claude Code usa Git Bash; los demás agentes pueden necesitarlo instalado. La base normativa se copia al repo del proyecto: tras una actualización, `apm update` la refresca.
 
 ## Probar el prototipo
 

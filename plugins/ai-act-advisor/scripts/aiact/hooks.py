@@ -16,8 +16,9 @@ WATCH_EXT = {".py", ".sql", ".yml", ".yaml", ".ipynb", ".toml"}
 DISCLAIMER = "No es asesoramiento legal."
 
 
-# Nombres de herramienta que escriben, por agente: Claude Code, Copilot CLI, Gemini CLI y Cursor.
-WRITE_TOOLS = {"Edit", "Write", "MultiEdit", "NotebookEdit", "edit", "create", "write_file", "replace"}
+# Nombres de herramienta que escriben, por agente: Claude Code, Copilot, Codex y Gemini CLI.
+WRITE_TOOLS = {"Edit", "Write", "MultiEdit", "NotebookEdit", "edit", "create", "str_replace_editor",
+               "apply_patch", "write_file", "replace"}
 
 
 def _project_root(payload):
@@ -26,11 +27,19 @@ def _project_root(payload):
 
 
 def _emit(event, text, payload=None):
-    """Formato de Claude Code (lo comparten Gemini CLI y Codex). Otros agentes lo ignoran sin error."""
-    if text:
-        name = (payload or {}).get("hook_event_name") or event
-        print(json.dumps({"hookSpecificOutput": {"hookEventName": name, "additionalContext": text}},
-                         ensure_ascii=False))
+    """Añade contexto con el formato del agente que lanzó el hook.
+
+    Claude Code, Gemini CLI y Codex leen hookSpecificOutput.additionalContext y mandan
+    hook_event_name en PascalCase. Copilot (CLI y VS Code) lee additionalContext y Cursor
+    additional_context, ambos en el primer nivel: si el evento no es de los primeros, van los tres.
+    """
+    if not text:
+        return
+    name = (payload or {}).get("hook_event_name") or ""
+    out = {"hookSpecificOutput": {"hookEventName": name or event, "additionalContext": text}}
+    if not name[:1].isupper():
+        out.update({"additionalContext": text, "additional_context": text})
+    print(json.dumps(out, ensure_ascii=False))
 
 
 def _tool_and_path(payload):
@@ -46,6 +55,15 @@ def _tool_and_path(payload):
         args = {}
     path = (args.get("file_path") or args.get("notebook_path") or args.get("absolute_path")
             or args.get("path") or payload.get("file_path"))
+    if not path:  # Codex edita con apply_patch: el fichero va dentro del parche
+        patch = args.get("command") or args.get("input") or args.get("patch") or ""
+        if isinstance(patch, list):
+            patch = "\n".join(map(str, patch))
+        m = re.search(r"^\*\*\* (?:Update|Add) File: (.+)$", str(patch), re.M)
+        if m:
+            path = m.group(1).strip()
+            if not os.path.isabs(path):
+                path = os.path.join(_project_root(payload), path)
     return tool, path
 
 
