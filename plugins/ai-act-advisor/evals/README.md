@@ -54,3 +54,15 @@ Cómo leer el resultado:
 - `nota-recuperada` es la cifra comparable con los 19 de 20 de `test_buscar.py`. Si falla, las consultas de Claude no encontraron la nota; si pasa y falla `nota-citada`, la encontró y no la citó.
 - Claude sin plugin no conoce los ids de las notas, así que `nota-citada` y `formato-cita` suman a Δ por construcción. La comparación limpia entre brazos está en `articulo-citado`, `fuente-oficial`, `guia-como-apoyo` y `no-inventa-cita`.
 - Los graders LLM usan el modelo de `--judge-model`; conviene que sea distinto del que responde.
+
+## Primera ejecución (2026-11-17)
+
+Casos `humo` (02, 21 y 22), una pasada por brazo, juez `sonnet`: 35 s y 0,46 USD.
+
+| Caso | Con plugin | Sin plugin | Qué pasó |
+| --- | --- | --- | --- |
+| 02-minimizacion | 1,00 | 0,44 | La skill se activa, llama a `buscar.py` y cita `RGPD art. 5.1.c · nota rgpd-art-5 (L23) · DOUE, CELEX …` |
+| 21-singularizacion | 0,00 | 0,29 | La skill **no se activa**: Claude responde de memoria con el Dictamen 05/2014 y el considerando 26, sin buscar en la guía del CEPD |
+| 22-sin-nota | 0,67 | 0,00 | La skill **no se activa**: cita el art. 27 del DSA de memoria; el juez la aprueba en `no-inventa-cita`, pero no dice «sin nota que lo respalde» |
+
+Lo que enseña: la búsqueda y el formato funcionan cuando la skill entra, pero su `description` no la activa con preguntas conceptuales («¿qué es…?») ni sobre normas que no están en las notas. Es lo primero que hay que ajustar antes de lanzar los 22 casos con tres pasadas.
