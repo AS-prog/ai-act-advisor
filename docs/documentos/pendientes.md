@@ -7,7 +7,7 @@ status: vivo
 
 # Pendientes y dudas
 
-Lista de trabajo del plugin `ai-act-advisor`. Tres partes: dudas normativas que siguen abiertas (P), decisiones de diseño abiertas (D) y lo ya verificado (V), con su fuente, para no repetirlo. Las rutas son relativas a la raíz del repo; `knowledge/` es `plugins/ai-act-advisor/knowledge/` y `skills/` es `plugins/ai-act-advisor/skills/`.
+Lista de trabajo del plugin `ai-act-advisor`. Tres partes: dudas normativas que siguen abiertas (P), decisiones de diseño abiertas y cerradas (D) y lo ya verificado (V), con su fuente, para no repetirlo. Las rutas son relativas a la raíz del repo; `knowledge/` es `plugins/ai-act-advisor/knowledge/` y `skills/` es `plugins/ai-act-advisor/skills/`.
 
 ## Cómo se hizo la revisión
 
@@ -46,11 +46,6 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 
 ## Decisiones de diseño abiertas
 
-### D01 · Q5: cuánto ruido es aceptable
-
-- **Estado**: el hook avisa de cuatro hallazgos por fichero como máximo, una vez por sesión, y calla lo que está en la línea base (`plugins/ai-act-advisor/scripts/aiact/hooks.py`).
-- **Qué decidir**: si ese límite vale tras probarlo en proyectos reales y si la búsqueda por términos, que es la parte ruidosa, sigue activa cuando el repo ya tiene reglas.
-
 ### D02 · MCP de documentación normativa (versión madura)
 
 - **Qué decidir**: dónde corre (local o servicio), qué modelo de embeddings usa y cómo se reparte el índice con el plugin. Está como pendiente en `docs/documentos/diseno/propuesta-prototipo.md`.
@@ -81,20 +76,10 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 - **Estado**: `knowledge/signals.yaml` no tiene términos de proxy; la skill los busca leyendo el esquema.
 - **Qué decidir**: si se añade una lista `proxy_terms` (código postal, nacionalidad, bajas…) y con qué severidad, sabiendo que `codigo_postal` y `postal_code` ya están en `pii_terms`. La duda P08 ya está cerrada (V40): el criterio del TJUE es amplio, así que la lista sería larga.
 
-### D08 · `scoring-model` en el hook
-
-- **Estado**: propuesta hecha con la demo (2026-11-17). El hook `PostToolUse` ya comprueba ML más términos de scoring en el fichero leído o editado (`core.check_scoring`), con el mismo id por repo que la auditoría, para que la línea base lo silencie en los dos sitios.
-- **Qué decidir**: si se queda así o si el aviso debe ser por fichero (hoy, un segundo modelo en otro fichero no vuelve a avisar si el primero ya está en la línea base).
-
 ### D09 · Tarea semanal sin programar
 
 - **Estado**: el diseño (Q13) pide una tarea semanal que abra una PR; el plugin no la trae. La alerta de 90 días del `SessionStart` sí existe.
 - **Qué decidir**: dónde se programa (tarea programada de Claude Code o CI del repo) y con qué permisos para abrir la PR.
-
-### D10 · Quién decide y cuándo, en la línea base
-
-- **Estado**: `.ai-act/baseline.json` guarda `status` y `justification` en texto libre, sin autor ni fecha de la decisión.
-- **Qué decidir**: si se añaden `decided_by` y `decided_on`, y que `merge_baseline` de `core.py` los conserve.
 
 ### D11 · Fechas y artículos escritos fuera de `knowledge/`
 
@@ -142,10 +127,28 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 - **Estado**: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. `skills/regulatory-update/SKILL.md` no dice nada de ella.
 - **Qué decidir**: si cada `/regulatory-update` añade a `docs/documentos/fuentes/` los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.
 
-### D20 · Relanzar la auditoría silencia lo que nadie ha visto
+## Decisiones de diseño cerradas
 
-- **Estado**: visto al diseñar la demo (2026-11-17). `audit.py write` mete en la línea base, como `abierto`, todo lo que encuentra, y los hooks callan lo que está en la línea base. Si el PM relanza `/project-init` (o `ai-act-classify` escribe la línea base) antes de que DE y AE abran los ficheros nuevos, esos avisos ya no salen en su sesión. La demo lo evita con el orden de los pasos.
-- **Qué decidir**: si los hooks deben seguir avisando de los `abierto` que nadie ha revisado (por ejemplo, con un campo `reviewed` o una fecha de decisión, que enlaza con D10), o si basta con que `/project-init` y `/risk-summary` los enseñen.
+Decididas por Andrés el 2026-11-17, cada una con su issue.
+
+### D10 · Quién decide y cuándo, en la línea base (issue #8)
+
+- **Decisión**: cada hallazgo de `.ai-act/baseline.json` lleva `decided_by` (quién decide) y `decided_on` (AAAA-MM-DD). `merge_baseline` los conserva al relanzar la auditoría, igual que `status` y `justification`. Las skills que registran decisiones (`pii-masking`, `special-categories`, `ai-transparency`, `ai-act-classify`, `risk-summary`) rellenan los dos campos.
+- **Además**: un hallazgo `no detectado` que vuelve a aparecer pasa a `abierto`.
+
+### D20 · Relanzar la auditoría silencia lo que nadie ha visto (issue #8)
+
+- **Decisión**: los hooks callan lo decidido (`core.is_decided`): `mitigado`, `aceptado` o cualquier estado con `decided_on`, como un `abierto` revisado que espera a legal. Lo que la auditoría deja `abierto` sin `decided_on` sigue avisando a quien abra el fichero, marcado «abierto sin revisar»; lo nuevo va primero, marcado «nuevo». Relanzar `/project-init` ya no esconde avisos, y la demo deja de depender del orden de los pasos.
+
+### D08 · `scoring-model` en el hook (issue #9)
+
+- **Decisión**: el id es por fichero (`scoring-model:<hash de la ruta>`), en la auditoría y en el hook, como `llm-sdk`. Cada modelo tiene su finalidad y su clasificación, y un segundo modelo avisa aunque el primero esté decidido.
+- **Migración**: si una línea base anterior tenía decidido el id por repo, `merge_baseline` pasa esa decisión a los ficheros de su evidencia (con `migrated_from`) y retira el id viejo; los demás modelos quedan `abierto`.
+
+### D01 · Q5: cuánto ruido es aceptable (issue #10)
+
+- **Decisión**: se mantiene el límite de cuatro hallazgos por aviso, una vez por sesión, y nada de lo decidido. Cuando el repo tiene `.ai-act/rules.json`, los términos con aspecto de dato personal (`pii-terms`, la parte ruidosa) solo avisan al escribir un fichero, no al leerlo. Las categorías especiales y las reglas del repo avisan en los dos casos. Sin reglas, todo avisa también al leer.
+- **Seguimiento**: la tabla «Qué apuntar durante la demo» de la guía sigue sirviendo para medirlo en proyectos reales; si sale demasiado o demasiado poco, se abre un issue nuevo.
 
 ## Verificado
 

@@ -52,6 +52,7 @@ En `.ai-act/baseline.json`, sobre el id del hallazgo (`special-category-terms:�
 
 - `mitigado`, con `justification` que diga qué se hizo y dónde.
 - `aceptado`, con `justification` que recoja la base del art. 9.2 y la respuesta del DPO (quién y qué día). Mientras llega esa respuesta, el estado sigue `abierto`.
+- En los dos casos, y en un `abierto` ya consultado al DPO, rellena `decided_by` (quién decide) y `decided_on` (la fecha, AAAA-MM-DD).
 - Falso positivo: añade el término a `exclusions` en `.ai-act/rules.json`. Vale para todo el repo, así que avisa al ingeniero de que ese término dejará de señalarse en cualquier fichero.
 
 ## Forma del aviso

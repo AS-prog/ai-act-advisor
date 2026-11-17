@@ -57,7 +57,7 @@
 
       <header class="doc-header">
         <h1>Pendientes y dudas</h1>
-        <p class="lede">Lista de trabajo del plugin <code>ai-act-advisor</code>. Tres partes: dudas normativas que siguen abiertas (P), decisiones de diseño abiertas (D) y lo ya verificado (V), con su fuente, para no repetirlo. Las rutas son relativas a la raíz del repo; <code>knowledge/</code> es <code>plugins/ai-act-advisor/knowledge/</code> y <code>skills/</code> es <code>plugins/ai-act-advisor/skills/</code>.</p>
+        <p class="lede">Lista de trabajo del plugin <code>ai-act-advisor</code>. Tres partes: dudas normativas que siguen abiertas (P), decisiones de diseño abiertas y cerradas (D) y lo ya verificado (V), con su fuente, para no repetirlo. Las rutas son relativas a la raíz del repo; <code>knowledge/</code> es <code>plugins/ai-act-advisor/knowledge/</code> y <code>skills/</code> es <code>plugins/ai-act-advisor/skills/</code>.</p>
         <dl class="doc-meta">
           <div><dt>Fuente</dt><dd><a href="../documentos/pendientes.md">docs/documentos/pendientes.md</a></dd></div>
           <div><dt>Fecha</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
@@ -71,6 +71,7 @@
           <li><a href="#como-se-hizo-la-revision">Cómo se hizo la revisión</a></li>
           <li><a href="#dudas-normativas-que-siguen-abiertas">Dudas normativas que siguen abiertas</a></li>
           <li><a href="#decisiones-de-diseno-abiertas">Decisiones de diseño abiertas</a></li>
+          <li><a href="#decisiones-de-diseno-cerradas">Decisiones de diseño cerradas</a></li>
           <li><a href="#verificado">Verificado</a></li>
           <li><a href="#corregido">Corregido</a></li>
         </ol>
@@ -110,11 +111,6 @@
 <li><strong>Qué hacer</strong>: en el próximo <code>/regulatory-update</code>, recorrer las 14 páginas de la AEPD, comprobar que la URL del CEPD lista también las directrices adoptadas y valorar una URL de la AEPD filtrada por IA.</li>
 </ul>
 <h2 id="decisiones-de-diseno-abiertas">Decisiones de diseño abiertas</h2>
-<h3 id="d01-q5-cuanto-ruido-es-aceptable">D01 · Q5: cuánto ruido es aceptable</h3>
-<ul>
-<li><strong>Estado</strong>: el hook avisa de cuatro hallazgos por fichero como máximo, una vez por sesión, y calla lo que está en la línea base (<code>plugins/ai-act-advisor/scripts/aiact/hooks.py</code>).</li>
-<li><strong>Qué decidir</strong>: si ese límite vale tras probarlo en proyectos reales y si la búsqueda por términos, que es la parte ruidosa, sigue activa cuando el repo ya tiene reglas.</li>
-</ul>
 <h3 id="d02-mcp-de-documentacion-normativa-version-madura">D02 · MCP de documentación normativa (versión madura)</h3>
 <ul>
 <li><strong>Qué decidir</strong>: dónde corre (local o servicio), qué modelo de embeddings usa y cómo se reparte el índice con el plugin. Está como pendiente en <code>docs/documentos/diseno/propuesta-prototipo.md</code>.</li>
@@ -145,20 +141,10 @@
 <li><strong>Estado</strong>: <code>knowledge/signals.yaml</code> no tiene términos de proxy; la skill los busca leyendo el esquema.</li>
 <li><strong>Qué decidir</strong>: si se añade una lista <code>proxy_terms</code> (código postal, nacionalidad, bajas…) y con qué severidad, sabiendo que <code>codigo_postal</code> y <code>postal_code</code> ya están en <code>pii_terms</code>. La duda P08 ya está cerrada (V40): el criterio del TJUE es amplio, así que la lista sería larga.</li>
 </ul>
-<h3 id="d08-scoring-model-en-el-hook">D08 · <code>scoring-model</code> en el hook</h3>
-<ul>
-<li><strong>Estado</strong>: propuesta hecha con la demo (2026-11-17). El hook <code>PostToolUse</code> ya comprueba ML más términos de scoring en el fichero leído o editado (<code>core.check_scoring</code>), con el mismo id por repo que la auditoría, para que la línea base lo silencie en los dos sitios.</li>
-<li><strong>Qué decidir</strong>: si se queda así o si el aviso debe ser por fichero (hoy, un segundo modelo en otro fichero no vuelve a avisar si el primero ya está en la línea base).</li>
-</ul>
 <h3 id="d09-tarea-semanal-sin-programar">D09 · Tarea semanal sin programar</h3>
 <ul>
 <li><strong>Estado</strong>: el diseño (Q13) pide una tarea semanal que abra una PR; el plugin no la trae. La alerta de 90 días del <code>SessionStart</code> sí existe.</li>
 <li><strong>Qué decidir</strong>: dónde se programa (tarea programada de Claude Code o CI del repo) y con qué permisos para abrir la PR.</li>
-</ul>
-<h3 id="d10-quien-decide-y-cuando-en-la-linea-base">D10 · Quién decide y cuándo, en la línea base</h3>
-<ul>
-<li><strong>Estado</strong>: <code>.ai-act/baseline.json</code> guarda <code>status</code> y <code>justification</code> en texto libre, sin autor ni fecha de la decisión.</li>
-<li><strong>Qué decidir</strong>: si se añaden <code>decided_by</code> y <code>decided_on</code>, y que <code>merge_baseline</code> de <code>core.py</code> los conserve.</li>
 </ul>
 <h3 id="d11-fechas-y-articulos-escritos-fuera-de-knowledge">D11 · Fechas y artículos escritos fuera de <code>knowledge/</code></h3>
 <ul>
@@ -206,10 +192,26 @@
 <li><strong>Estado</strong>: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. <code>skills/regulatory-update/SKILL.md</code> no dice nada de ella.</li>
 <li><strong>Qué decidir</strong>: si cada <code>/regulatory-update</code> añade a <code>docs/documentos/fuentes/</code> los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.</li>
 </ul>
-<h3 id="d20-relanzar-la-auditoria-silencia-lo-que-nadie-ha-visto">D20 · Relanzar la auditoría silencia lo que nadie ha visto</h3>
+<h2 id="decisiones-de-diseno-cerradas">Decisiones de diseño cerradas</h2>
+<p>Decididas por Andrés el 2026-11-17, cada una con su issue.</p>
+<h3 id="d10-quien-decide-y-cuando-en-la-linea-base-issue-8">D10 · Quién decide y cuándo, en la línea base (issue #8)</h3>
 <ul>
-<li><strong>Estado</strong>: visto al diseñar la demo (2026-11-17). <code>audit.py write</code> mete en la línea base, como <code>abierto</code>, todo lo que encuentra, y los hooks callan lo que está en la línea base. Si el PM relanza <code>/project-init</code> (o <code>ai-act-classify</code> escribe la línea base) antes de que DE y AE abran los ficheros nuevos, esos avisos ya no salen en su sesión. La demo lo evita con el orden de los pasos.</li>
-<li><strong>Qué decidir</strong>: si los hooks deben seguir avisando de los <code>abierto</code> que nadie ha revisado (por ejemplo, con un campo <code>reviewed</code> o una fecha de decisión, que enlaza con D10), o si basta con que <code>/project-init</code> y <code>/risk-summary</code> los enseñen.</li>
+<li><strong>Decisión</strong>: cada hallazgo de <code>.ai-act/baseline.json</code> lleva <code>decided_by</code> (quién decide) y <code>decided_on</code> (AAAA-MM-DD). <code>merge_baseline</code> los conserva al relanzar la auditoría, igual que <code>status</code> y <code>justification</code>. Las skills que registran decisiones (<code>pii-masking</code>, <code>special-categories</code>, <code>ai-transparency</code>, <code>ai-act-classify</code>, <code>risk-summary</code>) rellenan los dos campos.</li>
+<li><strong>Además</strong>: un hallazgo <code>no detectado</code> que vuelve a aparecer pasa a <code>abierto</code>.</li>
+</ul>
+<h3 id="d20-relanzar-la-auditoria-silencia-lo-que-nadie-ha-visto-issue-8">D20 · Relanzar la auditoría silencia lo que nadie ha visto (issue #8)</h3>
+<ul>
+<li><strong>Decisión</strong>: los hooks callan lo decidido (<code>core.is_decided</code>): <code>mitigado</code>, <code>aceptado</code> o cualquier estado con <code>decided_on</code>, como un <code>abierto</code> revisado que espera a legal. Lo que la auditoría deja <code>abierto</code> sin <code>decided_on</code> sigue avisando a quien abra el fichero, marcado «abierto sin revisar»; lo nuevo va primero, marcado «nuevo». Relanzar <code>/project-init</code> ya no esconde avisos, y la demo deja de depender del orden de los pasos.</li>
+</ul>
+<h3 id="d08-scoring-model-en-el-hook-issue-9">D08 · <code>scoring-model</code> en el hook (issue #9)</h3>
+<ul>
+<li><strong>Decisión</strong>: el id es por fichero (<code>scoring-model:&lt;hash de la ruta&gt;</code>), en la auditoría y en el hook, como <code>llm-sdk</code>. Cada modelo tiene su finalidad y su clasificación, y un segundo modelo avisa aunque el primero esté decidido.</li>
+<li><strong>Migración</strong>: si una línea base anterior tenía decidido el id por repo, <code>merge_baseline</code> pasa esa decisión a los ficheros de su evidencia (con <code>migrated_from</code>) y retira el id viejo; los demás modelos quedan <code>abierto</code>.</li>
+</ul>
+<h3 id="d01-q5-cuanto-ruido-es-aceptable-issue-10">D01 · Q5: cuánto ruido es aceptable (issue #10)</h3>
+<ul>
+<li><strong>Decisión</strong>: se mantiene el límite de cuatro hallazgos por aviso, una vez por sesión, y nada de lo decidido. Cuando el repo tiene <code>.ai-act/rules.json</code>, los términos con aspecto de dato personal (<code>pii-terms</code>, la parte ruidosa) solo avisan al escribir un fichero, no al leerlo. Las categorías especiales y las reglas del repo avisan en los dos casos. Sin reglas, todo avisa también al leer.</li>
+<li><strong>Seguimiento</strong>: la tabla «Qué apuntar durante la demo» de la guía sigue sirviendo para medirlo en proyectos reales; si sale demasiado o demasiado poco, se abre un issue nuevo.</li>
 </ul>
 <h2 id="verificado">Verificado</h2>
 <p>Todo comprobado el 2026-11-17 en el documento oficial que se indica. Los ficheros están en <code>docs/documentos/fuentes/</code>; la columna de fuente da el identificador y, la primera vez que aparece, el nombre del fichero. Abreviaturas:</p>

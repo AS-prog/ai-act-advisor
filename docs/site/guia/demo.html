@@ -177,7 +177,7 @@
 <figure class="figwrap">
   <svg viewBox="0 0 720 364" role="img" aria-labelledby="cob-title cob-desc">
   <title id="cob-title">Qué parte del plugin ejercita cada paso del guion</title>
-  <desc id="cob-desc">Matriz de catorce pasos por once piezas del plugin. Los pasos 1 a 7 son la fase 1, los 8 a 13 la fase 2 y el 14 el mantenimiento. Las siete skills, el agente, los dos hooks y la línea base salen al menos una vez. En el paso 4 el hook debe callar porque el riesgo ya está en la línea base.</desc>
+  <desc id="cob-desc">Matriz de catorce pasos por once piezas del plugin. Los pasos 1 a 7 son la fase 1, los 8 a 13 la fase 2 y el 14 el mantenimiento. Las siete skills, el agente, los dos hooks y la línea base salen al menos una vez. En el paso 4 el hook debe callar: al leer no avisa de columnas con aspecto de dato personal y la exportación ya está decidida.</desc>
   <rect class="d-wash-1" x="196" y="8" width="252" height="348"/>
   <rect class="d-wash-2" x="448" y="8" width="216" height="348"/>
   <rect class="d-wash-1" x="664" y="8" width="36" height="348"/>
@@ -262,7 +262,7 @@
   <circle class="d-bar" cx="682" cy="320" r="6"/>
   <circle class="d-bar" cx="682" cy="344" r="6"/>
   </svg>
-  <figcaption>Cada punto es una pieza del plugin que entra en juego en ese paso. El círculo hueco del paso 4 es una comprobación al revés: el hook debe <strong>callar</strong>, porque el riesgo ya está en la línea base. MT es mantenimiento.</figcaption>
+  <figcaption>Cada punto es una pieza del plugin que entra en juego en ese paso. El círculo hueco del paso 4 es una comprobación al revés: el hook debe <strong>callar</strong>: al leer no avisa de columnas con aspecto de dato personal, y la exportación ya está decidida. MT es mantenimiento.</figcaption>
 </figure>
 
 <h2 id="antes-de-empezar">Antes de empezar</h2>
@@ -352,7 +352,7 @@ claude --plugin-dir &lt;ruta-del-clon&gt;/plugins/ai-act-advisor
 </blockquote>
 <p><strong>Qué debe pasar</strong></p>
 <ul>
-<li>Claude cambia en <code>.ai-act/baseline.json</code> el hallazgo <code>external-export:…</code> a <code>aceptado</code>, con esa justificación.</li>
+<li>Claude cambia en <code>.ai-act/baseline.json</code> el hallazgo <code>external-export:…</code> a <code>aceptado</code>, con esa justificación, <code>decided_by</code> (el PM) y <code>decided_on</code> (la fecha de hoy).</li>
 <li>No toca el código.</li>
 </ul>
 <h3 id="paso-4-de-abrir-sesion-y-leer-codigo-ya-revisado">Paso 4 · DE · Abrir sesión y leer código ya revisado</h3>
@@ -363,7 +363,7 @@ claude --plugin-dir &lt;ruta-del-clon&gt;/plugins/ai-act-advisor
 <p><strong>Qué debe pasar</strong></p>
 <ul>
 <li>Al abrir, Claude conoce el perfil (sector, fuera de alcance, datos de contacto) y sabe que hay hallazgos altos abiertos, pero <strong>no</strong> los repite si no trabajas en ellos.</li>
-<li>Al leer el fichero <strong>no hay aviso</strong>: las columnas <code>email</code>, <code>phone</code> y <code>birth_date</code> ya están en la línea base desde el paso 2. Este paso comprueba que el plugin calla lo ya visto.</li>
+<li>Al leer el fichero <strong>no hay aviso</strong>: con reglas del repo, las columnas con aspecto de dato personal (<code>email</code>, <code>phone</code>, <code>birth_date</code>) solo avisan al escribir, no al leer. Si pides «léete también transform/gold/exports/partner_upload.py», tampoco avisa: el PM ya decidió sobre la exportación en el paso 3. Este paso comprueba que el plugin calla al leer y calla lo decidido.</li>
 </ul>
 <h3 id="paso-5-de-anadir-una-fuente-sin-declarar-la-pii">Paso 5 · DE · Añadir una fuente sin declarar la PII</h3>
 <blockquote>
@@ -372,7 +372,7 @@ claude --plugin-dir &lt;ruta-del-clon&gt;/plugins/ai-act-advisor
 <p><strong>Qué debe pasar</strong></p>
 <ul>
 <li>Claude hace el cambio y te avisa en pocas líneas: objeto <code>newsletter_signups</code> sin <code>pii_columns</code>, RGPD art. 5.1.c, 25 y 30, aplica ya, skill <code>pii-masking</code>, con la fecha de la base normativa y «no es asesoramiento legal».</li>
-<li>No repite <code>campaign_contacts</code>, que ya estaba en la línea base, y no bloquea nada.</li>
+<li>El objeto nuevo va primero, marcado como <code>nuevo</code>. Detrás puede salir <code>campaign_contacts</code> marcado como <code>abierto sin revisar</code>: estaba en la línea base desde el paso 2, pero nadie ha decidido sobre él. No bloquea nada.</li>
 </ul>
 <p>Pide el detalle:</p>
 <blockquote>
@@ -410,7 +410,7 @@ claude --plugin-dir &lt;ruta-del-clon&gt;/plugins/ai-act-advisor
 <pre><code class="language-text">python3 examples/demo/preparar.py --fase 2 --dest ~/ai-act-demo
 </code></pre>
 <p>Añade cuatro ficheros: la fuente nueva en <code>config/sources/crm_postgres.yaml</code>, el modelo <code>ml/instalment_scoring.py</code>, el asistente <code>assistant/support_bot.py</code> y la encuesta <code>accessibility_survey.sql</code> en Silver. Las dependencias no se copian: las pides tú en el paso 8.</p>
-<div class="notice notice-important"><span class="notice-title">Importante</span><p>En esta fase, <strong>no relances <code>/project-init</code> hasta el paso 13</strong>, aunque Claude lo sugiera en el paso 8. La auditoría mete en la línea base todo lo que encuentra y los hooks callan lo que está en la línea base, así que los avisos de los pasos 9 a 12 ya no saldrían. Está apuntado como D20 en los pendientes.</p></div>
+<div class="notice notice-important"><span class="notice-title">Importante</span><p>Puedes relanzar <code>/project-init</code> cuando Claude lo sugiera en el paso 8: la auditoría mete la fase 2 en la línea base como <code>abierto</code> sin <code>decided_on</code>, y los hooks siguen avisando de ello a quien abra cada fichero (pendiente D20, resuelto). Los avisos de los pasos 9 a 12 salen igual, marcados <code>abierto sin revisar</code> en lugar de <code>nuevo</code>.</p></div>
 
 <h3 id="paso-8-de-anadir-dependencias-de-ml-y-llm">Paso 8 · DE · Añadir dependencias de ML y LLM</h3>
 <p>Abre Claude Code como DE.</p>
@@ -556,7 +556,7 @@ AI_ACT_KNOWLEDGE=~/ai-act-demo-base-antigua claude --plugin-dir &lt;ruta-del-clo
 <ul>
 <li><strong>No hay ningún aviso</strong>: comprueba que el plugin está cargado (<code>/plugin</code> lo lista) y que Python 3 está en el <code>PATH</code>. <code>python3 examples/demo/ensayo.py</code> dice si el fallo es del plugin o de la sesión.</li>
 <li><strong>Avisa dos veces de lo mismo</strong>: hay dos copias del plugin activas (la del marketplace y la de <code>--plugin-dir</code>).</li>
-<li><strong>En la fase 2 no salen los avisos</strong>: se relanzó <code>/project-init</code> antes de tiempo. Empieza de cero con <code>preparar.py --force</code> o borra la línea base (<code>.ai-act/baseline.json</code>) y vuelve al paso 2.</li>
+<li><strong>En la fase 2 no salen los avisos</strong>: alguien registró ya una decisión (<code>decided_on</code>) sobre esos hallazgos, o el aviso salió antes en la misma sesión. Abre una sesión nueva, o empieza de cero con <code>preparar.py --force</code>.</li>
 <li><strong>Claude no carga la skill</strong>: pídesela por su nombre (<code>/pii-masking</code>, <code>/special-categories</code>…).</li>
 </ul>
 <h2 id="limpiar">Limpiar</h2>

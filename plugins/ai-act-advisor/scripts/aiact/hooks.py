@@ -184,12 +184,19 @@ def post_tool_use(payload):
         findings += core.check_llm(rel, text, signals)
         findings += core.check_scoring(rel, text, signals)
     if ext in core.CODE_EXT and not core.is_test(rel) and not is_source:
-        findings += core.check_terms(rel, text, signals, exclusions)
+        terms = core.check_terms(rel, text, signals, exclusions)
+        if rules and not writing:
+            # D01: con reglas propias, los términos de PII (la parte ruidosa) solo avisan al escribir.
+            # Las categorías especiales siguen avisando también al leer.
+            terms = [f for f in terms if f["rule"] != "pii-terms"]
+        findings += terms
 
-    findings = [f for f in findings if f["id"] not in baseline]
+    # D10 y D20: calla lo que alguien ha decidido; lo abierto sin revisar sigue avisando.
+    findings = [f for f in findings if not core.is_decided(baseline.get(f["id"]))]
     seen_path = _state_path(payload.get("session_id") or payload.get("sessionId"))
     seen = set(core.load_json(seen_path, []))
     fresh = [f for f in findings if f["id"] not in seen]
+    fresh.sort(key=lambda f: f["id"] in baseline)  # primero lo nuevo, luego lo abierto sin revisar
     if not fresh and not notes:
         return
     seen.update(f["id"] for f in fresh)
@@ -202,16 +209,19 @@ def post_tool_use(payload):
     lines = []
     if fresh:
         lines.append(
-            f"ai-act-advisor: señales de riesgo en `{rel}` (no están en la línea base del proyecto). "
+            f"ai-act-advisor: señales de riesgo en `{rel}` sin decisión registrada en la línea base. "
             "Cuéntaselo al usuario en pocas líneas cuando encaje con lo que está haciendo; no bloquees "
-            "su trabajo: la decisión es suya. Si quiere detalle, carga la skill indicada."
+            "su trabajo: la decisión es suya. Si quiere detalle, carga la skill indicada. Si decide, "
+            "se registra en .ai-act/baseline.json con status, justification, decided_by y decided_on."
         )
         for f in fresh[:4]:
             esc = f" · escalar a {f['escalate'].upper()}" if f.get("escalate") else ""
             det = f" ({f['detail']})" if f.get("detail") and f["rule"].endswith("terms") else ""
+            known = baseline.get(f["id"])
+            state = (f"abierto sin revisar desde {known.get('first_seen', '?')}" if known else "nuevo")
             lines.append(
                 f"- [{f['severity']}] {f['title']}{det} · {f['norma']} {', '.join(f['articulos'])} · "
-                f"aplica {f['aplica']}{esc} · skill {f['skill']} · id {f['id']}\n"
+                f"aplica {f['aplica']}{esc} · skill {f['skill']} · {state} · id {f['id']}\n"
                 f"  Opción sugerida: {f['recommendation']}"
             )
         if len(fresh) > 4:

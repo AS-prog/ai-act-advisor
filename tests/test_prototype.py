@@ -140,14 +140,34 @@ class WriteAndBaselineTest(RepoCopy):
 
         base = core.load_json(paths["baseline"], {})
         fid = next(iter(base["findings"]))
-        base["findings"][fid]["status"] = "aceptado"
-        base["findings"][fid]["justification"] = "Riesgo asumido por el cliente"
+        self.assertEqual(base["findings"][fid]["decided_by"], "")
+        self.assertEqual(base["findings"][fid]["decided_on"], "")
+        base["findings"][fid].update(status="aceptado", justification="Riesgo asumido por el cliente",
+                                     decided_by="Ana (PM)", decided_on="2026-11-10")
         with open(paths["baseline"], "w", encoding="utf-8") as fh:
             json.dump(base, fh)
         core.write_outputs(self.root, core.audit(self.root))
-        again = core.load_json(paths["baseline"], {})
-        self.assertEqual(again["findings"][fid]["status"], "aceptado")
-        self.assertEqual(again["findings"][fid]["justification"], "Riesgo asumido por el cliente")
+        again = core.load_json(paths["baseline"], {})["findings"][fid]
+        self.assertEqual(again["status"], "aceptado")
+        self.assertEqual(again["justification"], "Riesgo asumido por el cliente")
+        self.assertEqual(again["decided_by"], "Ana (PM)")
+        self.assertEqual(again["decided_on"], "2026-11-10")
+
+    def test_reappearing_finding_is_open_again(self):
+        old = {"findings": {"x:1": {"status": "no detectado", "justification": "", "first_seen": "2026-01-01"}}}
+        f = {"id": "x:1", "rule": "x", "severity": "media", "title": "t", "evidence": []}
+        self.assertEqual(core.merge_baseline(old, [f])["findings"]["x:1"]["status"], "abierto")
+
+
+def decide_all(root, status="aceptado", who="PM de prueba"):
+    """Registra una decisión sobre todo lo que hay en la línea base, como haría una persona."""
+    path = os.path.join(root, core.STATE_DIR, "baseline.json")
+    base = core.load_json(path, {})
+    for item in base["findings"].values():
+        item.update(status=status, justification="Revisado en el test", decided_by=who, decided_on="2026-11-17")
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(base, fh)
+    return base
 
 
 class HooksTest(RepoCopy):
@@ -164,6 +184,7 @@ class HooksTest(RepoCopy):
 
     def test_new_object_without_pii_key_warns_once(self):
         core.write_outputs(self.root, core.audit(self.root))  # línea base actual
+        decide_all(self.root)
         path = os.path.join(self.root, "config", "sources", "crm_postgres.yaml")
         with open(path, "a", encoding="utf-8") as fh:
             fh.write("  - name: complaints\n    schema: crm\n")
@@ -173,10 +194,46 @@ class HooksTest(RepoCopy):
         self.assertIn("No es asesoramiento legal", ctx)
         self.assertEqual(self.edit("config/sources/crm_postgres.yaml"), "")  # una vez por sesión
 
-    def test_baseline_silences_known_findings(self):
+    def test_baseline_silences_decided_findings(self):
         core.write_outputs(self.root, core.audit(self.root))
+        decide_all(self.root)
         self.assertEqual(self.edit("transform/gold/exports/partner_upload.py"), "")
         self.assertEqual(self.edit("ingestion/bronze/writer.py"), "")
+
+    def test_open_findings_nobody_reviewed_still_warn(self):
+        """D20: relanzar la auditoría no silencia lo que nadie ha visto."""
+        core.write_outputs(self.root, core.audit(self.root))
+        ctx = self.edit("transform/gold/exports/partner_upload.py")
+        self.assertIn("abierto sin revisar desde", ctx)
+        self.assertIn("decided_on", ctx)
+
+    def test_open_with_decision_date_is_silent(self):
+        """Un abierto revisado (a la espera de legal, por ejemplo) ya no avisa."""
+        core.write_outputs(self.root, core.audit(self.root))
+        decide_all(self.root, status="abierto")
+        self.assertEqual(self.edit("transform/gold/exports/partner_upload.py"), "")
+
+    def test_new_findings_come_before_open_ones(self):
+        core.write_outputs(self.root, core.audit(self.root))
+        with open(os.path.join(self.root, "config", "sources", "crm_postgres.yaml"), "a", encoding="utf-8") as fh:
+            fh.write("  - name: complaints\n    schema: crm\n")
+        ctx = self.edit("config/sources/crm_postgres.yaml")
+        self.assertLess(ctx.index("complaints"), ctx.index("subscriptions"))
+        self.assertIn("· nuevo ·", ctx)
+
+    def test_pii_terms_warn_on_write_only_when_repo_has_rules(self):
+        """D01: con reglas, los términos de PII no avisan al leer; sí al escribir."""
+        core.write_outputs(self.root, core.audit(self.root))
+        self.assertEqual(self.edit("transform/silver/build_customers.py", tool="Read"), "")
+        self.assertIn("email", self.edit("transform/silver/build_customers.py", tool="Write"))
+
+    def test_special_categories_still_warn_on_read(self):
+        core.write_outputs(self.root, core.audit(self.root))
+        with open(os.path.join(self.root, "transform", "silver", "health.sql"), "w", encoding="utf-8") as fh:
+            fh.write("select customer_id, disability from bronze_survey\n")
+        ctx = self.edit("transform/silver/health.sql", tool="Read")
+        self.assertIn("art. 9", ctx)
+        self.assertNotIn("Columnas o campos con aspecto de dato personal", ctx)
 
     def test_without_rules_still_flags_pii_terms_and_suggests_init(self):
         ctx = self.edit("transform/silver/build_customers.py", tool="Read")
@@ -295,6 +352,36 @@ class ScoringHookTest(RepoCopy):
         self.assertIn("ai-act-classify", ctx)
         audit_ids = {f["id"] for f in core.audit(self.root)["findings"] if f["rule"] == "scoring-model"}
         self.assertTrue(any(fid in ctx for fid in audit_ids))
+
+    def _model(self, name):
+        os.makedirs(os.path.join(self.root, "ml"), exist_ok=True)
+        with open(os.path.join(self.root, "ml", name), "w", encoding="utf-8") as fh:
+            fh.write("from sklearn.ensemble import RandomForestClassifier\nchurn = 1\n")
+
+    def test_second_model_warns_even_if_first_is_decided(self):
+        """D08: el id es por fichero."""
+        self._model("churn.py")
+        core.write_outputs(self.root, core.audit(self.root))
+        decide_all(self.root)
+        self.assertEqual(self.edit("ml/churn.py", tool="Read"), "")
+        self._model("upsell.py")
+        self.assertIn("ai-act-classify", self.edit("ml/upsell.py", tool="Read"))
+        ids = [f["id"] for f in core.audit(self.root)["findings"] if f["rule"] == "scoring-model"]
+        self.assertEqual(len(ids), 2)
+
+    def test_repo_level_decision_moves_to_its_files(self):
+        """Una línea base anterior a D08 conserva la decisión sobre los ficheros de su evidencia."""
+        self._model("churn.py")
+        self._model("upsell.py")
+        old = {"findings": {core.LEGACY_SCORING_ID: {
+            "status": "aceptado", "justification": "Anexo III no aplica", "rule": "scoring-model",
+            "evidence": ["ml/churn.py"], "decided_by": "PM", "decided_on": "2026-11-01"}}}
+        merged = core.merge_baseline(old, core.audit(self.root)["findings"])["findings"]
+        self.assertNotIn(core.LEGACY_SCORING_ID, merged)
+        by_file = {v["evidence"][0]: v for v in merged.values() if v["rule"] == "scoring-model"}
+        self.assertEqual(by_file["ml/churn.py"]["status"], "aceptado")
+        self.assertEqual(by_file["ml/churn.py"]["migrated_from"], core.LEGACY_SCORING_ID)
+        self.assertEqual(by_file["ml/upsell.py"]["status"], "abierto")
 
 
 class EntryPointsTest(unittest.TestCase):

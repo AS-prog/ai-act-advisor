@@ -52,6 +52,8 @@ En `.ai-act/baseline.json`, sobre cada id `llm-sdk:…` (si falta en la línea b
 - `mitigado`, con `justification` que diga dónde está el aviso o el marcado (ruta o pantalla).
 - `aceptado`, con `justification` que diga la rama y el motivo: «máquina a máquina: devuelve JSON a la tabla X», o la decisión del PM de asumirlo y hasta cuándo.
 
+En los dos casos rellena `decided_by` (quién decide) y `decided_on` (la fecha del día, AAAA-MM-DD).
+
 ## Forma del aviso
 
 Riesgo · Norma y artículo · Aplica ya o desde AAAA-MM-DD · Qué puede pasar · Opciones · A quién escalar · Base normativa de AAAA-MM-DD (de `knowledge/VERSION`) · No es asesoramiento legal.

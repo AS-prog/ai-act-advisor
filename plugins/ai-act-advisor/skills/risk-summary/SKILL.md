@@ -19,7 +19,7 @@ La línea base guarda el estado y la decisión; la norma, la fecha y el escalado
 
 Por cada repo (el actual, y los de la lista del perfil que estén clonados en esta máquina):
 
-1. Lee `.ai-act/baseline.json`: por id, `status`, `justification`, `severity`, `title`, `evidence`, `first_seen` y `last_seen`.
+1. Lee `.ai-act/baseline.json`: por id, `status`, `justification`, `decided_by`, `decided_on`, `severity`, `title`, `evidence`, `first_seen` y `last_seen`. Un `abierto` sin `decided_on` es uno que nadie ha revisado todavía; dilo así en el grupo de abiertos.
 2. Ejecuta la auditoría en modo consulta, que no escribe nada, y toma de cada hallazgo `norma`, `articulos`, `aplica`, `escalate` y `skill`:
 
    ```sh
@@ -40,7 +40,7 @@ En este orden. Con varios repos, cada hallazgo lleva delante el nombre de su rep
 2. **Abiertos, severidad alta**: uno por uno con la forma del aviso de abajo, en dos o tres líneas cada uno.
 3. **Abiertos, severidad media**: tabla con hallazgo, evidencia, norma y skill que ayuda.
 4. **Nuevos sin registrar**: lista, con la sugerencia de relanzar `/project-init` para que entren en la línea base.
-5. **Aceptados**: tabla con hallazgo, justificación y desde cuándo. Un aceptado con la justificación vacía se señala: la decisión existe, pero falta su motivo.
+5. **Aceptados**: tabla con hallazgo, justificación, quién decidió (`decided_by`) y cuándo (`decided_on`). Un aceptado con la justificación, el autor o la fecha vacíos se señala: la decisión existe, pero no consta entera.
 6. **Mitigados** y **no detectados**: recuento y lista corta.
 7. **Qué escalar y a quién**: los abiertos con `escalate`, agrupados por destinatario, con el contacto de `escalation` del perfil. Los hallazgos de categorías especiales van siempre al DPO.
 8. **Qué aplica ya y qué después**: los hallazgos del AI Act ordenados por fecha, con `${CLAUDE_PLUGIN_ROOT}/knowledge/dates.yaml` y la fecha de hoy.
@@ -53,7 +53,7 @@ Señala también una clasificación envejecida: `classification.reviewed` anteri
 
 Enseña la página en la conversación. Si el PM pide guardarla, escríbela en `.ai-act/risk-summary.md` del repo actual; en un proyecto de varios repos ese es el repo de gestión, donde vive el consolidado. Se sobrescribe en cada lanzamiento y el historial lo lleva git.
 
-Si al leer el resumen el PM decide sobre un hallazgo, la decisión se registra en la línea base del repo al que pertenece: `status` a `aceptado` con su `justification`, o a `mitigado` cuando esté hecho. Relanzar la auditoría conserva ambos campos.
+Si al leer el resumen el PM decide sobre un hallazgo, la decisión se registra en la línea base del repo al que pertenece: `status` a `aceptado` con su `justification`, o a `mitigado` cuando esté hecho, con `decided_by` y `decided_on`. Relanzar la auditoría conserva los cuatro campos.
 
 ## Forma del aviso
 

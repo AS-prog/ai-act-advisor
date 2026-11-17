@@ -89,7 +89,7 @@
 <li>El PM lanza <code>/project-init</code> al empezar el proyecto, o cuando ya está en marcha, y deja configurado el repo en <code>.ai-act/</code>.</li>
 <li>DE y AE trabajan como siempre. Cuando Claude lee o edita algo con riesgo nuevo de RGPD o del AI Act, recibe un aviso y te lo cuenta en pocas líneas.</li>
 <li>Si quieres detalle, pides la skill que indica el aviso. Te explica el riesgo, te propone opciones y la decisión es tuya.</li>
-<li>La decisión se apunta en la línea base (<code>.ai-act/baseline.json</code>), y ese aviso no vuelve a salir.</li>
+<li>La decisión se apunta en la línea base (<code>.ai-act/baseline.json</code>), con quién decide y cuándo, y ese aviso no vuelve a salir.</li>
 <li>El PM lanza <code>/risk-summary</code> cuando quiere ver el estado y qué escalar.</li>
 <li>Quien mantiene el plugin lanza <code>/regulatory-update</code> para revisar las fuentes oficiales y proponer los cambios en una PR.</li>
 </ol>
@@ -231,7 +231,7 @@
 
 <p>Vuelve a lanzarlo cuando cambie el alcance o el stack, o cuando un aviso diga que aparece un entorno que la auditoría no tenía (por ejemplo, una dependencia de <code>openai</code> nueva).</p>
 <h2 id="2-trabajar-que-hacer-con-un-aviso">2. Trabajar: qué hacer con un aviso</h2>
-<p>DE y AE no lanzan nada. Al abrir una sesión, el plugin le da a Claude un resumen del perfil. Cuando Claude lee o edita un fichero con un riesgo que no está en la línea base, recibe un aviso con esta forma:</p>
+<p>DE y AE no lanzan nada. Al abrir una sesión, el plugin le da a Claude un resumen del perfil. Cuando Claude lee o edita un fichero con un riesgo sobre el que nadie ha decidido todavía, recibe un aviso con esta forma. Cada hallazgo dice si es <code>nuevo</code> o si ya estaba en la línea base como <code>abierto sin revisar</code>; lo nuevo va primero:</p>
 <pre><code class="language-text">[media] Objeto «complaints» sin «pii_columns» declarado · RGPD art. 5.1.c, art. 25, art. 30
 · aplica ya · skill pii-masking
 Opción sugerida: Revisa el esquema de origen de «complaints» antes de llevarlo a Bronze y
@@ -291,8 +291,8 @@ Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
 <tbody>
 <tr>
 <td><code>abierto</code></td>
-<td>Lo pone la auditoría al encontrarlo</td>
-<td>Nada</td>
+<td>Lo pone la auditoría al encontrarlo; los hooks siguen avisando mientras nadie lo revise</td>
+<td>Nada. Si ya lo has revisado y esperas respuesta (de legal o del DPO), <code>decided_by</code> y <code>decided_on</code> para que deje de avisar</td>
 </tr>
 <tr>
 <td><code>mitigado</code></td>
@@ -302,11 +302,11 @@ Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
 <tr>
 <td><code>aceptado</code></td>
 <td>Se asume el riesgo</td>
-<td><code>justification</code>: por qué, y quién lo decidió</td>
+<td><code>justification</code>: por qué</td>
 </tr>
 <tr>
 <td><code>no detectado</code></td>
-<td>Lo pone la auditoría cuando el hallazgo desaparece del código</td>
+<td>Lo pone la auditoría cuando el hallazgo desaparece del código; si vuelve, pasa a <code>abierto</code></td>
 <td>Nada</td>
 </tr>
 </tbody>
@@ -314,10 +314,12 @@ Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
 </div>
 <pre><code class="language-json">&quot;external-export:98e308bed7&quot;: {
   &quot;status&quot;: &quot;aceptado&quot;,
-  &quot;justification&quot;: &quot;Contrato de encargado firmado; bucket en UE&quot;
+  &quot;justification&quot;: &quot;Contrato de encargado firmado; bucket en UE&quot;,
+  &quot;decided_by&quot;: &quot;Ana (PM)&quot;,
+  &quot;decided_on&quot;: &quot;2026-11-17&quot;
 }
 </code></pre>
-<p>Puedes pedírselo a Claude: «marca la exportación como aceptada, hay contrato de encargado». Relanzar la auditoría conserva el estado y la justificación, y los hooks no vuelven a avisar de ningún id que esté en la línea base. Si una palabra salta y no es dato personal en tu repo, añádela a <code>exclusions</code> en <code>.ai-act/rules.json</code>.</p>
+<p>Puedes pedírselo a Claude: «marca la exportación como aceptada, hay contrato de encargado». En <code>mitigado</code> y <code>aceptado</code> se añaden siempre <code>decided_by</code> (quién decide) y <code>decided_on</code> (la fecha). Relanzar la auditoría conserva los cuatro campos, y los hooks no vuelven a avisar de lo decidido. Lo que la auditoría acaba de meter como <code>abierto</code> sigue avisando a quien abra el fichero, así que relanzar <code>/project-init</code> no esconde avisos que nadie ha visto. Si una palabra salta y no es dato personal en tu repo, añádela a <code>exclusions</code> en <code>.ai-act/rules.json</code>.</p>
 <h2 id="4-ver-el-estado-risk-summary">4. Ver el estado: /risk-summary</h2>
 <p>Lo lanza el PM. Une la línea base con una auditoría de consulta y devuelve una página con:</p>
 <ol>
@@ -382,7 +384,7 @@ Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
 <dt>¿Manda datos o código a algún sitio?</dt>
 <dd>No. Todo se ejecuta en local con Python, solo lee código y configuración del repo, y no abre datos ni secretos.</dd>
 <dt>Me avisa demasiado.</dt>
-<dd>Registra en la línea base lo que ya has decidido y añade a <code>exclusions</code> los términos que no son datos personales en tu repo. Cada aviso sale una vez por sesión y como mucho con cuatro hallazgos.</dd>
+<dd>Registra en la línea base lo que ya has decidido y añade a <code>exclusions</code> los términos que no son datos personales en tu repo. Cada aviso sale una vez por sesión y como mucho con cuatro hallazgos. Con <code>.ai-act/rules.json</code>, las columnas con aspecto de dato personal solo avisan al escribir un fichero, no al leerlo; las categorías especiales avisan en los dos casos.</dd>
 <dt>¿Y si el proyecto no usa IA?</dt>
 <dd>Los avisos del RGPD siguen siendo útiles. La clasificación AI Act queda como «fuera de alcance».</dd>
 <dt>¿Es asesoramiento legal?</dt>

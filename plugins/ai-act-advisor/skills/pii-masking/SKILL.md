@@ -36,7 +36,7 @@ Si el repo ya tiene una clave de PII que se valida pero no se aplica, la propues
 
 ## 4. Deja la decisión
 
-Termina con: qué recomiendas, a quién escalar si decide no protegerla (DPO si son datos de clientes finales, PM si cambia alcance o coste) y cómo registrar la decisión: estado `aceptado` y `justification` en `.ai-act/baseline.json`, o `mitigado` cuando esté hecho.
+Termina con: qué recomiendas, a quién escalar si decide no protegerla (DPO si son datos de clientes finales, PM si cambia alcance o coste) y cómo registrar la decisión: estado `aceptado` y `justification` en `.ai-act/baseline.json`, o `mitigado` cuando esté hecho, siempre con `decided_by` (quién decide) y `decided_on` (la fecha del día, AAAA-MM-DD).
 
 ## Forma del aviso
 

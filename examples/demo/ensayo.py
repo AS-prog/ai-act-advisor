@@ -94,13 +94,15 @@ class Ensayo:
     def baseline(self):
         return core.load_json(os.path.join(self.root, ".ai-act", "baseline.json"), {}).get("findings", {})
 
-    def decide(self, rule, status, justification):
+    def decide(self, rule, status, justification, who="PM"):
         path = os.path.join(self.root, ".ai-act", "baseline.json")
         base = core.load_json(path, {})
         hit = [fid for fid, f in base["findings"].items() if f["rule"] == rule]
         for fid in hit:
             base["findings"][fid]["status"] = status
             base["findings"][fid]["justification"] = justification
+            base["findings"][fid]["decided_by"] = who
+            base["findings"][fid]["decided_on"] = core.today()
         with open(path, "w", encoding="utf-8") as fh:
             json.dump(base, fh, ensure_ascii=False, indent=2)
         return hit
@@ -178,7 +180,9 @@ class Ensayo:
         self.check("severidad alta abiertos" in ctx, "recuerda cuántos hallazgos altos siguen abiertos")
         ctx = self.tool(de, "Read", "transform/silver/build_customers.py")
         self.show("Aviso al leer build_customers.py", ctx)
-        self.check(ctx == "", "calla: ese riesgo ya está en la línea base")
+        self.check(ctx == "", "calla al leer: con reglas propias, los términos de PII solo avisan al escribir")
+        ctx = self.tool(de, "Read", "transform/gold/exports/partner_upload.py")
+        self.check(ctx == "", "calla lo que el PM ya decidió en el paso 3")
 
         self.step(5, "DE", "añade una fuente nueva de SharePoint sin declarar la PII")
         with open(os.path.join(self.root, "config", "sources", "sharepoint.yaml"), "a", encoding="utf-8") as fh:
@@ -186,7 +190,10 @@ class Ensayo:
         ctx = self.tool(de, "Edit", "config/sources/sharepoint.yaml")
         self.show("Aviso al editar sharepoint.yaml", ctx)
         self.check("newsletter_signups" in ctx and "pii-masking" in ctx, "avisa del objeto nuevo y apunta a pii-masking")
-        self.check("campaign_contacts" not in ctx, "no repite el objeto que ya estaba en la línea base")
+        self.check("campaign_contacts" not in ctx or "abierto sin revisar" in ctx,
+                   "lo que ya estaba en la línea base sin decidir sale marcado como abierto sin revisar")
+        self.check(ctx.find("newsletter_signups") < ctx.find("campaign_contacts") or "campaign_contacts" not in ctx,
+                   "lo nuevo va primero")
         self.check("No es asesoramiento legal" in ctx and "Base normativa" in ctx, "lleva fecha de la base y aviso legal")
         again = self.tool(de, "Edit", "config/sources/sharepoint.yaml")
         self.check(again == "", "el mismo aviso no se repite en la sesión")
@@ -222,6 +229,10 @@ class Ensayo:
         self.show("Aviso al editar pyproject.toml", ctx)
         self.check("relanzar /project-init" in ctx and "SDK de LLM" in ctx and "Librerías de ML" in ctx,
                    "detecta entornos nuevos (ML y LLM) y sugiere relanzar /project-init")
+
+        # D20: aunque el PM relance /project-init ahora, lo que nadie ha revisado sigue avisando.
+        core.write_outputs(self.root, core.audit(self.root))
+        self.show("PM relanza /project-init antes de tiempo", "la auditoría mete la fase 2 en la línea base como abierto, sin decidir")
 
         self.step(9, "DE", "revisa la fuente de solicitudes de pago a plazos")
         ctx = self.tool(de, "Read", "config/sources/crm_postgres.yaml")

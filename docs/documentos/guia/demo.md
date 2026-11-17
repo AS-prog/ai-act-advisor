@@ -105,7 +105,7 @@ La demo tiene dos fases. En la primera el proyecto solo mueve y agrega datos: el
 <figure class="figwrap">
   <svg viewBox="0 0 720 364" role="img" aria-labelledby="cob-title cob-desc">
   <title id="cob-title">Qué parte del plugin ejercita cada paso del guion</title>
-  <desc id="cob-desc">Matriz de catorce pasos por once piezas del plugin. Los pasos 1 a 7 son la fase 1, los 8 a 13 la fase 2 y el 14 el mantenimiento. Las siete skills, el agente, los dos hooks y la línea base salen al menos una vez. En el paso 4 el hook debe callar porque el riesgo ya está en la línea base.</desc>
+  <desc id="cob-desc">Matriz de catorce pasos por once piezas del plugin. Los pasos 1 a 7 son la fase 1, los 8 a 13 la fase 2 y el 14 el mantenimiento. Las siete skills, el agente, los dos hooks y la línea base salen al menos una vez. En el paso 4 el hook debe callar: al leer no avisa de columnas con aspecto de dato personal y la exportación ya está decidida.</desc>
   <rect class="d-wash-1" x="196" y="8" width="252" height="348"/>
   <rect class="d-wash-2" x="448" y="8" width="216" height="348"/>
   <rect class="d-wash-1" x="664" y="8" width="36" height="348"/>
@@ -190,7 +190,7 @@ La demo tiene dos fases. En la primera el proyecto solo mueve y agrega datos: el
   <circle class="d-bar" cx="682" cy="320" r="6"/>
   <circle class="d-bar" cx="682" cy="344" r="6"/>
   </svg>
-  <figcaption>Cada punto es una pieza del plugin que entra en juego en ese paso. El círculo hueco del paso 4 es una comprobación al revés: el hook debe <strong>callar</strong>, porque el riesgo ya está en la línea base. MT es mantenimiento.</figcaption>
+  <figcaption>Cada punto es una pieza del plugin que entra en juego en ese paso. El círculo hueco del paso 4 es una comprobación al revés: el hook debe <strong>callar</strong>: al leer no avisa de columnas con aspecto de dato personal, y la exportación ya está decidida. MT es mantenimiento.</figcaption>
 </figure>
 
 ## Antes de empezar
@@ -269,7 +269,7 @@ El perfil esperado está en `examples/demo/perfil.yaml`, por si quieres comparar
 
 **Qué debe pasar**
 
-- Claude cambia en `.ai-act/baseline.json` el hallazgo `external-export:…` a `aceptado`, con esa justificación.
+- Claude cambia en `.ai-act/baseline.json` el hallazgo `external-export:…` a `aceptado`, con esa justificación, `decided_by` (el PM) y `decided_on` (la fecha de hoy).
 - No toca el código.
 
 ### Paso 4 · DE · Abrir sesión y leer código ya revisado
@@ -281,7 +281,7 @@ Cierra Claude Code (`/exit`) y vuelve a abrirlo con el mismo comando. Ahora eres
 **Qué debe pasar**
 
 - Al abrir, Claude conoce el perfil (sector, fuera de alcance, datos de contacto) y sabe que hay hallazgos altos abiertos, pero **no** los repite si no trabajas en ellos.
-- Al leer el fichero **no hay aviso**: las columnas `email`, `phone` y `birth_date` ya están en la línea base desde el paso 2. Este paso comprueba que el plugin calla lo ya visto.
+- Al leer el fichero **no hay aviso**: con reglas del repo, las columnas con aspecto de dato personal (`email`, `phone`, `birth_date`) solo avisan al escribir, no al leer. Si pides «léete también transform/gold/exports/partner_upload.py», tampoco avisa: el PM ya decidió sobre la exportación en el paso 3. Este paso comprueba que el plugin calla al leer y calla lo decidido.
 
 ### Paso 5 · DE · Añadir una fuente sin declarar la PII
 
@@ -290,7 +290,7 @@ Cierra Claude Code (`/exit`) y vuelve a abrirlo con el mismo comando. Ahora eres
 **Qué debe pasar**
 
 - Claude hace el cambio y te avisa en pocas líneas: objeto `newsletter_signups` sin `pii_columns`, RGPD art. 5.1.c, 25 y 30, aplica ya, skill `pii-masking`, con la fecha de la base normativa y «no es asesoramiento legal».
-- No repite `campaign_contacts`, que ya estaba en la línea base, y no bloquea nada.
+- El objeto nuevo va primero, marcado como `nuevo`. Detrás puede salir `campaign_contacts` marcado como `abierto sin revisar`: estaba en la línea base desde el paso 2, pero nadie ha decidido sobre él. No bloquea nada.
 
 Pide el detalle:
 
@@ -335,7 +335,7 @@ python3 examples/demo/preparar.py --fase 2 --dest ~/ai-act-demo
 Añade cuatro ficheros: la fuente nueva en `config/sources/crm_postgres.yaml`, el modelo `ml/instalment_scoring.py`, el asistente `assistant/support_bot.py` y la encuesta `accessibility_survey.sql` en Silver. Las dependencias no se copian: las pides tú en el paso 8.
 
 > [!IMPORTANT]
-> En esta fase, **no relances `/project-init` hasta el paso 13**, aunque Claude lo sugiera en el paso 8. La auditoría mete en la línea base todo lo que encuentra y los hooks callan lo que está en la línea base, así que los avisos de los pasos 9 a 12 ya no saldrían. Está apuntado como D20 en los pendientes.
+> Puedes relanzar `/project-init` cuando Claude lo sugiera en el paso 8: la auditoría mete la fase 2 en la línea base como `abierto` sin `decided_on`, y los hooks siguen avisando de ello a quien abra cada fichero (pendiente D20, resuelto). Los avisos de los pasos 9 a 12 salen igual, marcados `abierto sin revisar` en lugar de `nuevo`.
 
 ### Paso 8 · DE · Añadir dependencias de ML y LLM
 
@@ -457,7 +457,7 @@ La demo sirve para afinar el plugin. Apunta en cada paso:
 
 - **No hay ningún aviso**: comprueba que el plugin está cargado (`/plugin` lo lista) y que Python 3 está en el `PATH`. `python3 examples/demo/ensayo.py` dice si el fallo es del plugin o de la sesión.
 - **Avisa dos veces de lo mismo**: hay dos copias del plugin activas (la del marketplace y la de `--plugin-dir`).
-- **En la fase 2 no salen los avisos**: se relanzó `/project-init` antes de tiempo. Empieza de cero con `preparar.py --force` o borra la línea base (`.ai-act/baseline.json`) y vuelve al paso 2.
+- **En la fase 2 no salen los avisos**: alguien registró ya una decisión (`decided_on`) sobre esos hallazgos, o el aviso salió antes en la misma sesión. Abre una sesión nueva, o empieza de cero con `preparar.py --force`.
 - **Claude no carga la skill**: pídesela por su nombre (`/pii-masking`, `/special-categories`…).
 
 ## Limpiar
