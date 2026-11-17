@@ -13,6 +13,11 @@ title = "Cómo se usa"
 path = "docs/site/guia/como-se-usa.html"
 type = "guía"
 
+[[section.page]]
+title = "Demo de punta a punta"
+path = "docs/site/guia/demo.html"
+type = "guía"
+
 [[section]]
 title = "Diseño"
 

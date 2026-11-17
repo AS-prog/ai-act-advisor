@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="es" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo de ai-act-advisor de punta a punta</title>
+    <meta name="description" content="Guion para probar el plugin entero en una hora con un proyecto ficticio, paso a paso por rol (PM, DE y AE), con qué pedirle a Claude, qué debe pasar y qué apuntar." />
+    <meta name="theme-color" content="#F0EBDE" />
+    <link rel="stylesheet" href="../design-system/v0.13/tokens.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/base.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/document.css" />
+    <!-- site:css --><link rel="stylesheet" href="../design-system/v0.13/css/library.css" /><!-- /site:css -->
+    <script>
+      // Antes de pintar, para que no haya destello: el tema guardado manda sobre «auto».
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="lib">
+    <!-- site:nav -->
+    <nav class="lib-nav" aria-label="Sitio">
+    <details open>
+    <summary><a class="lib-home" href="../index.html">ai-act-advisor</a><span class="lib-menu">Índice</span></summary>
+    <h2>Guía</h2>
+    <ul>
+    <li><a href="como-se-usa.html">Cómo se usa</a></li>
+    <li><a href="demo.html" aria-current="page">Demo de punta a punta</a></li>
+    <li><a href="demo.html">Demo de punta a punta</a></li>
+    </ul>
+    <h2>Diseño</h2>
+    <ul>
+    <li><a href="../diseno/propuesta-prototipo.html">Propuesta del prototipo</a></li>
+    </ul>
+    <h2>Técnica</h2>
+    <ul>
+    <li><a href="../tecnica/uso-del-prototipo.html">Cómo funciona el prototipo en uso</a></li>
+    </ul>
+    <h2>Seguimiento</h2>
+    <ul>
+    <li><a href="../pendientes.html">Pendientes y dudas</a></li>
+    </ul>
+    <h2>Investigación</h2>
+    <ul>
+    <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
+    </ul>
+    </details>
+    </nav>
+    <script>(function () { var m = matchMedia('(max-width: 56rem)'), d = document.querySelector('.lib-nav details'); d.open = !m.matches; m.addEventListener('change', function () { d.open = !m.matches; }); })();</script>
+    <script src="../design-system/v0.13/js/library-fold.js"></script>
+    <!-- /site:nav -->
+    <div class="doc">
+      <header class="doc-bar">
+        <span class="doc-brand">ai-act-advisor / guía</span>
+        <button class="doc-theme" type="button" aria-label="Cambiar tema">Tema</button>
+      </header>
+
+      <header class="doc-header">
+        <h1>Demo de ai-act-advisor de punta a punta</h1>
+        <p class="lede">Guion para probar el plugin entero con un proyecto ficticio: catorce pasos repartidos entre PM, data engineer (DE) y analytics engineer (AE), que ejercitan las siete skills, el agente, los dos hooks y la línea base. Cada paso dice qué pedirle a Claude, qué debe pasar y qué decidir.</p>
+        <dl class="doc-meta">
+          <div><dt>Fuente</dt><dd><a href="../../documentos/guia/demo.md">docs/documentos/guia/demo.md</a></dd></div>
+          <div><dt>Fecha</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
+          <div><dt>Estado</dt><dd>vigente</dd></div>
+        </dl>
+      </header>
+
+      <nav class="doc-toc" aria-label="Índice">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#en-corto">En corto</a></li>
+          <li><a href="#el-escenario">El escenario</a></li>
+          <li><a href="#que-ejercita-cada-paso">Qué ejercita cada paso</a></li>
+          <li><a href="#antes-de-empezar">Antes de empezar</a></li>
+          <li><a href="#fase-1-medallion-de-clientes">Fase 1 · Medallion de clientes</a></li>
+          <li><a href="#fase-2-el-cliente-pide-ia">Fase 2 · El cliente pide IA</a></li>
+          <li><a href="#mantenimiento">Mantenimiento</a></li>
+          <li><a href="#que-apuntar-durante-la-demo">Qué apuntar durante la demo</a></li>
+          <li><a href="#si-algo-no-sale">Si algo no sale</a></li>
+          <li><a href="#limpiar">Limpiar</a></li>
+          <li><a href="#mas-informacion">Más información</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc-prose">
+<h2 id="en-corto">En corto</h2>
+<ul>
+<li><strong>Duración</strong>: una hora, o 45 minutos sin el paso 14 (necesita internet y tarda).</li>
+<li><strong>Quién</strong>: una persona puede hacer los tres roles. Al cambiar de rol se cierra Claude Code y se vuelve a abrir, para que empiece una sesión nueva.</li>
+<li><strong>Qué hace falta</strong>: Claude Code, Python 3 y git. Nada más: el plugin no tiene dependencias.</li>
+<li><strong>Datos</strong>: ninguno. El proyecto es ficticio y no trae ficheros de datos; el plugin solo lee código y configuración.</li>
+<li><strong>Antes, sin Claude</strong>: <code>python3 examples/demo/ensayo.py</code> recorre el guion con la auditoría y los hooks reales y comprueba que cada aviso sale donde debe (27 comprobaciones, un par de segundos).</li>
+</ul>
+<h2 id="el-escenario">El escenario</h2>
+<p><em>Electrodomésticos Ejemplo, S.L.</em> (inventada) vende en tiendas y online. La consultora le construye una medallion de clientes y ventas, y le entrega cada semana un fichero de audiencias a un socio de medios. Es el proyecto de <code>examples/medallion-demo</code>, hecho para que salga lo que vimos en proyectos reales.</p>
+<p>La demo tiene dos fases. En la primera el proyecto solo mueve y agrega datos: el riesgo es de RGPD y el proyecto queda fuera del AI Act. En la segunda el cliente pide tres cosas nuevas, y con ellas llega el AI Act:</p>
+<ol>
+<li>Un <strong>modelo de impago</strong> que decide en la web quién puede pagar a plazos. Puntúa la solvencia de personas físicas: candidato a alto riesgo (anexo III, punto 5.b), aunque el sector del cliente no tenga punto propio.</li>
+<li>Un <strong>asistente para el chat de la web</strong> que responde con un modelo de lenguaje: transparencia del art. 50.</li>
+<li>Una <strong>encuesta de accesibilidad</strong> que marketing quiere cruzar con clientes: datos de salud, categoría especial del art. 9 del RGPD.</li>
+</ol>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 372" role="img" aria-labelledby="esc-title esc-desc">
+  <title id="esc-title">El proyecto ficticio de la demo y dónde salta cada aviso</title>
+  <desc id="esc-desc">Fase 1: el CRM en PostgreSQL y un libro de SharePoint entran en Bronze, pasan a Silver y a Gold, y Gold entrega un fichero a un socio de medios en Google Cloud Storage. Fase 2: el cliente añade solicitudes de pago a plazos, dependencias de ML y de LLM, una encuesta de accesibilidad, un modelo de impago y un asistente para la web. Cada elemento lleva el número del paso del guion en el que avisa el plugin.</desc>
+  <defs><marker id="esc-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker></defs>
+  <rect class="d-wash-1" x="8" y="8" width="704" height="186"/>
+  <rect class="d-wash-2" x="8" y="206" width="704" height="158"/>
+  <text class="d-tm" x="20" y="28">FASE 1 · MEDALLION DE CLIENTES</text>
+  <text class="d-tm" x="20" y="226">FASE 2 · EL CLIENTE PIDE IA</text>
+  <line class="d-line" x1="166" y1="70" x2="196" y2="98" marker-end="url(#esc-arrow)"/>
+  <line class="d-line" x1="166" y1="146" x2="196" y2="118" marker-end="url(#esc-arrow)"/>
+  <line class="d-line" x1="340" y1="108" x2="372" y2="108" marker-end="url(#esc-arrow)"/>
+  <line class="d-line" x1="516" y1="100" x2="548" y2="76" marker-end="url(#esc-arrow)"/>
+  <line class="d-line" x1="624" y1="96" x2="624" y2="132" marker-end="url(#esc-arrow)"/>
+  <rect class="d-box" x="24" y="48" width="142" height="44"/>
+  <text class="d-t d-mid" x="95" y="67">CRM PostgreSQL</text>
+  <text class="d-tm d-mid" x="95" y="84">subscriptions</text>
+  <rect class="d-box" x="24" y="124" width="142" height="44"/>
+  <text class="d-t d-mid" x="95" y="143">SharePoint</text>
+  <text class="d-tm d-mid" x="95" y="160">campaign_contacts</text>
+  <rect class="d-box" x="200" y="86" width="140" height="44"/>
+  <text class="d-t d-mid" x="270" y="105">Bronze</text>
+  <text class="d-tm d-mid" x="270" y="122">Delta, solo añade</text>
+  <rect class="d-box" x="376" y="86" width="140" height="44"/>
+  <text class="d-t d-mid" x="446" y="105">Silver</text>
+  <text class="d-tm d-mid" x="446" y="122">build_customers</text>
+  <rect class="d-box" x="552" y="52" width="144" height="44"/>
+  <text class="d-t d-mid" x="624" y="71">Gold</text>
+  <text class="d-tm d-mid" x="624" y="88">customers_by_age</text>
+  <rect class="d-box" x="552" y="136" width="144" height="44"/>
+  <text class="d-t d-mid" x="624" y="155">Socio de medios</text>
+  <text class="d-tm d-mid" x="624" y="172">exporta a GCS</text>
+  <circle class="d-fill" cx="166" cy="48" r="11"/>
+  <text class="d-tm d-mid" x="166" y="52">2</text>
+  <circle class="d-fill" cx="166" cy="124" r="11"/>
+  <text class="d-tm d-mid" x="166" y="128">5</text>
+  <circle class="d-fill" cx="340" cy="86" r="11"/>
+  <text class="d-tm d-mid" x="340" y="90">2</text>
+  <circle class="d-fill" cx="516" cy="86" r="11"/>
+  <text class="d-tm d-mid" x="516" y="90">4</text>
+  <circle class="d-fill" cx="696" cy="52" r="11"/>
+  <text class="d-tm d-mid" x="696" y="56">6</text>
+  <circle class="d-fill" cx="696" cy="136" r="11"/>
+  <text class="d-tm d-mid" x="696" y="140">3</text>
+  <rect class="d-box" x="24" y="246" width="142" height="44" stroke-dasharray="5 4"/>
+  <text class="d-t d-mid" x="95" y="265">Solicitudes a plazos</text>
+  <text class="d-tm d-mid" x="95" y="282">crm · finance</text>
+  <rect class="d-box" x="200" y="246" width="140" height="44" stroke-dasharray="5 4"/>
+  <text class="d-t d-mid" x="270" y="265">Dependencias</text>
+  <text class="d-tm d-mid" x="270" y="282">pyproject.toml</text>
+  <rect class="d-box" x="376" y="246" width="140" height="44" stroke-dasharray="5 4"/>
+  <text class="d-t d-mid" x="446" y="265">Encuesta</text>
+  <text class="d-tm d-mid" x="446" y="282">discapacidad</text>
+  <rect class="d-box" x="552" y="240" width="144" height="44" stroke-dasharray="5 4"/>
+  <text class="d-t d-mid" x="624" y="259">Modelo de impago</text>
+  <text class="d-tm d-mid" x="624" y="276">scikit-learn</text>
+  <rect class="d-box" x="552" y="302" width="144" height="44" stroke-dasharray="5 4"/>
+  <text class="d-t d-mid" x="624" y="321">Asistente web</text>
+  <text class="d-tm d-mid" x="624" y="338">anthropic</text>
+  <circle class="d-fill" cx="166" cy="246" r="11"/>
+  <text class="d-tm d-mid" x="166" y="250">9</text>
+  <circle class="d-fill" cx="340" cy="246" r="11"/>
+  <text class="d-tm d-mid" x="340" y="250">8</text>
+  <circle class="d-fill" cx="516" cy="246" r="11"/>
+  <text class="d-tm d-mid" x="516" y="250">11</text>
+  <circle class="d-fill" cx="696" cy="240" r="11"/>
+  <text class="d-tm d-mid" x="696" y="244">12</text>
+  <circle class="d-fill" cx="696" cy="302" r="11"/>
+  <text class="d-tm d-mid" x="696" y="306">10</text>
+  </svg>
+  <figcaption>El proyecto de la demo. Cada número es el paso del guion en el que el plugin avisa de ese elemento. Lo de la fase 2 (en trazo discontinuo) lo añade <code>preparar.py --fase 2</code>.</figcaption>
+</figure>
+
+<h2 id="que-ejercita-cada-paso">Qué ejercita cada paso</h2>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 364" role="img" aria-labelledby="cob-title cob-desc">
+  <title id="cob-title">Qué parte del plugin ejercita cada paso del guion</title>
+  <desc id="cob-desc">Matriz de catorce pasos por once piezas del plugin. Los pasos 1 a 7 son la fase 1, los 8 a 13 la fase 2 y el 14 el mantenimiento. Las siete skills, el agente, los dos hooks y la línea base salen al menos una vez. En el paso 4 el hook debe callar porque el riesgo ya está en la línea base.</desc>
+  <rect class="d-wash-1" x="196" y="8" width="252" height="348"/>
+  <rect class="d-wash-2" x="448" y="8" width="216" height="348"/>
+  <rect class="d-wash-1" x="664" y="8" width="36" height="348"/>
+  <text class="d-tm d-mid" x="322" y="26">FASE 1</text>
+  <text class="d-tm d-mid" x="556" y="26">FASE 2</text>
+  <text class="d-tm d-mid" x="682" y="26">MANT.</text>
+  <text class="d-t d-mid" x="214" y="52">1</text>
+  <text class="d-tm d-mid" x="214" y="72">PM</text>
+  <text class="d-t d-mid" x="250" y="52">2</text>
+  <text class="d-tm d-mid" x="250" y="72">PM</text>
+  <text class="d-t d-mid" x="286" y="52">3</text>
+  <text class="d-tm d-mid" x="286" y="72">PM</text>
+  <text class="d-t d-mid" x="322" y="52">4</text>
+  <text class="d-tm d-mid" x="322" y="72">DE</text>
+  <text class="d-t d-mid" x="358" y="52">5</text>
+  <text class="d-tm d-mid" x="358" y="72">DE</text>
+  <text class="d-t d-mid" x="394" y="52">6</text>
+  <text class="d-tm d-mid" x="394" y="72">AE</text>
+  <text class="d-t d-mid" x="430" y="52">7</text>
+  <text class="d-tm d-mid" x="430" y="72">PM</text>
+  <text class="d-t d-mid" x="466" y="52">8</text>
+  <text class="d-tm d-mid" x="466" y="72">DE</text>
+  <text class="d-t d-mid" x="502" y="52">9</text>
+  <text class="d-tm d-mid" x="502" y="72">DE</text>
+  <text class="d-t d-mid" x="538" y="52">10</text>
+  <text class="d-tm d-mid" x="538" y="72">DE</text>
+  <text class="d-t d-mid" x="574" y="52">11</text>
+  <text class="d-tm d-mid" x="574" y="72">AE</text>
+  <text class="d-t d-mid" x="610" y="52">12</text>
+  <text class="d-tm d-mid" x="610" y="72">PM</text>
+  <text class="d-t d-mid" x="646" y="52">13</text>
+  <text class="d-tm d-mid" x="646" y="72">PM</text>
+  <text class="d-t d-mid" x="682" y="52">14</text>
+  <text class="d-tm d-mid" x="682" y="72">MT</text>
+  <line class="d-dash" x1="16" y1="92" x2="700" y2="92"/>
+  <text class="d-tm" x="16" y="108">SessionStart</text>
+  <line class="d-dash" x1="16" y1="116" x2="700" y2="116"/>
+  <text class="d-tm" x="16" y="132">PostToolUse</text>
+  <line class="d-dash" x1="16" y1="140" x2="700" y2="140"/>
+  <text class="d-tm" x="16" y="156">línea base</text>
+  <line class="d-dash" x1="16" y1="164" x2="700" y2="164"/>
+  <text class="d-tm" x="16" y="180">project-init</text>
+  <line class="d-dash" x1="16" y1="188" x2="700" y2="188"/>
+  <text class="d-tm" x="16" y="204">pii-masking</text>
+  <line class="d-dash" x1="16" y1="212" x2="700" y2="212"/>
+  <text class="d-tm" x="16" y="228">special-categories</text>
+  <line class="d-dash" x1="16" y1="236" x2="700" y2="236"/>
+  <text class="d-tm" x="16" y="252">ai-transparency</text>
+  <line class="d-dash" x1="16" y1="260" x2="700" y2="260"/>
+  <text class="d-tm" x="16" y="276">ai-act-classify</text>
+  <line class="d-dash" x1="16" y1="284" x2="700" y2="284"/>
+  <text class="d-tm" x="16" y="300">risk-summary</text>
+  <line class="d-dash" x1="16" y1="308" x2="700" y2="308"/>
+  <text class="d-tm" x="16" y="324">regulatory-update</text>
+  <line class="d-dash" x1="16" y1="332" x2="700" y2="332"/>
+  <text class="d-tm" x="16" y="348">regulatory-watcher</text>
+  <circle class="d-bar" cx="214" cy="104" r="6"/>
+  <circle class="d-bar" cx="250" cy="176" r="6"/>
+  <circle class="d-bar" cx="250" cy="152" r="6"/>
+  <circle class="d-bar" cx="286" cy="152" r="6"/>
+  <circle class="d-bar" cx="322" cy="104" r="6"/>
+  <circle class="d-box" cx="322" cy="128" r="6"/>
+  <circle class="d-bar" cx="358" cy="128" r="6"/>
+  <circle class="d-bar" cx="358" cy="200" r="6"/>
+  <circle class="d-bar" cx="394" cy="128" r="6"/>
+  <circle class="d-bar" cx="394" cy="200" r="6"/>
+  <circle class="d-bar" cx="430" cy="296" r="6"/>
+  <circle class="d-bar" cx="466" cy="128" r="6"/>
+  <circle class="d-bar" cx="502" cy="128" r="6"/>
+  <circle class="d-bar" cx="502" cy="200" r="6"/>
+  <circle class="d-bar" cx="538" cy="128" r="6"/>
+  <circle class="d-bar" cx="538" cy="248" r="6"/>
+  <circle class="d-bar" cx="574" cy="128" r="6"/>
+  <circle class="d-bar" cx="574" cy="224" r="6"/>
+  <circle class="d-bar" cx="610" cy="128" r="6"/>
+  <circle class="d-bar" cx="610" cy="272" r="6"/>
+  <circle class="d-bar" cx="610" cy="152" r="6"/>
+  <circle class="d-bar" cx="646" cy="176" r="6"/>
+  <circle class="d-bar" cx="646" cy="296" r="6"/>
+  <circle class="d-bar" cx="646" cy="152" r="6"/>
+  <circle class="d-bar" cx="682" cy="104" r="6"/>
+  <circle class="d-bar" cx="682" cy="320" r="6"/>
+  <circle class="d-bar" cx="682" cy="344" r="6"/>
+  </svg>
+  <figcaption>Cada punto es una pieza del plugin que entra en juego en ese paso. El círculo hueco del paso 4 es una comprobación al revés: el hook debe <strong>callar</strong>, porque el riesgo ya está en la línea base. MT es mantenimiento.</figcaption>
+</figure>
+
+<h2 id="antes-de-empezar">Antes de empezar</h2>
+<p><strong>1. Clona el repo del plugin</strong> y sitúate en la rama que quieras probar.</p>
+<p><strong>2. Ensaya sin Claude.</strong> Si algo falla aquí, fallará en vivo:</p>
+<pre><code class="language-text">python3 examples/demo/ensayo.py
+</code></pre>
+<p><strong>3. Prepara la carpeta de trabajo.</strong> Copia el proyecto ficticio fuera del repo del plugin y hace <code>git init</code>:</p>
+<pre><code class="language-text">python3 examples/demo/preparar.py --dest ~/ai-act-demo
+</code></pre>
+<p><strong>4. Abre Claude Code</strong> en esa carpeta con el plugin de tu rama:</p>
+<pre><code class="language-text">cd ~/ai-act-demo
+claude --plugin-dir &lt;ruta-del-clon&gt;/plugins/ai-act-advisor
+</code></pre>
+<div class="notice notice-important"><span class="notice-title">Importante</span><p>Si ya tienes instalado <code>ai-act-advisor</code> desde el marketplace, desactívalo durante la demo (<code>/plugin</code>, pestaña de instalados), para que no avisen dos copias a la vez.</p></div>
+
+<p>En Windows usa <code>python</code> si no tienes <code>python3</code>, y en PowerShell la variable del paso 14 se pone con <code>$env:AI_ACT_KNOWLEDGE="…"</code> antes de lanzar <code>claude</code>. Los hooks se lanzan con <code>sh</code>, que Claude Code trae con Git Bash.</p>
+<h2 id="fase-1-medallion-de-clientes">Fase 1 · Medallion de clientes</h2>
+<h3 id="paso-1-pm-abrir-el-repo-sin-configurar">Paso 1 · PM · Abrir el repo sin configurar</h3>
+<p><strong>Abre</strong> Claude Code (ya lo hiciste en «Antes de empezar») y escribe:</p>
+<blockquote>
+<p>Hola, soy el PM de este proyecto. ¿Qué es este repo?</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Claude resume el repo y te sugiere <strong>una vez</strong> lanzar <code>/project-init</code>, porque no hay perfil (<code>.ai-act/profile.yaml</code>).</li>
+<li>No insiste si sigues con otra cosa.</li>
+</ul>
+<h3 id="paso-2-pm-configurar-el-proyecto-project-init">Paso 2 · PM · Configurar el proyecto: /project-init</h3>
+<blockquote>
+<p>/project-init</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ol>
+<li>Detecta que es un proyecto <strong>encaminado</strong> (hay código) y lanza la auditoría en modo consulta, que no escribe nada.</li>
+<li>Te enseña los entornos (Delta Lake, DuckDB, PostgreSQL, SharePoint, Google Cloud Storage), las reglas del repo (clave de PII <code>pii_columns</code>, fuentes en <code>config/sources/</code>, escritura en Bronze, exportación) y los hallazgos: 7, de ellos 2 altos.</li>
+<li>Te pregunta el perfil en pocas tandas.</li>
+</ol>
+<p>Contesta con esto:</p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cliente y sector</td>
+<td>Electrodomésticos Ejemplo, S.L. · <code>retail-marketing</code></td>
+</tr>
+<tr>
+<td>Finalidad</td>
+<td>Medallion de clientes y ventas; entrega de audiencias a un socio de medios. No infiere</td>
+</tr>
+<tr>
+<td>Rol de la consultora</td>
+<td>Responsable del despliegue (no hay sistema de IA todavía)</td>
+</tr>
+<tr>
+<td>Datos personales</td>
+<td>Contacto e historial de compras</td>
+</tr>
+<tr>
+<td>Stack</td>
+<td>El que propone la auditoría</td>
+</tr>
+<tr>
+<td>Contactos</td>
+<td>DPO <code>dpo@cliente.example</code>, legal <code>legal@consultora.example</code>, PM <code>pm@consultora.example</code></td>
+</tr>
+<tr>
+<td>Repos</td>
+<td>Solo este</td>
+</tr>
+</tbody>
+</table>
+<p>Confirma los hallazgos sin corregir nada. Después:</p>
+<ul>
+<li>Escribe <code>.ai-act/profile.yaml</code>, <code>.ai-act/rules.json</code>, <code>.ai-act/baseline.json</code> y <code>.ai-act/audits/AAAA-MM-DD.md</code>.</li>
+<li>Cierra con un resumen de cinco líneas: clasificación inicial <strong>fuera de alcance</strong> del AI Act (siguen los avisos del RGPD), hallazgos por severidad y los dos que mirar primero (<code>pii_columns</code> que nadie aplica y la exportación al socio), con su skill.</li>
+</ul>
+<p>El perfil esperado está en <code>examples/demo/perfil.yaml</code>, por si quieres compararlo.</p>
+<h3 id="paso-3-pm-registrar-una-decision">Paso 3 · PM · Registrar una decisión</h3>
+<blockquote>
+<p>Marca la exportación al socio de medios como aceptada en la línea base: hay contrato de encargado firmado y el bucket está en la UE. Lo decido yo, el PM.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Claude cambia en <code>.ai-act/baseline.json</code> el hallazgo <code>external-export:…</code> a <code>aceptado</code>, con esa justificación.</li>
+<li>No toca el código.</li>
+</ul>
+<h3 id="paso-4-de-abrir-sesion-y-leer-codigo-ya-revisado">Paso 4 · DE · Abrir sesión y leer código ya revisado</h3>
+<p>Cierra Claude Code (<code>/exit</code>) y vuelve a abrirlo con el mismo comando. Ahora eres DE.</p>
+<blockquote>
+<p>Soy DE. Explícame qué hace transform/silver/build_customers.py.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Al abrir, Claude conoce el perfil (sector, fuera de alcance, datos de contacto) y sabe que hay hallazgos altos abiertos, pero <strong>no</strong> los repite si no trabajas en ellos.</li>
+<li>Al leer el fichero <strong>no hay aviso</strong>: las columnas <code>email</code>, <code>phone</code> y <code>birth_date</code> ya están en la línea base desde el paso 2. Este paso comprueba que el plugin calla lo ya visto.</li>
+</ul>
+<h3 id="paso-5-de-anadir-una-fuente-sin-declarar-la-pii">Paso 5 · DE · Añadir una fuente sin declarar la PII</h3>
+<blockquote>
+<p>Añade a config/sources/sharepoint.yaml un objeto newsletter_signups de la biblioteca Marketing, hoja altas_newsletter, activo.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Claude hace el cambio y te avisa en pocas líneas: objeto <code>newsletter_signups</code> sin <code>pii_columns</code>, RGPD art. 5.1.c, 25 y 30, aplica ya, skill <code>pii-masking</code>, con la fecha de la base normativa y «no es asesoramiento legal».</li>
+<li>No repite <code>campaign_contacts</code>, que ya estaba en la línea base, y no bloquea nada.</li>
+</ul>
+<p>Pide el detalle:</p>
+<blockquote>
+<p>¿Qué hago con esto?</p>
+</blockquote>
+<ul>
+<li>Claude carga <code>pii-masking</code>: explica el riesgo, propone revisar el esquema de origen y declarar <code>pii_columns</code>, y debería notar el comentario del fichero (el registro de SharePoint no admite <code>pii_columns</code>).</li>
+<li><strong>Decide</strong> tú: declararlo, dejarlo pendiente o anotarlo como aceptado con justificación.</li>
+</ul>
+<h3 id="paso-6-ae-crear-un-modelo-en-gold-con-un-dato-personal">Paso 6 · AE · Crear un modelo en Gold con un dato personal</h3>
+<p>Cierra y vuelve a abrir Claude Code. Ahora eres AE.</p>
+<blockquote>
+<p>Soy AE. Crea transform/gold/customers_by_age.sql que cuente clientes por ciudad y edad a partir de silver_customers.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Al escribir el fichero, aviso de <strong>dato personal</strong> (<code>birth_date</code>) con la skill <code>pii-masking</code>.</li>
+</ul>
+<blockquote>
+<p>¿Cómo lo dejo sin dato personal en Gold?</p>
+</blockquote>
+<ul>
+<li><code>pii-masking</code> propone generalizar (tramos de edad, calcularla en Silver y no llevar <code>birth_date</code> a Gold) y agregar con un mínimo de personas por grupo, adaptado a DuckDB.</li>
+<li><strong>Decide</strong> si aplicas el cambio.</li>
+</ul>
+<h3 id="paso-7-pm-ver-el-estado-risk-summary">Paso 7 · PM · Ver el estado: /risk-summary</h3>
+<p>Cierra y vuelve a abrir Claude Code como PM.</p>
+<blockquote>
+<p>/risk-summary</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<p>Una página con la cabecera (proyecto, <code>retail-marketing</code>, fuera de alcance), el hallazgo alto abierto (<code>pii_columns</code> que nadie aplica), la tabla de los de severidad media, los <strong>nuevos sin registrar</strong> de los pasos 5 y 6, la exportación <strong>aceptada</strong> con su justificación, qué escalar al DPO (aplicar <code>pii_columns</code>, supresión y retención) y qué aplica ya (todo el RGPD).</p>
+<h2 id="fase-2-el-cliente-pide-ia">Fase 2 · El cliente pide IA</h2>
+<p>En un terminal aparte, aplica la fase 2 sobre la misma carpeta:</p>
+<pre><code class="language-text">python3 examples/demo/preparar.py --fase 2 --dest ~/ai-act-demo
+</code></pre>
+<p>Añade cuatro ficheros: la fuente nueva en <code>config/sources/crm_postgres.yaml</code>, el modelo <code>ml/instalment_scoring.py</code>, el asistente <code>assistant/support_bot.py</code> y la encuesta <code>accessibility_survey.sql</code> en Silver. Las dependencias no se copian: las pides tú en el paso 8.</p>
+<div class="notice notice-important"><span class="notice-title">Importante</span><p>En esta fase, <strong>no relances <code>/project-init</code> hasta el paso 13</strong>, aunque Claude lo sugiera en el paso 8. La auditoría mete en la línea base todo lo que encuentra y los hooks callan lo que está en la línea base, así que los avisos de los pasos 9 a 12 ya no saldrían. Está apuntado como D20 en los pendientes.</p></div>
+
+<h3 id="paso-8-de-anadir-dependencias-de-ml-y-llm">Paso 8 · DE · Añadir dependencias de ML y LLM</h3>
+<p>Abre Claude Code como DE.</p>
+<blockquote>
+<p>Añade scikit-learn y anthropic a las dependencias de pyproject.toml.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Al editar, aviso de <strong>entornos nuevos</strong> que la auditoría no tenía: «SDK de LLM» y «Librerías de ML». Sugiere al PM relanzar <code>/project-init</code> (déjalo para el paso 13).</li>
+</ul>
+<h3 id="paso-9-de-revisar-la-fuente-de-las-solicitudes-a-plazos">Paso 9 · DE · Revisar la fuente de las solicitudes a plazos</h3>
+<blockquote>
+<p>Revisa config/sources/crm_postgres.yaml: hay un objeto nuevo para el modelo de impago.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Aviso de <code>instalment_applications</code> sin <code>pii_columns</code>, con <code>pii-masking</code>. Son datos financieros de personas: el DE debería declararlos antes de llevarlos a Bronze.</li>
+</ul>
+<h3 id="paso-10-de-revisar-el-asistente-de-la-web">Paso 10 · DE · Revisar el asistente de la web</h3>
+<blockquote>
+<p>Revisa assistant/support_bot.py: es el chat de atención al cliente de la web.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Aviso <strong>alto</strong>: uso de un modelo de lenguaje, AI Act art. 50, aplica ya (desde 2026-08-02), escalar al PM, skill <code>ai-transparency</code>.</li>
+</ul>
+<blockquote>
+<p>¿Qué tenemos que hacer para cumplir el art. 50?</p>
+</blockquote>
+<ul>
+<li><code>ai-transparency</code> sitúa el chat en el 50.1 (interactúa con personas), dice que la obligación es del proveedor, explica si aplica o no el marcado del 50.2 a sus respuestas y propone un aviso al empezar la conversación («Soy un asistente automático…»).</li>
+<li><strong>Decide</strong> si lo implementas y regístralo.</li>
+</ul>
+<h3 id="paso-11-ae-revisar-la-encuesta-de-accesibilidad">Paso 11 · AE · Revisar la encuesta de accesibilidad</h3>
+<p>Cierra y vuelve a abrir Claude Code como AE.</p>
+<blockquote>
+<p>Revisa transform/silver/accessibility_survey.sql: marketing quiere cruzarla con clientes para campañas de productos adaptados.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Aviso <strong>alto</strong> de posibles categorías especiales (<code>discapacidad</code>), RGPD art. 9, escalar al DPO, skill <code>special-categories</code>, y uno medio por <code>postal_code</code>.</li>
+</ul>
+<blockquote>
+<p>/special-categories</p>
+</blockquote>
+<ul>
+<li>Clasifica <code>discapacidad</code> como dato de salud y debería ver también <code>movilidad_reducida</code> y <code>necesita_ayuda_en_tienda</code>, aunque la señal no los nombre.</li>
+<li>Explica que cruzarla con clientes para campañas necesita una excepción del art. 9.2 (en la práctica, consentimiento explícito), propone alternativas (agregar por tienda, no cruzar con clientes, quitar columnas) y termina <strong>siempre</strong> en el DPO.</li>
+</ul>
+<h3 id="paso-12-de-y-pm-revisar-y-clasificar-el-modelo-de-impago">Paso 12 · DE y PM · Revisar y clasificar el modelo de impago</h3>
+<p>Como DE, en la misma sesión o en una nueva:</p>
+<blockquote>
+<p>Revisa ml/instalment_scoring.py.</p>
+</blockquote>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Aviso <strong>alto</strong>: modelo que puntúa o clasifica, posiblemente sobre personas, AI Act art. 6 y anexo III, aplica desde 2027-12-02, escalar al PM, skill <code>ai-act-classify</code>.</li>
+</ul>
+<p>Cierra y vuelve a abrir como PM:</p>
+<blockquote>
+<p>/ai-act-classify para el modelo de impago de ml/instalment_scoring.py</p>
+</blockquote>
+<ul>
+<li>Recorre el árbol: no es práctica prohibida (art. 5); el sector <code>retail-marketing</code> no tiene punto propio, pero la finalidad (decidir quién paga a plazos) evalúa la solvencia de personas físicas, así que es <strong>candidato a alto riesgo por el punto 5.b</strong>; la excepción del art. 6.3 no salva un sistema que elabora perfiles.</li>
+<li>Pregunta por el rol: proveedor es quien lo pone en servicio con su nombre (probablemente el cliente); la consultora lo desarrolla.</li>
+<li>Dice desde cuándo aplica (2027-12-02) y menciona la evaluación de impacto (FRIA, art. 27) para el responsable del despliegue de un sistema del 5.b.</li>
+<li>Te pide confirmación. <strong>Confirma</strong>: cambia <code>classification.ai_act_level</code> a <code>high-risk-candidate</code> en el perfil y registra el hallazgo <code>scoring-model</code> en la línea base con su justificación.</li>
+</ul>
+<h3 id="paso-13-pm-relanzar-la-auditoria-y-ver-el-estado">Paso 13 · PM · Relanzar la auditoría y ver el estado</h3>
+<blockquote>
+<p>/project-init</p>
+</blockquote>
+<ul>
+<li>Como ya hay perfil, no vuelve a preguntarlo todo: enseña el perfil, pregunta qué ha cambiado (ahora infiere: ML y LLM) y relanza la auditoría.</li>
+<li>Los hallazgos nuevos desde la fase 1: modelo que puntúa, SDK de LLM, categorías especiales, <code>postal_code</code> en la encuesta e <code>instalment_applications</code>.</li>
+</ul>
+<blockquote>
+<p>/risk-summary y guárdalo</p>
+</blockquote>
+<ul>
+<li>Cabecera con clasificación <strong>candidato a alto riesgo</strong>.</li>
+<li>Altos abiertos: categorías especiales (DPO), asistente con LLM (PM) y <code>pii_columns</code> sin aplicar (DPO).</li>
+<li>Aceptados con justificación: exportación y modelo de impago.</li>
+<li>Qué aplica ya (RGPD, art. 50 desde 2026-08-02) y qué después (anexo III desde 2027-12-02).</li>
+<li>Lo guarda en <code>.ai-act/risk-summary.md</code> porque se lo pediste.</li>
+</ul>
+<h2 id="mantenimiento">Mantenimiento</h2>
+<h3 id="paso-14-base-normativa-antigua-y-regulatory-update">Paso 14 · Base normativa antigua y /regulatory-update</h3>
+<p>Prepara una copia de la base normativa con la revisión de hace 120 días (se crea junto a la carpeta de trabajo, no dentro):</p>
+<pre><code class="language-text">python3 examples/demo/preparar.py --base-antigua --dest ~/ai-act-demo
+cd ~/ai-act-demo
+AI_ACT_KNOWLEDGE=~/ai-act-demo-base-antigua claude --plugin-dir &lt;ruta-del-clon&gt;/plugins/ai-act-advisor
+</code></pre>
+<p><strong>Qué debe pasar</strong></p>
+<ul>
+<li>Al abrir, Claude sabe que la base tiene 120 días y sugiere <code>/regulatory-update</code>.</li>
+</ul>
+<p>Después, en el <strong>clon del plugin</strong> (no en la carpeta de la demo), con internet:</p>
+<blockquote>
+<p>/regulatory-update. Solo quiero el informe: no abras rama ni PR.</p>
+</blockquote>
+<ul>
+<li>Lanza el agente <code>regulatory-watcher</code>, que lee las fuentes de <code>knowledge/sources.yaml</code> en solo lectura.</li>
+<li>Devuelve las fuentes leídas y no leídas, los cambios confirmados (con URL y cita literal), los que quedan por verificar y las novedades sin efecto. Sin tu permiso no crea la rama <code>regulatory/AAAA-MM-DD</code>.</li>
+</ul>
+<h2 id="que-apuntar-durante-la-demo">Qué apuntar durante la demo</h2>
+<p>La demo sirve para afinar el plugin. Apunta en cada paso:</p>
+<table>
+<thead>
+<tr>
+<th>Qué mirar</th>
+<th>Por qué importa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Salió el aviso? ¿Y en el momento justo?</td>
+<td>Si no sale, es un fallo; si sale tarde, Claude ya no lo encaja con lo que haces</td>
+</tr>
+<tr>
+<td>¿Claude lo contó en pocas líneas y siguió con tu tarea?</td>
+<td>El plugin nunca debe estorbar (D01, ruido)</td>
+</tr>
+<tr>
+<td>¿Hubo avisos que sobraban o falsos positivos?</td>
+<td>Van a <code>exclusions</code> o a ajustar señales</td>
+</tr>
+<tr>
+<td>¿La skill propuso opciones del stack del proyecto (Delta, DuckDB, PostgreSQL)?</td>
+<td>Las opciones genéricas no ayudan al DE</td>
+</tr>
+<tr>
+<td>¿Citó norma, artículo, fecha de aplicación y fecha de la base?</td>
+<td>Es la regla de todos los avisos</td>
+</tr>
+<tr>
+<td>¿Te dejó decidir?</td>
+<td>Ningún paso debe imponer un cambio de código</td>
+</tr>
+</tbody>
+</table>
+<h2 id="si-algo-no-sale">Si algo no sale</h2>
+<ul>
+<li><strong>No hay ningún aviso</strong>: comprueba que el plugin está cargado (<code>/plugin</code> lo lista) y que Python 3 está en el <code>PATH</code>. <code>python3 examples/demo/ensayo.py</code> dice si el fallo es del plugin o de la sesión.</li>
+<li><strong>Avisa dos veces de lo mismo</strong>: hay dos copias del plugin activas (la del marketplace y la de <code>--plugin-dir</code>).</li>
+<li><strong>En la fase 2 no salen los avisos</strong>: se relanzó <code>/project-init</code> antes de tiempo. Empieza de cero con <code>preparar.py --force</code> o borra la línea base (<code>.ai-act/baseline.json</code>) y vuelve al paso 2.</li>
+<li><strong>Claude no carga la skill</strong>: pídesela por su nombre (<code>/pii-masking</code>, <code>/special-categories</code>…).</li>
+</ul>
+<h2 id="limpiar">Limpiar</h2>
+<p>Borra la carpeta de trabajo (<code>~/ai-act-demo</code>) y, si hiciste el paso 14, <code>~/ai-act-demo-base-antigua</code>. El repo del plugin no cambia.</p>
+<h2 id="mas-informacion">Más información</h2>
+<ul>
+<li><a href="como-se-usa.html">Cómo se usa</a>: la guía de uso, aviso a aviso.</li>
+<li><a href="../tecnica/uso-del-prototipo.html">Cómo funciona el prototipo en uso</a>: qué hay por dentro.</li>
+<li><a href="../pendientes.html">Pendientes y dudas</a>: D01 (ruido), D08 (scoring en el hook) y D20 (relanzar la auditoría).</li>
+</ul>
+      </article>
+
+      <footer class="doc-footer">
+        <span>Fuente: docs/documentos/guia/demo.md</span>
+        <span>asprog-design-system</span>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelector('.doc-theme').addEventListener('click', function () {
+        var r = document.documentElement, t = r.getAttribute('data-theme');
+        var isDark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var next = isDark ? 'light' : 'dark';
+        r.setAttribute('data-theme', next);
+        try { localStorage.setItem('tema', next); } catch (e) {}
+      });
+    </script>
+  </body>
+</html>

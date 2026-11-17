@@ -182,6 +182,7 @@ def post_tool_use(payload):
                 )
     if ext in (".py", ".ipynb") and not core.is_test(rel):
         findings += core.check_llm(rel, text, signals)
+        findings += core.check_scoring(rel, text, signals)
     if ext in core.CODE_EXT and not core.is_test(rel) and not is_source:
         findings += core.check_terms(rel, text, signals, exclusions)
 

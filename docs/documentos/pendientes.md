@@ -83,8 +83,8 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 
 ### D08 · `scoring-model` en el hook
 
-- **Estado**: el hallazgo solo lo emite la auditoría completa (`core.audit`); el hook `PostToolUse` no lo comprueba, así que un modelo nuevo no avisa hasta relanzar `/project-init`.
-- **Qué decidir**: si el hook debe comprobar ML más términos de scoring en el fichero editado.
+- **Estado**: propuesta hecha con la demo (2026-11-17). El hook `PostToolUse` ya comprueba ML más términos de scoring en el fichero leído o editado (`core.check_scoring`), con el mismo id por repo que la auditoría, para que la línea base lo silencie en los dos sitios.
+- **Qué decidir**: si se queda así o si el aviso debe ser por fichero (hoy, un segundo modelo en otro fichero no vuelve a avisar si el primero ya está en la línea base).
 
 ### D09 · Tarea semanal sin programar
 
@@ -141,6 +141,11 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 
 - **Estado**: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. `skills/regulatory-update/SKILL.md` no dice nada de ella.
 - **Qué decidir**: si cada `/regulatory-update` añade a `docs/documentos/fuentes/` los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.
+
+### D20 · Relanzar la auditoría silencia lo que nadie ha visto
+
+- **Estado**: visto al diseñar la demo (2026-11-17). `audit.py write` mete en la línea base, como `abierto`, todo lo que encuentra, y los hooks callan lo que está en la línea base. Si el PM relanza `/project-init` (o `ai-act-classify` escribe la línea base) antes de que DE y AE abran los ficheros nuevos, esos avisos ya no salen en su sesión. La demo lo evita con el orden de los pasos.
+- **Qué decidir**: si los hooks deben seguir avisando de los `abierto` que nadie ha revisado (por ejemplo, con un campo `reviewed` o una fecha de decisión, que enlaza con D10), o si basta con que `/project-init` y `/risk-summary` los enseñen.
 
 ## Verificado
 

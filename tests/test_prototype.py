@@ -258,6 +258,45 @@ class OtherAgentsTest(RepoCopy):
         self.assertEqual(json.loads(buf.getvalue())["hookSpecificOutput"]["hookEventName"], "AfterTool")
 
 
+class DemoTest(unittest.TestCase):
+    """La demo de examples/demo: el ensayo de punta a punta y la fase 2."""
+
+    def test_rehearsal_passes_every_check(self):
+        import subprocess
+        p = subprocess.run([sys.executable, os.path.join(ROOT, "examples", "demo", "ensayo.py"), "--quiet"],
+                           capture_output=True, text=True)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("comprobaciones correctas", p.stdout)
+
+    def test_phase2_adds_ai_act_signals(self):
+        sys.path.insert(0, os.path.join(ROOT, "examples", "demo"))
+        import preparar
+        tmp = tempfile.mkdtemp()
+        try:
+            root = preparar.phase1(os.path.join(tmp, "demo"))
+            preparar.phase2(root)
+            result = core.audit(root)
+            rules = rules_of(result)
+            for rule in ("scoring-model", "llm-sdk", "special-category-terms"):
+                self.assertIn(rule, rules)
+            scoring = [f for f in result["findings"] if f["rule"] == "scoring-model"]
+            self.assertEqual(scoring[0]["evidence"], ["ml/instalment_scoring.py"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+
+class ScoringHookTest(RepoCopy):
+    def test_scoring_model_warns_on_read_with_the_audit_id(self):
+        core.write_outputs(self.root, core.audit(self.root))
+        os.makedirs(os.path.join(self.root, "ml"))
+        with open(os.path.join(self.root, "ml", "churn.py"), "w", encoding="utf-8") as fh:
+            fh.write("from sklearn.ensemble import RandomForestClassifier\nchurn = 1\n")
+        ctx = self.edit("ml/churn.py", tool="Read")
+        self.assertIn("ai-act-classify", ctx)
+        audit_ids = {f["id"] for f in core.audit(self.root)["findings"] if f["rule"] == "scoring-model"}
+        self.assertTrue(any(fid in ctx for fid in audit_ids))
+
+
 class EntryPointsTest(unittest.TestCase):
     def test_hook_entry_point_survives_bad_input(self):
         import subprocess
