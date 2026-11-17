@@ -9,7 +9,7 @@ Se recorre en orden y se para en la primera respuesta que fija el nivel. La tran
 | Paso | Pregunta | Si la respuesta es sí | Nivel en el perfil |
 |---|---|---|---|
 | 1 | ¿El entregable **infiere** (art. 3.1)? | Sigue. Si solo aplica reglas escritas por personas, consultas, cuadros de mando sin recomendación, optimización clásica o una regla estadística básica, queda fuera (directrices de definición, párr. 41-51) | `out-of-scope` si no infiere |
-| 2 | ¿Aplica una exclusión del art. 2? | Fuera: uso exclusivamente militar o de seguridad nacional (2.3), único fin de I+D científica (2.6), desarrollo y pruebas antes de comercializar, sin pruebas en condiciones reales (2.8), uso personal no profesional (2.10) | `out-of-scope` |
+| 2 | ¿Aplica una exclusión del art. 2? | Fuera: uso exclusivamente militar o de seguridad nacional (2.3), único fin de I+D científica (2.6), desarrollo y pruebas antes de comercializar, sin pruebas en condiciones reales (2.8), persona física que lo usa en una actividad puramente personal, no profesional (2.10) | `out-of-scope` |
 | 3 | ¿Es una práctica del art. 5? | Práctica prohibida | `prohibited` |
 | 4 | ¿Su finalidad cae en un caso del anexo III (art. 6.2) o es componente de seguridad de un producto del anexo I (art. 6.1)? | Candidato a alto riesgo, salvo la excepción del art. 6.3 | `high-risk-candidate` |
 | 5 | ¿Habla con personas o genera contenido (art. 50)? | Obligaciones de transparencia: skill `ai-transparency` | `transparency` |
@@ -29,8 +29,8 @@ El AI Act alcanza al proyecto si la salida del sistema se usa en la UE o afecta 
 | 5.1.d | Predecir el riesgo de que una persona delinca basándose únicamente en perfilado o rasgos de personalidad | Se permite apoyar una valoración humana basada en hechos objetivos y verificables |
 | 5.1.e | Crear o ampliar bases de reconocimiento facial con extracción no selectiva de imágenes de internet o CCTV | — |
 | 5.1.f | Inferir emociones en el lugar de trabajo y en centros educativos | Salvo motivos médicos o de seguridad. Debe basarse en datos biométricos (art. 3.39): el sentimiento de un texto no encaja en la definición |
-| 5.1.g | Categorización biométrica para deducir raza, opiniones políticas, afiliación sindical, convicciones religiosas, vida u orientación sexual | Salvo etiquetado o filtrado de conjuntos de datos biométricos lícitos |
-| 5.1.h | Identificación biométrica remota en tiempo real en espacios públicos con fines policiales | Salvo las excepciones tasadas del art. 5.2-5.7 |
+| 5.1.g | Categorización biométrica para deducir raza, opiniones políticas, afiliación sindical, convicciones religiosas, vida u orientación sexual | Salvo el etiquetado o filtrado de conjuntos de datos biométricos adquiridos lícitamente y la categorización de datos biométricos en el ámbito policial |
+| 5.1.h | Identificación biométrica remota en tiempo real en espacios públicos con fines policiales | Salvo las tres excepciones del propio 5.1.h (búsqueda de víctimas o desaparecidos, amenaza inminente, localización de sospechosos de delitos graves), con las condiciones del art. 5.2-5.7 |
 
 El scoring crediticio y el de seguros **no** son puntuación social por sí mismos: son alto riesgo (directrices de prácticas prohibidas, párr. 37). Multa: hasta 35 M EUR o el 7 % del volumen de negocios (art. 99.3).
 

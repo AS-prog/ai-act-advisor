@@ -12,6 +12,8 @@ Referencia de la skill `ai-transparency`. Sale de `docs/investigacion/ai-act-inv
 | 50.4 | Responsable del despliegue | Deepfakes: revelar que el contenido es artificial. Texto publicado para informar al público sobre asuntos de interés público: revelarlo | Obras evidentemente artísticas, satíricas o de ficción (revelación atenuada). Texto con revisión humana y responsabilidad editorial |
 | 50.5 | Ambos | Información clara y distinguible, como muy tarde en la primera interacción o exposición, y accesible | — |
 
+La tabla deja fuera la excepción de uso policial autorizado por ley, que tienen los apartados 1 a 4.
+
 El art. 50.2 tiene dos fechas en `dates.yaml`: la general y la de los sistemas generativos comercializados antes de la fecha general (art. 111.4). El contenido generado antes de la fecha general no necesita etiquetado retroactivo (FAQ de la Comisión sobre el art. 50).
 
 ## Aviso de IA (50.1)
@@ -27,14 +29,14 @@ El art. 50.2 tiene dos fechas en `dates.yaml`: la general y la de los sistemas g
 - Hacen falta las dos cosas: marcado legible por máquina y detectabilidad (párr. 69-70).
 - **Técnicas** (párr. 72-73): marca de agua, metadatos (C2PA, IPTC), procedencia criptográfica, registro y huellas. Se combinan en capas.
 - El marcado puede hacerse en el modelo, en la inferencia o a posteriori. El proveedor del sistema responde aunque use la solución de un tercero (párr. 74).
-- **Fuera del marcado** (párr. 64-68): salidas muy cortas (palabras sueltas, pies de foto, texto alternativo, etiquetas de interfaz); código fuente, SQL, JSON, YAML, esquemas y API; salidas máquina a máquina; recomendadores que solo ordenan contenido existente; salidas intermedias de un circuito cerrado de producción.
+- **Fuera del marcado** (párr. 64-68): salidas muy cortas (palabras sueltas, pies de foto, texto alternativo, etiquetas de interfaz); código fuente, SQL, JSON, YAML, esquemas y API; salidas máquina a máquina; recomendadores que solo seleccionan u ordenan contenido existente; salidas intermedias de un circuito cerrado de producción.
 - **Edición estándar** (párr. 90-92): corrección gramatical, formato, traducción, transcripción y reducción de ruido están exentas. Se marcan los resúmenes generados, las reescrituras que cambian el sentido y la inserción o eliminación de personas u objetos en imágenes.
 - El Código de buenas prácticas sobre transparencia del contenido generado por IA (versión final de 10-06-2026) sirve para demostrar el cumplimiento, y hay iconos de la UE para etiquetar.
 
 ## Deepfakes y texto de interés público (50.4)
 
-- Un deepfake cumple tres criterios (párr. 113-117): semejanza apreciable con algo existente, existencia plausible y apariencia falsa de autenticidad. La intención de engañar es indiferente. Un avatar realista de una persona real lo es.
-- El responsable del despliegue pone una etiqueta perceptible por personas; el marcado técnico del proveedor se suma a ella, sin sustituirla.
+- Un deepfake cumple cuatro criterios acumulativos (párr. 113): el contenido se asemeja de forma apreciable; a algo existente; que es una persona, un objeto, un lugar, una entidad o un suceso; y aparenta falsamente ser auténtico o verídico. La intención de engañar es indiferente (párr. 114). Un avatar realista de una persona real lo es.
+- El responsable del despliegue pone una etiqueta perceptible por personas; el marcado técnico del proveedor se suma a ella, sin sustituirla (párr. 117).
 - La publicación automática de textos de interés público generados sin revisión editorial entra en el 50.4.
 
 ## Emociones y biometría (50.3)

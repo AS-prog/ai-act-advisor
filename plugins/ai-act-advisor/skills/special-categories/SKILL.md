@@ -59,4 +59,4 @@ Riesgo · Norma y artículo · Aplica ya o desde AAAA-MM-DD · Qué puede pasar 
 ## Límites
 
 - La detección es por nombre de columna (`special_category_terms` en `knowledge/signals.yaml`). Los proxies no tienen señal propia: salen de leer el esquema con la tabla de la referencia.
-- La parte de RGPD de la referencia está pendiente de contrastar; el aviso lo dice cuando cita una excepción del art. 9.2.
+- La excepción del art. 9.2 que vale en cada caso la confirma el DPO; el aviso la propone como pregunta, sin darla por buena.

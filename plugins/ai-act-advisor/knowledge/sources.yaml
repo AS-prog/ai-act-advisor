@@ -3,7 +3,7 @@
   nombre: EUR-Lex (AI Act y reglamentos que lo modifican)
   urls:
     - https://eur-lex.europa.eu/eli/reg/2024/1689/oj
-    - https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32026R1744
+    - https://eur-lex.europa.eu/legal-content/ES/TXT/HTML/?uri=CELEX:32026R1744
   last_checked: 2026-11-17
 - id: ai-office
   nombre: Oficina de IA de la Comisión (directrices y códigos)
