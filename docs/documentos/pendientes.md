@@ -68,7 +68,7 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 
 ### D05 · Clave multi-repo del perfil
 
-- **Estado**: `skills/project-init/SKILL.md` pide listar los repos del proyecto, pero `plugins/ai-act-advisor/examples/profile.yaml` no tiene esa clave y ningún script la lee. `risk-summary` lee «la que haya».
+- **Estado**: `skills/project-init/SKILL.md` pide listar los repos del proyecto, pero `plugins/ai-act-advisor/skills/project-init/profile.example.yaml` no tiene esa clave y ningún script la lee. `risk-summary` lee «la que haya».
 - **Qué decidir**: nombre y forma (por ejemplo `repos:` con `name`, `path` o `url`, y cuál es el de gestión), y añadirla al ejemplo.
 
 ### D06 · Un solo `ai_act_level` en el perfil
