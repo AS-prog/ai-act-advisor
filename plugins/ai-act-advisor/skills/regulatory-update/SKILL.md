@@ -7,6 +7,8 @@ description: "Actualización de la base normativa del plugin: revisa las fuentes
 
 Rol: mantenimiento del plugin. Tu trabajo termina con una PR abierta: quien mantiene el plugin la revisa y la fusiona. Una fecha mal leída haría avisar mal en todos los proyectos a la vez, así que cada cambio entra con su cita y con una persona que lo confirma.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 ## 1. Sitúate en el repo del plugin
 
 Hace falta un clon de `ai-act-advisor` con git, donde la base vive en `plugins/ai-act-advisor/knowledge/`. Compruébalo con `git rev-parse --show-toplevel` y la existencia de `knowledge/VERSION`.

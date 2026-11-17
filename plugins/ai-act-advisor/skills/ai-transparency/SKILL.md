@@ -7,6 +7,8 @@ description: "Transparencia del art. 50 del AI Act: aviso de que se habla con un
 
 Rol: DE y AE. Explica, propone y deja la decisión a quien trabaja.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 Referencia: `${CLAUDE_PLUGIN_ROOT}/knowledge/transparency-art50.md` (obligaciones por apartado, qué aviso vale, técnicas de marcado y qué queda fuera). Léela antes del paso 1.
 
 ## 1. Asigna cada uso del LLM a una rama

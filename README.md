@@ -27,6 +27,16 @@ Plugin de Claude Code que avisa a project managers (PM), data engineers (DE) y a
 /plugin install ai-act-advisor@ai-act-advisor
 ```
 
+### Con APM (otros agentes, experimental)
+
+[APM](https://github.com/microsoft/apm) instala el mismo plugin en el repo del proyecto y lo traduce a cada agente (Copilot, Codex, Cursor, Gemini…). Desde la raíz del repo del proyecto:
+
+```
+apm install AS-prog/ai-act-advisor/plugins/ai-act-advisor --target copilot
+```
+
+Las skills y el agente llegan a todos los agentes. Los avisos automáticos (hooks) dependen de cada agente: en Claude Code funcionan igual que con el plugin; en el resto, revisa `plugins/ai-act-advisor/apm.yml` para ver qué se pierde.
+
 ## Probar el prototipo
 
 ```

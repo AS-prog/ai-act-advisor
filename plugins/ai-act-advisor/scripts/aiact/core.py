@@ -14,10 +14,12 @@ import re
 
 from . import miniyaml
 
+# Claude Code define CLAUDE_PLUGIN_ROOT. Instalado con APM, la carpeta del plugin es la que
+# contiene scripts/ y knowledge/ (.claude/hooks/ai-act-advisor, .github/hooks/scripts/ai-act-advisor…).
 PLUGIN_ROOT = os.environ.get("CLAUDE_PLUGIN_ROOT") or os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..")
 )
-KNOWLEDGE = os.path.join(PLUGIN_ROOT, "knowledge")
+KNOWLEDGE = os.environ.get("AI_ACT_KNOWLEDGE") or os.path.join(PLUGIN_ROOT, "knowledge")
 STATE_DIR = ".ai-act"
 
 SKIP_DIRS = {

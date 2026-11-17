@@ -7,6 +7,8 @@ description: "Configura un proyecto frente al AI Act y el RGPD: en un repo nuevo
 
 Rol: PM. Lanzamiento manual con `/project-init`. Nunca bloquea: informa y deja la decisión a quien trabaja.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 ## Reglas de seguridad (siempre)
 
 - Solo lectura sobre el código del cliente. Lo único que se escribe es la carpeta `.ai-act/` del repo.
@@ -38,7 +40,7 @@ Rellena primero con lo que haya en el repo (README, `docs/`, propuesta, SOW) y p
 6. Contactos de escalado: DPO, legal, PM.
 7. Si el proyecto ocupa varios repos, lista los repos. El informe consolidado vive en el repo de gestión.
 
-Escribe `.ai-act/profile.yaml` con la forma de `${CLAUDE_PLUGIN_ROOT}/examples/profile.yaml`. Para la clasificación inicial usa `knowledge/dates.yaml` y explica qué fecha aplica a cada obligación (art. 4 y 5 desde 2025-02-02, art. 50 desde 2026-08-02, Anexo III desde 2027-12-02 tras el Omnibus). Si hay dudas sobre alto riesgo, propón la skill `ai-act-classify`.
+Escribe `.ai-act/profile.yaml` con la forma de `profile.example.yaml`, en la carpeta de esta skill. Para la clasificación inicial usa `knowledge/dates.yaml` y explica qué fecha aplica a cada obligación (art. 4 y 5 desde 2025-02-02, art. 50 desde 2026-08-02, Anexo III desde 2027-12-02 tras el Omnibus). Si hay dudas sobre alto riesgo, propón la skill `ai-act-classify`.
 
 ## 3. Auditoría de riesgos (proyecto encaminado)
 

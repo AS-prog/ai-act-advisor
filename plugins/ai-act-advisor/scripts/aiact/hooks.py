@@ -16,14 +16,37 @@ WATCH_EXT = {".py", ".sql", ".yml", ".yaml", ".ipynb", ".toml"}
 DISCLAIMER = "No es asesoramiento legal."
 
 
+# Nombres de herramienta que escriben, por agente: Claude Code, Copilot CLI, Gemini CLI y Cursor.
+WRITE_TOOLS = {"Edit", "Write", "MultiEdit", "NotebookEdit", "edit", "create", "write_file", "replace"}
+
+
 def _project_root(payload):
-    return os.environ.get("CLAUDE_PROJECT_DIR") or payload.get("cwd") or os.getcwd()
+    return (os.environ.get("CLAUDE_PROJECT_DIR") or os.environ.get("GEMINI_PROJECT_DIR")
+            or payload.get("cwd") or os.getcwd())
 
 
-def _emit(event, text):
+def _emit(event, text, payload=None):
+    """Formato de Claude Code (lo comparten Gemini CLI y Codex). Otros agentes lo ignoran sin error."""
     if text:
-        print(json.dumps({"hookSpecificOutput": {"hookEventName": event, "additionalContext": text}},
+        name = (payload or {}).get("hook_event_name") or event
+        print(json.dumps({"hookSpecificOutput": {"hookEventName": name, "additionalContext": text}},
                          ensure_ascii=False))
+
+
+def _tool_and_path(payload):
+    """Herramienta y fichero del evento, con los nombres de campo de cada agente."""
+    tool = payload.get("tool_name") or payload.get("toolName") or ""
+    args = payload.get("tool_input") or payload.get("toolArgs") or {}
+    if isinstance(args, str):  # Copilot CLI manda los argumentos como texto JSON
+        try:
+            args = json.loads(args)
+        except ValueError:
+            args = {}
+    if not isinstance(args, dict):
+        args = {}
+    path = (args.get("file_path") or args.get("notebook_path") or args.get("absolute_path")
+            or args.get("path") or payload.get("file_path"))
+    return tool, path
 
 
 def _state_path(session_id):
@@ -77,7 +100,7 @@ def session_start(payload):
         age = None
     if age is not None and age > 90:
         msgs.append(f"La base normativa del plugin tiene {age} días: conviene lanzar /regulatory-update.")
-    _emit("SessionStart", "\n".join(msgs))
+    _emit("SessionStart", "\n".join(msgs), payload)
 
 
 # ---------------------------------------------------------------- PostToolUse
@@ -93,8 +116,7 @@ def _rel(root, path):
 
 
 def post_tool_use(payload):
-    tool = payload.get("tool_name", "")
-    path = (payload.get("tool_input") or {}).get("file_path") or (payload.get("tool_input") or {}).get("notebook_path")
+    tool, path = _tool_and_path(payload)
     if not path:
         return
     root = _project_root(payload)
@@ -115,7 +137,7 @@ def post_tool_use(payload):
     rules = core.load_json(os.path.join(state_dir, "rules.json"), None)
     baseline = core.load_json(os.path.join(state_dir, "baseline.json"), {}).get("findings", {})
     exclusions = (rules or {}).get("exclusions") or signals.get("exclusions", [])
-    writing = tool in ("Edit", "Write", "MultiEdit", "NotebookEdit")
+    writing = tool in WRITE_TOOLS
 
     findings = []
     notes = []
@@ -146,7 +168,7 @@ def post_tool_use(payload):
         findings += core.check_terms(rel, text, signals, exclusions)
 
     findings = [f for f in findings if f["id"] not in baseline]
-    seen_path = _state_path(payload.get("session_id"))
+    seen_path = _state_path(payload.get("session_id") or payload.get("sessionId"))
     seen = set(core.load_json(seen_path, []))
     fresh = [f for f in findings if f["id"] not in seen]
     if not fresh and not notes:
@@ -179,4 +201,4 @@ def post_tool_use(payload):
         if not rules:
             lines.append("El repo no tiene reglas propias (.ai-act/rules.json): sugiere una vez /project-init.")
     lines += notes
-    _emit("PostToolUse", "\n".join(lines))
+    _emit("PostToolUse", "\n".join(lines), payload)

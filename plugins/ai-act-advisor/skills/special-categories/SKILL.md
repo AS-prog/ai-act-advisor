@@ -7,6 +7,8 @@ description: "Categorías especiales de datos (RGPD art. 9) y variables proxy qu
 
 Rol: DE y AE. Explica, propone y deja la decisión a quien trabaja. La base jurídica de una categoría especial la decide el responsable del tratamiento con su DPO: por eso este aviso **siempre** termina en el DPO.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 Referencia: `${CLAUDE_PLUGIN_ROOT}/knowledge/special-categories.md` (lista del art. 9.1, tabla de proxies, excepciones del art. 9.2 y condiciones del art. 4 bis). Léela antes del paso 1.
 
 ## 1. Clasifica cada columna señalada
