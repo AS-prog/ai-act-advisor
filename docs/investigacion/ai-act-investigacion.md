@@ -178,13 +178,13 @@ La FAQ estima que la extensión a SMC beneficia a "an additional 8,250 companies
 | Categorización biométrica | Asigna a personas a categorías según sus datos biométricos, salvo que sea accesoria a otro servicio comercial y estrictamente necesaria | art. 3.40 |
 | Identificación biométrica remota | Sin participación activa de la persona, normalmente a distancia, por comparación con una base de datos | art. 3.41; "en tiempo real": 3.42 |
 | Incidente grave | Muerte o daño grave a la salud; alteración grave e irreversible de infraestructura crítica; infracción del Derecho de la UE sobre derechos fundamentales; daño grave a bienes o al medio ambiente | art. 3.49 (a-d) |
-| **Ultrasuplantación (deepfake)** | Contenido de imagen, audio o vídeo generado o manipulado que se asemeja a personas, objetos, lugares, entidades o sucesos existentes y que parecería auténtico | art. 3.60 |
+| **Ultrafalsificación (deepfake)** | Contenido de imagen, audio o vídeo generado o manipulado que se asemeja a personas, objetos, lugares, entidades o sucesos existentes y que parecería auténtico | art. 3.60 |
 | **Modelo GPAI** | Modelo, también el entrenado con grandes volúmenes de datos mediante autosupervisión, que muestra una generalidad significativa y puede realizar con competencia una gran variedad de tareas. Excluye los modelos usados solo para I+D o prototipos antes de comercializarse | art. 3.63 |
 | Capacidades de gran impacto | Igualan o superan las de los modelos más avanzados | art. 3.64 |
 | Riesgo sistémico | Riesgo específico de las capacidades de gran impacto, con repercusión significativa por su alcance o sus efectos negativos, que puede propagarse a escala | art. 3.65 |
 | Sistema GPAI | Sistema basado en un modelo GPAI que puede servir para diversos fines | art. 3.66 |
 
-**Directrices de la Comisión sobre la definición de sistema de IA** (6-02-2025, no vinculantes). Desglosan el art. 3.1 en **7 elementos**: basado en máquinas, autonomía, adaptabilidad (opcional), objetivos, **inferencia** (el criterio que separa la IA del software tradicional), salidas e influencia en el entorno (párr. 9-60). **Quedan fuera** (párr. 41-51):
+**Directrices de la Comisión sobre la definición de sistema de IA** (publicadas el 6-02-2025 y adoptadas el 29-07-2025 como C(2025) 5053 final; no vinculantes). Desglosan el art. 3.1 en **7 elementos**: basado en máquinas, autonomía, adaptabilidad (opcional), objetivos, **inferencia** (el criterio que separa la IA del software tradicional), salidas e influencia en el entorno (párr. 9-60). **Quedan fuera** (párr. 41-51):
 
 - la **optimización matemática** que solo acelera o aproxima métodos clásicos (párr. 42-44);
 - el **procesamiento básico de datos**: consultas a bases de datos, cuadros de mando sin recomendación (párr. 46-47);
@@ -236,7 +236,7 @@ Aplicables desde el 2-02-2025, salvo b bis y b ter, que se aplican a partir del 
 | **g** | **Categorización biométrica** para deducir raza, opiniones políticas, afiliación sindical, convicciones religiosas o filosóficas, vida sexual u orientación sexual | Salvo el etiquetado o filtrado de conjuntos de datos biométricos lícitos y la categorización en el ámbito policial | art. 5.1.g |
 | **h** | **Identificación biométrica remota "en tiempo real"** en espacios de acceso público **con fines policiales** | Salvo cuando sea estrictamente necesaria para: (i) buscar víctimas o personas desaparecidas; (ii) prevenir una amenaza concreta, sustancial e inminente o terrorista; (iii) localizar sospechosos de delitos del anexo II castigados con un máximo de al menos 4 años. Requiere FRIA (art. 27), registro (art. 49), autorización judicial o administrativa previa (urgencia: solicitud en 24 h), notificación a la autoridad de vigilancia del mercado y a la de protección de datos, y ley nacional habilitante | art. 5.1.h, 5.2-5.7 |
 
-**Ejemplos de las directrices de la Comisión sobre prácticas prohibidas** (4-02-2025, act. 31-07-2025, no vinculantes; lectura parcial):
+**Ejemplos de las directrices de la Comisión sobre prácticas prohibidas** (publicadas el 4-02-2025 y adoptadas el 29-07-2025 como C(2025) 5052 final; no vinculantes; lectura parcial):
 
 - Para la letra **a**: mensajes subliminales o estímulos enmascarados (párr. 65), manipulación sensorial (párr. 68), persuasión personalizada sobre vulnerabilidades (párr. 68) y un chatbot que suplanta a un familiar para estafar (párr. 73).
 - Las alucinaciones de la IA generativa no entran, si se informa a los usuarios y hay salvaguardias (párr. 73).
@@ -439,7 +439,7 @@ Aplicable **desde el 2-08-2026** (art. 113). Para los sistemas generativos comer
 | **50.5** | Ambos | Información **clara y distinguible**, **como muy tarde en la primera interacción o exposición**, y accesible | — |
 | **50.7** (AMENDED) | Comisión | Códigos de buenas prácticas sobre detección, marcado y etiquetado. **Acto de ejecución solo si el código se considera inadecuado** | — |
 
-**Criterios operativos de las directrices del art. 50**, C(2026) 5054, de 20-07-2026, no vinculantes:
+**Criterios operativos de las directrices del art. 50**, Comunicación C(2026) 7702 final, de 5-11-2026 (su contenido se aprobó el 20-07-2026 como C(2026) 5054, con la misma numeración de párrafos), no vinculantes:
 
 - **Interacción directa**: hay 4 elementos (párr. 30). Las respuestas automáticas basadas en reglas, como un mensaje de ausencia, quedan fuera. Los **agentes de IA** deben revelar su naturaleza y **en nombre de quién actúan**, en cada interacción nueva y en los pasos clave (párr. 31).
 - **Técnicas de aviso recomendadas** (párr. 37): etiquetas, banners, saludo en el primer turno, aviso sonoro en voz, iconos persistentes o el símbolo "AI".
@@ -456,8 +456,8 @@ Aplicable **desde el 2-08-2026** (art. 113). Para los sistemas generativos comer
   - recomendadores que solo ordenan contenido existente;
   - salidas intermedias de un circuito cerrado de producción.
 - **Edición estándar** (párr. 90-92): gramática, formato, traducción, transcripción y reducción de ruido están exentos. **Sí** hay que marcar los resúmenes generados, las reescrituras que cambian el sentido y la inserción o eliminación de personas u objetos en imágenes.
-- **Deepfake** (párr. 113-117):
-  - tres criterios: semejanza apreciable, existencia plausible y apariencia falsa de autenticidad. No hace falta intención de engañar.
+- **Ultrafalsificación o deepfake** (párr. 113-117):
+  - cuatro criterios acumulativos (párr. 113): semejanza apreciable; con personas, objetos, lugares, entidades o sucesos; existentes; y que puede inducir a una persona a pensar erróneamente que son auténticos o verídicos. No hace falta intención de engañar (párr. 114).
   - Un avatar realista del CEO **sí** es un deepfake; una esfinge volando sobre la Torre Eiffel **no**.
   - El responsable del despliegue necesita una etiqueta **perceptible por humanos**. **No le basta** con el marcado técnico del proveedor.
 - **Emociones y biometría** (párr. 99-108): avisar a **todas** las personas expuestas, incluidos los niños, en la primera exposición. Ejemplo: una ventana emergente antes de un juego que graba la cara.
@@ -701,12 +701,12 @@ Proceden del **sandbox piloto español**, liderado por SEDIA con la Comisión Eu
 
 | Documento | Fecha y estado | URL |
 |---|---|---|
-| Directrices sobre la definición de sistema de IA | 6-02-2025, no vinculantes | https://digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-ai-system-definition-facilitate-first-ai-acts-rules-application · PDF EN: https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-08/commission_guidelines_on_the_definition_of_an_artificial_intelligence_system_established_by_regulation_eu_20241689_ai_actenglish_nf2skcqfrtjdfggjavcodopcwz4_112455.PDF |
-| Directrices sobre prácticas prohibidas | 4-02-2025, actualizadas el 31-07-2025, no vinculantes | https://digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-prohibited-artificial-intelligence-ai-practices-defined-ai-act · PDF EN: https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-08/guidelines_on_prohibited_artificial_intelligence_practices_established_by_regulation_eu_20241689_ai_act_english_ied3r5nwo50xggpcfmwckm3nuc_112367-1.PDF |
+| Directrices sobre la definición de sistema de IA, C(2025) 5053 final | Publicadas el 6-02-2025; adoptadas el 29-07-2025; no vinculantes | PDF ES: https://ec.europa.eu/newsroom/dae/redirection/document/118640 · https://digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-ai-system-definition-facilitate-first-ai-acts-rules-application · PDF EN: https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-08/commission_guidelines_on_the_definition_of_an_artificial_intelligence_system_established_by_regulation_eu_20241689_ai_actenglish_nf2skcqfrtjdfggjavcodopcwz4_112455.PDF |
+| Directrices sobre prácticas prohibidas, C(2025) 5052 final | Publicadas el 4-02-2025; adoptadas el 29-07-2025; no vinculantes | PDF ES: https://ec.europa.eu/newsroom/dae/redirection/document/118659 · https://digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-prohibited-artificial-intelligence-ai-practices-defined-ai-act · PDF EN: https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-08/guidelines_on_prohibited_artificial_intelligence_practices_established_by_regulation_eu_20241689_ai_act_english_ied3r5nwo50xggpcfmwckm3nuc_112367-1.PDF |
 | Directrices sobre el alcance de las obligaciones GPAI, C(2025) 5045 | 18-07-2025, actualizadas el 20-04-2026 | https://digital-strategy.ec.europa.eu/en/library/guidelines-scope-obligations-providers-general-purpose-ai-models-under-ai-act · PDF: https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-07/guidelines_on_the_scope_of_the_obligations_for_generalpurpose_ai_models_established_by_regulation_1cx2atxgq79us4n3x8jfgyy1qlm_118340-3.pdf · FAQ: https://digital-strategy.ec.europa.eu/en/faqs/guidelines-obligations-general-purpose-ai-providers |
-| Directrices del art. 50 (transparencia), C(2026) 5054 | 20-07-2026 | https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf · https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content · Q&A: https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act |
+| Directrices del art. 50 (transparencia), C(2026) 7702 final | Adoptadas el 5-11-2026 (contenido aprobado el 20-07-2026 como C(2026) 5054); no vinculantes | PDF ES: https://ec.europa.eu/newsroom/dae/redirection/document/134794 · PDF EN de julio: https://ai-act-service-desk.ec.europa.eu/sites/default/files/2026-07/guidelines_on_the_implementation_of_the_transparency_obligations_for_certain_ai_systems_under_article_50_of_the_ai_act_bzptwqhk0ikg1dtlddap41psfy_131215.pdf · https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content · Q&A: https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act |
 | Código de buenas prácticas sobre transparencia del contenido generado por IA | Final el 10-06-2026; declarado adecuado | https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content · PDF: https://ec.europa.eu/newsroom/dae/redirection/document/129555 · Iconos UE: https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content |
-| Directrices de clasificación de alto riesgo (art. 6) | **BORRADOR**, consulta hasta el 23-07-2026 | https://ai-act-service-desk.ec.europa.eu/en/guidelines-classification-high-risk-ai-systems · https://digital-strategy.ec.europa.eu/en/library/draft-guidelines-high-risk · Explorer: https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer |
+| Directrices de clasificación de alto riesgo (art. 6) | **BORRADOR** publicado el 19-05-2026, consulta hasta el 23-07-2026; sin versión final a 17-11-2026 | https://ai-act-service-desk.ec.europa.eu/en/guidelines-classification-high-risk-ai-systems · https://digital-strategy.ec.europa.eu/en/library/draft-guidelines-high-risk · Explorer: https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer |
 | Código de buenas prácticas GPAI | Versión final de julio de 2025 (según la lista awesome; **no leído** en origen) | https://digital-strategy.ec.europa.eu/en/policies/ai-act-general-purpose-ai |
 | AI Act Service Desk: Compliance Checker, Explorer y FAQ | Oficial (Comisión) | https://ai-act-service-desk.ec.europa.eu/en/eu-ai-act-compliance-checker · https://ai-act-service-desk.ec.europa.eu/en/ai-act-explorer · https://ai-act-service-desk.ec.europa.eu/en/faq |
 
@@ -877,6 +877,18 @@ Todas se consultaron el **17-11-2026**.
 ---
 
 ## 20. Pendiente / no verificado
+
+> **Revisión del 17-11-2026 con los textos oficiales en español** (copias en `docs/fuentes/`, manifiesto en `docs/fuentes/README.md`). La lista de abajo se conserva como quedó al cerrar la investigación; esto es lo que ha cambiado:
+>
+> - **Puntos 2 y 3, resueltos.** Se leyó el consolidado en español (CELEX 02024R1689-20260727) y el texto original de 2024 (DO L de 12-07-2024). La terminología de este documento sigue ya la oficial; el art. 3.60 dice «ultrafalsificación».
+> - **Punto 1, resuelto en lo que usa el plugin.** Los arts. 99, 111 y 113 y el anexo I se comprobaron en el consolidado, y el art. 4 del Reglamento 2026/1744 (entrada en vigor a los tres días de su publicación: 27-07-2026), en el Diario Oficial. El art. 3 del Reglamento 2026/1744 modifica los arts. 8, 20 y 47 del Reglamento 2023/1230; no se ha analizado más allá.
+> - **Punto 5, resuelto.** En el consolidado, el art. 6.4 conserva la redacción original; el Omnibus solo añade los apartados 1 bis, 1 ter y 1 quater.
+> - **Punto 7, sigue igual.** Las directrices del art. 6 siguen en borrador.
+> - **Punto 8, resuelto en parte.** Las directrices de prácticas prohibidas se descargaron completas en español (C(2025) 5052 final); se comprobaron los términos y los ejemplos que usa `knowledge/`, no el resto de ejemplos de este documento.
+> - **Punto 13, resuelto en parte.** Las guías 01-15 de AESIA (versión 2.0, de 17-07-2026, ya adaptadas al Reglamento 2026/1744), la guía 16 y el ZIP de checklists están descargados; no se han leído una a una.
+> - **Punto 14.** El art. 43.2 del consolidado confirma el control interno del anexo VI.
+>
+> El estado al día de cada duda está en `docs/pendientes.md`.
 
 1. **Texto íntegro del Reglamento 2026/1744 a partir del art. 1 punto 32 (art. 75 bis)**: arts. 77, 96, 99, 111 y 113, anexos VIII y XIV, y los **arts. 2 y 3 (modificaciones de los Reglamentos 2018/1139 y 2023/1230)**. Los cambios de los arts. 77-113 y de los anexos se verificaron **solo** con las marcas del Service Desk, y no se conoce el número de punto exacto. No se leyó el contenido de las modificaciones del Reglamento de máquinas, que es relevante para el traslado de las máquinas a la sección B del anexo I.
 2. **Texto original de 2024 de los arts. 4 y 113**, para la columna "antes" del calendario. Se infiere de la FAQ del Service Desk y del considerando 8 del Omnibus. EUR-Lex y BOE se truncaron antes de llegar a los artículos.

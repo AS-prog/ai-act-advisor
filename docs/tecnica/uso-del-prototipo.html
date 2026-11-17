@@ -31,6 +31,10 @@
     <ul>
     <li><a href="uso-del-prototipo.html" aria-current="page">Cómo funciona el prototipo en uso</a></li>
     </ul>
+    <h2>Seguimiento</h2>
+    <ul>
+    <li><a href="../pendientes.html">Pendientes y dudas</a></li>
+    </ul>
     <h2>Investigación</h2>
     <ul>
     <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
@@ -608,7 +612,7 @@ python3 -m unittest discover -s tests
 
 <ul>
 <li>Solo entiende configuración en YAML, código Python y SQL. Los notebooks <code>.ipynb</code> se leen por celdas. Scala y R solo entran en la auditoría, con la búsqueda de términos; los hooks no los vigilan.</li>
-<li>Categorías especiales, scoring y transparencia (art. 50) se detectan, pero sus skills siguen como esqueleto.</li>
+<li>Categorías especiales, scoring y transparencia (art. 50) tienen skill propia, pero el hook del día a día no emite <code>scoring-model</code> (solo la auditoría) y los proxies de categorías especiales no tienen señal en <code>signals.yaml</code>.</li>
 <li>El informe HTML con el sistema de diseño solo se ofrece si el repo tiene <code>docs/site/site.toml</code>.</li>
 </ul>
 <h2 id="donde-esta">Dónde está en el código</h2>
@@ -671,6 +675,11 @@ python3 -m unittest discover -s tests
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>2026-11-17</td>
+<td>Skills y agente</td>
+<td><code>risk-summary</code>, <code>special-categories</code>, <code>ai-act-classify</code>, <code>ai-transparency</code>, <code>regulatory-update</code> y el agente <code>regulatory-watcher</code> con contenido real, más tres referencias en <code>knowledge/</code></td>
+</tr>
 <tr>
 <td>2026-11-17</td>
 <td>PR #2</td>

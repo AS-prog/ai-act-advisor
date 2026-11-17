@@ -22,6 +22,14 @@ path = "docs/tecnica/uso-del-prototipo.html"
 type = "técnica"
 
 [[section]]
+title = "Seguimiento"
+
+[[section.page]]
+title = "Pendientes y dudas"
+path = "docs/pendientes.html"
+type = "documento"
+
+[[section]]
 title = "Investigación"
 
 [[section.page]]

@@ -1,8 +1,55 @@
-# Sector del cliente → puntos del anexo III que pueden aplicar.
-# Por hacer: completar. Ejemplo de forma:
+# Sector del cliente → puntos del anexo III que pueden aplicar según la finalidad.
+# Es una pista para preguntar, no una clasificación: decide la finalidad prevista
+# (art. 3.12), no el sector. El detalle de cada punto, con sus exclusiones, está en
+# ai-act-classification.md. Fuente: docs/investigacion/ai-act-investigacion.md (7.2).
 - sector: insurance-life-health
   anexo_iii: [5.c]
-  nota: Fijación de precios y evaluación de riesgos de personas en seguros de vida y salud
+  nota: Evaluación de riesgos y fijación de precios de personas en seguros de vida y salud
+- sector: insurance-other
+  anexo_iii: []
+  nota: El punto 5.c solo cubre vida y salud. Revisa el 5.b si se evalúa la solvencia del tomador
 - sector: banking-credit
   anexo_iii: [5.b]
-  nota: Evaluación de solvencia de personas físicas. La detección de fraude está excluida
+  nota: Solvencia o calificación crediticia de personas físicas. La detección de fraude financiero está excluida
+- sector: hr-employment
+  anexo_iii: [4.a, 4.b]
+  nota: Selección de personal y decisiones sobre la relación laboral. Aplica a cualquier cliente cuando el proyecto trata a sus empleados o candidatos
+- sector: education
+  anexo_iii: [3.a, 3.b, 3.c, 3.d]
+  nota: Admisión, evaluación del aprendizaje, nivel educativo y vigilancia de exámenes
+- sector: public-services
+  anexo_iii: [5.a]
+  nota: Elegibilidad, concesión, reducción o revocación de prestaciones y servicios públicos
+- sector: healthcare
+  anexo_iii: [5.a, 5.d]
+  nota: Acceso a la asistencia sanitaria y triaje de emergencias. Un producto sanitario con IA va por el anexo I, no por el III
+- sector: emergency-services
+  anexo_iii: [5.d]
+  nota: Clasificación de llamadas de emergencia, despacho y triaje
+- sector: energy-utilities
+  anexo_iii: ["2"]
+  nota: Solo si el sistema es componente de seguridad de la red de agua, gas, calefacción o electricidad. La analítica de clientes o de consumo no entra por este punto
+- sector: transport-infrastructure
+  anexo_iii: ["2"]
+  nota: Solo si es componente de seguridad en la gestión del tráfico rodado
+- sector: telecom-digital-infrastructure
+  anexo_iii: ["2"]
+  nota: Solo si es componente de seguridad de una infraestructura digital crítica
+- sector: law-enforcement
+  anexo_iii: [6.a, 6.b, 6.c, 6.d, 6.e]
+  nota: Garantía del cumplimiento del Derecho
+- sector: migration-border
+  anexo_iii: [7.a, 7.b, 7.c, 7.d]
+  nota: Migración, asilo y control fronterizo. La verificación de documentos de viaje está excluida
+- sector: justice
+  anexo_iii: [8.a]
+  nota: Asistencia a autoridades judiciales y resolución alternativa de litigios
+- sector: political-campaigns
+  anexo_iii: [8.b]
+  nota: Influir en elecciones, referendos o en el comportamiento electoral. La logística de campaña que no se expone a las personas está excluida
+- sector: retail-marketing
+  anexo_iii: []
+  nota: Sin punto propio. Revisa el 5.b si se puntúa la solvencia de clientes, el área 4 si se trata a empleados y el área 1 si hay biometría
+- sector: other
+  anexo_iii: []
+  nota: Sin punto propio. Recorre las ocho áreas con la finalidad en la mano
