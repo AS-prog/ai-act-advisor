@@ -2,7 +2,7 @@
 
 Referencia para la skill `pii-masking`. Cada técnica: qué es, cuándo conviene, qué no protege y ejemplo por stack. Los ejemplos son orientativos: adáptalos a las convenciones del repo.
 
-Recordatorio de base: un dato seudonimizado sigue siendo dato personal (RGPD considerando 26). Solo la anonimización real lo saca del RGPD, y es difícil de conseguir con datos de clientes.
+Recordatorio de base: un dato seudonimizado sigue siendo dato personal para quien puede atribuirlo a una persona con información adicional (RGPD art. 4.5 y considerando 26). Solo la anonimización real lo saca del RGPD, y es difícil de conseguir con datos de clientes. El CEPD prepara unas directrices sobre anonimización (Guidelines 02/2026, versión 1.0 para consulta pública, sin versión final) que valoran el anonimato desde la perspectiva de cada entidad que recibe el dato; hasta que se adopten, el plugin mantiene el criterio prudente.
 
 ## Dónde proteger en una arquitectura medallion
 

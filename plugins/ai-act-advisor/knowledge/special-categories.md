@@ -1,6 +1,6 @@
 # Categorías especiales: referencia
 
-Referencia de la skill `special-categories`. El art. 4 bis del AI Act sale de `docs/investigacion/ai-act-investigacion.md` (sección 11) y se contrastó con el consolidado del AI Act Service Desk. La parte del RGPD y de la LOPDGDD se contrastó el 2026-11-17; el detalle de con qué fuente está al final y en `docs/pendientes.md`.
+Referencia de la skill `special-categories`. Contrastada el 2026-11-17 con los textos oficiales en español del RGPD, la LOPDGDD y el AI Act; el detalle está al final.
 
 ## Qué es categoría especial (RGPD art. 9.1)
 
@@ -10,7 +10,7 @@ Los datos de condenas e infracciones penales van aparte, por el art. 10 RGPD. En
 
 ## Proxies
 
-Un **proxy** es una variable que no es categoría especial pero permite inferirla. Si se usa para inferir o decidir sobre la categoría, se trata como tal. Heurísticas para preguntar, no pruebas:
+Un **proxy** es una variable que no nombra una categoría especial pero permite deducirla. Para el Tribunal de Justicia, tratar datos que pueden desvelar indirectamente una categoría especial, por deducción o cruce de datos, es tratar categorías especiales (sentencia de 1-8-2022, asunto C-184/20, apartados 123 a 128 y punto 2 del fallo). El criterio es amplio: cuánto pesa en cada variable lo valora el DPO. La tabla es una heurística del plugin para saber por dónde preguntar:
 
 | Variable | Qué puede revelar |
 |---|---|
@@ -49,17 +49,19 @@ El art. 4 bis permite tratar categorías especiales para detectar y corregir ses
 | Letra | Condición | Cómo se ve en un repo |
 |---|---|---|
 | a | No es posible con otros datos, incluidos sintéticos o anonimizados | Nota de por qué no bastan |
-| b | Límites técnicos a la reutilización y medidas de vanguardia, incluida la seudonimización | Tabla aparte, seudonimizada, sin unirse al conjunto de entrenamiento productivo |
+| b | Limitaciones técnicas a la reutilización y medidas punteras de seguridad y protección de la intimidad, incluida la seudonimización | Tabla aparte, seudonimizada, sin unirse al conjunto de entrenamiento productivo |
 | c | Controles estrictos y acceso documentado, limitado a personas autorizadas con deber de confidencialidad | Permisos propios y registro de accesos |
 | d | Sin transmisión a terceros | Fuera de exportaciones y de entornos compartidos |
-| e | Supresión cuando se corrige el sesgo o vence el plazo de conservación | Fecha o tarea de borrado |
+| e | Eliminación cuando se corrige el sesgo o vence el plazo de conservación, lo que ocurra antes | Fecha o tarea de borrado |
 | f | El registro de actividades de tratamiento justifica la necesidad | Entrada en el registro del responsable |
 
 Cubre medir y corregir el sesgo; usar la categoría como variable del modelo en producción queda fuera de este artículo y vuelve al art. 9.2.
 
 ## Estado de la verificación
 
-- RGPD arts. 9.1, 9.2, 22.4 y 35.3.b, y los títulos de los arts. 10 y 89: contrastados el 2026-11-17 con una copia no oficial del texto (gdpr-info.eu), porque EUR-Lex y el BOE devolvieron el Reglamento cortado en los considerandos. Los considerandos 26 y 51 sí se leyeron en EUR-Lex. Falta la lectura en la fuente oficial (`docs/pendientes.md`, P01).
-- LOPDGDD arts. 9.1, 9.2 y 10.1: contrastados el 2026-11-17 en el texto consolidado del BOE.
-- AI Act art. 4 bis: contrastado el 2026-11-17 en el consolidado del AI Act Service Desk, en inglés.
-- La tabla de proxies es heurística propia del plugin, sin fuente normativa.
+Contrastado el 2026-11-17 con los textos oficiales en español, que están en `docs/fuentes/`:
+
+- RGPD arts. 9, 10, 22.4 y 35.3.b y considerando 51: consolidado CELEX 02016R0679-20160504.
+- LOPDGDD arts. 9 y 10: texto consolidado del BOE, BOE-A-2018-16673, última modificación publicada el 27-12-2025.
+- AI Act art. 4 bis: consolidado CELEX 02024R1689-20260727.
+- Proxies: sentencia del TJUE en el asunto C-184/20, CELEX 62020CJ0184. La tabla de variables es heurística propia del plugin, sin fuente normativa.

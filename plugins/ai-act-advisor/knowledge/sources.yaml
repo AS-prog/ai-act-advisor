@@ -1,15 +1,36 @@
-# Fuentes que vigila regulatory-watcher. last_checked: null = aún sin revisar desde el plugin.
+# Fuentes que vigila regulatory-watcher. last_checked: null = aún sin revisar entera desde el plugin.
+# Si EUR-Lex no responde a una petición automática, el mismo texto está en publications.europa.eu/resource/celex/<CELEX>.
+# Copia de los documentos leídos en cada revisión: docs/fuentes/ (manifiesto en docs/fuentes/README.md).
 - id: eur-lex
   nombre: EUR-Lex (AI Act y reglamentos que lo modifican)
   urls:
     - https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+    - https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:02024R1689-20260727
+    - https://publications.europa.eu/resource/celex/02024R1689-20260727
     - https://eur-lex.europa.eu/legal-content/ES/TXT/HTML/?uri=CELEX:32026R1744
+  last_checked: 2026-11-17
+- id: rgpd
+  nombre: EUR-Lex (RGPD, Reglamento (UE) 2016/679)
+  urls:
+    - https://eur-lex.europa.eu/eli/reg/2016/679/oj
+    - https://publications.europa.eu/resource/celex/02016R0679-20160504
+  last_checked: 2026-11-17
+- id: lopdgdd
+  nombre: BOE (LOPDGDD, Ley Orgánica 3/2018, texto consolidado)
+  urls:
+    - https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673
+  last_checked: 2026-11-17
+- id: ai-act-service-desk
+  nombre: AI Act Service Desk de la Comisión (directrices y preguntas frecuentes)
+  urls:
+    - https://ai-act-service-desk.ec.europa.eu/en
   last_checked: 2026-11-17
 - id: ai-office
   nombre: Oficina de IA de la Comisión (directrices y códigos)
   urls:
     - https://digital-strategy.ec.europa.eu/en/policies/ai-office
-  last_checked: null
+    - https://digital-strategy.ec.europa.eu/en/library
+  last_checked: 2026-11-17
 - id: aesia
   nombre: AESIA (guías y checklists)
   urls:

@@ -1,6 +1,8 @@
 # Clasificación AI Act: referencia
 
-Referencia de la skill `ai-act-classify`. Los artículos salen de `docs/investigacion/ai-act-investigacion.md` (secciones 4 a 7); las fechas de aplicación viven en `dates.yaml` y aquí no se repiten. Los criterios marcados «directrices» vienen de documentos no vinculantes de la Comisión.
+Referencia de la skill `ai-act-classify`. Contrastada el 2026-11-17 con el consolidado en español del Reglamento (CELEX 02024R1689-20260727); las fechas de aplicación viven en `dates.yaml` y aquí no se repiten. Los criterios marcados «directrices» vienen de dos Comunicaciones de la Comisión de 29-07-2025, no vinculantes: C(2025) 5053 final (definición de sistema de IA) y C(2025) 5052 final (prácticas prohibidas).
+
+Dos términos del Reglamento que aquí se abrevian: «perfilado» es la «elaboración de perfiles» (art. 3.52, que remite al art. 4.4 del RGPD) y «puntuación social» es la «puntuación ciudadana» del art. 5.1.c.
 
 ## Árbol de clasificación
 
@@ -25,7 +27,7 @@ El AI Act alcanza al proyecto si la salida del sistema se usa en la UE o afecta 
 | 5.1.b | Explotar vulnerabilidades por edad, discapacidad o situación social o económica | Misma prueba de alteración sustancial y perjuicio considerable |
 | 5.1.b bis | Generar o manipular imágenes, vídeo o audio realistas de las partes íntimas o de actividad sexual explícita de una persona identificable sin su consentimiento | En la comercialización, si esa es la finalidad prevista o un resultado previsible y reproducible sin medidas técnicas de seguridad adecuadas (5.1 bis) |
 | 5.1.b ter | Generar o manipular material de abuso sexual infantil | Mismo régimen del 5.1 bis |
-| 5.1.c | Puntuación social: evaluar o clasificar a personas a lo largo del tiempo por su comportamiento social o sus características | Si lleva a un trato perjudicial en contextos ajenos al de los datos, o desproporcionado |
+| 5.1.c | Puntuación social («puntuación ciudadana»): evaluar o clasificar a personas a lo largo del tiempo por su comportamiento social o sus características | Si lleva a un trato perjudicial en contextos ajenos al de los datos, o desproporcionado |
 | 5.1.d | Predecir el riesgo de que una persona delinca basándose únicamente en perfilado o rasgos de personalidad | Se permite apoyar una valoración humana basada en hechos objetivos y verificables |
 | 5.1.e | Crear o ampliar bases de reconocimiento facial con extracción no selectiva de imágenes de internet o CCTV | — |
 | 5.1.f | Inferir emociones en el lugar de trabajo y en centros educativos | Salvo motivos médicos o de seguridad. Debe basarse en datos biométricos (art. 3.39): el sentimiento de un texto no encaja en la definición |
@@ -49,26 +51,28 @@ El scoring crediticio y el de seguros **no** son puntuación social por sí mism
 
 Ejemplos frecuentes en proyectos de datos: un modelo de propensión a la baja o de *next best action* para marketing no tiene punto propio; un *scorecard* de impago de personas físicas es 5.b; un modelo de precio para una póliza de salud es 5.c; un ranking de candidatos o una medida del rendimiento de empleados es 4.a o 4.b.
 
+En España, la empresa informa por escrito a cada persona trabajadora de que existen sistemas algorítmicos o automatizados de toma de decisiones y, si deciden sobre condiciones de trabajo (jornada, tareas, salario, progresión, lugar de trabajo o extinción), de sus pautas, criterios y reglas de funcionamiento (Real Decreto 723/2026, art. 3.2.k, BOE-A-2026-19200, en vigor desde el 5-10-2026). Este deber se suma al RGPD y al AI Act; la AEPD lo comenta en su nota de 7-10-2026, «Sistemas algorítmicos en el ámbito laboral».
+
 ## Excepción del art. 6.3 y perfilado
 
 Un sistema del anexo III deja de ser de alto riesgo si no plantea un riesgo importante de daño ni influye sustancialmente en la decisión **y** cumple una de estas condiciones:
 
-- a) tarea procedimental limitada;
+- a) tarea de procedimiento limitada;
 - b) mejora del resultado de una actividad humana ya realizada;
 - c) detecta patrones de decisión o desviaciones, sin sustituir la valoración humana ni influir en ella sin revisión;
 - d) tarea preparatoria de una evaluación.
 
-**Perfilado**: si el sistema perfila a personas físicas, es siempre de alto riesgo (art. 6.3, último párrafo). Indicio en un repo: variables de comportamiento individual que predicen preferencias, fiabilidad o rendimiento de una persona.
+**Perfilado**: si el sistema efectúa la elaboración de perfiles de personas físicas, se considera siempre de alto riesgo (art. 6.3, último párrafo). Indicio en un repo: variables de comportamiento individual que predicen preferencias, fiabilidad o rendimiento de una persona.
 
 Quien usa la excepción documenta la evaluación antes de comercializar y registra el sistema en la base de datos de la UE (arts. 6.4 y 49.2).
 
-Las directrices de la Comisión sobre el art. 6 son un borrador, sin adoptar (investigación, sección 7.3): un criterio que venga de ellas se marca como tal en el aviso.
+Las directrices de la Comisión sobre el art. 6 (art. 6.5) son un borrador publicado el 19-05-2026 para consulta, sin versión final a 2026-11-17: un criterio que venga de ellas se marca como tal en el aviso.
 
 ## Qué trae ser candidato a alto riesgo
 
 Para orientar al PM, no para auditar: el detalle está en la investigación, sección 8.
 
-- **Proveedor** (arts. 8-17): gestión de riesgos, gobernanza de datos, documentación técnica, registros, supervisión humana, precisión y ciberseguridad, evaluación de conformidad.
+- **Proveedor**: requisitos del sistema (arts. 8-15: gestión de riesgos, datos y gobernanza de datos, documentación técnica, conservación de registros, transparencia hacia el responsable del despliegue, supervisión humana, precisión, solidez y ciberseguridad) y obligaciones propias (arts. 16-17), entre ellas el sistema de gestión de la calidad, la evaluación de la conformidad (art. 43), el marcado CE y el registro.
 - **Responsable del despliegue** (art. 26): usar según instrucciones, supervisión humana, conservar los registros al menos 6 meses, informar a los trabajadores (26.7) y a las personas sobre las que se decide (26.11).
 - **FRIA** (art. 27): la hacen los organismos públicos, las entidades privadas que prestan servicios públicos y los responsables del despliegue de los puntos 5.b y 5.c. Puede apoyarse en la EIPD del RGPD (27.4).
 - Los sistemas ya comercializados antes de la fecha de aplicación solo quedan sujetos si cambian de forma significativa (art. 111.2).

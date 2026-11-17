@@ -21,7 +21,7 @@ Recorre todas las fuentes de `sources.yaml`, cada una con sus URL. En cada una b
 - **AESIA**: guías y checklists nuevos o con versión nueva.
 - **AEPD** y **CEPD**: guías y directrices sobre IA, perfilado, decisiones automatizadas, seudonimización, anonimización o categorías especiales.
 
-WebSearch sirve para descubrir un documento; la cita sale siempre de la página oficial, leída con WebFetch. Dominios que valen como fuente: `eur-lex.europa.eu`, `ec.europa.eu`, `digital-strategy.ec.europa.eu`, `ai-act-service-desk.ec.europa.eu`, `aesia.digital.gob.es`, `aepd.es`, `edpb.europa.eu`, `boe.es`.
+WebSearch sirve para descubrir un documento; la cita sale siempre de la página oficial, leída con WebFetch. Dominios que valen como fuente: `eur-lex.europa.eu`, `publications.europa.eu`, `curia.europa.eu`, `ec.europa.eu`, `commission.europa.eu`, `digital-strategy.ec.europa.eu`, `ai-act-service-desk.ec.europa.eu`, `aesia.digital.gob.es`, `aepd.es`, `edpb.europa.eu`, `boe.es`.
 
 Una fuente cuenta como **leída** cuando has visto su contenido actual. Si rechaza la lectura, devuelve solo metadatos o corta el texto antes de la parte que importa, cuenta como **no leída**, con el motivo.
 

@@ -14,7 +14,7 @@ Referencia: `${CLAUDE_PLUGIN_ROOT}/knowledge/special-categories.md` (lista del a
 Trabaja con el código, la configuración y los esquemas; los ficheros de datos se quedan cerrados. Parte del hallazgo `special-category-terms` (su detalle lista los términos) o de lo que el ingeniero tenga abierto, y pon cada columna en uno de tres grupos:
 
 - **Categoría especial**: el dato revela directamente algo del art. 9.1 (o condenas penales, art. 10).
-- **Proxy**: no lo revela, pero permite inferirlo y el proyecto lo usa para segmentar, puntuar o decidir.
+- **Proxy**: no nombra la categoría, pero permite deducirla. Pesa más cuando el proyecto lo usa para segmentar, puntuar o decidir.
 - **Falso positivo**: el término habla de otra cosa (`health_check` de un servicio, `salud` de un pipeline).
 
 Hecho cuando cada columna señalada tiene grupo y ruta. Si todas son falsos positivos, salta al paso 5.
