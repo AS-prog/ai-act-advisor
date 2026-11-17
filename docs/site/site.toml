@@ -6,6 +6,14 @@ home = "docs/site/home.md"
 index = "docs/index.html"
 
 [[section]]
+title = "Guía"
+
+[[section.page]]
+title = "Cómo se usa"
+path = "docs/guia/como-se-usa.html"
+type = "guía"
+
+[[section]]
 title = "Diseño"
 
 [[section.page]]
