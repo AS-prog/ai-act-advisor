@@ -462,11 +462,10 @@ claude plugin eval . --allow-tools Bash --judge-model sonnet</code></pre>
 <code>buscar.py</code>. En Linux, Claude Code solo lo concede dentro de
 un eval si están instalados <code>bubblewrap</code> y
 <code>socat</code>.</li>
-<li><strong>Notas.</strong> Aún no viajan con el plugin (decisión 1 de
-D21, issue #15). <code>buscar.py</code> las encuentra en
-<code>docs/documentos/fuentes/notas/</code> subiendo desde su carpeta,
-así que el eval funciona con el plugin cargado desde el clon y falla con
-el instalado desde el marketplace.</li>
+<li><strong>Notas.</strong> Viajan con el plugin en
+<code>knowledge/notas/</code> (decisión 1 de D21, 2026-11-17), así que
+el eval funciona igual con el plugin cargado desde el clon, instalado
+desde el marketplace o con APM.</li>
 <li><strong>Resultados</strong> en <code>evals/results/</code>, fuera de
 git, con un informe HTML.</li>
 <li>Para cambiar una pregunta, edita <code>generate.py</code> y
