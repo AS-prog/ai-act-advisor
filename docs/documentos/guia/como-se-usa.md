@@ -197,7 +197,7 @@ Cada aviso lleva la fecha de la base normativa. Cuando tiene más de 90 días, l
 2. La skill separa lo confirmado de lo que está por verificar.
 3. Deja los cambios en una rama `regulatory/AAAA-MM-DD` con su PR. Una persona la revisa y la fusiona; nunca se fusiona sola.
 
-Los textos oficiales de referencia están en `docs/fuentes/` del repo del plugin, con su versión y su huella en el manifiesto.
+Los textos oficiales de referencia están en `docs/documentos/fuentes/` del repo del plugin, con su versión y su huella en el manifiesto.
 
 ## Qué deja en tu repo
 

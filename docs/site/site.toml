@@ -1,16 +1,16 @@
 [project]
 name = "ai-act-advisor"
 brand = "ai-act-advisor"
-system = "docs/design-system"
-home = "docs/site/home.md"
-index = "docs/index.html"
+system = "docs/site/design-system"
+home = "docs/documentos/portada.md"
+index = "docs/site/index.html"
 
 [[section]]
 title = "Guía"
 
 [[section.page]]
 title = "Cómo se usa"
-path = "docs/guia/como-se-usa.html"
+path = "docs/site/guia/como-se-usa.html"
 type = "guía"
 
 [[section]]
@@ -18,7 +18,7 @@ title = "Diseño"
 
 [[section.page]]
 title = "Propuesta del prototipo"
-path = "docs/diseno/propuesta-prototipo.html"
+path = "docs/site/diseno/propuesta-prototipo.html"
 type = "diseño"
 
 [[section]]
@@ -26,7 +26,7 @@ title = "Técnica"
 
 [[section.page]]
 title = "Cómo funciona el prototipo en uso"
-path = "docs/tecnica/uso-del-prototipo.html"
+path = "docs/site/tecnica/uso-del-prototipo.html"
 type = "técnica"
 
 [[section]]
@@ -34,7 +34,7 @@ title = "Seguimiento"
 
 [[section.page]]
 title = "Pendientes y dudas"
-path = "docs/pendientes.html"
+path = "docs/site/pendientes.html"
 type = "documento"
 
 [[section]]
