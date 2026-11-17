@@ -89,8 +89,9 @@ def procesar(n):
 
 
 def main():
-    if SALIDA.exists():
-        shutil.rmtree(SALIDA)
+    SALIDA.mkdir(exist_ok=True)
+    for n in NORMAS:
+        shutil.rmtree(SALIDA / n['slug'], ignore_errors=True)
     indice = ["# Índice de notas normativas", "",
               "Generado por `md/conversion/trocear.py`. No editar a mano: edita la conversión y regenera.", ""]
     total = 0

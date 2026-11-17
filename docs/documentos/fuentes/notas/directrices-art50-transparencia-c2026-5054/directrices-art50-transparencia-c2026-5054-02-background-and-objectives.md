@@ -1,0 +1,60 @@
+---
+name: directrices-art50-transparencia-c2026-5054-02-background-and-objectives
+description: "Comisión Europea: directrices art50 transparencia c2026 5054, sección «Background and Objectives» (págs. 4-4). Documento de 2026-07-20, idioma en."
+metadata:
+  type: reference
+  documento: directrices-art50-transparencia-c2026-5054
+  emisor: Comisión Europea
+  fecha: 2026-07-20
+  idioma: en
+  seccion: "Background and Objectives"
+  paginas: 4-4
+  origen: 2026-07-20-directrices-art50-transparencia-c2026-5054-en.pdf
+  oficial: false
+---
+# Background and Objectives
+
+1. BACKGROUND AND OBJECTIVES
+(1) Regulation (EU) 2024/1689 of the European Parliament and the Council of 13 June 2024 laying down harmonised rules on artificial intelligence and amending certain regulations
+(‘the AI Act’) entered into force on 1 August 2024 (1). The AI Act lays down harmonised rules for the placing on the market, putting into service, and use of artificial intelligence
+(‘AI’) in the Union (2). Its aim is to promote innovation in and the uptake of trustworthy
+AI, while ensuring a high level of protection of health, safety and fundamental rights in the Union, including democracy and the rule of law.
+(2) The AI Act follows a risk-based approach, classifying AI systems into four different risk categories, one of which is AI systems posing transparency risks that are subject to the obligations laid down in Article 50 AI Act. These transparency obligations apply two years after the entry into force of the AI Act, i.e. as from 2 August 2026.
+(3) Pursuant to Article 96(1)(d) AI Act, these Commission Guidelines are issued with the aim to serve as practical guidance to assist competent authorities, as well as providers and deployers of AI systems, in ensuring compliance with the transparency obligations under
+Article 50 AI Act in a consistent, effective, proportionate and uniform manner.
+(4) The drafting of these Guidelines was informed by input from a variety of stakeholders collected during a broad consultation organised by the Commission and input from the
+Member States in the AI Board as well as stakeholder input on the draft guidelines that were published for consultation.
+(5) These Guidelines are non-binding. Any authoritative interpretation of the AI Act may ultimately only be given by the Court of Justice of the European Union (‘CJEU’).
+
+2. OVERVIEW OF THE TRANSPARENCY OBLIGATIONS AND HORIZONTAL TOPICS
+2.1. Overview of the transparency obligations in Article 50 AI Act
+(6) Article 50 AI Act includes four transparency obligations, each applying to different types of AI systems or their outputs.
+Provision
+
+Type of AI system/output
+
+Transparency obligation
+
+Exceptions or special regimes
+
+Art. 50(1)
+
+AI systems directly interacting with natural persons
+
+Providers must develop and design the AI system in such a way that the natural persons concerned are informed they are interacting with an AI system.
+
+Exceptions 1) if the artificial origin of the interaction is obvious, or 2)
+the system is authorised by law to detect, prevent, investigate or prosecute criminal offences, unless the system is available to the public to report a criminal offence.
+
+Art. 50(2)
+
+AI systems generating or
+
+Providers must ensure the
+AI system’s outputs are
+
+Exceptions if 1) the AI system performs an assistive function for
+
+(1) Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act) (OJ L, 2024/1689, 12.7.2024).
+(2) Article 1 AI Act.
+3

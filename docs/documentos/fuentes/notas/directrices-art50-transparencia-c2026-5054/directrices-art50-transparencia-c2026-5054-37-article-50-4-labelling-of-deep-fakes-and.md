@@ -1,0 +1,43 @@
+---
+name: directrices-art50-transparencia-c2026-5054-37-article-50-4-labelling-of-deep-fakes-and
+description: "Comisión Europea: directrices art50 transparencia c2026 5054, sección «Article 50(4): Labelling of Deep Fakes and Certain Text Publications» (págs. 34-34). Documento de 2026-07-20, idioma en."
+metadata:
+  type: reference
+  documento: directrices-art50-transparencia-c2026-5054
+  emisor: Comisión Europea
+  fecha: 2026-07-20
+  idioma: en
+  seccion: "Article 50(4): Labelling of Deep Fakes and Certain Text Publications"
+  paginas: 34-34
+  origen: 2026-07-20-directrices-art50-transparencia-c2026-5054-en.pdf
+  oficial: false
+---
+# Article 50(4): Labelling of Deep Fakes and Certain Text Publications
+
+6. ARTICLE 50(4): LABELLING OF DEEP FAKES AND CERTAIN TEXT PUBLICATIONS
+(111) Article 50(4) AI Act lays down two separate obligations addressed to deployers of generative AI systems requiring clear and distinguishable disclosures of (i) deep fakes and (ii) AI-generated or manipulated text published with the purpose of informing the public on matters of public interest except in defined cases. These labelling obligations apply in addition and without prejudice to the obligations for machine-readable marking and detection under Article 50(2) AI Act applicable to providers of AI systems generating or manipulating synthetic images, video, audio or text content.
+
+6.1. Main components, concepts and related transparency obligation(s) for deep fakes under Article 50(4) AI Act
+(112) Article 50(4), first subparagraph, AI Act applies if several conditions are fulfilled:
+i.
+
+The system must be an AI system;
+
+ii.
+
+Used by deployers for professional purposes (see Sections 2.3. and 2.4.1.);
+
+iii.
+
+To generate or manipulate image, audio or video content that constitutes a deep fake;
+
+iv.
+
+The AI system must not fall under the exception for use authorised by law to detect, prevent, investigate or prosecute criminal offence.
+
+6.1.1. The notion of ‘deep fake’
+(113) Article 3(60) AI Act defines ‘deep fakes’ as ‘AI-generated or manipulated image, audio or video content that resembles existing persons, objects, places, entities or events and would falsely appear to a person to be authentic or truthful’. The difference between manipulation and generation has been clarified in Section 4.1 above. For the purpose of clarifying the notion of deep fake, four cumulative criteria from that definition are examined below: (i) resemblance of (ii) existing (iii) persons, objects, places, entities or events (iv) that would falsely appear to a person to be authentic or truthful.
+i. Resemblance: Article 3(60) AI Act specifies that AI-generated or manipulated image, audio or video content must ‘resemble’ existing subjects to constitute a deep fake.
+Recital 134 AI Act adds that such resemblance should be ‘appreciable’. AI-generated or manipulated image, audio or video content appreciably resembles a subject if there is a high level of similarity between the deep fake content and the subject (including any of its recognisable elements) being simulated by the deep fake. The content does not need to be identical to the subject. Whether the level of resemblance is appreciable is a case-by-case assessment to be done by the deployer based on an objective comparison between the simulated subject and the deep fake content, based on, among others, the extent to which characteristic or distinctive features are represented by the deep fake.
+ii. Existing: Article 3(60) AI Act specifies that AI-generated or manipulated image, audio or video content must resemble ‘existing’ subject(s) to constitute a deep fake. To effectively fulfil the purpose of Article 50(4) AI Act to reduce the risks of impersonation, deception, misinformation, manipulation and fraud, the characteristic
+33

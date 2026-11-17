@@ -1,10 +1,11 @@
 # Notas normativas (fuentes legales troceadas)
 
-Una nota por artículo, anexo o disposición del AI Act, el RGPD, la LOPDGDD y el Omnibus 2026/1744. Cada nota lleva front matter con formato skill (`name`, `description`, `metadata.tags`, `metadata.origen`) para encontrarla con grep o con un índice.
+Fuentes oficiales troceadas en notas con front matter con formato skill (`name`, `description`, `metadata`), para encontrarlas con grep o con un índice.
 
-- Son **derivadas** de `../md/` (conversiones no oficiales). No se editan a mano: `python3 -I ../md/conversion/trocear.py` las regenera.
-- `INDICE.md` lista todas las notas.
-- El Omnibus se trocea solo por sus artículos propios (1 a 4 y 75 ter, quater y quinquies), así que `omnibus-art-1` es larga.
+- **Normas** (`INDICE.md`): una nota por artículo, anexo o disposición del AI Act, el RGPD, la LOPDGDD y el Omnibus 2026/1744. Se generan desde `../md/` con `python3 -I ../md/conversion/trocear.py`. El Omnibus solo se trocea en sus artículos propios (1 a 4 y 75 ter, quater y quinquies).
+- **Guías y directrices** (`INDICE-guias.md`): guías AESIA 01-16, directrices de la Comisión (definición de sistema de IA, prácticas prohibidas, art. 6, art. 50), directrices del CEPD, documentos de la AEPD y el RD 723/2026. Se generan desde los PDF con `python3 -I ../md/conversion/trocear_pdf.py` (necesita `pdftotext` y `pypdf`). Se trocean por marcadores del PDF, por el índice de la guía o por bloques de 8 páginas; la extracción de texto no recupera bien tablas ni maquetación.
+- Las notas son derivadas: no se editan a mano, se regeneran.
+- No incluido todavía: los checklists Excel de AESIA (`aesia-checklists-y-ejemplos.zip`) y la sentencia TJUE C-184/20 (XHTML).
 - Solo hace fe el texto del Diario Oficial o del BOE.
 
 Ejemplo: `grep -rl "gobernanza de datos" docs/documentos/fuentes/notas`.
