@@ -157,7 +157,7 @@ class HooksTest(RepoCopy):
 
     def test_session_start_with_profile_summarises(self):
         os.makedirs(os.path.join(self.root, ".ai-act"))
-        shutil.copy(os.path.join(ROOT, "plugins", "ai-act-advisor", "examples", "profile.yaml"),
+        shutil.copy(os.path.join(ROOT, "plugins", "ai-act-advisor", "skills", "project-init", "profile.example.yaml"),
                     os.path.join(self.root, ".ai-act", "profile.yaml"))
         ctx = self.run_hook(hooks.session_start, {"cwd": self.root})
         self.assertIn("insurance-life-health", ctx)
@@ -219,6 +219,45 @@ class HooksTest(RepoCopy):
         self.assertEqual(self.edit(".env"), "")
 
 
+class OtherAgentsTest(RepoCopy):
+    """Eventos con los campos de otros agentes, para la instalación con APM."""
+
+    def test_copilot_payload_with_tool_args_as_text(self):
+        rel = os.path.join(self.root, "transform/silver/build_customers.py")
+        ctx = self.run_hook(hooks.post_tool_use, {
+            "sessionId": self.session, "cwd": self.root, "toolName": "view", "toolArgs": json.dumps({"path": rel})})
+        self.assertIn("email", ctx)
+
+    def test_copilot_and_cursor_read_top_level_context(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            hooks.session_start({"cwd": self.root, "source": "new"})
+        out = json.loads(buf.getvalue())
+        self.assertIn("/project-init", out["additionalContext"])
+        self.assertEqual(out["additionalContext"], out["additional_context"])
+
+    def test_claude_output_has_no_extra_keys(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            hooks.session_start({"cwd": self.root, "hook_event_name": "SessionStart"})
+        self.assertEqual(list(json.loads(buf.getvalue())), ["hookSpecificOutput"])
+
+    def test_codex_apply_patch_finds_the_file(self):
+        patch = "*** Begin Patch\n*** Update File: transform/silver/build_customers.py\n@@\n-x\n+y\n*** End Patch"
+        ctx = self.run_hook(hooks.post_tool_use, {
+            "session_id": self.session, "cwd": self.root, "hook_event_name": "PostToolUse",
+            "tool_name": "apply_patch", "tool_input": {"command": patch}})
+        self.assertIn("email", ctx)
+
+    def test_gemini_payload_keeps_its_event_name(self):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            hooks.post_tool_use({"session_id": self.session, "cwd": self.root, "hook_event_name": "AfterTool",
+                                 "tool_name": "read_file",
+                                 "tool_input": {"file_path": os.path.join(self.root, "transform/silver/build_customers.py")}})
+        self.assertEqual(json.loads(buf.getvalue())["hookSpecificOutput"]["hookEventName"], "AfterTool")
+
+
 class EntryPointsTest(unittest.TestCase):
     def test_hook_entry_point_survives_bad_input(self):
         import subprocess
@@ -226,6 +265,26 @@ class EntryPointsTest(unittest.TestCase):
                            input="no es json", capture_output=True, text=True)
         self.assertEqual(p.returncode, 0)
         self.assertEqual(p.stdout, "")
+
+    def test_knowledge_next_to_scripts_as_apm_installs_it(self):
+        """APM copia scripts/ y knowledge/ a una carpeta del agente; el hook debe encontrar la base."""
+        import subprocess
+        tmp = tempfile.mkdtemp()
+        try:
+            dest = os.path.join(tmp, ".github", "hooks", "scripts", "ai-act-advisor")
+            plugin = os.path.dirname(SCRIPTS)
+            shutil.copytree(SCRIPTS, os.path.join(dest, "scripts"))
+            shutil.copytree(os.path.join(plugin, "knowledge"), os.path.join(dest, "knowledge"))
+            env = {k: v for k, v in os.environ.items() if k not in ("CLAUDE_PLUGIN_ROOT", "CLAUDE_PROJECT_DIR")}
+            env["AI_ACT_DEBUG"] = "1"
+            p = subprocess.run(
+                ["sh", os.path.join(dest, "scripts", "run.sh"), "hook.py", "session-start",
+                 os.path.join(dest, "knowledge", "VERSION")],
+                input=json.dumps({"cwd": tmp}), capture_output=True, text=True, env=env)
+            self.assertEqual(p.returncode, 0, p.stderr)
+            self.assertIn("/project-init", p.stdout)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
 
 
 if __name__ == "__main__":

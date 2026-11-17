@@ -7,6 +7,8 @@ description: "Clasificación AI Act de un proyecto: práctica prohibida (art. 5)
 
 Rol: PM, con el DE o AE que conoce el modelo. Propone una clasificación razonada y deja la decisión al PM; el perfil solo cambia cuando el PM la confirma.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 Referencia: `${CLAUDE_PLUGIN_ROOT}/knowledge/ai-act-classification.md` (árbol, art. 5, anexo III, art. 6.3 y roles). Léela antes del paso 2.
 
 ## 1. Reúne los hechos

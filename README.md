@@ -16,6 +16,8 @@ En un proyecto de datos los riesgos legales aparecen en el código antes que en 
 
 El plugin no bloquea nada: informa, propone y deja la decisión a quien trabaja. Cada decisión queda en `.ai-act/baseline.json` (abierto, mitigado o aceptado con justificación), y los avisos solo vuelven si aparece algo nuevo.
 
+Además de como plugin de Claude Code, se puede instalar con [APM](https://github.com/microsoft/apm) en otros agentes (Copilot, Cursor, Codex, Gemini…). Es experimental: las skills llegan a todos, pero algunos avisos automáticos se pierden según el agente (ver [Con APM](#con-apm-otros-agentes-experimental)).
+
 El marco es el AI Act tras el Omnibus 2026/1744, bajando al RGPD y la LOPDGDD, con la normativa española (AESIA, AEPD). Hoy el foco está en el RGPD y la PII en la ingesta, que es lo que más aparece en proyectos reales.
 
 ## Qué hay
@@ -25,6 +27,7 @@ El marco es el AI Act tras el Omnibus 2026/1744, bajando al RGPD y la LOPDGDD, c
 | `.claude-plugin/marketplace.json` | El marketplace `ai-act-advisor` |
 | `plugins/ai-act-advisor/` | El plugin: manifiesto, skills, agente, hooks, scripts y base de conocimiento |
 | `plugins/ai-act-advisor/skills/` | `project-init` y `risk-summary` (PM); `pii-masking`, `special-categories`, `ai-act-classify` y `ai-transparency` (riesgo); `regulatory-update` (mantenimiento) |
+| `plugins/ai-act-advisor/apm.yml` | Manifiesto para instalar el plugin con APM en otros agentes |
 | `plugins/ai-act-advisor/hooks/hooks.json` | `SessionStart` y `PostToolUse`: solo añaden contexto |
 | `plugins/ai-act-advisor/agents/` | `regulatory-watcher`, que vigila las fuentes oficiales |
 | `plugins/ai-act-advisor/knowledge/` | Fechas, señales, sectores, técnicas y fuentes, con la fecha de la base normativa |
@@ -41,6 +44,28 @@ El marco es el AI Act tras el Omnibus 2026/1744, bajando al RGPD y la LOPDGDD, c
 /plugin marketplace add AS-prog/ai-act-advisor
 /plugin install ai-act-advisor@ai-act-advisor
 ```
+
+### Con APM (otros agentes, experimental)
+
+[APM](https://github.com/microsoft/apm) instala el mismo plugin en el repo del proyecto y lo traduce a cada agente (Copilot, Codex, Cursor, Gemini…). Desde la raíz del repo del proyecto:
+
+```
+apm install AS-prog/ai-act-advisor/plugins/ai-act-advisor --target copilot
+```
+
+Las 7 skills llegan a todos los agentes; el agente `regulatory-watcher`, a todos salvo Gemini y Windsurf. Los avisos automáticos (hooks) dependen del agente:
+
+| Agente | Aviso al abrir sesión | Aviso al leer o editar un fichero |
+|---|---|---|
+| Claude Code | Sí | Sí |
+| Copilot (CLI y VS Code) | Sí | Sí, según la documentación; sin probar en el agente |
+| Cursor | Sí | Sí, según la documentación; sin probar en el agente |
+| Codex | Sí | Solo al editar (no salta al leer) |
+| Gemini CLI | Sí | No: sus herramientas se llaman distinto y el filtro no las reconoce |
+| Windsurf | Sin comprobar | Sin comprobar |
+| OpenCode | No (no tiene hooks) | No |
+
+Los hooks se lanzan con `sh` y Python 3. En Windows, Claude Code usa Git Bash; los demás agentes pueden necesitarlo instalado. La base normativa se copia al repo del proyecto: tras una actualización, `apm update` la refresca.
 
 ## Probar el prototipo
 

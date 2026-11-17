@@ -7,6 +7,8 @@ description: "Resumen de riesgos AI Act y RGPD de un proyecto en una página, pa
 
 Rol: PM. Se lanza con `/risk-summary`. Es una lectura del estado: informa y deja las decisiones al PM. La única escritura posible es el propio resumen, y solo si el PM lo pide.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 ## 1. Lee el perfil
 
 `.ai-act/profile.yaml`: cliente y sector, finalidad, rol, datos personales, `classification` con su fecha, contactos de `escalation` y, si el proyecto ocupa varios repos, la lista de repos. Sin perfil, dilo, sugiere `/project-init` y termina aquí.

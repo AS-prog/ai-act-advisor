@@ -7,6 +7,8 @@ description: "Explica el riesgo de trabajar con datos personales sin proteger y 
 
 Rol: DE y AE. Carga automática cuando un hook o el usuario la mencionan. Nunca bloquea: explica, propone y deja la decisión al ingeniero.
 
+**Carpeta del plugin**: en Claude Code, `${CLAUDE_PLUGIN_ROOT}` llega ya sustituido por una ruta. Si lo ves tal cual, el plugin se instaló con APM: usa en su lugar la primera de estas carpetas, en la raíz del repo, que tenga `knowledge/VERSION` dentro: `.claude/hooks/ai-act-advisor`, `.github/hooks/scripts/ai-act-advisor`, `.codex/hooks/ai-act-advisor`, `.cursor/hooks/ai-act-advisor`, `.gemini/hooks/ai-act-advisor` o `.windsurf/hooks/ai-act-advisor`. Haz lo mismo con `$CLAUDE_PROJECT_DIR`, que es la raíz del repo.
+
 ## 1. Entiende qué hay
 
 - Columnas afectadas y tipo de dato personal (contacto, identificador, financiero, ubicación). Si alguna es de categoría especial (salud, biometría, ideología…), cambia a la skill `special-categories`.
