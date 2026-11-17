@@ -52,7 +52,7 @@
 
       <header class="doc-header">
         <h1>Pendientes y dudas</h1>
-        <p class="lede">Lista de trabajo del plugin <code>ai-act-advisor</code> tras la revisión de datos normativos del 2026-11-17. Tres partes: dudas normativas sin confirmar (P), decisiones de diseño abiertas (D) y lo ya verificado (V), con su fuente y fecha, para no repetirlo. Las rutas son relativas a la raíz del repo; <code>knowledge/</code> es <code>plugins/ai-act-advisor/knowledge/</code> y <code>skills/</code> es <code>plugins/ai-act-advisor/skills/</code>.</p>
+        <p class="lede">Lista de trabajo del plugin <code>ai-act-advisor</code>. Tres partes: dudas normativas que siguen abiertas (P), decisiones de diseño abiertas (D) y lo ya verificado (V), con su fuente, para no repetirlo. Las rutas son relativas a la raíz del repo; <code>knowledge/</code> es <code>plugins/ai-act-advisor/knowledge/</code> y <code>skills/</code> es <code>plugins/ai-act-advisor/skills/</code>.</p>
         <dl class="doc-meta">
           <div><dt>Fuente</dt><dd><a href="pendientes.md">docs/pendientes.md</a></dd></div>
           <div><dt>Fecha</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
@@ -64,109 +64,45 @@
         <h2>Índice</h2>
         <ol>
           <li><a href="#como-se-hizo-la-revision">Cómo se hizo la revisión</a></li>
-          <li><a href="#dudas-normativas-sin-confirmar">Dudas normativas sin confirmar</a></li>
+          <li><a href="#dudas-normativas-que-siguen-abiertas">Dudas normativas que siguen abiertas</a></li>
           <li><a href="#decisiones-de-diseno-abiertas">Decisiones de diseño abiertas</a></li>
           <li><a href="#verificado">Verificado</a></li>
-          <li><a href="#corregido-en-esta-revision">Corregido en esta revisión</a></li>
+          <li><a href="#corregido">Corregido</a></li>
         </ol>
       </nav>
 
       <article class="doc-prose">
 <h2 id="como-se-hizo-la-revision">Cómo se hizo la revisión</h2>
+<p>Hubo dos pasadas el 2026-11-17.</p>
 <ul>
-<li>Fecha de consulta de todas las fuentes: 2026-11-17.</li>
-<li>El AI Act se contrastó con el consolidado «as at 27 July 2026» del AI Act Service Desk de la Comisión (<code>https:/<wbr>/<wbr>ai-act-service-desk.ec.europa.eu/<wbr>en/<wbr>ai-act/<wbr>article-N</code> y <code>/annex-N</code>), <strong>en inglés</strong>. Es la única copia del consolidado que se deja leer entera desde aquí.</li>
-<li>La herramienta de lectura devuelve resúmenes con citas de 125 caracteres como máximo. Sirve para comprobar artículo, apartado, fecha y contenido, y no para copiar texto literal largo. Las bases de conocimiento no contienen citas literales largas; las pocas frases entrecomilladas están en <code>docs/investigacion/ai-act-investigacion.md</code>, que no se revisó entera.</li>
-<li>EUR-Lex (HTML) y el BOE (PDF del DOUE) devolvieron el RGPD cortado en los considerandos, sin el articulado. Por eso los artículos del RGPD se contrastaron con una copia no oficial (P01).</li>
+<li><strong>Primera</strong>: con el consolidado en inglés del AI Act Service Desk y, para el RGPD, una copia no oficial. Dejó doce dudas, P01 a P12.</li>
+<li><strong>Segunda</strong>: con los textos oficiales, en español cuando existe. Los documentos están en <code>docs/fuentes/</code> y su manifiesto (título oficial, identificador, versión, URL de origen y sha256) en <code>docs/fuentes/README.md</code>. Cada dato de la tabla de verificado se buscó en el original; las conversiones a Markdown de <code>docs/fuentes/md/</code> solo sirvieron para localizar el pasaje.</li>
 </ul>
-<h2 id="dudas-normativas-sin-confirmar">Dudas normativas sin confirmar</h2>
-<h3 id="p01-articulos-del-rgpd-sin-leer-en-fuente-oficial">P01 · Artículos del RGPD, sin leer en fuente oficial</h3>
-<ul>
-<li><strong>Qué se afirma</strong>: el contenido de los arts. 4.5, 5.1.c, 5.1.e, 9.1, 9.2 (letras a, b, g, h, i, j), 10, 17, 22.4, 25, 28, 30, 32, 35.3.b, 44-49 y 89.</li>
-<li><strong>Dónde</strong>: <code>knowledge/special-categories.md</code>, <code>knowledge/masking-techniques.md</code>, <code>skills/pii-masking/SKILL.md</code>, <code>skills/special-categories/SKILL.md</code> y los campos <code>articulos</code> de <code>plugins/ai-act-advisor/scripts/aiact/core.py</code>.</li>
-<li><strong>Estado</strong>: coinciden con la copia no oficial <code>gdpr-info.eu</code> (arts. 5, 9, 22 y 35 leídos; del resto, solo el título). Los considerandos 26 y 51 sí se leyeron en EUR-Lex.</li>
-<li><strong>Qué falta</strong>: leer el articulado en EUR-Lex o en el BOE. <code>https:/<wbr>/<wbr>eur-lex.europa.eu/<wbr>legal-content/<wbr>ES/<wbr>TXT/<wbr>HTML/<wbr>?<wbr>uri=<wbr>CELEX:32016R0679</code> y <code>https:/<wbr>/<wbr>www.boe.es/<wbr>doue/<wbr>2016/<wbr>119/<wbr>L00001-00088.pdf</code> se cortan antes del art. 1 (157 796 y 106 474 caracteres).</li>
-<li><strong>Qué hacer</strong>: abrir el PDF oficial a mano o con otra herramienta y repasar esos artículos; si todo coincide, pasar esta entrada a la tabla de verificado.</li>
-</ul>
-<h3 id="p02-terminos-y-numeracion-del-ai-act-en-espanol">P02 · Términos y numeración del AI Act en español</h3>
-<ul>
-<li><strong>Qué se afirma</strong>: la numeración «art. 4 bis», «art. 5.1.b bis», «5.1.b ter», «5.1 bis», «5.1 ter», «6.1 bis a quater» y términos como «responsable del despliegue» o «ultrasuplantación».</li>
-<li><strong>Dónde</strong>: <code>knowledge/dates.yaml</code>, <code>knowledge/ai-act-classification.md</code>, <code>knowledge/special-categories.md</code>, <code>knowledge/transparency-art50.md</code> y las skills.</li>
-<li><strong>Estado</strong>: el contenido está verificado en inglés (allí son 4a, 5(1)(ba), 5(1)(bb), 5(1a), 5(1b), 6(1a)-(1c)). La forma española es la conversión habitual, sin leer el consolidado en español.</li>
-<li><strong>Qué falta</strong>: el consolidado en español de EUR-Lex (<code>https:/<wbr>/<wbr>eur-lex.europa.eu/<wbr>eli/<wbr>reg/<wbr>2024/<wbr>1689/<wbr>2026-07-27/<wbr>spa</code> o equivalente); en la investigación ya consta que no se pudo leer.</li>
-<li><strong>Qué hacer</strong>: confirmar la numeración y los términos en la versión española y corregir si difieren.</li>
-</ul>
-<h3 id="p03-estado-formal-de-las-directrices-del-art-50">P03 · Estado formal de las directrices del art. 50</h3>
-<ul>
-<li><strong>Qué se afirma</strong>: que las directrices C(2026) 5054, de 20-07-2026, «no son vinculantes».</li>
-<li><strong>Dónde</strong>: <code>knowledge/transparency-art50.md</code> (cabecera) y <code>skills/ai-transparency/SKILL.md</code> (límites).</li>
-<li><strong>Estado</strong>: referencia, fecha y párrafos verificados (V25). El PDF se presenta como anexo de una Comunicación que «aprueba el proyecto de directrices»; en lo leído no aparece la frase sobre su carácter no vinculante, y la FAQ de la Comisión tampoco la dice.</li>
-<li><strong>Qué falta</strong>: la parte introductoria del PDF y saber si hubo adopción formal posterior en todas las lenguas.</li>
-<li><strong>Qué hacer</strong>: leer la introducción del PDF y la página <code>https:/<wbr>/<wbr>digital-strategy.ec.europa.eu/<wbr>en/<wbr>policies/<wbr>guidelines-transparency-ai-generated-content</code>; ajustar la frase si procede.</li>
-</ul>
-<h3 id="p04-directrices-de-clasificacion-de-alto-riesgo-art-6-5-siguen-en-borrador">P04 · Directrices de clasificación de alto riesgo (art. 6.5): ¿siguen en borrador?</h3>
+<p>Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están cerradas y pasan a la tabla de verificado; P09 era una decisión de diseño y ahora es D17. Siguen abiertas P04, P10 y P11, que dependen de documentos que aún no existen en versión final o de una lectura que no se ha hecho. Los identificadores no se renumeran.</p>
+<h2 id="dudas-normativas-que-siguen-abiertas">Dudas normativas que siguen abiertas</h2>
+<h3 id="p04-directrices-de-clasificacion-de-alto-riesgo-art-6-5-siguen-en-borrador">P04 · Directrices de clasificación de alto riesgo (art. 6.5): siguen en borrador</h3>
 <ul>
 <li><strong>Qué se afirma</strong>: que son un borrador sin adoptar.</li>
 <li><strong>Dónde</strong>: <code>knowledge/ai-act-classification.md</code> (final de «Excepción del art. 6.3») y <code>skills/ai-act-classify/SKILL.md</code> (límites).</li>
-<li><strong>Estado</strong>: la página del Service Desk sigue hablando de borrador en consulta hasta el 23-07-2026. Han pasado casi cuatro meses y la página puede estar sin actualizar.</li>
-<li><strong>Qué hacer</strong>: buscar la adopción en <code>https:/<wbr>/<wbr>digital-strategy.ec.europa.eu/<wbr>en/<wbr>library</code> y en el Service Desk. Si están adoptadas, revisar con ellas la tabla del anexo III y la excepción del 6.3.</li>
+<li><strong>Estado a 2026-11-17</strong>: comprobado. Solo existe el borrador publicado el 19-05-2026 para consulta hasta el 23-07-2026, en tres PDF en inglés sin número de documento («<a href="2026">…</a> XXX draft»), guardados como <code>docs/fuentes/2026-05-19-directrices-art6-alto-riesgo-borrador-parte{1,2,3}-en.pdf</code>. Ni el Service Desk ni la biblioteca de la Comisión listan una versión final.</li>
+<li><strong>Por qué sigue abierta</strong>: el plazo legal venció el 2-02-2026 y la consulta se cerró en julio; la adopción puede llegar en cualquier momento. El borrador (167 páginas) no se ha comparado con la tabla del anexo III de <code>knowledge/</code>, porque un borrador no debe fijar criterio.</li>
+<li><strong>Qué hacer</strong>: vigilar la adopción en cada <code>/regulatory-update</code>. Cuando se adopten, revisar con ellas la tabla del anexo III y la excepción del art. 6.3.</li>
 </ul>
-<h3 id="p05-entrada-en-vigor-del-reglamento-2026-1744">P05 · Entrada en vigor del Reglamento 2026/1744</h3>
+<h3 id="p10-publicaciones-recientes-leidas-por-encima-sin-comparacion-a-fondo">P10 · Publicaciones recientes: leídas por encima, sin comparación a fondo</h3>
 <ul>
-<li><strong>Qué se afirma</strong>: que entró en vigor el 27-07-2026, al tercer día de su publicación.</li>
-<li><strong>Dónde</strong>: <code>knowledge/VERSION</code> (fecha del consolidado) y <code>docs/investigacion/ai-act-investigacion.md</code> (secciones 1 y 2).</li>
-<li><strong>Estado</strong>: la fecha 27-07-2026 está confirmada de forma indirecta (consolidado del Service Desk «as at 27 July 2026»; la página de la Oficina de IA dice que las enmiendas entraron en vigor el 27 de julio). El artículo final del Reglamento, con la regla del tercer día, no se pudo leer: EUR-Lex corta el texto a los 100 000 caracteres.</li>
-<li><strong>Qué hacer</strong>: leer el último artículo del Reglamento 2026/1744 en el PDF del DO.</li>
+<li><strong>Qué se hizo</strong>: se descargaron y se repasaron los documentos que quedaron apuntados en la primera pasada.</li>
+<li>AEPD, «Sistemas algorítmicos en el ámbito laboral» (7-10-2026): llevó a añadir el Real Decreto 723/2026 a <code>knowledge/ai-act-classification.md</code> (V43).</li>
+<li>AEPD, «Asistentes y agentes de IA» (27-10-2026) y «Exactitud, idoneidad y calidad de los datos» (21-07-2026): no contradicen la base; no se han incorporado.</li>
+<li>CEPD, Guidelines 02/2026 (anonimización) y 03/2026 (<em>web scraping</em> en IA generativa): son la versión 1.0 para consulta pública, en inglés. <code>knowledge/masking-techniques.md</code> menciona la primera como borrador.</li>
+<li>AESIA: las guías 01 a 15 ya están en su versión 2.0, de 17-07-2026, adaptadas al Reglamento 2026/1744.</li>
+<li><strong>Por qué sigue abierta</strong>: las dos directrices del CEPD no tienen versión final y pueden cambiar; las guías de AESIA (16 PDF y un ZIP de checklists) no se han leído una a una ni se han comparado con las skills; el decálogo de agentes de la AEPD podría dar criterios para <code>skills/ai-transparency/SKILL.md</code> que no se han extraído.</li>
+<li><strong>Qué hacer</strong>: en el próximo <code>/regulatory-update</code>, comprobar si el CEPD ha adoptado las directrices y revisar <code>masking-techniques.md</code> con la de anonimización; decidir si las guías de AESIA entran en la base (D19).</li>
 </ul>
-<h3 id="p06-resumen-de-obligaciones-de-alto-riesgo">P06 · Resumen de obligaciones de alto riesgo</h3>
+<h3 id="p11-listados-de-la-aepd-y-del-cepd-leidos-a-medias">P11 · Listados de la AEPD y del CEPD, leídos a medias</h3>
 <ul>
-<li><strong>Qué se afirma</strong>: la lista corta de obligaciones del proveedor («arts. 8-17»: gestión de riesgos, gobernanza de datos, documentación técnica, registros, supervisión humana, precisión y ciberseguridad, evaluación de conformidad).</li>
-<li><strong>Dónde</strong>: <code>knowledge/ai-act-classification.md</code>, sección «Qué trae ser candidato a alto riesgo».</li>
-<li><strong>Estado</strong>: sale de la sección 8 de la investigación; en esta revisión solo se leyeron los arts. 25, 26 y 27. La evaluación de conformidad es el art. 43, fuera del rango citado.</li>
-<li><strong>Qué hacer</strong>: leer los arts. 8 a 17 y 43 en el Service Desk y ajustar el rango o la lista.</li>
-</ul>
-<h3 id="p07-anexo-i-y-productos-sanitarios">P07 · Anexo I y productos sanitarios</h3>
-<ul>
-<li><strong>Qué se afirma</strong>: que un producto sanitario con IA va por el anexo I (art. 6.1) y no por el anexo III.</li>
-<li><strong>Dónde</strong>: <code>knowledge/sectors.yaml</code> (nota de <code>healthcare</code>) y <code>knowledge/dates.yaml</code> (fila de 2028-08-02).</li>
-<li><strong>Estado</strong>: el art. 6.1 y su fecha están verificados; la lista del anexo I no se releyó.</li>
-<li><strong>Qué hacer</strong>: leer <code>https:/<wbr>/<wbr>ai-act-service-desk.ec.europa.eu/<wbr>en/<wbr>ai-act/<wbr>annex-1</code> y confirmar que los Reglamentos 2017/745 y 2017/746 siguen en la sección A.</li>
-</ul>
-<h3 id="p08-proxies-cuando-un-dato-que-permite-inferir-una-categoria-especial-lo-es">P08 · Proxies: cuándo un dato que permite inferir una categoría especial lo es</h3>
-<ul>
-<li><strong>Qué se afirma</strong>: que un proxy «se trata como» categoría especial si se usa para inferirla o decidir sobre ella, y una tabla de variables proxy.</li>
-<li><strong>Dónde</strong>: <code>knowledge/special-categories.md</code> (sección «Proxies») y <code>skills/special-categories/SKILL.md</code> (paso 1).</li>
-<li><strong>Estado</strong>: heurística propia, sin fuente. Hay jurisprudencia del TJUE que podría ir más lejos (datos que revelan indirectamente una categoría especial; asunto C-184/20, de 2022, citado de memoria y sin comprobar).</li>
-<li><strong>Qué hacer</strong>: leer esa sentencia en <code>curia.europa.eu</code> y lo que digan la AEPD y el CEPD sobre datos inferidos; reescribir la definición de proxy con esa base o marcarla como criterio prudente del plugin.</li>
-</ul>
-<h3 id="p09-precisiones-menores-en-dates-yaml">P09 · Precisiones menores en <code>dates.yaml</code></h3>
-<ul>
-<li><strong>Qué se afirma</strong>: «arts. 51-55» desde 2025-08-02 y «arts. 6-27» desde 2027-12-02.</li>
-<li><strong>Estado</strong>: el art. 113.b habla del capítulo V entero (arts. 51-56) y también del capítulo III sección 4, el capítulo VII, el capítulo XII salvo el art. 101 y el art. 78. El art. 113.c excluye el art. 6.5 del aplazamiento. Las fechas son correctas; el alcance está resumido.</li>
-<li><strong>Qué hacer</strong>: decidir si <code>dates.yaml</code> debe reflejar el alcance completo. Si se cambia, revisar el hook <code>SessionStart</code> y las skills que lo leen.</li>
-</ul>
-<h3 id="p10-publicaciones-vistas-y-sin-analizar">P10 · Publicaciones vistas y sin analizar</h3>
-<ul>
-<li><strong>Qué son</strong>: novedades que aparecieron al abrir las fuentes y que no se compararon con la base.</li>
-<li>AEPD: «Asistentes y agentes de IA: Que la IA actúe por ti, no sin ti» (27-10-2026); «Sistemas algorítmicos en el ámbito laboral. Transparencia y garantías de protección de datos» (07-10-2026); «Exactitud, idoneidad y calidad de los datos en tratamientos de datos personales con Inteligencia Artificial» (21-07-2026).</li>
-<li>CEPD: Guidelines 02/2026 sobre anonimización y Guidelines 03/2026 sobre <em>web scraping</em> en IA generativa, en consulta hasta el 30-10-2026.</li>
-<li>AESIA: anuncia que actualizará sus 16 guías por el Ómnibus; sin fecha.</li>
-<li>Oficina de IA: enlace a «próximas directrices», sin fecha.</li>
-<li><strong>A qué pueden afectar</strong>: <code>knowledge/masking-techniques.md</code> (anonimización), <code>knowledge/transparency-art50.md</code> (agentes), <code>knowledge/ai-act-classification.md</code> (área 4, empleo).</li>
-<li><strong>Qué hacer</strong>: lanzar <code>/regulatory-update</code> y dejar que el vigilante las compare.</li>
-</ul>
-<h3 id="p11-fuentes-de-sources-yaml-leidas-a-medias">P11 · Fuentes de <code>sources.yaml</code> leídas a medias</h3>
-<ul>
-<li><strong>Estado</strong>: las siete URL cargan. De la AEPD solo se ve la primera de 14 páginas; la URL del CEPD muestra sobre todo consultas públicas; <code>ai-office</code>, <code>aepd</code> y <code>edpb</code> siguen con <code>last_checked: null</code> porque esta revisión no fue una vigilancia completa.</li>
-<li><strong>Qué hacer</strong>: en el próximo <code>/regulatory-update</code>, comprobar que la URL del CEPD lista también las directrices adoptadas y valorar una URL de la AEPD filtrada por IA.</li>
-</ul>
-<h3 id="p12-errores-vistos-en-la-investigacion-sin-corregir">P12 · Errores vistos en la investigación, sin corregir</h3>
-<ul>
-<li><strong>Dónde</strong>: <code>docs/investigacion/ai-act-investigacion.md</code>. No se tocó porque quedaba fuera del encargo.</li>
-<li><strong>Qué</strong>:</li>
-<li>Sección 9: dice que el deepfake tiene «tres criterios»; las directrices del art. 50 dan cuatro (párr. 113). En <code>knowledge/</code> ya está corregido.</li>
-<li>Secciones 4.3, 6 y 16: fecha las directrices de definición en «6-02-2025» y las de prácticas prohibidas en «4-02-2025, actualizadas el 31-07-2025». Los PDF dicen C(2025) 5053 final y C(2025) 5052 final, ambos de 29-07-2025. Puede que las fechas de febrero sean las de publicación del borrador aprobado; sin comprobar.</li>
-<li><strong>Qué hacer</strong>: corregir la sección 9 y aclarar las fechas de la sección 16.</li>
+<li><strong>Estado</strong>: de la página de guías de la AEPD solo se ha visto la primera de 14 páginas; la URL del CEPD de <code>knowledge/sources.yaml</code> muestra sobre todo consultas públicas. Por eso <code>aepd</code> y <code>edpb</code> siguen con <code>last_checked: null</code>. El resto de fuentes, incluidas las tres nuevas (<code>rgpd</code>, <code>lopdgdd</code>, <code>ai-act-service-desk</code>), están a 2026-11-17.</li>
+<li><strong>Por qué sigue abierta</strong>: sin recorrer los listados enteros no se puede afirmar que no haya otra guía reciente que afecte a la base.</li>
+<li><strong>Qué hacer</strong>: en el próximo <code>/regulatory-update</code>, recorrer las 14 páginas de la AEPD, comprobar que la URL del CEPD lista también las directrices adoptadas y valorar una URL de la AEPD filtrada por IA.</li>
 </ul>
 <h2 id="decisiones-de-diseno-abiertas">Decisiones de diseño abiertas</h2>
 <h3 id="d01-q5-cuanto-ruido-es-aceptable">D01 · Q5: cuánto ruido es aceptable</h3>
@@ -177,7 +113,7 @@
 <h3 id="d02-mcp-de-documentacion-normativa-version-madura">D02 · MCP de documentación normativa (versión madura)</h3>
 <ul>
 <li><strong>Qué decidir</strong>: dónde corre (local o servicio), qué modelo de embeddings usa y cómo se reparte el índice con el plugin. Está como pendiente en <code>docs/diseno/propuesta-prototipo.md</code>.</li>
-<li><strong>Dato nuevo</strong>: EUR-Lex y el BOE cortan los textos largos al leerlos desde un agente (P01, P05); un índice propio del texto íntegro resolvería también eso.</li>
+<li><strong>Dato nuevo</strong>: EUR-Lex no responde a peticiones automáticas y las herramientas de lectura cortan los textos largos. Los originales íntegros y sus conversiones a Markdown están ya en <code>docs/fuentes/</code> y <code>docs/fuentes/md/</code>, y pueden ser la materia prima del índice.</li>
 </ul>
 <h3 id="d03-ruta-del-resumen-de-riesgos">D03 · Ruta del resumen de riesgos</h3>
 <ul>
@@ -202,7 +138,7 @@
 <h3 id="d07-senal-para-proxies">D07 · Señal para proxies</h3>
 <ul>
 <li><strong>Estado</strong>: <code>knowledge/signals.yaml</code> no tiene términos de proxy; la skill los busca leyendo el esquema.</li>
-<li><strong>Qué decidir</strong>: si se añade una lista <code>proxy_terms</code> (código postal, nacionalidad, bajas…) y con qué severidad, sabiendo que <code>codigo_postal</code> y <code>postal_code</code> ya están en <code>pii_terms</code>. Depende de P08.</li>
+<li><strong>Qué decidir</strong>: si se añade una lista <code>proxy_terms</code> (código postal, nacionalidad, bajas…) y con qué severidad, sabiendo que <code>codigo_postal</code> y <code>postal_code</code> ya están en <code>pii_terms</code>. La duda P08 ya está cerrada (V40): el criterio del TJUE es amplio, así que la lista sería larga.</li>
 </ul>
 <h3 id="d08-scoring-model-en-el-hook">D08 · <code>scoring-model</code> en el hook</h3>
 <ul>
@@ -228,12 +164,12 @@
 <h3 id="d12-cuando-se-sube-ultima-revision">D12 · Cuándo se sube <code>ultima_revision</code></h3>
 <ul>
 <li><strong>Estado</strong>: <code>skills/regulatory-update/SKILL.md</code> solo la sube si se leyeron todas las fuentes. EUR-Lex suele devolver textos cortados, así que la alerta de 90 días podría no apagarse nunca.</li>
-<li><strong>Qué decidir</strong>: si basta con leer el índice de cada fuente, o si se añade a <code>sources.yaml</code> el AI Act Service Desk como copia legible del consolidado.</li>
+<li><strong>Qué decidir</strong>: si basta con leer el índice de cada fuente. <code>knowledge/sources.yaml</code> incluye ya el AI Act Service Desk y la dirección de la Oficina de Publicaciones (<code>publications.europa.eu/resource/celex/&lt;CELEX&gt;</code>), que sí devuelve el texto íntegro.</li>
 </ul>
 <h3 id="d13-fuentes-que-el-plugin-cita-y-no-vigila">D13 · Fuentes que el plugin cita y no vigila</h3>
 <ul>
-<li><strong>Estado</strong>: <code>knowledge/sources.yaml</code> no incluye el RGPD en EUR-Lex, la LOPDGDD en el BOE ni el AI Act Service Desk, y las tres se usan en <code>knowledge/</code>.</li>
-<li><strong>Qué decidir</strong>: si se añaden, y que el agente <code>regulatory-watcher</code> acepte <code>curia.europa.eu</code> si P08 acaba citando jurisprudencia.</li>
+<li><strong>Estado</strong>: resuelto en parte. <code>knowledge/sources.yaml</code> incluye ya el RGPD, la LOPDGDD y el AI Act Service Desk, y el agente <code>regulatory-watcher</code> acepta <code>publications.europa.eu</code>, <code>curia.europa.eu</code> y <code>commission.europa.eu</code>.</li>
+<li><strong>Qué decidir</strong>: si el vigilante debe seguir también la jurisprudencia del TJUE (hoy se cita una sentencia, C-184/20) y con qué URL.</li>
 </ul>
 <h3 id="d14-datos-penales-dentro-de-categorias-especiales">D14 · Datos penales dentro de «categorías especiales»</h3>
 <ul>
@@ -250,8 +186,32 @@
 <li><strong>Estado</strong>: las cinco skills nuevas lo dicen en positivo («explica, propone y deja la decisión»); <code>project-init</code> y <code>pii-masking</code> conservan «Nunca bloquea».</li>
 <li><strong>Qué decidir</strong>: si se unifican.</li>
 </ul>
+<h3 id="d17-alcance-resumido-en-dates-yaml">D17 · Alcance resumido en <code>dates.yaml</code></h3>
+<ul>
+<li><strong>Estado</strong>: las fechas son correctas (V02 a V08), pero el alcance está resumido: pone «arts. 51-55» desde 2025-08-02 y «arts. 6-27» desde 2027-12-02. El art. 113.b habla del capítulo V entero (arts. 51-56) y también del capítulo III sección 4, el capítulo VII, el capítulo XII salvo el art. 101 y el art. 78; el art. 113.c excluye el art. 6.5 del aplazamiento. Antes era la duda P09; el texto literal del art. 113 está comprobado.</li>
+<li><strong>Qué decidir</strong>: si <code>dates.yaml</code> refleja el alcance completo. Si se cambia, revisar el hook <code>SessionStart</code> y las skills que lo leen.</li>
+</ul>
+<h3 id="d18-normas-nacionales-fuera-del-ai-act-y-del-rgpd">D18 · Normas nacionales fuera del AI Act y del RGPD</h3>
+<ul>
+<li><strong>Estado</strong>: <code>knowledge/ai-act-classification.md</code> menciona el Real Decreto 723/2026 (información a la persona trabajadora sobre sistemas algorítmicos) como nota del área de empleo. Ninguna señal ni hallazgo lo usa, y <code>knowledge/sources.yaml</code> no vigila normas laborales.</li>
+<li><strong>Qué decidir</strong>: si el plugin cubre normas nacionales sectoriales (laboral, consumo, seguros) o se queda en el AI Act, el RGPD y la LOPDGDD, con notas sueltas como esta.</li>
+</ul>
+<h3 id="d19-mantenimiento-de-docs-fuentes">D19 · Mantenimiento de <code>docs/fuentes/</code></h3>
+<ul>
+<li><strong>Estado</strong>: la carpeta guarda 37 documentos oficiales (38 MB) y cinco derivadas, con manifiesto. <code>skills/regulatory-update/SKILL.md</code> no dice nada de ella.</li>
+<li><strong>Qué decidir</strong>: si cada <code>/regulatory-update</code> añade a <code>docs/fuentes/</code> los documentos que lee y actualiza el manifiesto; si las versiones antiguas se conservan; y si las guías de AESIA, que hoy solo están archivadas, pasan a ser referencia de alguna skill.</li>
+</ul>
 <h2 id="verificado">Verificado</h2>
-<p>Todo consultado el 2026-11-17. «SD» es el consolidado del AI Act Service Desk (inglés, «as at 27 July 2026»).</p>
+<p>Todo comprobado el 2026-11-17 en el documento oficial que se indica. Los ficheros están en <code>docs/fuentes/</code>; la columna de fuente da el identificador y, la primera vez que aparece, el nombre del fichero. Abreviaturas:</p>
+<ul>
+<li><strong>AIA</strong>: AI Act consolidado en español, CELEX 02024R1689-20260727, <code>2026-07-27-ai-act-2024-1689-consolidado-es.xhtml</code>.</li>
+<li><strong>OMN</strong>: Reglamento (UE) 2026/1744, CELEX 32026R1744, <code>2026-07-24-omnibus-2026-1744-es.xhtml</code>.</li>
+<li><strong>RGPD</strong>: consolidado en español, CELEX 02016R0679-20160504, <code>2016-05-04-rgpd-2016-679-consolidado-es.xhtml</code>.</li>
+<li><strong>LOPDGDD</strong>: texto consolidado del BOE, BOE-A-2018-16673, última modificación BOE-A-2025-26698 (27-12-2025), <code>2025-12-27-lopdgdd-3-2018-consolidado-boe.pdf</code>.</li>
+<li><strong>D50</strong>: Directrices del art. 50, C(2026) 7702 final, de 5-11-2026, <code>2026-11-05-directrices-art50-transparencia-c2026-7702-es.pdf</code>.</li>
+<li><strong>DPP</strong>: Directrices de prácticas prohibidas, C(2025) 5052 final, de 29-07-2025, <code>2025-07-29-directrices-practicas-prohibidas-c2025-5052-es.pdf</code>.</li>
+<li><strong>DDEF</strong>: Directrices de definición de sistema de IA, C(2025) 5053 final, de 29-07-2025, <code>2025-07-29-directrices-definicion-sistema-ia-c2025-5053-es.pdf</code>.</li>
+</ul>
 <div class="table-wrap">
 <table>
 <thead>
@@ -265,195 +225,195 @@
 <tbody>
 <tr>
 <td>V01</td>
-<td>Consolidado de 27-07-2026; Reglamentos 2024/1689 y 2026/1744; el 2026/1744 es de 8-07-2026, publicado en el DO L el 24-07-2026, y modifica los Reglamentos 2024/1689, 2018/1139 y 2023/1230</td>
+<td>Consolidado de 27-07-2026 (versión 001.001, incorpora el Reglamento 2026/1744); el 2026/1744 es de 8-07-2026, publicado en el DO L el 24-07-2026, y modifica los Reglamentos 2024/1689, 2018/1139 y 2023/1230</td>
 <td><code>knowledge/VERSION</code></td>
-<td>SD; EUR-Lex CELEX 32026R1744 (HTML ES); página de la Oficina de IA</td>
+<td>AIA; OMN</td>
 </tr>
 <tr>
 <td>V02</td>
 <td>Capítulos I y II (art. 4 y art. 5.1.a-h) desde 2025-02-02</td>
 <td><code>knowledge/dates.yaml</code>, <code>skills/project-init</code></td>
-<td>SD art. 113.a</td>
+<td>AIA art. 113.a</td>
 </tr>
 <tr>
 <td>V03</td>
 <td>Capítulo V (GPAI) desde 2025-08-02</td>
 <td><code>knowledge/dates.yaml</code></td>
-<td>SD art. 113.b</td>
+<td>AIA art. 113.b</td>
 </tr>
 <tr>
 <td>V04</td>
 <td>Fecha general 2026-08-02, que incluye el art. 50 y el art. 101</td>
 <td><code>knowledge/dates.yaml</code>, <code>core.py</code> (<code>llm-sdk</code>), <code>skills/project-init</code></td>
-<td>SD art. 113; FAQ de la Comisión sobre el art. 50</td>
+<td>AIA art. 113</td>
 </tr>
 <tr>
 <td>V05</td>
 <td>Art. 5.1.b bis, 5.1.b ter, 5.1 bis y 5.1 ter desde 2026-12-02</td>
 <td><code>knowledge/dates.yaml</code></td>
-<td>SD art. 113.a</td>
+<td>AIA art. 113.a</td>
 </tr>
 <tr>
 <td>V06</td>
 <td>Art. 50.2 exigible desde 2026-12-02 a sistemas comercializados antes del 2026-08-02</td>
 <td><code>knowledge/dates.yaml</code>, <code>knowledge/transparency-art50.md</code>, <code>skills/ai-transparency</code></td>
-<td>SD art. 111.4; FAQ del art. 50</td>
+<td>AIA art. 111.4</td>
 </tr>
 <tr>
 <td>V07</td>
 <td>Alto riesgo del anexo III (cap. III, secc. 1-3) desde 2027-12-02</td>
 <td><code>knowledge/dates.yaml</code>, <code>core.py</code> (<code>scoring-model</code>), <code>skills/project-init</code></td>
-<td>SD art. 113.c.i</td>
+<td>AIA art. 113.c.i</td>
 </tr>
 <tr>
 <td>V08</td>
 <td>Alto riesgo del anexo I (art. 6.1) desde 2028-08-02</td>
 <td><code>knowledge/dates.yaml</code></td>
-<td>SD art. 113.c.ii</td>
+<td>AIA art. 113.c.ii</td>
 </tr>
 <tr>
 <td>V09</td>
 <td>Ámbito y exclusiones: art. 2.1.c, 2.1.g, 2.3, 2.6, 2.8 y 2.10</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 2</td>
+<td>AIA art. 2</td>
 </tr>
 <tr>
 <td>V10</td>
-<td>Definiciones: art. 3.1, 3.3, 3.4, 3.12, 3.39 (exige datos biométricos), 3.40, 3.60 y 3.63</td>
+<td>Definiciones: art. 3.1, 3.3, 3.4, 3.12, 3.39 (exige datos biométricos), 3.40, 3.52, 3.60 y 3.63</td>
 <td><code>knowledge/ai-act-classification.md</code>, <code>skills/ai-act-classify</code></td>
-<td>SD art. 3</td>
+<td>AIA art. 3</td>
 </tr>
 <tr>
 <td>V11</td>
 <td>Art. 4: medidas de apoyo a la alfabetización, sin nivel garantizado</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 4</td>
+<td>AIA art. 4</td>
 </tr>
 <tr>
 <td>V12</td>
 <td>Art. 4 bis: seis condiciones (a-f), alcance del apartado 2 y ausencia de obligación de detectar sesgos</td>
 <td><code>knowledge/special-categories.md</code>, <code>skills/special-categories</code></td>
-<td>SD art. 4a</td>
+<td>AIA art. 4 bis</td>
 </tr>
 <tr>
 <td>V13</td>
 <td>Art. 5.1, letras a, b, b bis, b ter, c, d, e, f, g y h, con sus excepciones; 5.1 bis y 5.1 ter; 5.2-5.7</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 5</td>
+<td>AIA art. 5</td>
 </tr>
 <tr>
 <td>V14</td>
-<td>Art. 6.1, 6.1 bis-quater, 6.2, 6.3 (cuatro condiciones y perfilado), 6.4 con el registro del 49.2, y 6.5</td>
+<td>Art. 6.1, 6.1 bis-quater, 6.2, 6.3 (cuatro condiciones y elaboración de perfiles), 6.4 con el registro del 49.2, y 6.5. El art. 6.4 conserva su redacción de 2024</td>
 <td><code>knowledge/ai-act-classification.md</code>, <code>skills/ai-act-classify</code></td>
-<td>SD arts. 6 y 49</td>
+<td>AIA arts. 6 y 49</td>
 </tr>
 <tr>
 <td>V15</td>
 <td>Anexo III: las ocho áreas, sus letras y las exclusiones expresas</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD annex-3</td>
+<td>AIA anexo III</td>
 </tr>
 <tr>
 <td>V16</td>
 <td>Mapa de 17 sectores a puntos del anexo III</td>
 <td><code>knowledge/sectors.yaml</code></td>
-<td>SD annex-3</td>
+<td>AIA anexo III</td>
 </tr>
 <tr>
 <td>V17</td>
 <td>Art. 25.1 (a-c), 25.2 y 25.4</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 25</td>
+<td>AIA art. 25</td>
 </tr>
 <tr>
 <td>V18</td>
 <td>Art. 26.1, 26.2, 26.6 (seis meses como mínimo), 26.7, 26.9 y 26.11</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 26</td>
+<td>AIA art. 26</td>
 </tr>
 <tr>
 <td>V19</td>
 <td>Art. 27: quién hace la FRIA, exclusión del anexo III.2, 27.4 y 27.5</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 27</td>
+<td>AIA art. 27</td>
 </tr>
 <tr>
 <td>V20</td>
-<td>Art. 50.1 a 50.7: obligado, obligación y excepciones</td>
+<td>Art. 50.1 a 50.7: obligado, obligación y excepciones, con la redacción oficial</td>
 <td><code>knowledge/transparency-art50.md</code>, <code>skills/ai-transparency</code>, <code>core.py</code></td>
-<td>SD art. 50</td>
+<td>AIA art. 50</td>
 </tr>
 <tr>
 <td>V21</td>
 <td>Multas: art. 99.3 (35 M EUR o 7 %), 99.4 (15 M EUR o 3 %; el art. 50 es la letra g), 99.5, 99.6 y 99.6 bis</td>
 <td><code>knowledge/ai-act-classification.md</code>, <code>knowledge/transparency-art50.md</code></td>
-<td>SD art. 99</td>
+<td>AIA art. 99</td>
 </tr>
 <tr>
 <td>V22</td>
 <td>Art. 101.1: multas de la Comisión a proveedores de modelos GPAI</td>
 <td><code>knowledge/dates.yaml</code></td>
-<td>SD art. 101</td>
+<td>AIA art. 101</td>
 </tr>
 <tr>
 <td>V23</td>
 <td>Art. 111.2: sistemas ya comercializados, solo con cambios significativos de diseño</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>SD art. 111</td>
+<td>AIA art. 111</td>
 </tr>
 <tr>
 <td>V24</td>
 <td>Las obligaciones del art. 53 son del proveedor del modelo GPAI</td>
 <td><code>skills/ai-transparency</code> (límites)</td>
-<td>SD art. 53</td>
+<td>AIA art. 53</td>
 </tr>
 <tr>
 <td>V25</td>
-<td>Directrices del art. 50, C(2026) 5054 final, 20-07-2026: párr. 30, 31, 37, 38, 40, 42-45, 64-68, 69-70, 72-73, 74, 90-92, 99-108 y 113-117</td>
+<td>Directrices del art. 50: párr. 30, 31, 37, 38, 40, 42-45, 64-68, 69-70, 72-76, 90-92, 99-108 y 113-117, con los ejemplos literales del párr. 38</td>
 <td><code>knowledge/transparency-art50.md</code></td>
-<td>PDF de las directrices en el Service Desk</td>
+<td>D50</td>
 </tr>
 <tr>
 <td>V26</td>
 <td>Código de buenas prácticas sobre transparencia del contenido generado por IA: versión final de 10-06-2026, declarado herramienta voluntaria adecuada</td>
 <td><code>knowledge/transparency-art50.md</code></td>
-<td>Página de la Comisión sobre el código</td>
+<td>Página de la Comisión sobre el código (primera pasada; no hay copia en <code>docs/fuentes/</code>)</td>
 </tr>
 <tr>
 <td>V27</td>
 <td>El contenido generado antes del 2026-08-02 no necesita etiquetado retroactivo</td>
 <td><code>knowledge/transparency-art50.md</code></td>
-<td>FAQ de la Comisión sobre el art. 50</td>
+<td>FAQ de la Comisión sobre el art. 50 (primera pasada; no hay copia en <code>docs/fuentes/</code>)</td>
 </tr>
 <tr>
 <td>V28</td>
-<td>El scoring crediticio y de seguros es alto riesgo si no cumple las condiciones de la puntuación social (párr. 37)</td>
+<td>El scoring crediticio y de seguros es alto riesgo si no cumple las condiciones de la puntuación ciudadana (párr. 37)</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>Directrices de prácticas prohibidas, C(2025) 5052 final</td>
+<td>DPP</td>
 </tr>
 <tr>
 <td>V29</td>
 <td>Quedan fuera de la definición: optimización matemática (párr. 42-45), procesamiento básico (46-47), heurísticas clásicas (48) y predicción simple (49-51)</td>
 <td><code>knowledge/ai-act-classification.md</code></td>
-<td>Directrices de definición, C(2025) 5053 final</td>
+<td>DDEF</td>
 </tr>
 <tr>
 <td>V30</td>
 <td>RGPD considerando 26 (el dato seudonimizado sigue siendo personal) y considerando 51 (se suman las condiciones generales de licitud)</td>
 <td><code>knowledge/masking-techniques.md</code>, <code>knowledge/special-categories.md</code></td>
-<td>EUR-Lex CELEX 32016R0679 (HTML ES)</td>
+<td>RGPD</td>
 </tr>
 <tr>
 <td>V31</td>
 <td>LOPDGDD art. 9.1, 9.2 y 10.1</td>
 <td><code>knowledge/special-categories.md</code></td>
-<td>BOE, texto consolidado BOE-A-2018-16673</td>
+<td>LOPDGDD</td>
 </tr>
 <tr>
 <td>V32</td>
-<td>RGPD arts. 5.1.c, 5.1.e, 9.1, 9.2, 22.4 y 35.3.b; títulos de los arts. 10, 17, 25, 28, 30, 32 y 89 y del capítulo V</td>
-<td><code>knowledge/special-categories.md</code>, <code>knowledge/masking-techniques.md</code>, <code>skills/pii-masking</code>, <code>core.py</code></td>
-<td>Copia no oficial <code>gdpr-info.eu</code>. Falta la fuente oficial: P01</td>
+<td>RGPD arts. 4.5, 5.1.c, 5.1.e, 9.1, 9.2 (letras a-j), 10, 17, 22.4, 25, 28, 30, 32, 35.3.b, 44-49 y 89. Cierra P01</td>
+<td><code>knowledge/special-categories.md</code>, <code>knowledge/masking-techniques.md</code>, <code>skills/pii-masking</code>, <code>skills/special-categories</code>, <code>core.py</code></td>
+<td>RGPD</td>
 </tr>
 <tr>
 <td>V33</td>
@@ -463,14 +423,192 @@
 </tr>
 <tr>
 <td>V34</td>
-<td>Las siete URL de las fuentes cargan; AESIA lista 16 guías y el compendio de checklists</td>
+<td>Las URL de las fuentes cargan; AESIA lista 16 guías y el compendio de checklists</td>
 <td><code>knowledge/sources.yaml</code></td>
 <td>Las propias páginas; salvedades en P11</td>
+</tr>
+<tr>
+<td>V35</td>
+<td>Numeración en español: «artículo 4 bis», «b bis)», «b ter)», «1 bis», «1 ter», «1 quater» y «6 bis» (art. 99). Términos oficiales: «responsable del despliegue», «ultrafalsificación» (art. 3.60), «puntuación ciudadana» (art. 5.1.c), «elaboración de perfiles» (art. 3.52), «Consejo de IA». Cierra P02</td>
+<td><code>knowledge/</code> y las skills</td>
+<td>AIA</td>
+</tr>
+<tr>
+<td>V36</td>
+<td>Las directrices del art. 50 se adoptaron formalmente como Comunicación C(2026) 7702 final el 5-11-2026, en español; el documento de 20-07-2026, C(2026) 5054, aprobaba su contenido y tiene la misma numeración de párrafos. El párr. 5 dice que no son vinculantes. Cierra P03</td>
+<td><code>knowledge/transparency-art50.md</code>, <code>skills/ai-transparency</code> (límites)</td>
+<td>D50; C(2026) 5054 final, <code>2026-07-20-directrices-art50-transparencia-c2026-5054-en.pdf</code></td>
+</tr>
+<tr>
+<td>V37</td>
+<td>El Reglamento 2026/1744 entró en vigor a los tres días de su publicación en el DO (24-07-2026): el 27-07-2026. Cierra P05</td>
+<td><code>knowledge/VERSION</code>, <code>docs/investigacion/ai-act-investigacion.md</code></td>
+<td>OMN art. 4 y considerando 46</td>
+</tr>
+<tr>
+<td>V38</td>
+<td>Requisitos de los sistemas de alto riesgo en los arts. 8-15; obligaciones del proveedor en los arts. 16-17; la evaluación de la conformidad es el art. 43, al que remite el art. 16.f. Cierra P06</td>
+<td><code>knowledge/ai-act-classification.md</code></td>
+<td>AIA arts. 8-17 y 43</td>
+</tr>
+<tr>
+<td>V39</td>
+<td>Los Reglamentos 2017/745 y 2017/746 (productos sanitarios) están en la sección A del anexo I; la maquinaria (Reglamento 2023/1230) pasa a la sección B. Cierra P07</td>
+<td><code>knowledge/sectors.yaml</code> (<code>healthcare</code>), <code>knowledge/dates.yaml</code></td>
+<td>AIA anexo I</td>
+</tr>
+<tr>
+<td>V40</td>
+<td>Tratar datos que pueden desvelar indirectamente una categoría especial, por deducción o cruce, es tratar categorías especiales. La tabla de variables proxy sigue siendo heurística del plugin. Cierra P08</td>
+<td><code>knowledge/special-categories.md</code>, <code>skills/special-categories</code></td>
+<td>TJUE, sentencia de 1-8-2022, C-184/20, apdos. 123-128 y fallo 2; CELEX 62020CJ0184, <code>2022-08-01-tjue-c-184-20-sentencia-es.xhtml</code></td>
+</tr>
+<tr>
+<td>V41</td>
+<td>Fechas de las directrices de 2025: las de prácticas prohibidas se publicaron el 4-02-2025 y las de definición el 6-02-2025; las dos se adoptaron el 29-07-2025. Cierra P12</td>
+<td><code>docs/investigacion/ai-act-investigacion.md</code> (secciones 4.3, 6 y 16), <code>knowledge/ai-act-classification.md</code></td>
+<td>DPP; DDEF</td>
+</tr>
+<tr>
+<td>V42</td>
+<td>Las directrices del art. 6 siguen en borrador a 2026-11-17 (ver P04)</td>
+<td><code>knowledge/ai-act-classification.md</code>, <code>skills/ai-act-classify</code></td>
+<td>Borrador de 19-05-2026, <code>2026-05-19-directrices-art6-alto-riesgo-borrador-parte1-en.pdf</code> y partes 2 y 3</td>
+</tr>
+<tr>
+<td>V43</td>
+<td>Real Decreto 723/2026, art. 3.2.k: la empresa informa por escrito de los sistemas algorítmicos o automatizados de toma de decisiones; publicado el 15-09-2026 y en vigor a los veinte días, el 5-10-2026</td>
+<td><code>knowledge/ai-act-classification.md</code></td>
+<td>BOE-A-2026-19200, <code>2026-09-15-rd-723-2026-consolidado-boe.pdf</code> (disposición final cuarta)</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="corregido-en-esta-revision">Corregido en esta revisión</h2>
+<h2 id="corregido">Corregido</h2>
+<h3 id="segunda-pasada-con-los-textos-oficiales">Segunda pasada, con los textos oficiales</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Qué</th>
+<th>Antes</th>
+<th>Después</th>
+<th>Fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Referencia de las directrices del art. 50, <code>knowledge/transparency-art50.md</code> e investigación</td>
+<td>C(2026) 5054, de 20-07-2026</td>
+<td>Comunicación C(2026) 7702 final, de 5-11-2026; no vinculantes (párr. 5)</td>
+<td>D50</td>
+</tr>
+<tr>
+<td>Término del art. 3.60, <code>knowledge/transparency-art50.md</code> e investigación (sección 4.2)</td>
+<td>«Deepfake» a secas; «ultrasuplantación» en la investigación</td>
+<td>«Ultrafalsificación»; deepfake queda como nombre de oficio</td>
+<td>AIA art. 3.60</td>
+</tr>
+<tr>
+<td>Criterios de la ultrafalsificación, investigación (sección 9)</td>
+<td>Tres criterios</td>
+<td>Cuatro criterios acumulativos</td>
+<td>D50 párr. 113</td>
+</tr>
+<tr>
+<td>Excepción del art. 50.1, <code>knowledge/transparency-art50.md</code></td>
+<td>«Obvio para una persona razonablemente informada»; «no vale si hay grupos vulnerables»</td>
+<td>«Evidente para una persona razonablemente informada, atenta y perspicaz»; se tiene en cuenta a los grupos vulnerables</td>
+<td>AIA art. 50.1; D50 párr. 42-45</td>
+</tr>
+<tr>
+<td>Excepción del art. 50.4, mismo fichero</td>
+<td>«Obras evidentemente artísticas, satíricas o de ficción»</td>
+<td>«Manifiestamente creativas, satíricas, artísticas o de ficción»; se hace pública la existencia del contenido sin dificultar el disfrute de la obra</td>
+<td>AIA art. 50.4</td>
+</tr>
+<tr>
+<td>Ejemplos de aviso insuficiente, mismo fichero</td>
+<td>«este sitio usa IA», «este sistema usa LLM»</td>
+<td>Las frases del texto español: «Los servicios en este sitio web utilizan la IA», «este sistema utiliza grandes modelos de lenguaje»</td>
+<td>D50 párr. 38</td>
+</tr>
+<tr>
+<td>Recordatorios, mismo fichero</td>
+<td>Incluía «siempre que el usuario pregunte»</td>
+<td>Lo que dice el párrafo: asesoramiento financiero, de seguros, jurídico o sanitario, acompañantes de IA y control sobre un agente</td>
+<td>D50 párr. 40</td>
+</tr>
+<tr>
+<td>Obligaciones del proveedor, <code>knowledge/ai-act-classification.md</code></td>
+<td>«Arts. 8-17», con la evaluación de conformidad dentro</td>
+<td>Requisitos (arts. 8-15) y obligaciones (arts. 16-17), con el art. 43 citado aparte</td>
+<td>AIA arts. 8-17 y 43</td>
+</tr>
+<tr>
+<td>Términos, mismo fichero</td>
+<td>«Tarea procedimental limitada»; «perfila»</td>
+<td>«Tarea de procedimiento limitada»; «elaboración de perfiles»; nota con «puntuación ciudadana»</td>
+<td>AIA arts. 6.3, 3.52 y 5.1.c</td>
+</tr>
+<tr>
+<td>Directrices del art. 6, mismo fichero</td>
+<td>«Borrador, sin adoptar»</td>
+<td>Borrador de 19-05-2026, sin versión final a 2026-11-17</td>
+<td>Borrador (ver P04)</td>
+</tr>
+<tr>
+<td>Empleo en España, mismo fichero</td>
+<td>Nada</td>
+<td>Nota sobre el Real Decreto 723/2026, art. 3.2.k</td>
+<td>BOE-A-2026-19200</td>
+</tr>
+<tr>
+<td>Definición de proxy, <code>knowledge/special-categories.md</code> y <code>skills/special-categories/SKILL.md</code></td>
+<td>Heurística propia: «se trata como» categoría especial si se usa para inferirla</td>
+<td>Criterio del Tribunal de Justicia: basta con que el dato pueda desvelarla indirectamente</td>
+<td>TJUE C-184/20</td>
+</tr>
+<tr>
+<td>Condiciones b y e del art. 4 bis, <code>knowledge/special-categories.md</code></td>
+<td>«Medidas de vanguardia»; «supresión»</td>
+<td>«Medidas punteras de seguridad y protección de la intimidad»; «eliminación […] lo que ocurra antes»</td>
+<td>AIA art. 4 bis.1</td>
+</tr>
+<tr>
+<td>Seudonimización, <code>knowledge/masking-techniques.md</code></td>
+<td>Solo el considerando 26</td>
+<td>Añade el art. 4.5 y avisa de las Guidelines 02/2026 del CEPD, en consulta</td>
+<td>RGPD art. 4.5; CEPD 02/2026 v1.0</td>
+</tr>
+<tr>
+<td>Fechas de las directrices de 2025, investigación (secciones 4.3, 6 y 16)</td>
+<td>«6-02-2025» y «4-02-2025, actualizadas el 31-07-2025»</td>
+<td>Publicación en febrero y adopción el 29-07-2025, con su número C(2025)</td>
+<td>DPP; DDEF</td>
+</tr>
+<tr>
+<td>Pendientes de la investigación (sección 20)</td>
+<td>Daba por no leído el consolidado en español</td>
+<td>Nota con lo resuelto el 2026-11-17</td>
+<td>AIA; OMN</td>
+</tr>
+<tr>
+<td>Fuentes, <code>knowledge/sources.yaml</code></td>
+<td>Cinco fuentes; <code>ai-office</code> sin revisar</td>
+<td>Ocho: se añaden <code>rgpd</code>, <code>lopdgdd</code> y <code>ai-act-service-desk</code>, el consolidado del AI Act y la dirección de la Oficina de Publicaciones</td>
+<td>Las propias páginas</td>
+</tr>
+<tr>
+<td>Dominios del vigilante, <code>agents/regulatory-watcher.md</code></td>
+<td>Ocho dominios</td>
+<td>Añade <code>publications.europa.eu</code>, <code>curia.europa.eu</code> y <code>commission.europa.eu</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="primera-pasada">Primera pasada</h3>
 <div class="table-wrap">
 <table>
 <thead>
@@ -492,43 +630,43 @@
 <td>Excepciones del art. 5.1.h, <code>knowledge/ai-act-classification.md</code></td>
 <td>«Salvo las excepciones tasadas del art. 5.2-5.7»</td>
 <td>Las tres excepciones están en el propio 5.1.h; los apartados 2 a 7 ponen las condiciones</td>
-<td>SD art. 5</td>
+<td>AIA art. 5</td>
 </tr>
 <tr>
 <td>Excepción del art. 5.1.g, mismo fichero</td>
 <td>Solo etiquetado o filtrado de conjuntos de datos</td>
 <td>Añade la categorización de datos biométricos en el ámbito policial</td>
-<td>SD art. 5</td>
+<td>AIA art. 5</td>
 </tr>
 <tr>
 <td>Art. 2.10, mismo fichero</td>
 <td>«Uso personal no profesional»</td>
 <td>Persona física en actividad puramente personal, no profesional</td>
-<td>SD art. 2</td>
+<td>AIA art. 2</td>
 </tr>
 <tr>
 <td>Art. 9.2 y art. 6 RGPD, <code>knowledge/special-categories.md</code></td>
 <td>«además de una base del art. 6», sin fuente</td>
 <td>La misma idea, apoyada en el considerando 51</td>
-<td>EUR-Lex, RGPD considerando 51</td>
+<td>RGPD considerando 51</td>
 </tr>
 <tr>
 <td>Arts. 22.4 y 35 RGPD, mismo fichero</td>
 <td>Citas genéricas</td>
 <td>22.4: solo con el 9.2.a o el 9.2.g y con garantías; 35.3.b: gran escala, también datos penales</td>
-<td><code>gdpr-info.eu</code> (P01)</td>
+<td>RGPD</td>
 </tr>
 <tr>
 <td>Alcance del art. 4 bis.2, mismo fichero</td>
 <td>«También fuera del alto riesgo»</td>
 <td>A quién se extiende y con qué condición de necesidad</td>
-<td>SD art. 4a</td>
+<td>AIA art. 4 bis</td>
 </tr>
 <tr>
 <td>LOPDGDD, mismo fichero</td>
 <td>Solo el art. 9.1</td>
 <td>Añade el 9.2 (norma con rango de ley) y el 10.1 (datos penales)</td>
-<td>BOE-A-2018-16673</td>
+<td>LOPDGDD</td>
 </tr>
 <tr>
 <td>URL del Reglamento 2026/1744, <code>knowledge/sources.yaml</code></td>
