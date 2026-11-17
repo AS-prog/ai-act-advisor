@@ -131,6 +131,7 @@ Resultado de la segunda pasada: P01, P02, P03, P05, P06, P07, P08 y P12 están c
 
 - **Estado**: las notas de `docs/documentos/fuentes/notas/` no viajan con el plugin y ninguna skill las cita. Propuesta en `docs/documentos/diseno/citar-notas.md`: cita con formato fijo, mapa curado `knowledge/citas.yaml` y buscador stdlib; el MCP con embeddings (D02) después, con la misma interfaz.
 - **Qué decidir**: si las notas viajan enteras (7,5 MB) o solo las normas (2 MB); si vale el formato de cita con líneas; y si el MCP espera a que el conjunto de consultas de prueba lo pida.
+- **Prototipo**: `scripts/buscar.py` (BM25 por pasajes, normas y guías por separado). Con la pregunta en español, su versión en vocabulario de la norma y su traducción al inglés, que escribe Claude, acierta 19 de 20 consultas de prueba; solo con la pregunta en español, 15.
 
 ## Decisiones de diseño cerradas
 

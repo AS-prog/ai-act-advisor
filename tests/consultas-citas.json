@@ -1,0 +1,211 @@
+{
+  "_descripcion": "Consultas de prueba del buscador de notas (D21). «es» es como pregunta la persona; «es_norma» y «en» son las reformulaciones que haría Claude antes de buscar (vocabulario de la norma en español y traducción al inglés). Acierta si alguna nota de «esperadas» sale entre las k normas o las k guías primeras.",
+  "k": 3,
+  "consultas": [
+    {
+      "id": "cat-especiales",
+      "es": "categorías especiales de datos de salud",
+      "es_norma": "tratamiento de categorías especiales de datos personales relativos a la salud",
+      "en": "special categories of health data",
+      "esperadas": [
+        "rgpd-art-9",
+        "lopdgdd-art-9"
+      ]
+    },
+    {
+      "id": "minimizacion",
+      "es": "minimización de datos personales en la ingesta",
+      "es_norma": "datos adecuados, pertinentes y limitados a lo necesario, minimización de datos",
+      "en": "data minimisation personal data ingestion",
+      "esperadas": [
+        "rgpd-art-5"
+      ]
+    },
+    {
+      "id": "seudonimizacion",
+      "es": "seudonimización de correos electrónicos con hash",
+      "es_norma": "seudonimización de datos personales, medidas técnicas y organizativas",
+      "en": "pseudonymisation of email addresses with hashing",
+      "esperadas": [
+        "rgpd-art-4",
+        "rgpd-art-25",
+        "rgpd-art-32",
+        "aesia-07-guia-de-datos-y-gobernanza-de-datos-08-otros-elementos-a-considerar"
+      ]
+    },
+    {
+      "id": "eipd",
+      "es": "evaluación de impacto relativa a la protección de datos",
+      "es_norma": "evaluación de impacto relativa a la protección de datos",
+      "en": "data protection impact assessment",
+      "esperadas": [
+        "rgpd-art-35"
+      ]
+    },
+    {
+      "id": "decisiones-automatizadas",
+      "es": "decisiones automatizadas y elaboración de perfiles",
+      "es_norma": "decisiones individuales automatizadas, incluida la elaboración de perfiles",
+      "en": "automated decision-making and profiling",
+      "esperadas": [
+        "rgpd-art-22"
+      ]
+    },
+    {
+      "id": "gobernanza",
+      "es": "gobernanza de datos de entrenamiento y sesgos",
+      "es_norma": "conjuntos de datos de entrenamiento, validación y prueba, prácticas de gobernanza y gestión de datos, sesgos",
+      "en": "training data governance and bias",
+      "esperadas": [
+        "ai-act-art-10"
+      ]
+    },
+    {
+      "id": "solvencia",
+      "es": "modelo de scoring de solvencia crediticia de clientes",
+      "es_norma": "evaluar la solvencia de personas físicas o establecer su calificación crediticia",
+      "en": "credit scoring model creditworthiness of customers",
+      "esperadas": [
+        "ai-act-anexo-iii",
+        "directrices-art6-alto-riesgo-borrador-parte3-15-iv-high-risk-classification-according-to"
+      ]
+    },
+    {
+      "id": "chatbot",
+      "es": "avisar de que el usuario habla con un chatbot",
+      "es_norma": "informar a las personas físicas de que están interactuando con un sistema de IA",
+      "en": "inform users they are interacting with a chatbot AI system",
+      "esperadas": [
+        "ai-act-art-50",
+        "directrices-art50-transparencia-c2026-7702-04-3-articulo-50-apartado-1-del-reglamento"
+      ]
+    },
+    {
+      "id": "contenido-generado",
+      "es": "marcar el contenido generado por IA",
+      "es_norma": "marcar los resultados de salida en un formato legible por máquina como generados de manera artificial",
+      "en": "marking AI-generated content machine-readable",
+      "esperadas": [
+        "ai-act-art-50",
+        "directrices-art50-transparencia-c2026-7702-05-4-articulo-50-apartado-2-del-reglamento"
+      ]
+    },
+    {
+      "id": "deepfake",
+      "es": "ultrasuplantación de una persona real en un vídeo",
+      "es_norma": "ultrasuplantación, contenido de imagen, audio o vídeo generado o manipulado",
+      "en": "deep fake video of a real person",
+      "esperadas": [
+        "ai-act-art-50",
+        "directrices-art50-transparencia-c2026-7702-07-6-articulo-50-apartado-4-etiquetado-de-l",
+        "directrices-art50-transparencia-c2026-7702-08-6-articulo-50-apartado-4-etiquetado-de-l"
+      ]
+    },
+    {
+      "id": "emociones",
+      "es": "reconocimiento de emociones de empleados",
+      "es_norma": "sistemas de IA para inferir las emociones de una persona física en el lugar de trabajo",
+      "en": "emotion recognition in the workplace",
+      "esperadas": [
+        "ai-act-art-5",
+        "directrices-practicas-prohibidas-c2025-5052-17-7-articulo-5-apartado-1-letra-f-del-regl",
+        "directrices-art6-alto-riesgo-borrador-parte3-09-iv-high-risk-classification-according-to"
+      ]
+    },
+    {
+      "id": "seleccion-personal",
+      "es": "filtrar candidatos en un proceso de selección de personal",
+      "es_norma": "contratación o selección de personas físicas, analizar y filtrar las solicitudes de empleo",
+      "en": "screening job applicants recruitment",
+      "esperadas": [
+        "ai-act-anexo-iii",
+        "directrices-art6-alto-riesgo-borrador-parte3-12-iv-high-risk-classification-according-to",
+        "directrices-art6-alto-riesgo-borrador-parte3-13-iv-high-risk-classification-according-to"
+      ]
+    },
+    {
+      "id": "anonimizacion",
+      "es": "riesgo de reidentificación al anonimizar datos",
+      "es_norma": "datos anónimos, riesgo de reidentificación de las personas",
+      "en": "re-identification risk singling out anonymisation",
+      "esperadas": [
+        "cepd-directrices-02-2026-anonimizacion-v1-04-3-the-technical-analysis-of-anonymisatio",
+        "cepd-directrices-02-2026-anonimizacion-v1-05-3-the-technical-analysis-of-anonymisatio",
+        "cepd-directrices-02-2026-anonimizacion-v1-03-2-legal-analysis"
+      ]
+    },
+    {
+      "id": "web-scraping",
+      "es": "extraer datos de webs para entrenar un modelo generativo",
+      "es_norma": "recopilación de datos personales de internet para entrenar modelos de IA generativa",
+      "en": "web scraping personal data to train generative AI",
+      "esperadas": [
+        "cepd-directrices-03-2026-web-scraping-ia-generativa-v1-04-3-web-scraping-and-the-gdpr-parte-1",
+        "cepd-directrices-03-2026-web-scraping-ia-generativa-v1-05-3-web-scraping-and-the-gdpr-parte-2"
+      ]
+    },
+    {
+      "id": "excepcion-6-3",
+      "es": "excepción cuando el sistema realiza una tarea procedimental limitada",
+      "es_norma": "no se considerará de alto riesgo cuando el sistema esté destinado a realizar una tarea de procedimiento limitada",
+      "en": "exception narrow procedural task article 6(3)",
+      "esperadas": [
+        "ai-act-art-6",
+        "directrices-art6-alto-riesgo-borrador-parte1-03-ii-general-principles-for-classification",
+        "directrices-art6-alto-riesgo-borrador-parte3-03-ii-general-principles-for-classification"
+      ]
+    },
+    {
+      "id": "alfabetizacion",
+      "es": "alfabetización en IA del personal",
+      "es_norma": "alfabetización en materia de IA del personal",
+      "en": "AI literacy of staff",
+      "esperadas": [
+        "ai-act-art-4"
+      ]
+    },
+    {
+      "id": "transferencias",
+      "es": "exportar datos a un proveedor fuera del EEE",
+      "es_norma": "transferencias de datos personales a terceros países u organizaciones internacionales",
+      "en": "transfer personal data to a third country outside the EEA",
+      "esperadas": [
+        "rgpd-art-44",
+        "rgpd-art-46",
+        "rgpd-art-45",
+        "rgpd-art-49"
+      ]
+    },
+    {
+      "id": "encargado",
+      "es": "contrato con un encargado del tratamiento",
+      "es_norma": "encargado del tratamiento, contrato u otro acto jurídico",
+      "en": "contract with a data processor",
+      "esperadas": [
+        "rgpd-art-28",
+        "lopdgdd-art-33"
+      ]
+    },
+    {
+      "id": "supresion",
+      "es": "derecho de supresión de un cliente",
+      "es_norma": "derecho de supresión, derecho al olvido",
+      "en": "right to erasure of a customer",
+      "esperadas": [
+        "rgpd-art-17",
+        "lopdgdd-art-15"
+      ]
+    },
+    {
+      "id": "trabajadores",
+      "es": "informar a los trabajadores de los algoritmos que les afectan",
+      "es_norma": "derecho de información de los trabajadores sobre algoritmos y sistemas de inteligencia artificial",
+      "en": "inform workers about algorithms affecting them",
+      "esperadas": [
+        "aepd-sistemas-algoritmicos-ambito-laboral-01-texto-completo",
+        "lopdgdd-art-64",
+        "rd-723-2026"
+      ]
+    }
+  ]
+}

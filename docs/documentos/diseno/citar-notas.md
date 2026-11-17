@@ -25,9 +25,11 @@ fijo**.
 2. **Mapa curado de señal a cita** en `knowledge/citas.yaml`. Los hooks y
    las skills lo leen para citar sin buscar. Es determinista y se revisa
    en PR, como el resto de `knowledge/`.
-3. **Buscador para las preguntas abiertas**, en Python stdlib: primero por
-   metadatos del front matter, después por texto con BM25, con un
-   glosario español-inglés para el vocabulario del código.
+3. **Buscador para las preguntas abiertas**, en Python stdlib, con BM25
+   por pasajes. Claude, que es quien lo llama, reformula la pregunta en el
+   vocabulario de la norma y la traduce al inglés; el buscador lanza cada
+   consulta sobre las notas de su idioma y devuelve por separado normas
+   (la cita) y guías (el apoyo). Hay prototipo: `scripts/buscar.py`.
 
 Los embeddings entran después detrás de la misma interfaz (entra una
 consulta y salen ids de nota), así que las skills no cambian el día que
@@ -73,7 +75,7 @@ Lo que se ha medido sobre `docs/documentos/fuentes/notas/` (806 notas,
 <figure class="figwrap">
   <svg viewBox="0 0 720 360" role="img" aria-labelledby="citas-title citas-desc">
     <title id="citas-title">De la señal a la cita</title>
-    <desc id="citas-desc">Un hook o una skill parten de una señal o de una pregunta. Si la señal está en el mapa curado, la cita sale directa. Si es una pregunta abierta, el buscador filtra por metadatos y después busca por texto, con el glosario para el inglés. Todo acaba en una cita con formato fijo que remite a la nota y a la fuente oficial. El MCP con embeddings sustituye al buscador más adelante con la misma salida.</desc>
+    <desc id="citas-desc">Un hook o una skill parten de una señal o de una pregunta. Si la señal está en el mapa curado, la cita sale directa. Si es una pregunta abierta, el buscador filtra por metadatos y después busca por texto, con las consultas que Claude reformula en español y en inglés. Todo acaba en una cita con formato fijo que remite a la nota y a la fuente oficial. El MCP con embeddings sustituye al buscador más adelante con la misma salida.</desc>
     <defs>
       <marker id="citas-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
     </defs>
@@ -90,9 +92,9 @@ Lo que se ha medido sobre `docs/documentos/fuentes/notas/` (806 notas,
     <text class="d-sm" x="280" y="60">knowledge/citas.yaml</text>
     <rect class="d-box" x="264" y="160" width="208" height="152"/>
     <text class="d-t" x="280" y="184">Buscador stdlib</text>
-    <text class="d-sm" x="280" y="210">1 · metadatos del front matter</text>
-    <text class="d-sm" x="280" y="232">2 · texto con BM25</text>
-    <text class="d-sm" x="280" y="254">3 · glosario es-en</text>
+    <text class="d-sm" x="280" y="210">1 · Claude: es, norma y en</text>
+    <text class="d-sm" x="280" y="232">2 · BM25 por pasajes e idioma</text>
+    <text class="d-sm" x="280" y="254">3 · normas y guías aparte</text>
     <text class="d-sm" x="280" y="292">salida: ids de nota + líneas</text>
     <line class="d-line" x1="472" y1="44" x2="520" y2="120" marker-end="url(#citas-arrow)"/>
     <line class="d-line" x1="472" y1="236" x2="520" y2="160" marker-end="url(#citas-arrow)"/>
@@ -147,16 +149,46 @@ normativo que mueva el texto rompe el test, no el aviso.
 
 ### 3. Buscador para preguntas abiertas
 
-`scripts/aiact/buscar.py`, sin dependencias, con las tres operaciones que
-la propuesta del prototipo preveía para el MCP:
+Prototipo en `scripts/buscar.py` (lógica en `scripts/aiact/notas.py`),
+sin dependencias. Indexa las 806 notas en 2 614 pasajes en medio segundo.
+Lleva dos de las tres operaciones que la propuesta del prototipo preveía
+para el MCP; la tercera queda para después:
 
 | Operación | Ejemplo | Cómo |
 | --- | --- | --- |
-| Traer un artículo | `buscar.py articulo rgpd 9.1` | Por `norma` y `unidad`; devuelve las líneas del apartado |
-| Buscar pasajes | `buscar.py pasajes "credit scoring"` | Glosario es-en, filtro por metadatos y BM25; devuelve ids y líneas |
-| Contrastar | `buscar.py contrastar "el art. 50 aplica desde 2026-08-02"` | Trae los pasajes que nombran ese artículo para que Claude los lea |
+| Traer un artículo | `buscar.py articulo rgpd 5.1.c` | Por `norma` y `unidad`; devuelve la línea del apartado y la letra |
+| Buscar citas | `buscar.py citas -q "…" -q "…" --en "…"` | BM25 por pasajes; cada `-q` busca en notas en español y cada `--en` en las inglesas; devuelve normas y guías por separado, con la línea del mejor pasaje |
+| Contrastar (pendiente) | `buscar.py contrastar "el art. 50 aplica desde 2026-08-02"` | Trae los pasajes que nombran ese artículo para que Claude los lea |
 
-Para que funcione hacen falta cuatro cambios en el troceado:
+**El idioma lo resuelve Claude, no un glosario.** Andrés señaló que se
+preguntará en español y parte de las fuentes solo está en inglés. Son 50
+notas: las directrices del art. 6 (borrador) y las dos del CEPD. Otras
+58 son la versión inglesa de las directrices del art. 50, que ya están
+en español, y el buscador las omite. La skill pide a Claude tres
+consultas: la pregunta tal cual, la misma con el vocabulario de la norma
+(«chatbot» → «interactuar con un sistema de IA») y su traducción al
+inglés. Cada una busca solo en las notas de su idioma; las del mismo
+idioma se unen con RRF y los idiomas se intercalan, para que el inglés no
+quede tapado.
+
+Resultado con las 20 consultas de prueba (acierto si una nota esperada
+sale entre las 3 normas o las 3 guías primeras):
+
+| Consultas que recibe el buscador | Aciertos |
+| --- | --- |
+| Solo la pregunta en español | 15 de 20 |
+| Español y su traducción al inglés | 17 de 20 |
+| Español y vocabulario de la norma | 17 de 20 |
+| Español, vocabulario de la norma e inglés | **19 de 20** |
+
+Falla «exportar datos a un proveedor fuera del EEE»: la reformulación
+encuentra el art. 44 del RGPD, pero la pregunta coloquial la empuja fuera
+de las tres primeras. Las reformulaciones de la prueba las he escrito yo
+como las haría Claude; falta medirlas con Claude de verdad desde una
+skill.
+
+Para pasar del prototipo al plugin hacen falta tres cambios en el
+troceado:
 
 - **Notas dentro del plugin.** `trocear*.py` escribe en
   `plugins/ai-act-advisor/knowledge/notas/` (o el build las copia). Con
@@ -166,15 +198,15 @@ Para que funcione hacen falta cuatro cambios en el troceado:
   título) y las de guías con `norma` y `articulos`.
 - **Anclas por apartado.** Un campo `apartados` con la línea de cada
   apartado, para traer solo el que se cita.
-- **Glosario** `knowledge/glosario.yaml`: términos del código en inglés y
-  sus equivalentes en la norma («credit scoring» → «solvencia»,
-  «pseudonymization» → «seudonimización»).
+
+Los hooks no pasan por Claude, así que no pueden reformular: para ellos
+está el mapa curado del punto 2.
 
 ### 4. Versión madura: MCP con embeddings
 
 Cuando el buscador se quede corto, el MCP de D02 expone las mismas tres
 operaciones y devuelve el mismo formato. Las skills no cambian. Los
-embeddings resuelven sinónimos y preguntas largas sin glosario, pero
+embeddings resuelven sinónimos y preguntas largas sin reformular, pero
 traen un modelo, un índice que regenerar y resultados que no se pueden
 reproducir con un grep. Merece la pena cuando haya preguntas reales de
 PM que el buscador no responda, y eso se mide con el conjunto de
@@ -186,17 +218,17 @@ consultas de prueba de abajo.
 | --- | --- | --- | --- | --- | --- |
 | Grep sobre texto y front matter | Ninguna | No | Sí | Ninguno | Base de todo |
 | Mapa curado señal → cita | Ninguna | No aplica | Sí | Una línea por señal, revisada en PR | Avisos de hooks y skills |
-| BM25 stdlib + glosario | Ninguna | Con glosario | Sí | Glosario | Preguntas abiertas, ahora |
+| BM25 stdlib con consultas reformuladas por Claude | Ninguna | Sí, vía Claude | Sí, dadas las consultas | Ninguno | Preguntas abiertas, ahora (prototipo) |
 | RAG con embeddings locales (MCP) | Modelo y servidor | Sí | No del todo | Índice por versión | Versión madura |
 | RAG como servicio | Cuenta externa y red | Sí | No | Servicio | Descartado: saca la consulta del proyecto |
 
 ## Cómo se mide
 
-Un fichero de consultas de prueba (`tests/consultas-citas.yaml`) con la
-nota esperada para cada una, en español y en inglés, y un test que
-falla si el buscador no la devuelve entre las cinco primeras. Hoy, con el
-prototipo, salen 6 de 10. Es el mismo conjunto que decidirá cuándo pasar
-a embeddings.
+`tests/consultas-citas.json` guarda 20 preguntas con su reformulación,
+su traducción y las notas esperadas; `tests/test_buscar.py` falla si el
+buscador baja de 18 aciertos. Es el mismo conjunto que decidirá cuándo
+pasar a embeddings: cuando las preguntas reales de PM y DE que se añadan
+dejen de salir.
 
 ## Pendiente
 
