@@ -370,8 +370,18 @@ Base normativa 2026-07-27 · No es asesoramiento legal</code></pre>
         <ul>
           <li><strong>MCP</strong>: ninguno en el prototipo. Después, Jira o Confluence para leer el SOW y dejar el resumen de riesgos, y el catálogo del data warehouse para leer esquemas y etiquetas de columnas.</li>
           <li><strong>LSP</strong>: no aporta nada a este plugin.</li>
-          <li><strong>Distribución</strong>: repo propio en GitHub con <code>.claude-plugin/marketplace.json</code>, todo en español.</li>
+          <li><strong>Distribución</strong>: por ahora en el repo personal <code>AS-prog/ai-act-advisor</code>, todo en español. Si va a un marketplace propio se decide después del prototipo.</li>
         </ul>
+
+        <h3 id="version-madura">Versión madura: MCP de documentación normativa</h3>
+        <p>Cuando el prototipo funcione, un servidor MCP con toda la documentación normativa indexada con embeddings, para contrastar cada aviso con el texto original en lugar de fiarse solo de los resúmenes de <code>knowledge/</code>.</p>
+        <ul>
+          <li><strong>Qué indexa</strong>: el AI Act consolidado y los reglamentos que lo modifican, las directrices y códigos de la Comisión, las guías y checklists de AESIA y las guías de AEPD y CEPD. Cada fragmento con su fuente, artículo o apartado y fecha.</li>
+          <li><strong>Para qué</strong>: que las skills citen el pasaje exacto en cada aviso, que el PM pueda preguntar en lenguaje natural («¿un modelo de propensión para una aseguradora es anexo III?») y que el vigilante normativo compare versiones de un mismo texto.</li>
+          <li><strong>Herramientas previstas</strong>: buscar pasajes por pregunta, traer un artículo por su número y contrastar una afirmación con los pasajes que la apoyan o la contradicen.</li>
+          <li><strong>Actualización</strong>: el índice se regenera con el mismo ciclo semanal y por el mismo PR que <code>knowledge/</code>.</li>
+        </ul>
+        <div class="notice notice-pending"><span class="notice-title">Pendiente · versión madura</span><p>Dónde corre el MCP (local o servicio), qué modelo de embeddings usa y cómo se reparte el índice con el plugin.</p></div>
 
         <h2 id="alternativas">Alternativas</h2>
         <ul>
@@ -397,20 +407,24 @@ Base normativa 2026-07-27 · No es asesoramiento legal</code></pre>
               <tr><td>Q9</td><td>Núcleo genérico más adaptadores por stack</td></tr>
               <tr><td>Q10</td><td>Los avisos de riesgo alto dicen a quién escalar</td></tr>
               <tr><td>Q11</td><td>Base normativa con fecha y búsqueda proactiva de cambios</td></tr>
-              <tr><td>Q12</td><td>Marketplace propio, todo en español</td></tr>
+              <tr><td>Q12</td><td>Todo en español</td></tr>
               <tr><td>Q13</td><td>Tarea semanal que abre un PR y alerta a 90 días</td></tr>
               <tr><td>Q14</td><td>EUR-Lex, Oficina de IA, AESIA, AEPD y CEPD</td></tr>
               <tr><td>Q15</td><td>Prototipo con PII, categorías especiales, scoring por sector y art. 50</td></tr>
+              <tr><td>Q16</td><td>Sin stack fijo: <code>project-init</code> audita el repo, detecta los entornos y el PM confirma</td></tr>
+              <tr><td>Q17</td><td>Nombre <code>ai-act-advisor</code></td></tr>
+              <tr><td>Q18</td><td>Repo personal hasta después del prototipo</td></tr>
+              <tr><td>Q20</td><td>Hooks y auditoría en Python sin dependencias</td></tr>
+              <tr><td>Q22</td><td>Licencia MIT</td></tr>
+              <tr><td>—</td><td>Versión madura con un MCP de documentación normativa y embeddings</td></tr>
             </tbody>
           </table>
         </div>
 
         <h2 id="pendiente">Pendiente</h2>
         <div class="notice notice-pending"><span class="notice-title">Pendiente · Q5</span><p>Cuánto ruido es aceptable y si las decisiones del ingeniero quedan en un registro del repo. Se decide al probar el prototipo.</p></div>
-        <div class="notice notice-pending"><span class="notice-title">Pendiente · Q16</span><p>Stack del primer adaptador.</p></div>
-        <div class="notice notice-pending"><span class="notice-title">Pendiente · Q17</span><p>Nombre definitivo del plugin.</p></div>
-        <div class="notice notice-pending"><span class="notice-title">Pendiente · Q18</span><p>Si el plugin va en un marketplace nuevo o en <code>asprog</code>, el de tu sistema de diseño.</p></div>
-      </article>
+        <div class="notice notice-pending"><span class="notice-title">Pendiente · Q19</span><p>Primer corte del prototipo. La auditoría de un repo real apunta a la PII en la ingesta.</p></div>
+        </article>
 
       <footer class="doc-footer">
         <span>Fuente: docs/diseno/propuesta-prototipo.md</span>
