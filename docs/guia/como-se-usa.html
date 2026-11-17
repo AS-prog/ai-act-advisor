@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="es" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cómo se usa ai-act-advisor</title>
+    <meta name="description" content="Guía de uso del plugin para PM, data engineers y analytics engineers: instalarlo, configurar un proyecto, qué hacer con cada aviso, cómo registrar decisiones, ver el estado y mantener al día la base normativa." />
+    <meta name="theme-color" content="#F0EBDE" />
+    <link rel="stylesheet" href="../design-system/v0.13/tokens.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/base.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/document.css" />
+    <!-- site:css --><link rel="stylesheet" href="../design-system/v0.13/css/library.css" /><!-- /site:css -->
+    <script>
+      // Antes de pintar, para que no haya destello: el tema guardado manda sobre «auto».
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="lib">
+    <!-- site:nav -->
+    <nav class="lib-nav" aria-label="Sitio">
+    <details open>
+    <summary><a class="lib-home" href="../index.html">ai-act-advisor</a><span class="lib-menu">Índice</span></summary>
+    <h2>Guía</h2>
+    <ul>
+    <li><a href="como-se-usa.html" aria-current="page">Cómo se usa</a></li>
+    </ul>
+    <h2>Diseño</h2>
+    <ul>
+    <li><a href="../diseno/propuesta-prototipo.html">Propuesta del prototipo</a></li>
+    </ul>
+    <h2>Técnica</h2>
+    <ul>
+    <li><a href="../tecnica/uso-del-prototipo.html">Cómo funciona el prototipo en uso</a></li>
+    </ul>
+    <h2>Seguimiento</h2>
+    <ul>
+    <li><a href="../pendientes.html">Pendientes y dudas</a></li>
+    </ul>
+    <h2>Investigación</h2>
+    <ul>
+    <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
+    </ul>
+    </details>
+    </nav>
+    <script>(function () { var m = matchMedia('(max-width: 56rem)'), d = document.querySelector('.lib-nav details'); d.open = !m.matches; m.addEventListener('change', function () { d.open = !m.matches; }); })();</script>
+    <script src="../design-system/v0.13/js/library-fold.js"></script>
+    <!-- /site:nav -->
+    <div class="doc">
+      <header class="doc-bar">
+        <span class="doc-brand">ai-act-advisor / guía</span>
+        <button class="doc-theme" type="button" aria-label="Cambiar tema">Tema</button>
+      </header>
+
+      <header class="doc-header">
+        <h1>Cómo se usa ai-act-advisor</h1>
+        <p class="lede">Guía de uso del plugin para PM, data engineers (DE) y analytics engineers (AE): cómo se instala, cómo se configura un proyecto, qué hacer con cada aviso, cómo se registran las decisiones, cómo se ve el estado y cómo se mantiene al día la base normativa.</p>
+        <dl class="doc-meta">
+          <div><dt>Fuente</dt><dd><a href="como-se-usa.md">docs/guia/como-se-usa.md</a></dd></div>
+          <div><dt>Fecha</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
+          <div><dt>Estado</dt><dd>vigente</dd></div>
+        </dl>
+      </header>
+
+      <nav class="doc-toc" aria-label="Índice">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#en-corto">En corto</a></li>
+          <li><a href="#el-flujo-de-un-proyecto">El flujo de un proyecto</a></li>
+          <li><a href="#instalar">Instalar</a></li>
+          <li><a href="#1-configurar-el-proyecto-project-init">1. Configurar el proyecto: /project-init</a></li>
+          <li><a href="#2-trabajar-que-hacer-con-un-aviso">2. Trabajar: qué hacer con un aviso</a></li>
+          <li><a href="#3-decidir-y-registrar">3. Decidir y registrar</a></li>
+          <li><a href="#4-ver-el-estado-risk-summary">4. Ver el estado: /risk-summary</a></li>
+          <li><a href="#5-clasificar-frente-al-ai-act-ai-act-classify">5. Clasificar frente al AI Act: /ai-act-classify</a></li>
+          <li><a href="#mantener-al-dia-la-base-normativa">Mantener al día la base normativa</a></li>
+          <li><a href="#que-deja-en-tu-repo">Qué deja en tu repo</a></li>
+          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+          <li><a href="#mas-informacion">Más información</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc-prose">
+<h2 id="en-corto">En corto</h2>
+<ol>
+<li>El PM lanza <code>/project-init</code> al empezar el proyecto, o cuando ya está en marcha, y deja configurado el repo en <code>.ai-act/</code>.</li>
+<li>DE y AE trabajan como siempre. Cuando Claude lee o edita algo con riesgo nuevo de RGPD o del AI Act, recibe un aviso y te lo cuenta en pocas líneas.</li>
+<li>Si quieres detalle, pides la skill que indica el aviso. Te explica el riesgo, te propone opciones y la decisión es tuya.</li>
+<li>La decisión se apunta en la línea base (<code>.ai-act/baseline.json</code>), y ese aviso no vuelve a salir.</li>
+<li>El PM lanza <code>/risk-summary</code> cuando quiere ver el estado y qué escalar.</li>
+<li>Quien mantiene el plugin lanza <code>/regulatory-update</code> para revisar las fuentes oficiales y proponer los cambios en una PR.</li>
+</ol>
+<p>El plugin no bloquea nada, no edita tu código salvo que se lo pidas, no abre ficheros de datos ni secretos y no se conecta a bases de datos. No es asesoramiento legal: cada aviso dice de qué norma viene y desde cuándo aplica.</p>
+<h2 id="el-flujo-de-un-proyecto">El flujo de un proyecto</h2>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 304" role="img" aria-labelledby="flujo-title flujo-desc">
+    <title id="flujo-title">Quién hace qué con el plugin a lo largo de un proyecto</title>
+    <desc id="flujo-desc">El PM configura el proyecto con project-init. DE y AE trabajan, reciben avisos y deciden con la ayuda de una skill; si hay un modelo o un LLM, el PM clasifica con ai-act-classify. Las decisiones van a la línea base, que el PM consulta con risk-summary. En mantenimiento, regulatory-update lanza el vigilante y deja una PR revisada que mantiene al día la base normativa.</desc>
+    <defs>
+      <marker id="flujo-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
+    </defs>
+    <rect class="d-wash-1" x="16" y="16" width="688" height="80"/>
+    <rect class="d-wash-1" x="16" y="208" width="688" height="80"/>
+    <text class="d-tm" x="24" y="60">PM</text>
+    <text class="d-tm" x="24" y="156">DE Y AE</text>
+    <text class="d-tm" x="24" y="252">MANTENIMIENTO</text>
+    <line class="d-line" x1="216" y1="80" x2="216" y2="124" marker-end="url(#flujo-arrow)"/>
+    <rect class="d-mask" x="176" y="95" width="80" height="14"/>
+    <text class="d-tm d-mid" x="216" y="106">CONFIGURA</text>
+    <line class="d-line" x1="296" y1="152" x2="332" y2="152" marker-end="url(#flujo-arrow)"/>
+    <line class="d-line" x1="496" y1="152" x2="532" y2="152" marker-end="url(#flujo-arrow)"/>
+    <line class="d-dash" x1="416" y1="128" x2="416" y2="84" marker-end="url(#flujo-arrow)"/>
+    <rect class="d-mask" x="366" y="99" width="100" height="14"/>
+    <text class="d-tm d-mid" x="416" y="110">MODELO O LLM</text>
+    <line class="d-line" x1="616" y1="128" x2="616" y2="84" marker-end="url(#flujo-arrow)"/>
+    <rect class="d-mask" x="572" y="99" width="88" height="14"/>
+    <text class="d-tm d-mid" x="616" y="110">LÍNEA BASE</text>
+    <line class="d-line" x1="296" y1="248" x2="332" y2="248" marker-end="url(#flujo-arrow)"/>
+    <line class="d-line" x1="496" y1="248" x2="532" y2="248" marker-end="url(#flujo-arrow)"/>
+    <line class="d-dash" x1="616" y1="224" x2="616" y2="180" marker-end="url(#flujo-arrow)"/>
+    <rect class="d-mask" x="572" y="195" width="88" height="14"/>
+    <text class="d-tm d-mid" x="616" y="206">BASE AL DÍA</text>
+    <rect class="d-fill" x="136" y="32" width="160" height="48"/>
+    <text class="d-t d-mid" x="216" y="53">Configura</text>
+    <text class="d-tm d-mid" x="216" y="70">/project-init</text>
+    <rect class="d-box" x="336" y="32" width="160" height="48"/>
+    <text class="d-t d-mid" x="416" y="53">Clasifica</text>
+    <text class="d-tm d-mid" x="416" y="70">/ai-act-classify</text>
+    <rect class="d-box" x="536" y="32" width="160" height="48"/>
+    <text class="d-t d-mid" x="616" y="53">Ve el estado</text>
+    <text class="d-tm d-mid" x="616" y="70">/risk-summary</text>
+    <rect class="d-box" x="136" y="128" width="160" height="48"/>
+    <text class="d-t d-mid" x="216" y="149">Trabaja</text>
+    <text class="d-sm d-mid" x="216" y="166">lee y edita código</text>
+    <rect class="d-box" x="336" y="128" width="160" height="48"/>
+    <text class="d-t d-mid" x="416" y="149">Recibe un aviso</text>
+    <text class="d-sm d-mid" x="416" y="166">solo si es nuevo</text>
+    <rect class="d-fill" x="536" y="128" width="160" height="48"/>
+    <text class="d-t d-mid" x="616" y="149">Decide</text>
+    <text class="d-sm d-mid" x="616" y="166">con la skill indicada</text>
+    <rect class="d-box" x="136" y="224" width="160" height="48"/>
+    <text class="d-t d-mid" x="216" y="245">Revisa normativa</text>
+    <text class="d-tm d-mid" x="216" y="262">/regulatory-update</text>
+    <rect class="d-box" x="336" y="224" width="160" height="48"/>
+    <text class="d-t d-mid" x="416" y="245">Lee las fuentes</text>
+    <text class="d-tm d-mid" x="416" y="262">regulatory-watcher</text>
+    <rect class="d-box" x="536" y="224" width="160" height="48"/>
+    <text class="d-t d-mid" x="616" y="245">PR revisada</text>
+    <text class="d-sm d-mid" x="616" y="262">nunca se fusiona sola</text>
+  </svg>
+  <figcaption>Hay dos momentos manuales del PM (configurar y ver el estado). El día a día de DE y AE es automático: solo habla el plugin cuando aparece algo nuevo.</figcaption>
+</figure>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Qué lanza</th>
+<th>Cuándo</th>
+<th>Qué obtiene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PM</td>
+<td><code>/project-init</code></td>
+<td>Al empezar, y cuando cambian el alcance, el stack o aparece un entorno nuevo</td>
+<td>Perfil del proyecto, reglas del repo, línea base e informe fechado</td>
+</tr>
+<tr>
+<td>PM</td>
+<td><code>/ai-act-classify</code></td>
+<td>Cuando hay un modelo que puntúa o decide sobre personas, un LLM, o cambia la finalidad</td>
+<td>Clasificación AI Act razonada y rol de proveedor o responsable del despliegue</td>
+</tr>
+<tr>
+<td>PM</td>
+<td><code>/risk-summary</code></td>
+<td>Antes de un comité, una entrega o cuando quiere saber qué escalar</td>
+<td>Resumen de una página por severidad y estado, y qué escalar a quién</td>
+</tr>
+<tr>
+<td>DE y AE</td>
+<td>Nada: los avisos llegan solos</td>
+<td>Al leer o editar código y configuración</td>
+<td>Aviso corto con norma, fecha, opción y skill</td>
+</tr>
+<tr>
+<td>DE y AE</td>
+<td><code>pii-masking</code>, <code>special-categories</code>, <code>ai-transparency</code></td>
+<td>Cuando quieren detalle de un aviso</td>
+<td>Riesgo explicado, opciones según su stack y a quién escalar</td>
+</tr>
+<tr>
+<td>Mantenimiento</td>
+<td><code>/regulatory-update</code></td>
+<td>Semanalmente, o cuando el aviso dice que la base tiene más de 90 días</td>
+<td>PR con los cambios normativos, cada uno con su cita</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="instalar">Instalar</h2>
+<p>En Claude Code:</p>
+<pre><code class="language-text">/plugin marketplace add AS-prog/ai-act-advisor
+/plugin install ai-act-advisor@ai-act-advisor
+</code></pre>
+<p>Hace falta Python 3 en la máquina (sin dependencias). Si no lo hay, los hooks no hacen nada y no interrumpen. Desde ese momento, al abrir un repo, el plugin te dice si ya está configurado.</p>
+<h2 id="1-configurar-el-proyecto-project-init">1. Configurar el proyecto: /project-init</h2>
+<p>Lo lanza el PM. Primero averigua si el repo tiene código:</p>
+<ul>
+<li><strong>Proyecto nuevo, sin código</strong>: entrevista corta y perfil. El stack queda como <code>declarado</code>, y el plugin sugerirá auditar cuando haya código.</li>
+<li><strong>Proyecto en marcha</strong>: además del perfil, una auditoría de riesgos de solo lectura.</li>
+</ul>
+<p>Preguntas del perfil, en pocas tandas, rellenando antes con lo que ya diga el README o la propuesta:</p>
+<ol>
+<li>Cliente y sector.</li>
+<li>Finalidad del entregable y si infiere (modelo, scoring, LLM) o solo mueve y agrega datos.</li>
+<li>Rol de la consultora: proveedor, responsable del despliegue o ambos.</li>
+<li>Datos personales que se tratan.</li>
+<li>Stack (si hay código, lo propone la auditoría y el PM lo corrige).</li>
+<li>Contactos de escalado: DPO, legal, PM.</li>
+<li>Si el proyecto ocupa varios repos, cuáles son.</li>
+</ol>
+<p>En un proyecto en marcha, la skill enseña los entornos que toca el repo, las reglas que deduce (dónde se declaran las fuentes, con qué clave se marca la PII, qué se escribe en Bronze, qué se exporta) y los hallazgos con su evidencia. El PM confirma o corrige: un entorno que sobra, un falso positivo que pasa a <code>exclusions</code>. Después la skill escribe el estado en <code>.ai-act/</code>.</p>
+<div class="notice notice-important"><span class="notice-title">Importante</span><p>La auditoría solo lee código y configuración del repo. No abre <code>.env</code>, claves, credenciales ni ficheros de datos, no se conecta a warehouses y no copia nada fuera del repo.</p></div>
+
+<p>Vuelve a lanzarlo cuando cambie el alcance o el stack, o cuando un aviso diga que aparece un entorno que la auditoría no tenía (por ejemplo, una dependencia de <code>openai</code> nueva).</p>
+<h2 id="2-trabajar-que-hacer-con-un-aviso">2. Trabajar: qué hacer con un aviso</h2>
+<p>DE y AE no lanzan nada. Al abrir una sesión, el plugin le da a Claude un resumen del perfil. Cuando Claude lee o edita un fichero con un riesgo que no está en la línea base, recibe un aviso con esta forma:</p>
+<pre><code class="language-text">[media] Objeto «complaints» sin «pii_columns» declarado · RGPD art. 5.1.c, art. 25, art. 30
+· aplica ya · skill pii-masking
+Opción sugerida: Revisa el esquema de origen de «complaints» antes de llevarlo a Bronze y
+declara «pii_columns» (aunque sea una lista vacía) para que conste que se revisó.
+Base normativa 2026-07-27 (revisada 2026-11-17). No es asesoramiento legal.
+</code></pre>
+<p>Claude te lo cuenta cuando encaja con lo que estás haciendo. Tienes tres opciones:</p>
+<ul>
+<li><strong>Seguir</strong>: el aviso no se repite en la sesión. Si no lo registras, volverá en otra sesión.</li>
+<li><strong>Pedir detalle</strong>: «explícame este riesgo» o «cómo lo enmascaro». Claude carga la skill del aviso.</li>
+<li><strong>Decidir y registrar</strong> (paso 3).</li>
+</ul>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Si el aviso habla de…</th>
+<th>La skill que ayuda</th>
+<th>Qué te da</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Columnas con aspecto de dato personal, fuente sin clave de PII, PII declarada que no se aplica, Bronze sin revisión, exportación, supresión</td>
+<td><code>pii-masking</code></td>
+<td>Técnicas según capa y stack (suprimir, seudonimizar con HMAC, tokenizar, generalizar, masking dinámico) y su límite</td>
+</tr>
+<tr>
+<td>Salud, origen, religión, ideología, sindicato, biometría, orientación sexual, antecedentes, o un proxy de ellas</td>
+<td><code>special-categories</code></td>
+<td>Si está permitido y bajo qué condición del art. 9.2; siempre escala al DPO</td>
+</tr>
+<tr>
+<td>SDK de LLM, chatbot, contenido generado, ultrafalsificaciones</td>
+<td><code>ai-transparency</code></td>
+<td>Qué aviso o marcado pide el art. 50 y desde cuándo</td>
+</tr>
+<tr>
+<td>Modelo que puntúa o clasifica a personas</td>
+<td><code>ai-act-classify</code></td>
+<td>Si es candidato a alto riesgo según sector y finalidad, y el rol</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-decidir-y-registrar">3. Decidir y registrar</h2>
+<p>La decisión es de quien trabaja (o del PM, el DPO o legal cuando el aviso dice a quién escalar). Se apunta en <code>.ai-act/baseline.json</code>, sobre el id del hallazgo:</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Cuándo</th>
+<th>Qué hay que escribir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abierto</code></td>
+<td>Lo pone la auditoría al encontrarlo</td>
+<td>Nada</td>
+</tr>
+<tr>
+<td><code>mitigado</code></td>
+<td>Ya se ha resuelto</td>
+<td><code>justification</code>: qué se hizo y dónde</td>
+</tr>
+<tr>
+<td><code>aceptado</code></td>
+<td>Se asume el riesgo</td>
+<td><code>justification</code>: por qué, y quién lo decidió</td>
+</tr>
+<tr>
+<td><code>no detectado</code></td>
+<td>Lo pone la auditoría cuando el hallazgo desaparece del código</td>
+<td>Nada</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">&quot;external-export:98e308bed7&quot;: {
+  &quot;status&quot;: &quot;aceptado&quot;,
+  &quot;justification&quot;: &quot;Contrato de encargado firmado; bucket en UE&quot;
+}
+</code></pre>
+<p>Puedes pedírselo a Claude: «marca la exportación como aceptada, hay contrato de encargado». Relanzar la auditoría conserva el estado y la justificación, y los hooks no vuelven a avisar de ningún id que esté en la línea base. Si una palabra salta y no es dato personal en tu repo, añádela a <code>exclusions</code> en <code>.ai-act/rules.json</code>.</p>
+<h2 id="4-ver-el-estado-risk-summary">4. Ver el estado: /risk-summary</h2>
+<p>Lo lanza el PM. Une la línea base con una auditoría de consulta y devuelve una página con:</p>
+<ol>
+<li>Cabecera: proyecto, sector, rol, clasificación y repos leídos.</li>
+<li>Abiertos de severidad alta, uno por uno, y de media en tabla.</li>
+<li>Nuevos sin registrar (aparecen en el código pero no en la línea base).</li>
+<li>Aceptados con su justificación (señala los que no la tienen).</li>
+<li>Mitigados y no detectados.</li>
+<li>Qué escalar y a quién, con los contactos del perfil.</li>
+<li>Qué aplica ya y qué después, por fecha.</li>
+<li>Qué falta por decidir y de quién es.</li>
+</ol>
+<p>Si el proyecto ocupa varios repos, lee los que estén clonados en la máquina, y el consolidado vive en el repo de gestión. La página se enseña en la conversación y solo se guarda en <code>.ai-act/risk-summary.md</code> si el PM lo pide.</p>
+<h2 id="5-clasificar-frente-al-ai-act-ai-act-classify">5. Clasificar frente al AI Act: /ai-act-classify</h2>
+<p>Cuando el proyecto entrena o usa un modelo sobre personas, o un LLM, el PM (con el DE o AE que lo conoce) recorre el árbol: práctica prohibida (art. 5), candidato a alto riesgo (anexo III según sector y finalidad), transparencia (art. 50), mínimo o fuera de alcance, y el rol de la consultora. La skill propone y razona. El perfil solo cambia cuando el PM lo confirma.</p>
+<h2 id="mantener-al-dia-la-base-normativa">Mantener al día la base normativa</h2>
+<p>Cada aviso lleva la fecha de la base normativa. Cuando tiene más de 90 días, la sesión lo dice al arrancar. Quien mantiene el plugin lanza <code>/regulatory-update</code> en un clon del repo del plugin:</p>
+<ol>
+<li>El agente <code>regulatory-watcher</code> lee las fuentes oficiales (EUR-Lex, BOE, Comisión, AESIA, AEPD, CEPD) en solo lectura y devuelve los cambios con cita.</li>
+<li>La skill separa lo confirmado de lo que está por verificar.</li>
+<li>Deja los cambios en una rama <code>regulatory/AAAA-MM-DD</code> con su PR. Una persona la revisa y la fusiona; nunca se fusiona sola.</li>
+</ol>
+<p>Los textos oficiales de referencia están en <code>docs/fuentes/</code> del repo del plugin, con su versión y su huella en el manifiesto.</p>
+<h2 id="que-deja-en-tu-repo">Qué deja en tu repo</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Fichero</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.ai-act/profile.yaml</code></td>
+<td>Perfil del proyecto: sector, finalidad, rol, datos personales, stack, contactos, clasificación</td>
+</tr>
+<tr>
+<td><code>.ai-act/rules.json</code></td>
+<td>Reglas del repo que usan los avisos, y <code>exclusions</code> para los falsos positivos</td>
+</tr>
+<tr>
+<td><code>.ai-act/baseline.json</code></td>
+<td>Hallazgos con estado y justificación: el registro de decisiones</td>
+</tr>
+<tr>
+<td><code>.ai-act/audits/AAAA-MM-DD.md</code></td>
+<td>Informe fechado de cada auditoría</td>
+</tr>
+<tr>
+<td><code>.ai-act/risk-summary.md</code></td>
+<td>Último resumen, solo si el PM pidió guardarlo</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Conviene versionar <code>.ai-act/</code> con el repo: así las decisiones quedan en el historial.</p>
+<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2>
+<dl>
+<dt>¿Me puede impedir hacer algo?</dt>
+<dd>No. Los avisos solo añaden contexto a Claude; la decisión es siempre tuya.</dd>
+<dt>¿Manda datos o código a algún sitio?</dt>
+<dd>No. Todo se ejecuta en local con Python, solo lee código y configuración del repo, y no abre datos ni secretos.</dd>
+<dt>Me avisa demasiado.</dt>
+<dd>Registra en la línea base lo que ya has decidido y añade a <code>exclusions</code> los términos que no son datos personales en tu repo. Cada aviso sale una vez por sesión y como mucho con cuatro hallazgos.</dd>
+<dt>¿Y si el proyecto no usa IA?</dt>
+<dd>Los avisos del RGPD siguen siendo útiles. La clasificación AI Act queda como «fuera de alcance».</dd>
+<dt>¿Es asesoramiento legal?</dt>
+<dd>No. Señala riesgos con su norma y su fecha para que el equipo decida y, cuando toca, escale al DPO o a legal.</dd>
+</dl>
+<h2 id="mas-informacion">Más información</h2>
+<ul>
+<li><a href="../tecnica/uso-del-prototipo.html">Cómo funciona el prototipo en uso</a>: qué hay por dentro, con las salidas reales.</li>
+<li><a href="../diseno/propuesta-prototipo.html">Propuesta del prototipo</a>: el diseño y las decisiones.</li>
+<li><a href="../pendientes.html">Pendientes y dudas</a>: lo que queda por decidir o confirmar.</li>
+</ul>
+      </article>
+
+      <footer class="doc-footer">
+        <span>Fuente: docs/guia/como-se-usa.md</span>
+        <span>asprog-design-system</span>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelector('.doc-theme').addEventListener('click', function () {
+        var r = document.documentElement, t = r.getAttribute('data-theme');
+        var isDark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var next = isDark ? 'light' : 'dark';
+        r.setAttribute('data-theme', next);
+        try { localStorage.setItem('tema', next); } catch (e) {}
+      });
+    </script>
+  </body>
+</html>
