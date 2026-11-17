@@ -1,0 +1,27 @@
+---
+name: lopdgdd-art-32
+description: "LOPDGDD, Artículo 32: Bloqueo de los datos. Ubicación: TÍTULO V — Responsable y encargado del tratamiento · CAPÍTULO I — Disposiciones generales. Medidas de responsabilidad activa. Texto consolidado 2025-12-27 (Ley Orgánica 3/2018)."
+metadata:
+  type: reference
+  norma: lopdgdd
+  celex: BOE-A-2018-16673
+  unidad: Artículo 32
+  titulo: "Bloqueo de los datos"
+  ubicacion: "TÍTULO V — Responsable y encargado del tratamiento · CAPÍTULO I — Disposiciones generales. Medidas de responsabilidad activa"
+  tags: [lopdgdd, espana, proteccion-datos, articulo, bloqueo]
+  origen: md/2025-12-27-lopdgdd-3-2018-consolidado-boe.md#L465-L478
+  oficial: false
+---
+# Artículo 32. Bloqueo de los datos.
+
+1. El responsable del tratamiento estará obligado a bloquear los datos cuando proceda a su rectificación o supresión.
+
+2. El bloqueo de los datos consiste en la identificación y reserva de los mismos, adoptando medidas técnicas y organizativas, para impedir su tratamiento, incluyendo su visualización, excepto para la puesta a disposición de los datos a los jueces y tribunales, el Ministerio Fiscal o las Administraciones Públicas competentes, en particular de las autoridades de protección de datos, para la exigencia de posibles responsabilidades derivadas del tratamiento y solo por el plazo de prescripción de las mismas.
+
+Transcurrido ese plazo deberá procederse a la destrucción de los datos.
+
+3. Los datos bloqueados no podrán ser tratados para ninguna finalidad distinta de la señalada en el apartado anterior.
+
+4. Cuando para el cumplimiento de esta obligación, la configuración del sistema de información no permita el bloqueo o se requiera una adaptación que implique un esfuerzo desproporcionado, se procederá a un copiado seguro de la información de modo que conste evidencia digital, o de otra naturaleza, que permita acreditar la autenticidad de la misma, la fecha del bloqueo y la no manipulación de los datos durante el mismo.
+
+5. La Agencia Española de Protección de Datos y las autoridades autonómicas de protección de datos, dentro del ámbito de sus respectivas competencias, podrán fijar excepciones a la obligación de bloqueo establecida en este artículo, en los supuestos en que, atendida la naturaleza de los datos o el hecho de que se refieran a un número particularmente elevado de afectados, su mera conservación, incluso bloqueados, pudiera generar un riesgo elevado para los derechos de los afectados, así como en aquellos casos en los que la conservación de los datos bloqueados pudiera implicar un coste desproporcionado para el responsable del tratamiento.

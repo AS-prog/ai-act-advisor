@@ -516,3 +516,7 @@ Copias de trabajo generadas a partir de los originales de arriba, para buscar y 
 - **sha256**: `a20760ccf092e4622197893668ee52bfe04791a5caea90eaba070d939c660a87`
 - **Copia del proyecto**: `fuentes-primarias/md/lopdgdd-3-2018-consolidado-boe.md`
 
+
+## Notas por artículo
+
+Las conversiones de `md/` están troceadas por artículo en `notas/` (con front matter para buscarlas). Ver `notas/README.md`.

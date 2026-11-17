@@ -1,0 +1,27 @@
+---
+name: rgpd-art-89
+description: "RGPD, Artículo 89: Garantías y excepciones aplicables al tratamiento con fines de archivo en interés público, fines de investigación científica o histórica o fines estadísticos. Ubicación: CAPÍTULO IX — Disposiciones relativas a situaciones específicas de tratamiento. Texto consolidado 2016-05-04 (Reglamento (UE) 2016/679)."
+metadata:
+  type: reference
+  norma: rgpd
+  celex: 02016R0679-20160504
+  unidad: Artículo 89
+  titulo: "Garantías y excepciones aplicables al tratamiento con fines de archivo en interés público, fines de investigación científica o histórica o fines estadísticos"
+  ubicacion: "CAPÍTULO IX — Disposiciones relativas a situaciones específicas de tratamiento"
+  tags: [rgpd, reglamento-ue, proteccion-datos, articulo, garantias, excepciones, aplicables, tratamiento]
+  origen: md/2016-05-04-rgpd-2016-679-consolidado-es.md#L1909-L1922
+  oficial: false
+---
+# Artículo 89 — Garantías y excepciones aplicables al tratamiento con fines de archivo en interés público, fines de investigación científica o histórica o fines estadísticos
+
+1. El tratamiento con fines de archivo en interés público, fines de investigación científica o histórica o fines estadísticos estará sujeto a las garantías adecuadas, con arreglo al presente Reglamento, para los derechos y las libertades de los interesados. Dichas garantías harán que se disponga de medidas técnicas y organizativas, en particular para garantizar el respeto del principio de minimización de los datos personales. Tales medidas podrán incluir la seudonimización, siempre que de esa forma puedan alcanzarse dichos fines. Siempre que esos fines pueden alcanzarse mediante un tratamiento ulterior que no permita o ya no permita la identificación de los interesados, esos fines se alcanzarán de ese modo.
+
+▼C2: REPLACED")
+
+2. Cuando se traten datos personales con fines de investigación científica o histórica o estadísticos el Derecho de la Unión o de los Estados miembros podrá establecer excepciones a los derechos contemplados en los artículos 15, 16, 18 y 21, sujetas a las condiciones y garantías indicadas en el apartado 1 del presente artículo, siempre y cuando sea probable que esos derechos imposibiliten u obstaculicen gravemente el logro de los fines científicos y cuando esas excepciones sean necesarias para alcanzar esos fines.
+
+▼B
+
+3. Cuando se traten datos personales con fines de archivo en interés público, el Derecho de le Unión o de los Estados miembros podrá prever excepciones a los derechos contemplados en los artículos 15, 16, 18, 19, 20 y 21, sujetas a las condiciones y garantías citadas en el apartado 1 del presente artículo, siempre que esos derechos puedan imposibilitar u obstaculizar gravemente el logro de los fines científicos y cuanto esas excepciones sean necesarias para alcanzar esos fines.
+
+4. En caso de que el tratamiento a que hacen referencia los apartados 2 y 3 sirva también al mismo tiempo a otro fin, las excepciones solo serán aplicables al tratamiento para los fines mencionados en dichos apartados.

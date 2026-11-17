@@ -1,0 +1,29 @@
+---
+name: rgpd-art-22
+description: "RGPD, Artículo 22: Decisiones individuales automatizadas, incluida la elaboración de perfiles. Ubicación: CAPÍTULO III — Derechos del interesado · Sección 4 — Derecho de oposición y decisiones individuales automatizadas. Texto consolidado 2016-05-04 (Reglamento (UE) 2016/679)."
+metadata:
+  type: reference
+  norma: rgpd
+  celex: 02016R0679-20160504
+  unidad: Artículo 22
+  titulo: "Decisiones individuales automatizadas, incluida la elaboración de perfiles"
+  ubicacion: "CAPÍTULO III — Derechos del interesado · Sección 4 — Derecho de oposición y decisiones individuales automatizadas"
+  tags: [rgpd, reglamento-ue, proteccion-datos, articulo, decisiones, individuales, automatizadas, incluida]
+  origen: md/2016-05-04-rgpd-2016-679-consolidado-es.md#L547-L562
+  oficial: false
+---
+# Artículo 22 — Decisiones individuales automatizadas, incluida la elaboración de perfiles
+
+1. Todo interesado tendrá derecho a no ser objeto de una decisión basada únicamente en el tratamiento automatizado, incluida la elaboración de perfiles, que produzca efectos jurídicos en él o le afecte significativamente de modo similar.
+
+2. El apartado 1 no se aplicará si la decisión:
+
+a) es necesaria para la celebración o la ejecución de un contrato entre el interesado y un responsable del tratamiento;
+
+b) está autorizada por el Derecho de la Unión o de los Estados miembros que se aplique al responsable del tratamiento y que establezca asimismo medidas adecuadas para salvaguardar los derechos y libertades y los intereses legítimos del interesado, o
+
+c) se basa en el consentimiento explícito del interesado.
+
+3. En los casos a que se refiere el apartado 2, letras a) y c), el responsable del tratamiento adoptará las medidas adecuadas para salvaguardar los derechos y libertades y los intereses legítimos del interesado, como mínimo el derecho a obtener intervención humana por parte del responsable, a expresar su punto de vista y a impugnar la decisión.
+
+4. Las decisiones a que se refiere el apartado 2 no se basarán en las categorías especiales de datos personales contempladas en el artículo 9, apartado 1, salvo que se aplique el artículo 9, apartado 2, letra a) o g), y se hayan tomado medidas adecuadas para salvaguardar los derechos y libertades y los intereses legítimos del interesado.

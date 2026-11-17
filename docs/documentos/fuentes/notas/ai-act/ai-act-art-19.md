@@ -1,0 +1,19 @@
+---
+name: ai-act-art-19
+description: "AI Act, Artículo 19: Archivos de registro generados automáticamente. Ubicación: CAPÍTULO III — SISTEMAS DE IA DE ALTO RIESGO · SECCIÓN 3 — Obligaciones de los proveedores y responsables del despliegue de sistemas de IA de alto riesgo y de otras partes. Texto consolidado 2026-07-27 (Reglamento (UE) 2024/1689)."
+metadata:
+  type: reference
+  norma: ai-act
+  celex: 02024R1689-20260727
+  unidad: Artículo 19
+  titulo: "Archivos de registro generados automáticamente"
+  ubicacion: "CAPÍTULO III — SISTEMAS DE IA DE ALTO RIESGO · SECCIÓN 3 — Obligaciones de los proveedores y responsables del despliegue de sistemas de IA de alto riesgo y de otras partes"
+  tags: [ai-act, reglamento-ue, articulo, archivos, registro, generados, automaticamente]
+  origen: md/2026-07-27-ai-act-2024-1689-consolidado-es.md#L837-L842
+  oficial: false
+---
+# Artículo 19 — Archivos de registro generados automáticamente
+
+1. Los proveedores de sistemas de IA de alto riesgo conservarán los archivos de registro a que se refiere el artículo 12, apartado 1, que los sistemas de IA de alto riesgo generen automáticamente en la medida en que dichos archivos estén bajo su control. Sin perjuicio del Derecho aplicable de la Unión o nacional, los archivos de registro se conservarán durante un período de tiempo adecuado para la finalidad prevista del sistema de IA de alto riesgo, de al menos seis meses, salvo que el Derecho de la Unión o nacional aplicable, en particular el Derecho de la Unión en materia de protección de datos personales, disponga otra cosa.
+
+2. Los proveedores que sean entidades financieras sujetas a requisitos relativos a su gobernanza, sus sistemas o sus procesos internos en virtud del Derecho de la Unión en materia de servicios financieros mantendrán los archivos de registro generados automáticamente por sus sistemas de IA de alto riesgo como parte de la documentación conservada en virtud del Derecho pertinente en materia de servicios financieros.

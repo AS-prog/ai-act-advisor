@@ -1,0 +1,21 @@
+---
+name: lopdgdd-art-53-bis
+description: "LOPDGDD, Artículo 53 bis: Actuaciones de investigación a través de sistemas digitales. Ubicación: TÍTULO VII — Autoridades de protección de datos · Sección 2.ª Potestades de investigación y planes de auditoría preventiva. Texto consolidado 2025-12-27 (Ley Orgánica 3/2018)."
+metadata:
+  type: reference
+  norma: lopdgdd
+  celex: BOE-A-2018-16673
+  unidad: Artículo 53 bis
+  titulo: "Actuaciones de investigación a través de sistemas digitales"
+  ubicacion: "TÍTULO VII — Autoridades de protección de datos · Sección 2.ª Potestades de investigación y planes de auditoría preventiva"
+  tags: [lopdgdd, espana, proteccion-datos, articulo, actuaciones, investigacion, traves, sistemas]
+  origen: md/2025-12-27-lopdgdd-3-2018-consolidado-boe.md#L833-L840
+  oficial: false
+---
+# Artículo 53 bis. Actuaciones de investigación a través de sistemas digitales.
+
+Las actuaciones de investigación podrán realizarse a través de sistemas digitales que, mediante la videoconferencia u otro sistema similar, permitan la comunicación bidireccional y simultánea de imagen y sonido, la interacción visual, auditiva y verbal entre la Agencia Española de Protección de Datos y el inspeccionado. Además, deben garantizar la transmisión y recepción seguras de los documentos e información que se intercambien, y, en su caso, recoger las evidencias necesarias y el resultado de las actuaciones realizadas asegurando su autoría, autenticidad e integridad.
+
+La utilización de estos sistemas se producirá cuando lo determine la Agencia y requerirá la conformidad del inspeccionado en relación con su uso y con la fecha y hora de su desarrollo.
+
+Se añade por la disposición final 9.3 de la Ley 11/2023, de 8 de mayo. Ref. BOE-A-2023-11022#df-9

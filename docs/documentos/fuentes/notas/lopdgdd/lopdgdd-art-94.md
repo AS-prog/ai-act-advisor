@@ -1,0 +1,25 @@
+---
+name: lopdgdd-art-94
+description: "LOPDGDD, Artículo 94: Derecho al olvido en servicios de redes sociales y servicios equivalentes. Ubicación: TÍTULO X — Garantía de los derechos digitales. Texto consolidado 2025-12-27 (Ley Orgánica 3/2018)."
+metadata:
+  type: reference
+  norma: lopdgdd
+  celex: BOE-A-2018-16673
+  unidad: Artículo 94
+  titulo: "Derecho al olvido en servicios de redes sociales y servicios equivalentes"
+  ubicacion: "TÍTULO X — Garantía de los derechos digitales"
+  tags: [lopdgdd, espana, proteccion-datos, articulo, derecho, olvido, servicios, sociales]
+  origen: md/2025-12-27-lopdgdd-3-2018-consolidado-boe.md#L1409-L1420
+  oficial: false
+---
+# Artículo 94. Derecho al olvido en servicios de redes sociales y servicios equivalentes.
+
+1. Toda persona tiene derecho a que sean suprimidos, a su simple solicitud, los datos personales que hubiese facilitado para su publicación por servicios de redes sociales y servicios de la sociedad de la información equivalentes.
+
+2. Toda persona tiene derecho a que sean suprimidos los datos personales que le conciernan y que hubiesen sido facilitados por terceros para su publicación por los servicios de redes sociales y servicios de la sociedad de la información equivalentes cuando fuesen inadecuados, inexactos, no pertinentes, no actualizados o excesivos o hubieren devenido como tales por el transcurso del tiempo, teniendo en cuenta los fines para los que se recogieron o trataron, el tiempo transcurrido y la naturaleza e interés público de la información.
+
+Del mismo modo deberá procederse a la supresión de dichos datos cuando las circunstancias personales que en su caso invocase el afectado evidenciasen la prevalencia de sus derechos sobre el mantenimiento de los datos por el servicio.
+
+Se exceptúan de lo dispuesto en este apartado los datos que hubiesen sido facilitados por personas físicas en el ejercicio de actividades personales o domésticas.
+
+3. En caso de que el derecho se ejercitase por un afectado respecto de datos que hubiesen sido facilitados al servicio, por él o por terceros, durante su minoría de edad, el prestador deberá proceder sin dilación a su supresión por su simple solicitud, sin necesidad de que concurran las circunstancias mencionadas en el apartado 2.
