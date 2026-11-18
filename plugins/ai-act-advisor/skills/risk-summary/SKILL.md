@@ -59,6 +59,8 @@ Si al leer el resumen el PM decide sobre un hallazgo, la decisión se registra e
 
 Riesgo · Norma y artículo · Aplica ya o desde AAAA-MM-DD · Qué puede pasar · Opciones · A quién escalar · Base normativa de AAAA-MM-DD (de `knowledge/VERSION`) · No es asesoramiento legal.
 
+**Cita de la norma.** Antes de escribir «Norma y artículo», trae el pasaje: `sh "${CLAUDE_PLUGIN_ROOT}/scripts/run.sh" buscar.py articulo <ai-act|rgpd|lopdgdd|omnibus> <ref>` (por ejemplo `articulo ai-act "anexo III 5.b"`), lee la línea que devuelve y cita como la skill `cite-regulation`: `AI Act anexo III 5.b · nota ai-act-anexo-iii (L51) · DOUE, CELEX …`. Si no sabes el artículo, usa `buscar.py citas` como explica esa skill. Si no hay nota que lo diga, escribe «sin nota que lo respalde» en lugar de citar de memoria.
+
 ## Límites
 
 - La línea base guarda una justificación en texto libre, sin autor ni fecha de la decisión: quién aceptó y cuándo solo consta si alguien lo escribió ahí o en el historial de git.

@@ -68,6 +68,8 @@ En `.ai-act/baseline.json`, sobre cada id `scoring-model:…` que hayas clasific
 
 Riesgo · Norma y artículo · Aplica ya o desde AAAA-MM-DD · Qué puede pasar · Opciones · A quién escalar · Base normativa de AAAA-MM-DD (de `knowledge/VERSION`) · No es asesoramiento legal.
 
+**Cita de la norma.** Antes de escribir «Norma y artículo», trae el pasaje: `sh "${CLAUDE_PLUGIN_ROOT}/scripts/run.sh" buscar.py articulo <ai-act|rgpd|lopdgdd|omnibus> <ref>` (por ejemplo `articulo ai-act "anexo III 5.b"`), lee la línea que devuelve y cita como la skill `cite-regulation`: `AI Act anexo III 5.b · nota ai-act-anexo-iii (L51) · DOUE, CELEX …`. Si no sabes el artículo, usa `buscar.py citas` como explica esa skill. Si no hay nota que lo diga, escribe «sin nota que lo respalde» en lugar de citar de memoria.
+
 ## Límites
 
 - El perfil guarda un solo `ai_act_level`. Cuando un candidato a alto riesgo tiene además obligaciones del art. 50 (se acumulan, art. 50.6), se escribe el nivel más grave y la transparencia se menciona en el aviso y en la justificación.

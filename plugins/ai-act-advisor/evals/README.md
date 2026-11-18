@@ -49,7 +49,8 @@ python3 run.py registrar results/x.json --modelo claude-opus-5-5   # añade una 
 
 - El JSON completo de cada ejecución va a `results/` (fuera de git). El resumen se añade a `historial/ejecuciones.csv` y `historial/casos.csv`, que sí se versionan.
 - Columnas de `ejecuciones.csv`: puntos con y sin plugin, Δ, tasa de aprobados, `skill_activa` (parte de las pasadas en que se cargó la skill), `nota_recuperada`, coste, duración, si fue parcial por el tope de coste, `commit` del repo y `skill_sha` (huella de `cite-regulation/SKILL.md`). Con las dos últimas se compara una versión de la skill con la anterior.
-- `--juez` (por defecto `sonnet`), `--runs`, `--tag`, `--caso`, `--max-cost` (por modelo) y `-j` pasan tal cual a `claude plugin eval`.
+- `--juez` (por defecto `sonnet`), `--runs`, `--tag`, `--max-cost` (por modelo) y `-j` pasan tal cual a `claude plugin eval`.
+- `--caso` admite varios globs (`--caso "0[7-9]-*" "1[0-2]-*"`). `claude plugin eval --case` solo entiende `*` y un patrón, así que `run.py` resuelve los nombres y, si hace falta, llama una vez por caso, junta los resultados en un solo JSON y registra una fila con `filtro` = `caso:…`. Si ningún caso coincide, no llama a nada ni registra.
 
 ## Qué comprueba cada grader
 
@@ -80,6 +81,6 @@ Casos `humo` (02, 21 y 22), una pasada por brazo, juez `sonnet`: 35 s y 0,46 USD
 | --- | --- | --- | --- |
 | 02-minimizacion | 1,00 | 0,44 | La skill se activa, llama a `buscar.py` y cita `RGPD art. 5.1.c · nota rgpd-art-5 (L23) · DOUE, CELEX …` |
 | 21-singularizacion | 0,00 | 0,29 | La skill **no se activa**: Claude responde de memoria con el Dictamen 05/2014 y el considerando 26, sin buscar en la guía del CEPD |
-| 22-sin-nota | 0,67 | 0,00 | La skill **no se activa**: cita el art. 27 del DSA de memoria; el juez la aprueba en `no-inventa-cita`, pero no dice «sin nota que lo respalde» |
+| 22-sin-nota | 0,67 | 0,00 | La skill **no se activa**: cita el art. 27 del DSA de memoria y avisa de que no está verificado (el juez aprueba `no-inventa-cita` con razón), pero no dice «sin nota que lo respalde» |
 
 Lo que enseña: la búsqueda y el formato funcionan cuando la skill entra, pero su `description` no la activa con preguntas conceptuales («¿qué es…?») ni sobre normas que no están en las notas. Es lo primero que hay que ajustar antes de lanzar los 22 casos con tres pasadas.

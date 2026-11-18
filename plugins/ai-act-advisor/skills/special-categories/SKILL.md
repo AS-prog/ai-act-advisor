@@ -59,6 +59,8 @@ En `.ai-act/baseline.json`, sobre el id del hallazgo (`special-category-terms:�
 
 Riesgo · Norma y artículo · Aplica ya o desde AAAA-MM-DD · Qué puede pasar · Opciones · A quién escalar (DPO) · Base normativa de AAAA-MM-DD (de `knowledge/VERSION`) · No es asesoramiento legal.
 
+**Cita de la norma.** Antes de escribir «Norma y artículo», trae el pasaje: `sh "${CLAUDE_PLUGIN_ROOT}/scripts/run.sh" buscar.py articulo <ai-act|rgpd|lopdgdd|omnibus> <ref>` (por ejemplo `articulo ai-act "anexo III 5.b"`), lee la línea que devuelve y cita como la skill `cite-regulation`: `AI Act anexo III 5.b · nota ai-act-anexo-iii (L51) · DOUE, CELEX …`. Si no sabes el artículo, usa `buscar.py citas` como explica esa skill. Si no hay nota que lo diga, escribe «sin nota que lo respalde» en lugar de citar de memoria.
+
 ## Límites
 
 - La detección es por nombre de columna (`special_category_terms` en `knowledge/signals.yaml`). Los proxies no tienen señal propia: salen de leer el esquema con la tabla de la referencia.
