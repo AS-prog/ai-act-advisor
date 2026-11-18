@@ -141,9 +141,11 @@ Lo que enseña:
 - **La skill no se activa sola en dos tipos de pregunta.** Las
   conceptuales («¿qué es…?») y las de normas que no están en las notas.
   Es un problema de su `description`, no del buscador.
-- **El juez de `no-inventa-cita` es blando.** Aprobó una cita del DSA de
-  memoria sin la advertencia que pide su criterio. Hay que revisarlo con
-  más pasadas.
+- **El juez de `no-inventa-cita` acierta.** Al principio pareció blando,
+  pero revisando las respuestas el brazo con plugin sí cerraba con «lo
+  respondo de memoria; las notas del plugin no cubren el DSA» y remitía a
+  EUR-Lex, que es lo que pide el criterio. El brazo sin plugin no avisaba
+  y suspendió las tres votaciones.
 
 ## Con varios modelos
 
@@ -216,6 +218,54 @@ la respuesta cuando la skill entra, y lo que más resta es que no entra.
 Con Haiku no se activa ninguna vez. Con una pasada por caso la varianza
 es alta; las cifras sirven para comparar tendencias, no para decidir.
 
+### Mejoras del 18 de noviembre
+
+Tres cambios, medidos con `run.py` y juez `sonnet`:
+
+1. **La `description` de `cite-regulation`** ahora pide usarla antes de
+   responder de memoria a cualquier pregunta de normativa, también las
+   conceptuales («¿qué es la singularización?») y las de normas que quizá
+   no estén en las notas (DSA, NIS2…).
+2. **Las skills de riesgo traen la cita.** `ai-act-classify`,
+   `ai-transparency`, `pii-masking`, `special-categories`, `project-init`
+   y `risk-summary` llaman a `buscar.py articulo` antes de escribir
+   «Norma y artículo», con el formato de `cite-regulation`. Hacía falta
+   porque, ante una pregunta del AI Act, Haiku entraba en
+   `ai-act-classify` y respondía con su guía, sin pasar por el buscador.
+3. **`run.py --caso` admite varios globs** (`"0[7-9]-*" "1[0-2]-*"`).
+   `claude plugin eval --case` solo entiende `*`, así que `run.py`
+   resuelve los nombres, llama una vez por caso y junta los resultados.
+
+Humo (3 casos, 2 pasadas), tras el cambio 1:
+
+| Modelo | Con plugin | Sin plugin | Δ | Skill activa | Antes (con · skill) |
+| --- | --- | --- | --- | --- | --- |
+| Haiku 5.5 | 0,93 | 0,20 | 0,73 | 3 de 3 | 0,47 · 0 de 3 |
+| Sonnet 5.5 | 0,98 | 0,15 | 0,83 | 3 de 3 | 0,65 · 1 de 3 |
+
+Suite completa (22 casos), tras el cambio 1:
+
+| Modelo | Pasadas | Con plugin | Sin plugin | Δ | Skill activa | Nota recuperada | Coste |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Haiku 5.5 | 3 | 0,78 | 0,44 | 0,34 | 0,99 | 0,83 | 3,40 USD |
+| Sonnet 5.5 | 1 | 0,92 | 0,39 | 0,53 | 1,00 | 0,95 | 4,91 USD |
+
+Los casos flojos eran los del AI Act (07 a 12): con Haiku, 0,56 de media
+y la nota recuperada solo en 0,39 de las pasadas. Tras el cambio 2, con
+2 pasadas:
+
+| Modelo | Con plugin (antes → ahora) | Nota recuperada (antes → ahora) | Coste |
+| --- | --- | --- | --- |
+| Haiku 5.5 | 0,56 → **0,82** | 0,39 → **0,92** | 0,45 USD |
+| Sonnet 5.5 | 0,85 → 0,82 | 0,83 → **1,00** | 2,59 USD |
+
+Con Sonnet la puntuación queda igual (la diferencia cabe en la varianza
+de 1 y 2 pasadas), pero el caso 12 (selección de personal) pasa de no
+recuperar la nota a recuperarla siempre. Lo que más falla ahora es
+`guia-como-apoyo` (6 de 12 pasadas con Sonnet, 3 de 12 con Haiku): la
+respuesta cita la norma bien, pero no presenta la guía como orientación
+aparte. Después, `formato-cita` y `fuente-oficial`.
+
 ## Cómo se ejecuta
 
 Desde `plugins/ai-act-advisor/`, en un clon del repositorio:
@@ -241,10 +291,9 @@ claude plugin eval . --allow-tools Bash --judge-model sonnet
 
 ## Siguientes pasos
 
-1. Ajustar la `description` de `cite-regulation` para que se active con
-   preguntas conceptuales y con normas que no están en las notas, y
-   repetir los casos `humo` con `run.py` para ver el cambio de
-   `skill_sha` y de `skill_activa` en el historial.
-2. Endurecer el criterio del juez `no-inventa-cita`.
-3. Lanzar la suite completa (22 casos, 2 brazos, 3 pasadas; unos 10 USD)
-   y comparar `nota-recuperada` con los 19 de 20 del test offline.
+1. Que la respuesta separe la guía como orientación (`guia-como-apoyo`):
+   un ejemplo en `cite-regulation` y en las skills de riesgo de cómo
+   cerrar con «Orientación: …» después de la cita de la norma.
+2. Repetir la suite completa con 3 pasadas en los dos modelos, con todos
+   los cambios, para tener una línea base limpia en el historial.
+3. Probar con Opus y con APM fuera de Claude Code (Copilot, Cursor).

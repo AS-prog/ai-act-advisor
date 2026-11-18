@@ -4,3 +4,7 @@ fecha,modelo,juez,filtro,casos,pasadas,puntos_con,puntos_sin,delta,aprobados_con
 2026-11-17T20:08:47,claude-sonnet-5-5,sonnet,humo,3,1,0.651,0.339,0.312,0.333,0.0,0.33,0.5,0.5,38,no,b44553f,bfb07f6f74,results/2026-11-17T20-08-claude-sonnet-5-5.json
 2026-11-18T02:41:02,claude-haiku-5-5,sonnet,humo,3,2,0.929,0.196,0.733,0.833,0.0,1.0,1.0,0.2,84,no,1bab86b+cambios,dd5ddc7605,results/2026-11-18T02-41-claude-haiku-5-5.json
 2026-11-18T02:42:27,claude-sonnet-5-5,sonnet,humo,3,2,0.976,0.148,0.828,0.833,0.0,1.0,1.0,1.11,79,no,1bab86b+cambios,dd5ddc7605,results/2026-11-18T02-41-claude-sonnet-5-5.json
+2026-11-18T02:44:03,claude-haiku-5-5,sonnet,todos,22,3,0.78,0.444,0.336,0.455,0.0,0.99,0.83,3.4,516,no,49ddc55,dd5ddc7605,results/2026-11-18T02-44-claude-haiku-5-5.json
+2026-11-18T02:52:39,claude-sonnet-5-5,sonnet,todos,22,1,0.917,0.385,0.532,0.773,0.0,1.0,0.95,4.91,170,no,49ddc55,dd5ddc7605,results/2026-11-18T02-52-claude-sonnet-5-5.json
+2026-11-18T02:59:36,claude-haiku-5-5,sonnet,caso:0[7-9]-* caso:1[0-2]-*,6,2,0.815,0.407,0.407,0.417,0.0,0.92,0.92,0.45,206,no,49ddc55+cambios,dd5ddc7605,results/2026-11-18T02-59-claude-haiku-5-5.json
+2026-11-18T03:05:13,claude-sonnet-5-5,sonnet,caso:0[7-9]-* caso:1[0-2]-*,6,2,0.824,0.407,0.417,0.333,0.0,1.0,1.0,2.59,160,no,0a59f01,dd5ddc7605,results/2026-11-18T03-05-claude-sonnet-5-5.json
