@@ -8,3 +8,9 @@ fecha,modelo,caso,puntos_con,puntos_sin,delta,skill_activa,nota_recuperada
 2026-11-17T20:08:47,claude-sonnet-5-5,02-minimizacion,1.0,0.444,0.556,1.0,1.0
 2026-11-17T20:08:47,claude-sonnet-5-5,21-singularizacion,0.286,0.571,-0.286,0.0,0.0
 2026-11-17T20:08:47,claude-sonnet-5-5,22-sin-nota,0.667,0.0,0.667,0.0,
+2026-11-18T02:41:02,claude-haiku-5-5,02-minimizacion,1.0,0.444,0.556,1.0,1.0
+2026-11-18T02:41:02,claude-haiku-5-5,21-singularizacion,0.786,0.143,0.643,1.0,1.0
+2026-11-18T02:41:02,claude-haiku-5-5,22-sin-nota,1.0,0.0,1.0,1.0,
+2026-11-18T02:42:27,claude-sonnet-5-5,02-minimizacion,1.0,0.444,0.556,1.0,1.0
+2026-11-18T02:42:27,claude-sonnet-5-5,21-singularizacion,0.929,0.0,0.929,1.0,1.0
+2026-11-18T02:42:27,claude-sonnet-5-5,22-sin-nota,1.0,0.0,1.0,1.0,

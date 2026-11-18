@@ -2,3 +2,5 @@ fecha,modelo,juez,filtro,casos,pasadas,puntos_con,puntos_sin,delta,aprobados_con
 2026-11-17T19:32:27,por-defecto,sonnet,humo,3,1,0.556,0.243,0.312,0.333,0.0,0.33,0.5,0.46,35,no,b44553f,bfb07f6f74,results/2026-11-17T19-32-humo-por-defecto.json
 2026-11-17T20:08:14,claude-haiku-5-5,sonnet,humo,3,1,0.466,0.243,0.222,0.0,0.0,0.0,0.0,0.09,32,no,b44553f,bfb07f6f74,results/2026-11-17T20-08-claude-haiku-5-5.json
 2026-11-17T20:08:47,claude-sonnet-5-5,sonnet,humo,3,1,0.651,0.339,0.312,0.333,0.0,0.33,0.5,0.5,38,no,b44553f,bfb07f6f74,results/2026-11-17T20-08-claude-sonnet-5-5.json
+2026-11-18T02:41:02,claude-haiku-5-5,sonnet,humo,3,2,0.929,0.196,0.733,0.833,0.0,1.0,1.0,0.2,84,no,1bab86b+cambios,dd5ddc7605,results/2026-11-18T02-41-claude-haiku-5-5.json
+2026-11-18T02:42:27,claude-sonnet-5-5,sonnet,humo,3,2,0.976,0.148,0.828,0.833,0.0,1.0,1.0,1.11,79,no,1bab86b+cambios,dd5ddc7605,results/2026-11-18T02-41-claude-sonnet-5-5.json
