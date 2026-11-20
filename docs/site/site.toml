@@ -44,6 +44,11 @@ title = "Cómo funciona el eval de las citas"
 path = "docs/site/tecnica/evals-citas.html"
 type = "técnica"
 
+[[section.page]]
+title = "Cómo funcionan los checklists Excel de AESIA"
+path = "docs/site/tecnica/checklists-aesia.html"
+type = "técnica"
+
 [[section]]
 title = "Seguimiento"
 

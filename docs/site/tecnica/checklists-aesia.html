@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cómo funcionan los checklists Excel de AESIA</title>
+    <meta name="description" content="Qué hoja rellena la persona, qué calcula solo el libro y qué produce cada uno de los 12 checklists de AESIA y el ejemplo 05.01, con sus errores y una recomendación para usarlos en el plugin." />
+    <meta name="theme-color" content="#F0EBDE" />
+    <link rel="stylesheet" href="../design-system/v0.13/tokens.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/base.css" />
+    <link rel="stylesheet" href="../design-system/v0.13/css/document.css" />
+    <!-- site:css --><link rel="stylesheet" href="../design-system/v0.13/css/library.css" /><!-- /site:css -->
+    <script>
+      // Antes de pintar, para que no haya destello: el tema guardado manda sobre «auto».
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="lib">
+    <!-- site:nav -->
+    <nav class="lib-nav" aria-label="Sitio">
+    <details open>
+    <summary><a class="lib-home" href="../index.html">ai-act-advisor</a><span class="lib-menu">Índice</span></summary>
+    <h2>Guía</h2>
+    <ul>
+    <li><a href="../guia/como-se-usa.html">Cómo se usa</a></li>
+    <li><a href="../guia/demo.html">Demo de punta a punta</a></li>
+    </ul>
+    <h2>Diseño</h2>
+    <ul>
+    <li><a href="../diseno/propuesta-prototipo.html">Propuesta del prototipo</a></li>
+    <li><a href="../diseno/citar-notas.html">Cómo recuperar y citar las notas normativas</a></li>
+    </ul>
+    <h2>Técnica</h2>
+    <ul>
+    <li><a href="uso-del-prototipo.html">Cómo funciona el prototipo en uso</a></li>
+    <li><a href="evals-citas.html">Cómo funciona el eval de las citas</a></li>
+    <li><a href="checklists-aesia.html" aria-current="page">Cómo funcionan los checklists Excel de AESIA</a></li>
+    </ul>
+    <h2>Seguimiento</h2>
+    <ul>
+    <li><a href="../pendientes.html">Pendientes y dudas</a></li>
+    </ul>
+    <h2>Investigación</h2>
+    <ul>
+    <li><span title="Aún sin página">El AI Act tras el Omnibus 2026/1744</span></li>
+    </ul>
+    </details>
+    </nav>
+    <script>(function () { var m = matchMedia('(max-width: 56rem)'), d = document.querySelector('.lib-nav details'); d.open = !m.matches; m.addEventListener('change', function () { d.open = !m.matches; }); })();</script>
+    <script src="../design-system/v0.13/js/library-fold.js"></script>
+    <!-- /site:nav -->
+    <div class="doc">
+      <header class="doc-bar">
+        <span class="doc-brand">ai-act-advisor / técnica</span>
+        <button class="doc-theme" type="button" aria-label="Cambiar tema">Tema</button>
+      </header>
+
+      <header class="doc-header">
+        <h1>Cómo funcionan los checklists Excel de AESIA</h1>
+        <p class="lede">Qué hoja rellena la persona, qué calcula solo el libro y qué produce
+cada uno de los 12 checklists de AESIA y el ejemplo 05.01, con sus
+errores y una recomendación para usarlos en el plugin. Responde al issue
+#13.</p>
+        <dl class="doc-meta">
+          <div><dt>Fecha</dt><dd><time datetime="2026-11-20">2026-11-20</time></dd></div>
+          <div><dt>Estado</dt><dd>borrador</dd></div>
+          <div><dt>Issue</dt><dd><a href="https://github.com/AS-prog/ai-act-advisor/issues/13">#13</a></dd></div>
+          <div><dt>Fuente</dt><dd><code>aesia-checklists-y-ejemplos.zip</code> y guía 16</dd></div>
+        </dl>
+      </header>
+
+      <nav class="doc-toc" aria-label="Índice">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#en-una-frase">En una frase</a></li>
+          <li><a href="#fuentes">Fuentes</a></li>
+          <li><a href="#el-flujo">El flujo</a></li>
+          <li><a href="#las-hojas">Las hojas</a></li>
+          <li><a href="#las-fórmulas">Las fórmulas</a></li>
+          <li><a href="#qué-produce">Qué produce</a></li>
+          <li><a href="#los-12-checklists">Los 12 checklists</a></li>
+          <li><a href="#el-ejemplo-0501">El ejemplo 05.01</a></li>
+          <li><a href="#errores-e-incoherencias">Errores e incoherencias</a></li>
+          <li><a href="#qué-recuperan-las-notas-y-qué-pierden">Qué recuperan las notas y qué pierden</a></li>
+          <li><a href="#recomendación">Recomendación</a></li>
+          <li><a href="#decisiones-que-quedan-abiertas">Decisiones que quedan abiertas</a></li>
+          <li><a href="#cómo-se-comprueba">Cómo se comprueba</a></li>
+        </ol>
+      </nav>
+
+      <article class="doc-prose">
+<h2 id="en-una-frase">En una frase</h2>
+<p>Cada checklist es una <strong>autoevaluación de brecha</strong> para
+un proveedor de un sistema de alto riesgo: cruza los apartados de un
+artículo del RIA con las medidas de su guía, la persona marca dificultad
+y madurez de cada cruce, y el libro deduce qué falta hacer (el
+<strong>Plan de Adaptación</strong>, PDA). No hay macros ni informes:
+todo son fórmulas, desplegables y hojas ocultas.</p>
+<h2 id="fuentes">Fuentes</h2>
+<ul>
+<li><code>docs/documentos/fuentes/2026-07-30-aesia-checklists-y-ejemplos.zip</code>:
+12 checklists <code>*_Checklist.xlsx</code> (versión 1.0, 10-12-2025) y
+el ejemplo
+<code>05.01 Ejemplo ilustrativo del desarrollo de un sistema de gestión de riesgos v6.xlsx</code>.</li>
+<li><code>docs/documentos/fuentes/2026-06-30-aesia-16-manual-de-checklist-de-guias-de-requisitos.pdf</code>
+(guía 16, versión 1.1).</li>
+<li>Las notas de <code>knowledge/notas/aesia-checklist-*</code> (PR
+#12).</li>
+</ul>
+<p>El análisis abrió los Excel con openpyxl (fórmulas, estados de hoja,
+validaciones) y leyó a mano el XML de cada libro para lo que openpyxl
+pierde: los desplegables <code>x14:dataValidation</code>, los cuadros de
+texto y las imágenes.</p>
+<h2 id="el-flujo">El flujo</h2>
+<p>El manual lo sitúa en la <strong>fase de diagnóstico</strong> del
+sandbox español. La entidad hace dos cosas: medir la brecha entre su
+sistema y el artículo, y diseñar el PDA que ejecutará después. La hoja
+<code>Intro</code> es solo una imagen con tres pasos:</p>
+<ol type="1">
+<li>Recorrer los apartados del artículo y autoevaluar la madurez de las
+<strong>medidas guía</strong> (MG) que proponen las guías.</li>
+<li>Aportar <strong>medidas adicionales</strong> (MA) propias. La SEDIA
+las evalúa y, si valen, las incorpora a las guías.</li>
+<li>Indicar a qué apartados aplica cada MA y su madurez.</li>
+</ol>
+<p>En todos los pasos la entidad tiene un mentor del sandbox. Fuera del
+sandbox el paso 2 no tiene quien evalúe.</p>
+<h2 id="las-hojas">Las hojas</h2>
+<p>Todos los checklists tienen la misma estructura: 14 hojas, de las que
+10 se ven y 4 están ocultas como <code>veryHidden</code> (solo se
+muestran desde VBA o editando el XML). El manual habla de 9 pestañas: no
+cuenta <code>Control de Versiones</code> ni las ocultas.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Hoja</th>
+<th>Tipo</th>
+<th>Qué rellena la persona</th>
+<th>Qué calcula el libro</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Portada</code></td>
+<td>informativa</td>
+<td>nada</td>
+<td>nada; aviso de confidencialidad del sandbox</td>
+</tr>
+<tr class="even">
+<td><code>Control de Versiones</code></td>
+<td>informativa</td>
+<td>nada</td>
+<td>nada; versión 1.0 del 10-12-2025</td>
+</tr>
+<tr class="odd">
+<td><code>Intro</code></td>
+<td>informativa</td>
+<td>nada</td>
+<td>nada; es una imagen con los tres pasos</td>
+</tr>
+<tr class="even">
+<td><code>Artículo RIA</code></td>
+<td>informativa</td>
+<td>nada</td>
+<td>nada; un apartado por fila: <code>IDArt</code>, apartado, texto
+literal y descripción resumida</td>
+</tr>
+<tr class="odd">
+<td><code>Medidas guías (MG)</code></td>
+<td>informativa</td>
+<td>nada</td>
+<td>nada; <code>MGnn</code>, descripción y «cuestiones
+orientativas»</td>
+</tr>
+<tr class="even">
+<td><code>Relación MG-Apart.</code></td>
+<td>informativa</td>
+<td>nada</td>
+<td>matriz apartado × medida con una <code>X</code> en cada cruce; los
+rótulos se leen de las dos hojas anteriores</td>
+</tr>
+<tr class="odd">
+<td><code>Autoeval MG</code></td>
+<td>operativa</td>
+<td>dificultad y madurez de cada cruce; filas extra al final si una MG
+aplica a otro apartado</td>
+<td>despliega una fila por cada <code>X</code>; rellena «Estado
+diagnóstico» y «Plan de adaptación»</td>
+</tr>
+<tr class="even">
+<td><code>Medidas Adicionales (MA)</code></td>
+<td>operativa</td>
+<td>descripción de cada MA y fichero donde se detalla</td>
+<td>numera <code>MA01</code>, <code>MA02</code>…; marca si está
+documentada</td>
+</tr>
+<tr class="odd">
+<td><code>Relación MA-Apart.</code></td>
+<td>operativa</td>
+<td>una <code>X</code> en cada cruce apartado × MA</td>
+<td>pone los <code>MAnn</code> como cabecera</td>
+</tr>
+<tr class="even">
+<td><code>Autoeval MA</code></td>
+<td>operativa</td>
+<td>dificultad, madurez y evidencia de cada cruce</td>
+<td>despliega una fila por cada <code>X</code>; mismos cálculos que
+<code>Autoeval MG</code></td>
+</tr>
+<tr class="odd">
+<td><code>TO_DO</code></td>
+<td>oculta</td>
+<td>—</td>
+<td>lista de tareas de quienes construyeron el libro</td>
+</tr>
+<tr class="even">
+<td><code>helper_flat_table</code></td>
+<td>oculta</td>
+<td>—</td>
+<td>despliega la matriz MG en filas (apartado, medida,
+<code>X</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>helper_flat_table_MA</code></td>
+<td>oculta</td>
+<td>—</td>
+<td>lo mismo para la matriz MA</td>
+</tr>
+<tr class="even">
+<td><code>Tablas Aux</code></td>
+<td>oculta</td>
+<td>—</td>
+<td>catálogos de los desplegables y tabla madurez → plan</td>
+</tr>
+</tbody>
+</table></div>
+<p>Las columnas que la SEDIA rellena en
+<code>Medidas Adicionales (MA)</code> («Evaluación SEDIA. Estado» y
+«Comentarios») y en <code>Autoeval MA</code> (evaluación de la
+evidencia) solo tienen sentido dentro del sandbox.</p>
+<figure class="figwrap">
+  <svg viewBox="0 0 720 300" role="img" aria-labelledby="chk-title chk-desc">
+    <title id="chk-title">De la matriz de cruces al plan de adaptación</title>
+    <desc id="chk-desc">Artículo RIA y Medidas guías alimentan la matriz Relación MG-Apart. La hoja oculta helper_flat_table la despliega en una fila por cruce. Autoeval MG muestra esas filas; la persona rellena dificultad y madurez, y el libro calcula el estado del diagnóstico y el plan de adaptación con la tabla de Tablas Aux. Las medidas adicionales siguen el mismo camino por su propia matriz y su propia hoja oculta.</desc>
+    <defs>
+      <marker id="chk-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon class="d-bar" points="0 0, 8 3, 0 6"/></marker>
+    </defs>
+    <rect class="d-box" x="16" y="16" width="160" height="56"/>
+    <text class="d-t" x="30" y="40">Artículo RIA</text>
+    <text class="d-sm" x="30" y="60">apartados</text>
+    <rect class="d-box" x="16" y="96" width="160" height="56"/>
+    <text class="d-t" x="30" y="120">Medidas guías</text>
+    <text class="d-sm" x="30" y="140">MGnn y cuestiones</text>
+    <line class="d-line" x1="176" y1="44" x2="200" y2="70" marker-end="url(#chk-arrow)"/>
+    <line class="d-line" x1="176" y1="124" x2="200" y2="98" marker-end="url(#chk-arrow)"/>
+    <rect class="d-box" x="200" y="56" width="148" height="56"/>
+    <text class="d-t" x="214" y="80">Relación MG-Apart.</text>
+    <text class="d-sm" x="214" y="100">matriz con X</text>
+    <line class="d-line" x1="348" y1="84" x2="364" y2="84" marker-end="url(#chk-arrow)"/>
+    <rect class="d-box" x="364" y="56" width="124" height="56"/>
+    <text class="d-t" x="376" y="80">helper (oculta)</text>
+    <text class="d-sm" x="376" y="100">una fila por X</text>
+    <line class="d-line" x1="488" y1="84" x2="504" y2="84" marker-end="url(#chk-arrow)"/>
+    <rect class="d-fill" x="504" y="40" width="200" height="88"/>
+    <text class="d-t" x="518" y="64">Autoeval MG</text>
+    <text class="d-sm" x="518" y="86">persona: dificultad, madurez</text>
+    <text class="d-sm" x="518" y="106">libro: estado y plan</text>
+    <line class="d-line" x1="618" y1="128" x2="618" y2="176" marker-end="url(#chk-arrow)"/>
+    <rect class="d-fill" x="532" y="176" width="172" height="56"/>
+    <text class="d-t" x="546" y="200">Plan de adaptación</text>
+    <text class="d-sm" x="546" y="220">L1…L9 → 01…05</text>
+    <rect class="d-box" x="16" y="190" width="160" height="56"/>
+    <text class="d-t" x="30" y="214">Medidas adicionales</text>
+    <text class="d-sm" x="30" y="234">MAnn de la entidad</text>
+    <line class="d-line" x1="176" y1="218" x2="200" y2="218" marker-end="url(#chk-arrow)"/>
+    <rect class="d-box" x="200" y="190" width="300" height="56"/>
+    <text class="d-t" x="214" y="214">Relación MA → helper_MA → Autoeval MA</text>
+    <text class="d-sm" x="214" y="234">mismo camino que las MG</text>
+    <line class="d-line" x1="500" y1="218" x2="532" y2="208" marker-end="url(#chk-arrow)"/>
+    <rect class="d-box" x="16" y="264" width="688" height="24"/>
+    <text class="d-tm" x="30" y="280">TABLAS AUX (OCULTA) · LISTAS DE LOS DESPLEGABLES Y REGLA MADUREZ → PLAN</text>
+  </svg>
+  <figcaption>La persona solo escribe en <strong>Autoeval</strong> y en las hojas de MA; el resto lo despliegan y calculan fórmulas de Excel 365.</figcaption>
+</figure>
+
+<h2 id="las-fórmulas">Las fórmulas</h2>
+<p>Son fórmulas de Excel 365: <code>LET</code>, <code>SEQUENCE</code>,
+<code>FILTER</code>, <code>HSTACK</code>, <code>XLOOKUP</code>,
+<code>TEXTBEFORE</code> y <code>TEXTAFTER</code>, con matrices
+desbordadas. En Excel 2019 o LibreOffice antiguos no calculan.
+<strong>No hay macros</strong>: los libros son <code>.xlsx</code> sin
+<code>vbaProject.bin</code>, sin tablas dinámicas, sin gráficos y sin
+conexiones externas.</p>
+<p>La cadena es esta:</p>
+<ol type="1">
+<li><code>helper_flat_table!A2</code> toma la matriz de
+<code>Relación MG-Apart.</code> y la despliega en filas, una por cada
+celda con <code>X</code>:
+<code>FILTER(HSTACK(fila, col, val), val="X")</code>.</li>
+<li><code>Autoeval MG</code> lee esa tabla. <code>C5</code> y
+<code>D5</code> parten el texto «13.1. Diseño y desarrollo» en apartado
+y descripción (<code>TEXTBEFORE</code>/<code>TEXTAFTER</code>);
+<code>F5</code> copia el <code>MGnn</code>; <code>B5</code>,
+<code>E5</code> y <code>G5</code> buscan con <code>XLOOKUP</code> el
+<code>IDArt</code>, el tipo y la descripción de la medida.</li>
+<li>En cada fila, dos fórmulas reaccionan a la madurez (columna I):
+<ul>
+<li>«Estado diagnóstico»:
+<code>=IF(I5="", '00. Pdte diagnóstico', '01. Ya diagnosticada')</code>.</li>
+<li>«Plan de adaptación»:
+<code>=IF(I5&lt;&gt;"", VLOOKUP(I5, 'Tablas Aux'!B23:C31, 2), '00. Pdte diagnóstico')</code>.</li>
+</ul></li>
+<li>Para las MA, <code>C5</code> numera con
+<code>"MA" &amp; TEXT(COUNTIF($D$5:D5,"&lt;&gt;"),"00")</code>,
+<code>Relación MA-Apart.</code> pone esos ids como cabecera con
+<code>TRANSPOSE(FILTER(...))</code> y <code>helper_flat_table_MA</code>
+repite el paso 1.</li>
+</ol>
+<p>La dificultad percibida (columna H) no entra en ninguna fórmula: solo
+se guarda para priorizar el PDA.</p>
+<h3 id="los-desplegables">Los desplegables</h3>
+<p>openpyxl solo ve uno, la validación del formato <code>MAnn</code>.
+Los demás son <code>x14:dataValidation</code> dentro de
+<code>extLst</code>, que openpyxl descarta al leer. Están en el XML:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Columna</th>
+<th>Lista</th>
+<th>Valores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dificultad percibida</td>
+<td><code>Tablas Aux!B51:B53</code></td>
+<td><code>00. Alto</code>, <code>01. Medio</code>,
+<code>03. Bajo</code></td>
+</tr>
+<tr class="even">
+<td>Nivel de madurez</td>
+<td><code>Tablas Aux!B23:B31</code></td>
+<td>L1 a L9, abajo</td>
+</tr>
+<tr class="odd">
+<td>Estado diagnóstico</td>
+<td><code>Tablas Aux!B38:B39</code></td>
+<td><code>00. Pdte diagnóstico</code>,
+<code>01. Ya diagnosticada</code></td>
+</tr>
+<tr class="even">
+<td>Evaluación SEDIA</td>
+<td><code>Tablas Aux!B46:B48</code></td>
+<td>Pendiente, OK, NO_OK</td>
+</tr>
+<tr class="odd">
+<td>MA documentada</td>
+<td><code>Tablas Aux!B42:B43</code></td>
+<td><code>00. Pendiente de aportar</code>,
+<code>01. Ya aportada</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="madurez-y-plan-de-adaptación">Madurez y plan de adaptación</h3>
+<p>Es el corazón del libro. La tabla de <code>Tablas Aux</code> tiene
+<strong>nueve</strong> niveles; el manual describe ocho, con otra
+numeración, porque no tiene «No documentada e implementación en curso».
+Mando lo que dice el Excel:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Nivel de madurez</th>
+<th>Plan de adaptación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>L1. No documentada ni implementada</td>
+<td>01. Documentar e implementar</td>
+</tr>
+<tr class="even">
+<td>L2. Documentación en curso y no implementada</td>
+<td>01. Documentar e implementar</td>
+</tr>
+<tr class="odd">
+<td>L3. No documentada e implementación en curso</td>
+<td>01. Documentar e implementar</td>
+</tr>
+<tr class="even">
+<td>L4. Documentada y no implementada</td>
+<td>02. Implementar</td>
+</tr>
+<tr class="odd">
+<td>L5. Documentada e implementación en curso</td>
+<td>02. Implementar</td>
+</tr>
+<tr class="even">
+<td>L6. Documentada e implementada</td>
+<td>03. Adaptación completa</td>
+</tr>
+<tr class="odd">
+<td>L7. No documentada e implementada</td>
+<td>04. Documentar</td>
+</tr>
+<tr class="even">
+<td>L8. Documentación en curso e implementada</td>
+<td>04. Documentar</td>
+</tr>
+<tr class="odd">
+<td>L9. Medida no necesaria en mi sistema</td>
+<td>05. Ninguna adaptación requerida</td>
+</tr>
+</tbody>
+</table></div>
+<p>La regla se reduce a dos preguntas: ¿está documentada? y ¿está
+implementada? Lo que falte de las dos es el plan.</p>
+<h2 id="qué-produce">Qué produce</h2>
+<p>Solo la propia hoja rellenada. No hay hoja de indicadores, ni de PDA,
+ni botón de exportar. La hoja oculta <code>TO_DO</code> lo confirma:
+entre sus tareas pendientes están «Probar la exportación a indicadores»,
+«Probar la exportación a PDA» e «Informe de seguimiento en base a
+indicadores».</p>
+<ul>
+<li><strong>PDA</strong> es el <strong>Plan de Adaptación</strong> del
+manual (apartado 1.1): el plan de trabajo que la entidad ejecuta después
+para cumplir el RIA. En el libro es la columna «Plan de adaptación»;
+plazos y esfuerzos se añadían fuera, en la fase siguiente del
+sandbox.</li>
+<li><strong>Indicadores</strong> son el «grado de avance» del
+diagnóstico: cuántas filas están en <code>01. Ya diagnosticada</code> y
+cómo se reparten por plan. Se calculaban fuera del libro, con los
+«automatismos desarrollados por Pablo» que la <code>TO_DO</code> pide
+integrar y que no vienen en el ZIP.</li>
+</ul>
+<h2 id="los-12-checklists">Los 12 checklists</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Checklist</th>
+<th>Guía</th>
+<th>Artículo</th>
+<th>Apartados</th>
+<th>MG</th>
+<th>Cruces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gestión de calidad</td>
+<td>04</td>
+<td>17</td>
+<td>17</td>
+<td>16</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td>Gestión de riesgos</td>
+<td>05</td>
+<td>9</td>
+<td>17</td>
+<td>14</td>
+<td>98</td>
+</tr>
+<tr class="odd">
+<td>Supervisión humana</td>
+<td>06</td>
+<td>14</td>
+<td>12</td>
+<td>8</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>Gobernanza del dato</td>
+<td>07</td>
+<td>10</td>
+<td>20</td>
+<td>21</td>
+<td>65</td>
+</tr>
+<tr class="odd">
+<td>Transparencia</td>
+<td>08</td>
+<td>13</td>
+<td>16</td>
+<td>16</td>
+<td>53</td>
+</tr>
+<tr class="even">
+<td>Precisión</td>
+<td>09</td>
+<td>15</td>
+<td>3</td>
+<td>14</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td>Solidez</td>
+<td>10</td>
+<td>15</td>
+<td>2</td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td>Ciberseguridad</td>
+<td>11</td>
+<td>15</td>
+<td>2</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>Registros</td>
+<td>12</td>
+<td>12 y 19</td>
+<td>10</td>
+<td>14</td>
+<td>37</td>
+</tr>
+<tr class="even">
+<td>Vigilancia poscomercialización</td>
+<td>13</td>
+<td>72</td>
+<td>2</td>
+<td>13</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>Gestión de incidentes</td>
+<td>14</td>
+<td>73</td>
+<td>11</td>
+<td>5</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td>Documentación técnica</td>
+<td>15</td>
+<td>11, 18 y anexo IV</td>
+<td>36</td>
+<td>45</td>
+<td>99</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td></td>
+<td></td>
+<td><strong>148</strong></td>
+<td><strong>193</strong></td>
+<td><strong>510</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>«Cruces» son las <code>X</code> de <code>Relación MG-Apart.</code>,
+es decir, las filas que aparecen en <code>Autoeval MG</code>. Algunas MG
+remiten a otro checklist en vez de describir una medida: en
+Transparencia, MG13 a MG16 son «Artículo 09», «Artículo 14», «Artículo
+15» y «Artículo 12»; en Gestión de calidad, MG04 y MG09 a MG12 remiten a
+los artículos 15, 10, 9, 72 y 73. Forman un grafo entre checklists.</p>
+<h2 id="el-ejemplo-0501">El ejemplo 05.01</h2>
+<p>No es un checklist. Es el anexo de la guía 05 (sistema de gestión de
+riesgos, art. 9): recorre los pasos de su sección 2 con dos casos de
+uso, un sistema de promoción de empleados y una bomba de insulina
+inteligente. Cada hoja lleva un cuadro de texto con la explicación.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Hoja</th>
+<th>Qué contiene</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Leyenda</code></td>
+<td>escalas de impacto (1-5, con columnas de seguridad, derechos
+fundamentales y salud) y de probabilidad (1-5, con frecuencia
+esperada)</td>
+</tr>
+<tr class="even">
+<td><code>0.Sistemas IA en análisis</code></td>
+<td>los dos casos de uso</td>
+</tr>
+<tr class="odd">
+<td><code>1.Definición apetito al riesgo</code></td>
+<td>solo texto: apetito de 4 sobre 15</td>
+</tr>
+<tr class="even">
+<td><code>2.Contexto de la organización</code></td>
+<td>elementos de salud, seguridad y derechos fundamentales por
+sistema</td>
+</tr>
+<tr class="odd">
+<td><code>3.Identificación de riesgos</code></td>
+<td>componente, categoría (datos, actores, entornos), amenaza y
+riesgo</td>
+</tr>
+<tr class="even">
+<td><code>4.Análisis y eval. de riesgos</code></td>
+<td>impacto, probabilidad,
+<code>riesgo inherente = impacto × probabilidad</code>, apetito y
+conclusión</td>
+</tr>
+<tr class="odd">
+<td><code>5.Respuesta al riesgo</code></td>
+<td>control, mitigación (0 a 0,8) y
+<code>riesgo residual = inherente − inherente × mitigación</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Hay tres hojas ocultas: versiones anteriores de las hojas 2 y 3 y un
+control de cambios (V1 de 2022-12-28, V2 de 2023-03-28). Las únicas
+fórmulas son las dos multiplicaciones; la conclusión de la hoja 4
+(«R.Inherente &gt; Apetito») está escrita a mano.</p>
+<p>Lo útil para el plugin: el patrón <strong>componente de datos →
+amenaza → riesgo → control</strong> está pensado para quien construye el
+sistema. Varias amenazas son de ingeniería de datos: envenenamiento de
+los datos de entrenamiento, perfilado por el etiquetado, sesgo en los
+datos, revelación de datos y procesos no reproducibles.</p>
+<h2 id="errores-e-incoherencias">Errores e incoherencias</h2>
+<p>Ninguno impide usar el contenido, pero hay que saberlos antes de
+reutilizarlo:</p>
+<ol type="1">
+<li><strong>El art. 10.5 ya no existe.</strong> El checklist de
+Gobernanza del dato evalúa los apartados 10.5.a a 10.5.f (categorías
+especiales para corregir sesgos). El Reglamento 2026/1744 suprimió el
+art. 10.5 y lo llevó al nuevo <strong>art. 4 bis</strong>; el nuevo 10.6
+remite a él. Los checklists son de 2025-12-10 y el manual avisa de que
+se actualizarán tras el Omnibus. También cambian, sin invalidar las
+medidas, el art. 11 (documentación simplificada para pymes y pequeñas
+mid-caps), el 17.2 (proporcionalidad) y el 72.3 (modelo de plan de la
+Comisión).</li>
+<li><strong>Manual y Excel no coinciden</strong> en la escala de madurez
+(8 niveles frente a 9) ni en la dificultad (<code>02. Bajo</code> frente
+a <code>03. Bajo</code>).</li>
+<li><strong>Cabeceras rotas en <code>Autoeval MA</code>.</strong> Las
+columnas L a P muestran <code>#REF!</code>: apuntan a una columna
+borrada de <code>Autoeval MG</code>. Por los desplegables, son el
+fichero de evidencia, si está aportada y la evaluación de la SEDIA.</li>
+<li><strong><code>IDArt</code> mal en Vigilancia
+poscomercialización</strong>: pone <code>AR73</code> para los apartados
+72.2 y 72.3.</li>
+<li><strong>Apartado repetido en Registros</strong>: «12.3» aparece dos
+veces.</li>
+<li><strong><code>VLOOKUP</code> sin coincidencia exacta</strong> en el
+plan de adaptación. Funciona porque L1…L9 están ordenados; con un L10
+fallaría.</li>
+<li><strong>El ejemplo 05.01 contradice su escala.</strong> El texto
+habla de impacto 1-5, probabilidad 1-3 y apetito 4 sobre 15; la
+<code>Leyenda</code> usa 1-5 para las dos, y el apetito de la bomba de
+insulina es 5.</li>
+<li><strong>Enlace privado.</strong> La plantilla para documentar una MA
+apunta al SharePoint del sandbox (<code>DIGITAL-SANDBOXIA</code>), al
+que no se puede acceder.</li>
+</ol>
+<h2 id="qué-recuperan-las-notas-y-qué-pierden">Qué recuperan las notas y
+qué pierden</h2>
+<p>Las notas de la PR #12 guardan el valor calculado que Excel dejó en
+caché, no la fórmula. Para las hojas informativas basta. En las
+demás:</p>
+<ul>
+<li><code>Autoeval MG</code> sí trae sus filas, porque la caché tiene la
+matriz desbordada. En Documentación técnica faltan 2 de 99 cruces (anexo
+IV.8 con MG44 y IV.9 con MG45) y <code>IDArt</code> sale vacío.</li>
+<li><code>Autoeval MA</code> y <code>Relación MA-Apart.</code> salen
+casi vacías porque el libro llega sin MA: son filas con los valores por
+defecto («00. Pdte diagnóstico», «00. Pendiente de aportar»).</li>
+<li>Las hojas <code>helper_*</code> no tienen nota, y no hace falta:
+repiten <code>Relación MG-Apart.</code> en filas.</li>
+<li>Se pierden las listas de los desplegables y la regla madurez → plan,
+aunque <code>Tablas Aux</code> conserva la tabla.</li>
+</ul>
+<h2 id="recomendación">Recomendación</h2>
+<p>Los checklists están hechos para <strong>proveedores de sistemas de
+alto riesgo</strong> que preparan una evaluación de conformidad, con
+plazos de 2027-12-02 (anexo III) y 2028-08-02 (anexo I). La mayoría de
+proyectos de un DE o un AE no lo son. Por eso propongo usarlos como
+<strong>catálogo de medidas</strong>, no como formulario:</p>
+<ol type="1">
+<li><strong>Las notas bastan para citar.</strong>
+<code>cite-regulation</code> y el buscador ya encuentran una medida y
+sus cuestiones orientativas. No hace falta rehacerlas; solo marcar en su
+front matter que el art. 10.5 es ahora el art. 4 bis.</li>
+<li><strong>Un catálogo estructurado para sugerir.</strong> Un script
+stdlib que lea los 12 Excel y escriba
+<code>knowledge/aesia-measures.yaml</code> con, por checklist: artículo,
+apartados, medidas (<code>id</code>, descripción, cuestiones
+orientativas), cruces apartado → medidas y remisiones entre checklists.
+Con eso una skill puede pasar de una señal a medidas concretas sin
+buscar. Ejemplo: una columna de categoría especial
+(<code>special_category_terms</code>) → art. 10.2.f-g y art. 4 bis →
+MG14 a MG16 (sesgo) y MG19 a MG21 (anonimización, seudonimización,
+garantías RGPD) de Gobernanza del dato. El mapa señal → medida se cura a
+mano, como <code>citas.yaml</code>.</li>
+<li><strong>Las cuestiones orientativas como preguntas, no como
+examen.</strong> Encajan con el enfoque del plugin: la skill las
+propone, explica el riesgo de no tenerlas y la decisión es de la
+persona. Nunca bloquean.</li>
+<li><strong>La escala de madurez, opcional.</strong> Si alguien quiere
+el diagnóstico completo, una skill puede preguntar por
+documentada/implementada y devolver el plan con la regla de arriba, en
+Markdown o CSV. No vale la pena generar el Excel: depende de Excel 365 y
+de una SEDIA que evalúe las MA.</li>
+<li><strong>El patrón del ejemplo 05.01</strong> sirve para
+<code>risk-summary</code>: componente de datos → amenaza → control, con
+las escalas de su <code>Leyenda</code>.</li>
+</ol>
+<p>El primer paso concreto sería el punto 2 limitado a
+<strong>Gobernanza del dato</strong> y <strong>Registros</strong>, que
+son los dos checklists más cercanos al trabajo de un DE o un AE
+(calidad, linaje, sesgo, retención y logs).</p>
+<h2 id="decisiones-que-quedan-abiertas">Decisiones que quedan
+abiertas</h2>
+<p>Cada una tiene su issue:</p>
+<ul>
+<li>Si se genera <code>knowledge/aesia-measures.yaml</code> y con qué
+esquema.</li>
+<li>Cómo se mapean las señales del plugin a las medidas, empezando por
+Gobernanza del dato y Registros.</li>
+<li>Si el plugin ofrece una autoevaluación guiada con la escala de
+madurez y el plan de adaptación.</li>
+</ul>
+<div class="notice notice-pending"><span class="notice-title">Pendiente · decisiones para Andrés en los issues de la PR: catálogo <code>aesia-measures.yaml</code>, mapa de señales a medidas y autoevaluación guiada.</span></div>
+<h2 id="cómo-se-comprueba">Cómo se comprueba</h2>
+<p>Los números de este documento salen de leer los Excel del ZIP con
+<code>openpyxl</code> y del XML de cada libro. Para repetirlo:
+descomprimir el ZIP, abrir cada <code>*_Checklist.xlsx</code> con
+<code>openpyxl.load_workbook(...)</code> (sin <code>data_only</code>) y
+contar las <code>X</code> de <code>Relación MG-Apart.</code>; los
+desplegables están en <code>xl/worksheets/sheetN.xml</code>, bajo
+<code>x14:dataValidations</code>.</p>
+<p><em>No es asesoramiento legal. Base normativa: consolidado del AI Act
+de 2026-07-27.</em></p>
+
+      </article>
+
+      <footer class="doc-footer">
+        <span>Fuente: docs/documentos/tecnica/checklists-aesia.md</span>
+        <span>asprog-design-system</span>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelector('.doc-theme').addEventListener('click', function () {
+        var r = document.documentElement, t = r.getAttribute('data-theme');
+        var isDark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var next = isDark ? 'light' : 'dark';
+        r.setAttribute('data-theme', next);
+        try { localStorage.setItem('tema', next); } catch (e) {}
+      });
+    </script>
+  </body>
+</html>
