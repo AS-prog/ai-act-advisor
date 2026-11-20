@@ -96,7 +96,7 @@ def filas(resultado, modelo, ruta_json, commit=None, sha=None):
     puntos_sin = _media([c.get("aggregates", {}).get("scoreWithout") for c in resultado.get("cases", [])])
     ejecucion = {
         "fecha": fecha, "modelo": modelo, "juez": suite.get("judgeModel", ""),
-        "filtro": " ".join(suite.get("tagFilters") or []) or "todos",
+        "filtro": " ".join((suite.get("tagFilters") or []) + ["caso:" + c for c in suite.get("caseFilters") or []]) or "todos",
         "casos": agg.get("casesTotal", len(casos)),
         "pasadas": max((len(c.get("arms", {}).get("with", [])) for c in resultado.get("cases", [])), default=0),
         "puntos_con": _r(agg.get("overallScore")), "puntos_sin": _r(puntos_sin), "delta": _r(agg.get("meanDelta")),
@@ -124,9 +124,10 @@ def _append(nombre, cols, rows):
     return ruta
 
 
-def registrar(ruta_json, modelo):
-    with open(ruta_json, encoding="utf-8") as fh:
-        resultado = json.load(fh)
+def registrar(ruta_json, modelo, resultado=None):
+    if resultado is None:
+        with open(ruta_json, encoding="utf-8") as fh:
+            resultado = json.load(fh)
     ejecucion, casos = filas(resultado, modelo, ruta_json)
     _append("ejecuciones.csv", COLS_EJECUCION, [ejecucion])
     _append("casos.csv", COLS_CASO, casos)
@@ -134,19 +135,59 @@ def registrar(ruta_json, modelo):
 
 
 # --- ejecutar ---------------------------------------------------------------
-def comando(args, modelo, ruta_json):
+def nombres_de_casos():
+    return sorted(d for d in os.listdir(EVALS) if os.path.isfile(os.path.join(EVALS, d, "case.yaml")))
+
+
+def resolver_casos(patrones):
+    """Expande los globs de --caso (fnmatch: *, ?, [0-9]) contra los casos del repo.
+
+    `claude plugin eval --case` solo entiende «*» y un patrón, así que run.py resuelve
+    los nombres y, si hace falta, llama una vez por caso y junta los resultados.
+    """
+    nombres = nombres_de_casos()
+    return [n for n in nombres if any(fnmatch.fnmatchcase(n, p) for p in patrones)]
+
+
+def _nativo(patrones):
+    return len(patrones) == 1 and not any(ch in patrones[0] for ch in "?[]{}")
+
+
+def juntar(resultados, patrones):
+    """Une varios JSON de `claude plugin eval` (uno por caso) en uno con agregados recalculados."""
+    casos = [c for r in resultados for c in r.get("cases", [])]
+    medias = lambda k: _media([c.get("aggregates", {}).get(k) for c in casos])  # noqa: E731
+    suite = dict(resultados[0].get("suite", {})) if resultados else {}
+    suite["caseFilters"] = list(patrones)
+    return {
+        "startedAt": min((r.get("startedAt") or "" for r in resultados), default=""),
+        "durationSeconds": sum(r.get("durationSeconds") or 0 for r in resultados),
+        "costUsd": sum(r.get("costUsd") or 0 for r in resultados),
+        "partial": any(r.get("partial") for r in resultados),
+        "suite": suite,
+        "cases": casos,
+        "aggregates": {
+            "casesTotal": len(casos),
+            "casesPassed": sum(r.get("aggregates", {}).get("casesPassed", 0) for r in resultados),
+            "overallScore": medias("score"), "overallPassRate": medias("passRate"), "meanDelta": medias("delta"),
+        },
+    }
+
+
+def comando(args, modelo, ruta_json, caso=None, tope=None):
     cmd = ["claude", "plugin", "eval", ".", "--model", modelo, "--judge-model", args.juez,
            "--allow-tools", "Bash", "--trust-plugin", "--json", ruta_json]
     if not args.publicar:
         cmd.append("--no-publish")
     for t in args.tag or []:
         cmd += ["--tag", t]
-    if args.caso:
-        cmd += ["--case", args.caso]
+    if caso:
+        cmd += ["--case", caso]
     if args.runs:
         cmd += ["--runs", str(args.runs)]
-    if args.max_cost:
-        cmd += ["--max-cost-usd", str(args.max_cost)]
+    tope = args.max_cost if tope is None else tope
+    if tope:
+        cmd += ["--max-cost-usd", str(round(tope, 2))]
     if args.concurrencia:
         cmd += ["-j", str(args.concurrencia)]
     return cmd
@@ -156,25 +197,56 @@ def ejecutar(args):
     if not args.dry_run and not shutil.which("claude"):
         print("No encuentro el comando «claude» en el PATH.")
         return 1
+    patrones = args.caso or []
+    casos = [None]
+    if patrones:
+        elegidos = resolver_casos(patrones)
+        if not elegidos:
+            print("Ningún caso coincide con %s. Casos: %s" % (" ".join(patrones), " ".join(nombres_de_casos())))
+            return 1
+        casos = [patrones[0]] if _nativo(patrones) else elegidos
+        print("Casos: %s" % " ".join(elegidos))
     os.makedirs(RESULTS, exist_ok=True)
     sello = datetime.datetime.now().strftime("%Y-%m-%dT%H-%M")
     codigo = 0
     for modelo in args.modelos:
-        ruta_json = os.path.join(RESULTS, "%s-%s.json" % (sello, modelo.replace("/", "_")))
-        cmd = comando(args, modelo, ruta_json)
-        print("\n== %s\n$ (cd %s) %s" % (modelo, os.path.relpath(PLUGIN, os.getcwd()), " ".join(cmd)), flush=True)
+        base = "%s-%s" % (sello, modelo.replace("/", "_"))
+        ruta_json = os.path.join(RESULTS, base + ".json")
+        resultados = []
+        for caso in casos:
+            ruta = ruta_json if len(casos) == 1 else os.path.join(RESULTS, "%s-%s.json" % (base, caso))
+            gastado = sum(r.get("costUsd") or 0 for r in resultados)
+            if args.max_cost and gastado >= args.max_cost:
+                print("Tope de %s USD alcanzado para %s; quedan casos sin ejecutar." % (args.max_cost, modelo))
+                break
+            cmd = comando(args, modelo, ruta, caso, args.max_cost - gastado if args.max_cost else None)
+            print("\n== %s\n$ (cd %s) %s" % (modelo, os.path.relpath(PLUGIN, os.getcwd()), " ".join(cmd)), flush=True)
+            if args.dry_run:
+                continue
+            proc = subprocess.run(cmd, cwd=PLUGIN)
+            # 0: todo por encima del umbral; 1: algún caso por debajo; 2: tope de coste (resultado parcial).
+            if not os.path.exists(ruta):
+                print("Sin resultado para %s %s (código %s)." % (modelo, caso or "", proc.returncode))
+                codigo = 1
+                continue
+            with open(ruta, encoding="utf-8") as fh:
+                resultados.append(json.load(fh))
         if args.dry_run:
             continue
-        proc = subprocess.run(cmd, cwd=PLUGIN)
-        # 0: todo por encima del umbral; 1: algún caso por debajo; 2: tope de coste (resultado parcial).
-        if not os.path.exists(ruta_json):
-            print("Sin resultado para %s (código %s); no se registra." % (modelo, proc.returncode))
+        if not resultados or not any(r.get("cases") for r in resultados):
+            print("Sin casos ejecutados para %s; no se registra." % modelo)
             codigo = 1
             continue
+        resultado = resultados[0] if len(casos) == 1 else juntar(resultados, patrones)
+        if patrones and len(casos) == 1:
+            resultado.setdefault("suite", {})["caseFilters"] = list(patrones)
+        if len(casos) > 1:
+            with open(ruta_json, "w", encoding="utf-8") as fh:
+                json.dump(resultado, fh, ensure_ascii=False, indent=2)
         if args.sin_registro:
             print("Resultado en %s (sin registrar)." % ruta_json)
             continue
-        e = registrar(ruta_json, modelo)
+        e = registrar(ruta_json, modelo, resultado)
         print("Registrado: con plugin %s · sin plugin %s · Δ %s · skill activa %s · %s USD" % (
             e["puntos_con"], e["puntos_sin"], e["delta"], e["skill_activa"], e["coste_usd"]))
     if not args.dry_run and not args.sin_registro:
@@ -239,7 +311,7 @@ def main(argv=None):
     e = sub.add_parser("ejecutar", help="lanza el eval con uno o varios modelos")
     e.add_argument("--modelos", nargs="+", required=True, help="ids de modelo, p. ej. claude-sonnet-5-5")
     e.add_argument("--tag", action="append", help="filtra casos por etiqueta (humo, cita, solo-ingles, negativo)")
-    e.add_argument("--caso", help="filtra casos por nombre (glob)")
+    e.add_argument("--caso", nargs="+", help="filtra casos por nombre (globs: 07-*, 1[0-2]-*); varios a la vez")
     e.add_argument("--runs", type=int, help="pasadas por caso (por defecto, las del case.yaml: 3)")
     e.add_argument("--juez", default="sonnet", help="modelo juez, fijo entre modelos (por defecto sonnet)")
     e.add_argument("--max-cost", type=float, help="tope de coste en USD por modelo")

@@ -49,5 +49,25 @@ class FilasTest(unittest.TestCase):
         self.assertIn("--no-publish", cmd)
 
 
+class CasosTest(unittest.TestCase):
+    def test_resuelve_globs_que_claude_no_entiende(self):
+        self.assertEqual(run.resolver_casos(["0[7-9]-*", "1[0-2]-*"])[:2], ["07-solvencia", "08-chatbot"])
+        self.assertEqual(len(run.resolver_casos(["0[7-9]-*", "1[0-2]-*"])), 6)
+        self.assertEqual(run.resolver_casos(["zz*"]), [])
+        self.assertTrue(run._nativo(["07-*"]))
+        self.assertFalse(run._nativo(["0[7-9]-*"]))
+        self.assertFalse(run._nativo(["07-*", "08-*"]))
+
+    def test_juntar_recalcula_agregados_y_filtro(self):
+        uno = dict(RESULTADO, cases=RESULTADO["cases"][:1], costUsd=0.5)
+        dos = dict(RESULTADO, cases=RESULTADO["cases"][1:], costUsd=0.25)
+        r = run.juntar([uno, dos], ["a", "b"])
+        self.assertEqual(r["aggregates"]["casesTotal"], 2)
+        self.assertEqual(r["aggregates"]["overallScore"], 0.75)
+        self.assertEqual(r["costUsd"], 0.75)
+        e, _ = run.filas(r, "m", "", commit="", sha="")
+        self.assertEqual(e["filtro"], "humo caso:a caso:b")
+
+
 if __name__ == "__main__":
     unittest.main()

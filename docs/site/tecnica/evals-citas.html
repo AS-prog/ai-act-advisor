@@ -63,8 +63,8 @@
 normativas, cómo corre cada caso con y sin plugin, qué comprueba cada
 grader y qué salió en la primera ejecución.</p>
         <dl class="doc-meta">
-          <div><dt>Vigente a</dt><dd><time datetime="2026-11-17">2026-11-17</time></dd></div>
-          <div><dt>Código</dt><dd><code>ai-act-advisor@ee40d83</code></dd></div>
+          <div><dt>Vigente a</dt><dd><time datetime="2026-11-18">2026-11-18</time></dd></div>
+          <div><dt>Código</dt><dd><code>ai-act-advisor@0a59f01</code></dd></div>
           <div><dt>Diseño</dt><dd><a href="../diseno/citar-notas.html">Cómo recuperar y citar las notas normativas</a></dd></div>
           <div><dt>Suite</dt><dd><code>plugins/ai-act-advisor/evals/</code></dd></div>
         </dl>
@@ -332,9 +332,11 @@ acierta el artículo, pero sin nota ni fuente oficial.</li>
 pregunta.</strong> Las conceptuales («¿qué es…?») y las de normas que no
 están en las notas. Es un problema de su <code>description</code>, no
 del buscador.</li>
-<li><strong>El juez de <code>no-inventa-cita</code> es blando.</strong>
-Aprobó una cita del DSA de memoria sin la advertencia que pide su
-criterio. Hay que revisarlo con más pasadas.</li>
+<li><strong>El juez de <code>no-inventa-cita</code> acierta.</strong> Al
+principio pareció blando, pero revisando las respuestas el brazo con
+plugin sí cerraba con «lo respondo de memoria; las notas del plugin no
+cubren el DSA» y remitía a EUR-Lex, que es lo que pide el criterio. El
+brazo sin plugin no avisaba y suspendió las tres votaciones.</li>
 </ul>
 <h2 id="con-varios-modelos">Con varios modelos</h2>
 <p><code>evals/run.py</code> lanza el eval una vez por modelo y lleva el
@@ -448,6 +450,131 @@ mejora la respuesta cuando la skill entra, y lo que más resta es que no
 entra. Con Haiku no se activa ninguna vez. Con una pasada por caso la
 varianza es alta; las cifras sirven para comparar tendencias, no para
 decidir.</p>
+<h3 id="mejoras-del-18-de-noviembre">Mejoras del 18 de noviembre</h3>
+<p>Tres cambios, medidos con <code>run.py</code> y juez
+<code>sonnet</code>:</p>
+<ol type="1">
+<li><strong>La <code>description</code> de
+<code>cite-regulation</code></strong> ahora pide usarla antes de
+responder de memoria a cualquier pregunta de normativa, también las
+conceptuales («¿qué es la singularización?») y las de normas que quizá
+no estén en las notas (DSA, NIS2…).</li>
+<li><strong>Las skills de riesgo traen la cita.</strong>
+<code>ai-act-classify</code>, <code>ai-transparency</code>,
+<code>pii-masking</code>, <code>special-categories</code>,
+<code>project-init</code> y <code>risk-summary</code> llaman a
+<code>buscar.py articulo</code> antes de escribir «Norma y artículo»,
+con el formato de <code>cite-regulation</code>. Hacía falta porque, ante
+una pregunta del AI Act, Haiku entraba en <code>ai-act-classify</code> y
+respondía con su guía, sin pasar por el buscador.</li>
+<li><strong><code>run.py --caso</code> admite varios globs</strong>
+(<code>"0[7-9]-*" "1[0-2]-*"</code>).
+<code>claude plugin eval --case</code> solo entiende <code>*</code>, así
+que <code>run.py</code> resuelve los nombres, llama una vez por caso y
+junta los resultados.</li>
+</ol>
+<p>Humo (3 casos, 2 pasadas), tras el cambio 1:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Con plugin</th>
+<th>Sin plugin</th>
+<th>Δ</th>
+<th>Skill activa</th>
+<th>Antes (con · skill)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Haiku 5.5</td>
+<td>0,93</td>
+<td>0,20</td>
+<td>0,73</td>
+<td>3 de 3</td>
+<td>0,47 · 0 de 3</td>
+</tr>
+<tr class="even">
+<td>Sonnet 5.5</td>
+<td>0,98</td>
+<td>0,15</td>
+<td>0,83</td>
+<td>3 de 3</td>
+<td>0,65 · 1 de 3</td>
+</tr>
+</tbody>
+</table></div>
+<p>Suite completa (22 casos), tras el cambio 1:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Pasadas</th>
+<th>Con plugin</th>
+<th>Sin plugin</th>
+<th>Δ</th>
+<th>Skill activa</th>
+<th>Nota recuperada</th>
+<th>Coste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Haiku 5.5</td>
+<td>3</td>
+<td>0,78</td>
+<td>0,44</td>
+<td>0,34</td>
+<td>0,99</td>
+<td>0,83</td>
+<td>3,40 USD</td>
+</tr>
+<tr class="even">
+<td>Sonnet 5.5</td>
+<td>1</td>
+<td>0,92</td>
+<td>0,39</td>
+<td>0,53</td>
+<td>1,00</td>
+<td>0,95</td>
+<td>4,91 USD</td>
+</tr>
+</tbody>
+</table></div>
+<p>Los casos flojos eran los del AI Act (07 a 12): con Haiku, 0,56 de
+media y la nota recuperada solo en 0,39 de las pasadas. Tras el cambio
+2, con 2 pasadas:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Con plugin (antes → ahora)</th>
+<th>Nota recuperada (antes → ahora)</th>
+<th>Coste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Haiku 5.5</td>
+<td>0,56 → <strong>0,82</strong></td>
+<td>0,39 → <strong>0,92</strong></td>
+<td>0,45 USD</td>
+</tr>
+<tr class="even">
+<td>Sonnet 5.5</td>
+<td>0,85 → 0,82</td>
+<td>0,83 → <strong>1,00</strong></td>
+<td>2,59 USD</td>
+</tr>
+</tbody>
+</table></div>
+<p>Con Sonnet la puntuación queda igual (la diferencia cabe en la
+varianza de 1 y 2 pasadas), pero el caso 12 (selección de personal) pasa
+de no recuperar la nota a recuperarla siempre. Lo que más falla ahora es
+<code>guia-como-apoyo</code> (6 de 12 pasadas con Sonnet, 3 de 12 con
+Haiku): la respuesta cita la norma bien, pero no presenta la guía como
+orientación aparte. Después, <code>formato-cita</code> y
+<code>fuente-oficial</code>.</p>
 <h2 id="como-se-ejecuta">Cómo se ejecuta</h2>
 <p>Desde <code>plugins/ai-act-advisor/</code>, en un clon del
 repositorio:</p>
@@ -474,15 +601,15 @@ al día.</li>
 </ul>
 <h2 id="siguientes-pasos">Siguientes pasos</h2>
 <ol type="1">
-<li>Ajustar la <code>description</code> de <code>cite-regulation</code>
-para que se active con preguntas conceptuales y con normas que no están
-en las notas, y repetir los casos <code>humo</code> con
-<code>run.py</code> para ver el cambio de <code>skill_sha</code> y de
-<code>skill_activa</code> en el historial.</li>
-<li>Endurecer el criterio del juez <code>no-inventa-cita</code>.</li>
-<li>Lanzar la suite completa (22 casos, 2 brazos, 3 pasadas; unos 10
-USD) y comparar <code>nota-recuperada</code> con los 19 de 20 del test
-offline.</li>
+<li>Que la respuesta separe la guía como orientación
+(<code>guia-como-apoyo</code>): un ejemplo en
+<code>cite-regulation</code> y en las skills de riesgo de cómo cerrar
+con «Orientación: …» después de la cita de la norma.</li>
+<li>Repetir la suite completa con 3 pasadas en los dos modelos, con
+todos los cambios, para tener una línea base limpia en el
+historial.</li>
+<li>Probar con Opus y con APM fuera de Claude Code (Copilot,
+Cursor).</li>
 </ol>
 
       </article>

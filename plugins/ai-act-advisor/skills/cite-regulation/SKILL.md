@@ -1,6 +1,6 @@
 ---
 name: cite-regulation
-description: "Busca en las notas normativas del plugin (AI Act, RGPD, LOPDGDD, Omnibus y guías de AESIA, AEPD, CEPD y Comisión) el pasaje que respalda una respuesta y lo cita con formato fijo. Úsala cuando pregunten qué norma o artículo regula algo, si algo es obligatorio o desde cuándo, o cuando otra skill necesite la cita de una afirmación legal."
+description: "Respuestas legales con cita comprobada: busca en las notas normativas del plugin (AI Act, RGPD, LOPDGDD, Omnibus, RD 723/2026, sentencias y guías de AESIA, AEPD, CEPD y Comisión) el pasaje que respalda la respuesta y lo cita con formato fijo. Úsala antes de responder de memoria a cualquier pregunta sobre normativa de datos o de IA: qué artículo o norma regula algo, si algo es obligatorio o desde cuándo, qué significa un concepto jurídico o técnico de la norma (seudonimización, anonimización, singularización, perfilado, encargado, sistema de IA, alto riesgo…), o qué dicen las guías. Úsala también cuando pregunten por una norma que quizá no esté en las notas (DSA, NIS2, Data Act…), para comprobarlo y decir «sin nota que lo respalde» si no está, y cuando otra skill necesite la cita de una afirmación legal."
 ---
 
 # cite-regulation
