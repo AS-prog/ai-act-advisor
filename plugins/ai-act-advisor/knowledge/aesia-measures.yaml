@@ -1,0 +1,398 @@
+# Catálogo de las medidas guía de los checklists de AESIA. GENERADO: no editar a mano.
+# Lo escribe docs/documentos/fuentes/md/conversion/aesia_measures.py desde el zip de AESIA.
+# Qué es cada hoja y cada campo: docs/documentos/tecnica/checklists-aesia.md.
+# Las medidas orientan sobre CÓMO cumplir; la obligación está en el artículo (campo note).
+source:
+  file: "docs/documentos/fuentes/2026-07-30-aesia-checklists-y-ejemplos.zip"
+  sha256: "5c03910083325b2bac7462bc67f7a48e0c673f847318cc9f2df67ead336e60f5"
+  publisher: "AESIA"
+  checklists_version: "1.0 (2025-12-10)"
+  license: "CC BY 4.0"
+  legal_basis: "AI Act consolidado de 2026-07-27"
+  scope: "Proveedores de sistemas de IA de alto riesgo; aplica desde 2027-12-02 (anexo III) y 2028-08-02 (anexo I)"
+checklists_included: [gobernanza-del-dato, registros]
+checklists:
+  - id: gobernanza-del-dato
+    title: "Gobernanza del dato"
+    guide: "07"
+    articles: ["art. 10"]
+    notes: "aesia-checklist-gobernanza-del-dato"
+    guide_notes: "aesia-07-"
+    clauses:
+      - id: "10.1"
+        summary: "Obligación de que los datos cumplan criterios de calidad"
+        note: "ai-act-art-10"
+        measures: []
+      - id: "10.2"
+        summary: "Prácticas de gobernanza y gestión de datos"
+        note: "ai-act-art-10"
+        measures: [MG01, MG02, MG03, MG04, MG05, MG06, MG07, MG08, MG09, MG10, MG11, MG12, MG13, MG14, MG15, MG16]
+      - id: "10.2.a"
+        summary: "Prácticas de gobernanza y gestión de datos. Decisiones de diseño"
+        note: "ai-act-art-10"
+        measures: [MG01]
+      - id: "10.2.b"
+        summary: "Prácticas de gobernanza y gestión de datos. Recogida y origen de los datos"
+        note: "ai-act-art-10"
+        measures: [MG02]
+      - id: "10.2.c"
+        summary: "Prácticas de gobernanza y gestión de datos. Preparación"
+        note: "ai-act-art-10"
+        measures: [MG03, MG04, MG05, MG06, MG07, MG08, MG09, MG10, MG11, MG12, MG13, MG14]
+      - id: "10.2.d"
+        summary: "Prácticas de gobernanza y gestión de datos. Formulación de supuestos"
+        note: "ai-act-art-10"
+        measures: [MG01]
+      - id: "10.2.e"
+        summary: "Prácticas de gobernanza y gestión de datos. Evaluación de datos necesarios"
+        note: "ai-act-art-10"
+        measures: [MG01, MG03, MG04, MG05, MG06, MG07]
+      - id: "10.2.f"
+        summary: "Prácticas de gobernanza y gestión de datos. Posibles sesgos"
+        note: "ai-act-art-10"
+        measures: [MG14, MG15, MG16]
+      - id: "10.2.g"
+        summary: "Prácticas de gobernanza y gestión de datos. Mitigación sesgos"
+        note: "ai-act-art-10"
+        measures: [MG03, MG04, MG05, MG06, MG07, MG15]
+      - id: "10.2.h"
+        summary: "Prácticas de gobernanza y gestión de datos. Detección de lagunas"
+        note: "ai-act-art-10"
+        measures: [MG07]
+      - id: "10.3"
+        summary: "Idoneidad de los datos"
+        note: "ai-act-art-10"
+        measures: [MG01]
+      - id: "10.4"
+        summary: "Adecuación de los datos al contexto"
+        note: "ai-act-art-10"
+        measures: [MG03, MG04, MG05, MG06, MG07]
+      - id: "10.5"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales"
+        note: "ai-act-art-10"
+        measures: [MG15, MG17, MG18, MG19, MG20, MG21]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.5.a"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales. No posibilidad de detección y corrección de sesgos con otros datos"
+        note: "ai-act-art-10"
+        measures: [MG15]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.5.b"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales. Medidas de protección de seguridad e intimidad"
+        note: "ai-act-art-10"
+        measures: [MG19]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.5.c"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales. Garantías de seguridad y control de acceso"
+        note: "ai-act-art-10"
+        measures: [MG20]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.5.d"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales. No transferencia de los datos"
+        note: "ai-act-art-10"
+        measures: [MG17]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.5.e"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales. Eliminación posterior de los datos"
+        note: "ai-act-art-10"
+        measures: [MG18]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.5.f"
+        summary: "Requisitos para el tratamiento de categorías especiales de datos personales. Justificación relativa a su tratamiento"
+        note: "ai-act-art-10"
+        measures: [MG21]
+        amended:
+          status: "suprimido"
+          moved_to: "art. 4 bis"
+          note: "ai-act-art-4-bis"
+          by: "Reglamento (UE) 2026/1744"
+          comment: "El art. 10.5 se suprimió y su contenido pasó al art. 4 bis; el art. 10.6 remite a él."
+      - id: "10.6"
+        summary: "Desarrollo de sistemas de IA que no implican el entrenamiento de modelos de IA"
+        note: "ai-act-art-10"
+        measures: []
+    measures:
+      - id: MG01
+        title: "Identificación de la información necesaria"
+        clauses: ["10.2", "10.2.a", "10.2.d", "10.2.e", "10.3"]
+        questions:
+          - "¿Se ha identificado toda la información necesaria para el desarrollo y uso del sistema de IA?"
+          - "¿Se ha documentado la información necesaria?"
+      - id: MG02
+        title: "Establecimiento del proceso de recopilación de datos"
+        clauses: ["10.2", "10.2.b"]
+        questions:
+          - "¿Se han identificado las fuentes de los datos utilizados?"
+          - "¿Se ha establecido un proceso de recopilación de datos?"
+      - id: MG03
+        title: "Determinar las dimensiones de calidad a evaluar"
+        clauses: ["10.2", "10.2.c", "10.2.e", "10.2.g", "10.4"]
+        questions:
+          - "¿Se han definido las dimensiones de calidad de los datos a evaluar?"
+      - id: MG04
+        title: "Definir los controles de calidad a implementar para cada dimensión"
+        clauses: ["10.2", "10.2.c", "10.2.e", "10.2.g", "10.4"]
+        questions:
+          - "¿Se han definido controles de calidad específicos para cada dimensión identificada?"
+      - id: MG05
+        title: "Implementar los controles de calidad definidos"
+        clauses: ["10.2", "10.2.c", "10.2.e", "10.2.g", "10.4"]
+        questions:
+          - "¿Se han implementado los controles de calidad definidos?"
+          - "¿Se han verificado los resultados de los controles de calidad implementados?"
+      - id: MG06
+        title: "Reportar los resultados de los controles de calidad."
+        clauses: ["10.2", "10.2.c", "10.2.e", "10.2.g", "10.4"]
+        questions:
+          - "¿Se han reportado los resultados de los controles de calidad?"
+          - "¿Se han documentado las desviaciones detectadas en los controles de calidad?"
+      - id: MG07
+        title: "Desarrollar las medidas de mejora de la calidad de los datos"
+        clauses: ["10.2", "10.2.c", "10.2.e", "10.2.g", "10.2.h", "10.4"]
+        questions:
+          - "¿Se han desarrollado planes de mejora basados en los resultados de calidad?"
+          - "¿Se han documentado las medidas de mejora implementadas?"
+      - id: MG08
+        title: "Transformación de los datos"
+        clauses: ["10.2", "10.2.c"]
+        questions:
+          - "¿Se han transformado los datos para adaptarlos a las necesidades del sistema de IA?"
+      - id: MG09
+        title: "Agregación de los datos"
+        clauses: ["10.2", "10.2.c"]
+        questions:
+          - "¿Se han agregado datos provenientes de diferentes fuentes?"
+          - "¿Se han documentado los procesos de agregación de datos realizados?"
+      - id: MG10
+        title: "Muestreo de los datos"
+        clauses: ["10.2", "10.2.c"]
+        questions:
+          - "¿Se realiza un muestreo adecuado de los datos?"
+      - id: MG11
+        title: "Creación y selección de características"
+        clauses: ["10.2", "10.2.c"]
+        questions:
+          - "Tras el proceso de recabado de datos inicial y posterior tratamiento, ¿se ha identificado necesidades de datos o características de éstos adicionales?"
+          - "¿Se ha considerado aumentar o reducir la dimensionalidad del conjunto de datos para crear características o desechar aquellas que sean redundantes?"
+      - id: MG12
+        title: "Enriquecimiento de los datos"
+        clauses: ["10.2", "10.2.c"]
+        questions:
+          - "¿Se han enriquecido y ampliado los datos?"
+      - id: MG13
+        title: "Etiquetado de los datos"
+        clauses: ["10.2", "10.2.c"]
+        questions:
+          - "¿Se han asignado etiquetas identificativas a los datos recabados?"
+          - "¿Se han utilizado herramientas de etiquetado automático de los datos? ¿El proceso ha sido supervisado por algún tipo de vigilancia humana?"
+      - id: MG14
+        title: "Análisis de las principales fuentes de sesgo en los datos"
+        clauses: ["10.2", "10.2.c", "10.2.f"]
+        questions:
+          - "¿Se ha analizado y evaluado el potencial sesgo que pueden presentar los datos recabados?"
+      - id: MG15
+        title: "Evaluación del sesgo en los datos"
+        clauses: ["10.2", "10.2.f", "10.2.g", "10.5", "10.5.a"]
+        questions:
+          - "¿Se ha identificado un sesgo en los datos?"
+          - "Si la respuesta es afirmativa, ¿se ha hecho un análisis y evaluación para determinar la necesidad de implementar medidas de tratamiento?"
+      - id: MG16
+        title: "Tratamiento del sesgo en los datos"
+        clauses: ["10.2", "10.2.f"]
+        questions:
+          - "¿Se han implementado medidas de tratamiento de los sesgos identificados y evaluados?"
+      - id: MG17
+        title: "Transferencia de los datos"
+        clauses: ["10.5", "10.5.d"]
+        questions:
+          - "Si en la última fase del ciclo de vida de los datos, éstos serán transferidos, ¿se ha generado un informe con todo el detalle del proceso de transferencia de datos abordados?"
+      - id: MG18
+        title: "Eliminación total o parcial de los datos"
+        clauses: ["10.5", "10.5.e"]
+        questions:
+          - "¿Se ha comprobado que no hay ningún usuario o actor involucrado en el desarrollo del sistema de IA que requiera todavía de acceso a los datos por un motivo o fin determinado?"
+          - "¿Se ha comprobado que el proceso de eliminación de datos que se llevará a cabo no viole ninguna obligación legal, contractual o de retención de datos?"
+          - "¿Se ha comprobado que los datos quedarán eliminados de todas las ubicaciones donde pudieran estar almacenados?"
+          - "¿Se ha evaluado si existe alguna posibilidad de restauración de los datos, parcial o total, a partir del sistema de IA entrenado con estos datos?"
+          - "¿Se ha comprobado si los datos tienen algún tipo de importancia cultural, social o histórica?"
+          - "¿Se ha generado un informe con todo el detalle del proceso de eliminación de datos?"
+      - id: MG19
+        title: "Anonimización de datos"
+        clauses: ["10.5", "10.5.b"]
+        questions:
+          - "¿Se ha informado acerca de las medidas de seguridad y protección de la privacidad en materia de anonimización que hayan sido implementadas?"
+      - id: MG20
+        title: "Seudonimización de datos"
+        clauses: ["10.5", "10.5.c"]
+        questions:
+          - "¿Se ha informado acerca de las medidas de seguridad y protección de la privacidad en materia de seudonimización que hayan sido implementadas?"
+      - id: MG21
+        title: "Medidas de garantía derivadas de la normativa de protección de datos de carácter personal"
+        clauses: ["10.5", "10.5.f"]
+        questions:
+          - "¿Se ha informado acerca de la posible presencia de datos personales o de categorías especiales de datos personales?"
+          - "¿Se ha informado acerca de posibles usos indebidos y razonablemente previsibles de los datos dispuestos?"
+          - "¿Se han documentado detalles adicionales de los datos y metadatos necesarios para facilitar la comprensión de éstos y su uso adecuado para el desarrollo del sistema de IA?"
+          - "¿Se tratan datos personales especiales en alguna etapa del ciclo de vida del sistema IA?"
+  - id: registros
+    title: "Registros"
+    guide: "12"
+    articles: ["art. 12", "art. 19"]
+    notes: "aesia-checklist-registros"
+    guide_notes: "aesia-12-"
+    errata: "El Excel repite el apartado 12.3; sus medidas se unen en uno."
+    clauses:
+      - id: "12.1"
+        summary: "Definición"
+        note: "ai-act-art-12"
+        measures: [MG01, MG02]
+      - id: "12.2"
+        summary: "Garantizar trazabilidad"
+        note: "ai-act-art-12"
+        measures: [MG01, MG02]
+      - id: "12.2.a"
+        summary: "Garantizar trazabilidad"
+        note: "ai-act-art-12"
+        measures: [MG01, MG02, MG04]
+      - id: "12.2.b"
+        summary: "Garantizar trazabilidad"
+        note: "ai-act-art-12"
+        measures: [MG01, MG02, MG05]
+      - id: "12.2.c"
+        summary: "Garantizar trazabilidad"
+        note: "ai-act-art-12"
+        measures: [MG01, MG02, MG06]
+      - id: "12.3"
+        summary: "Contenido mínimo de los registros"
+        note: "ai-act-art-12"
+        measures: [MG03, MG04, MG05, MG06, MG11]
+      - id: "12.3.d"
+        summary: "Contenido mínimo de los registros"
+        note: "ai-act-art-12"
+        measures: [MG03, MG04, MG05, MG06, MG10, MG13]
+      - id: "19.1"
+        summary: "Captura, conservación mínima y disposición de los registros"
+        note: "ai-act-art-19"
+        measures: [MG07, MG08, MG09, MG11, MG12, MG13, MG14]
+      - id: "19.2"
+        summary: "Captura, conservación mínima y disposición de los registros en materia de servicios financieros"
+        note: "ai-act-art-19"
+        measures: [MG07, MG08, MG09, MG11, MG12, MG13]
+    measures:
+      - id: MG01
+        title: "Identificación, análisis y evaluación de necesidades que motiven la generación de registros e información a incluir"
+        clauses: ["12.1", "12.2", "12.2.a", "12.2.b", "12.2.c"]
+        questions:
+          - "¿Se ha desarrollado un proceso de análisis de las necesidades que motivan la generación de registros y establecen la información que se debe recabar?"
+          - "¿Se ha desarrollado un proceso de evaluación de las necesidades que motivan la generación de registros y establecen la información que se debe recabar?"
+          - "¿Se han identificado adecuadamente las necesidades que motivan la generación de los registros?"
+      - id: MG02
+        title: "Identificación de los objetivos epecíficos de registro"
+        clauses: ["12.1", "12.2", "12.2.a", "12.2.b", "12.2.c"]
+        questions:
+          - "¿Se han identificado los objetivos específicos del registro?"
+          - "¿Se ha identificado claramente qué se espera lograr con su recabado?"
+      - id: MG03
+        title: "Identificar el alcande los registros, con la información a registrar y el tiempo a ser mantenido en el sistema"
+        clauses: ["12.3", "12.3.d"]
+        questions:
+          - "¿Se ha definido el alcance del registro entendido como la información que se va a registrar y el tiempo durante el cual se mantendrá dicho registro?"
+          - "¿Se han determinado los periodos de retención y eliminación de los registros teniendo en cuenta las necesidades de disposición de la información definidas y las normativas aplicables, como la normativa de protección de datos (GDPR)?"
+          - "¿Se han tenido en cuenta las necesidades especiales preexistentes de las normativas específicas dirigidas al sector financiero que debiesen cumplirse?"
+      - id: MG04
+        title: "Identificar los registros necesarios para evidenciar que se recoge la información determinada en el artículo 9: Sistemas de gestión de riesgos"
+        clauses: ["12.2.a", "12.3", "12.3.d"]
+        questions:
+          - "¿Se han generado los registros necesarios para garantizar que se recoge la información determinada en el proceso de implementación del sistema de gestión de riesgos?"
+          - "¿Se han tenido en cuenta los controles del sistema de gestión de riesgos con sus asociadas evidencias de cara a la obtención de registros en donde se indiquen oportunos?"
+      - id: MG05
+        title: "Identificar los registros necesarios para evidenciar que se recoge la información determinada en el artículo 72 necesaria para el sistema de vigilancia poscomercialización"
+        clauses: ["12.2.b", "12.3", "12.3.d"]
+        questions:
+          - "¿Se han generado los registros necesarios para garantizar que se recoge la información determinada en el proceso de implementación del sistema de vigilancia poscomercialización?"
+          - "¿Se han documentado e implementado adecuadamente las frecuencias con las que debiesen de recabarse estos registros?"
+      - id: MG06
+        title: "Identificar los registros necesarios para evidenciar que se recoge la información determinada en el artículo 14 necesaria para la efectiva supervisión humana"
+        clauses: ["12.2.c", "12.3", "12.3.d"]
+        questions:
+          - "¿Se han generado los registros necesarios para garantizar que se recoge la información determinada para implementar los mecanismos de supervisión humana definidos?"
+          - "¿Se ha documentado de manera adecuada la necesidad de estos registros y como interpretar los resultados de los mismos para su contribución en el proceso de vigilancia humana?"
+      - id: MG07
+        title: "Implementar el proceso de captura de los registros"
+        clauses: ["19.1", "19.2"]
+        questions:
+          - "¿Se ha implementado un proceso de captura de los registros para garantizar que se recaba la información de acuerdo con los criterios establecidos en la fase de diseño?"
+          - "¿Se han realizado tests que tengan por objetivo validar estos procedimientos?"
+          - "¿Se han realizado pruebas de estrés sobre el sistema de captura de registros que garanticen su funcionamiento sin percances aún en momentos de gran demanda?"
+      - id: MG08
+        title: "Implementar los medios de alamacenamiento para garantizar la disponibilidad de los registros"
+        clauses: ["19.1", "19.2"]
+        questions:
+          - "¿Se han seleccionado e implementado los medios de almacenamiento y materiales de protección adecuados para garantizar la seguridad y disponibilidad de los registros?"
+          - "¿Se han establecido periodos de supervisión y revisión de los medios de almacenamiento?"
+      - id: MG09
+        title: "Implementar los medios de seguridad y ciberseguridad para garantizar la protección de los registros"
+        clauses: ["19.1", "19.2"]
+        questions:
+          - "¿Se han seleccionado e implementado las medidas de ciberseguridad adecuadas para garantizar la seguridad y disponibilidad de los registros?"
+          - "¿Se han establecido periodos de supervisión y revisión de las medidas de ciberseguridad y control de acceso implementadas?"
+      - id: MG10
+        title: "Desarrollo de formaciones y capacitaciones del personal involucrado en la gestión de registos"
+        clauses: ["12.3.d"]
+        questions:
+          - "¿Se desarrollan procesos de formación y capacitación del personal involucrado en la gestión de los registros?"
+          - "¿Están estas necesidades de formación contempladas en la respuesta al artículo 4 de Alfabetización alrededor de la IA?"
+      - id: MG11
+        title: "Análisis del impacto de otras normativas o leyes aplicables como la normativa de protección de datos GDPR que sean necesarios considerar en la generación de registros"
+        clauses: ["12.3", "19.1", "19.2"]
+        questions:
+          - "¿Se ha analizado y evaluado el impacto de otras normativas o leyes aplicables que puedan afectar al proceso de generación de registros?"
+          - "¿Específicamente, se ha analizado y evaluado el impacto de la normativa de protección de datos (GDPR) en el proceso de generación de registros?"
+      - id: MG12
+        title: "Establecer preiodos de supervisión y revisión de los medios de almacenamiento y su ciberseguridad"
+        clauses: ["19.1", "19.2"]
+        questions:
+          - "¿Se han establecido periodos de supervisión de los medios de almacenamiento y las medidas de ciberseguridad y control de acceso implementadas?"
+          - "¿Se han establecido periodos de revisión de los medios de almacenamiento y las medidas de ciberseguridad y control de acceso implementadas? (ya aparecen de forma implícitas en las medidas 8 y 9, pero aquí se recoge de forma específica)"
+      - id: MG13
+        title: "Establecer un proceso de seguimiento y mejora contínua del sistema de gestión de registros"
+        clauses: ["12.3.d", "19.1", "19.2"]
+        questions:
+          - "¿Se ha establecido un proceso de seguimiento y mejora continua del sistema de gestión de registros?"
+          - "En el proceso de seguimiento y mejora continua establecido, ¿Se monitorizan e identifican posibles errores y se evalúan los datos registrados para la implementación y mejora continua de las soluciones propuestas?"
+      - id: MG14
+        title: "Impementar un proceso que garantice la adecuada documentación técnica del sistema de gestión de registros"
+        clauses: ["19.1"]
+        questions:
+          - "¿Se ha definido e implementado un proceso que garantice la adecuada documentación técnica del sistema de gestión de registros implementado?"
+          - "¿Se han contemplado los registros en la documentación no solo de los registros específicamente, sino también en el resto de documentos en los que aparezcan de forma colateral (por ejemplo, en la documentación técnica alrededor del cumplimiento de los artículos de sistema de gestión de riesgos, supervisión humana o seguimiento poscomercialización)?"
