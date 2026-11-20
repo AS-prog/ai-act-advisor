@@ -86,6 +86,7 @@ errores y una recomendación para usarlos en el plugin. Responde al issue
           <li><a href="#errores-e-incoherencias">Errores e incoherencias</a></li>
           <li><a href="#qué-recuperan-las-notas-y-qué-pierden">Qué recuperan las notas y qué pierden</a></li>
           <li><a href="#recomendación">Recomendación</a></li>
+          <li><a href="#catálogo-generado-20">Catálogo generado (#20)</a></li>
           <li><a href="#decisiones-que-quedan-abiertas">Decisiones que quedan abiertas</a></li>
           <li><a href="#cómo-se-comprueba">Cómo se comprueba</a></li>
         </ol>
@@ -711,12 +712,44 @@ las escalas de su <code>Leyenda</code>.</li>
 <strong>Gobernanza del dato</strong> y <strong>Registros</strong>, que
 son los dos checklists más cercanos al trabajo de un DE o un AE
 (calidad, linaje, sesgo, retención y logs).</p>
+<h2 id="catálogo-generado-20">Catálogo generado (#20)</h2>
+<p>El punto 2 ya está hecho para Gobernanza del dato y Registros:
+<code>plugins/ai-act-advisor/knowledge/aesia-measures.yaml</code>. No se
+edita a mano. Lo escribe el script <code>aesia_measures.py</code>, que
+vive junto a <code>trocear_otros.py</code> en
+<code>docs/documentos/fuentes/md/conversion/</code>, desde el ZIP, solo
+con librería estándar, porque un <code>.xlsx</code> es un zip de
+XML.</p>
+<ul>
+<li><code>python3 -I aesia_measures.py</code> regenera los dos
+checklists; <code>--all</code> hace los 12 y <code>--check</code> falla
+si el YAML no está al día.</li>
+<li>Por checklist guarda la guía, los artículos y el prefijo de sus
+notas. Por apartado guarda el resumen, la nota del artículo
+(<code>ai-act-art-10</code>) y sus medidas. Por medida guarda el título,
+los apartados que cubre, las cuestiones orientativas como lista y, si
+remite a otro checklist, <code>refers_to</code>.</li>
+<li>Los apartados que cambió el Omnibus llevan <code>amended</code>. El
+10.5 y sus letras dicen <code>suprimido</code> y
+<code>moved_to: art. 4 bis</code>, con la nota
+<code>ai-act-art-4-bis</code>. La lista vive en <code>AMENDMENTS</code>,
+dentro del script, y se revisa a mano.</li>
+<li>Corrige dos erratas al leer: une el 12.3 repetido de Registros y
+casa las filas de la matriz por apartado, no por posición, porque en
+Documentación técnica la matriz no sigue el orden de
+<code>Artículo RIA</code>.</li>
+<li><code>tests/test_aesia_measures.py</code> comprueba que el YAML está
+al día, que apartados y medidas cuadran, que existen las notas citadas,
+el traslado al art. 4 bis y que los 12 libros dan 193 medidas y 510
+cruces.</li>
+</ul>
 <h2 id="decisiones-que-quedan-abiertas">Decisiones que quedan
 abiertas</h2>
 <p>Cada una tiene su issue:</p>
 <ul>
-<li>#20 · Si se genera <code>knowledge/aesia-measures.yaml</code> y con
-qué esquema.</li>
+<li>#20 · Revisar el esquema de
+<code>knowledge/aesia-measures.yaml</code> y si se amplía a los 12
+checklists.</li>
 <li>#21 · Cómo se mapean las señales del plugin a las medidas, empezando
 por Gobernanza del dato y Registros.</li>
 <li>#22 · Si el plugin ofrece una autoevaluación guiada con la escala de

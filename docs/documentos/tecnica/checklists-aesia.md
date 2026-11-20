@@ -297,11 +297,38 @@ El primer paso concreto sería el punto 2 limitado a **Gobernanza del
 dato** y **Registros**, que son los dos checklists más cercanos al
 trabajo de un DE o un AE (calidad, linaje, sesgo, retención y logs).
 
+## Catálogo generado (#20)
+
+El punto 2 ya está hecho para Gobernanza del dato y Registros:
+`plugins/ai-act-advisor/knowledge/aesia-measures.yaml`. No se edita a
+mano. Lo escribe el script `aesia_measures.py`, que vive junto a
+`trocear_otros.py` en `docs/documentos/fuentes/md/conversion/`, desde el ZIP, solo con librería estándar, porque un `.xlsx` es un zip de
+XML.
+
+- `python3 -I aesia_measures.py` regenera los dos checklists; `--all`
+  hace los 12 y `--check` falla si el YAML no está al día.
+- Por checklist guarda la guía, los artículos y el prefijo de sus notas.
+  Por apartado guarda el resumen, la nota del artículo
+  (`ai-act-art-10`) y sus medidas. Por medida guarda el título, los
+  apartados que cubre, las cuestiones orientativas como lista y, si
+  remite a otro checklist, `refers_to`.
+- Los apartados que cambió el Omnibus llevan `amended`. El 10.5 y sus
+  letras dicen `suprimido` y `moved_to: art. 4 bis`, con la nota
+  `ai-act-art-4-bis`. La lista vive en `AMENDMENTS`, dentro del script,
+  y se revisa a mano.
+- Corrige dos erratas al leer: une el 12.3 repetido de Registros y casa
+  las filas de la matriz por apartado, no por posición, porque en
+  Documentación técnica la matriz no sigue el orden de `Artículo RIA`.
+- `tests/test_aesia_measures.py` comprueba que el YAML está al día, que
+  apartados y medidas cuadran, que existen las notas citadas, el traslado
+  al art. 4 bis y que los 12 libros dan 193 medidas y 510 cruces.
+
 ## Decisiones que quedan abiertas
 
 Cada una tiene su issue:
 
-- #20 · Si se genera `knowledge/aesia-measures.yaml` y con qué esquema.
+- #20 · Revisar el esquema de `knowledge/aesia-measures.yaml` y si se
+  amplía a los 12 checklists.
 - #21 · Cómo se mapean las señales del plugin a las medidas, empezando
   por Gobernanza del dato y Registros.
 - #22 · Si el plugin ofrece una autoevaluación guiada con la escala de
