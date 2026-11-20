@@ -301,11 +301,11 @@ trabajo de un DE o un AE (calidad, linaje, sesgo, retención y logs).
 
 Cada una tiene su issue:
 
-- Si se genera `knowledge/aesia-measures.yaml` y con qué esquema.
-- Cómo se mapean las señales del plugin a las medidas, empezando por
-  Gobernanza del dato y Registros.
-- Si el plugin ofrece una autoevaluación guiada con la escala de madurez
-  y el plan de adaptación.
+- #20 · Si se genera `knowledge/aesia-measures.yaml` y con qué esquema.
+- #21 · Cómo se mapean las señales del plugin a las medidas, empezando
+  por Gobernanza del dato y Registros.
+- #22 · Si el plugin ofrece una autoevaluación guiada con la escala de
+  madurez y el plan de adaptación.
 
 ## Cómo se comprueba
 
